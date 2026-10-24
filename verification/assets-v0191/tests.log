@@ -1,0 +1,33 @@
+✔ 9 MB GLB payload is stored once; history, editing and autosave never serialize or reread its bytes (1264.9714ms)
+✔ two model IDs and copied worlds share one binary while selection preserves both IDs (695.6117ms)
+✔ full binary project imports into a fresh library and its models survive undo/redo and reopening (598.7264ms)
+✔ missing references and damaged binary packages leave scene, view and history unchanged (664.5699ms)
+✔ bad metadata, mismatched sizes and model/world budgets are checked without payloads (18.7383ms)
+✔ a v1 database and embedded format 9 migrate lazily without losing the previous save (302.8259ms)
+✔ blob write failure never publishes a partially imported world or loses the previous record (413.8551ms)
+✔ world and session pointer cannot commit with a missing binary reference (1.1034ms)
+✔ packages reject duplicate records, trailing bytes and unsupported versions (651.2567ms)
+✔ an aborted binary batch leaves no partial payloads in IndexedDB (6.5317ms)
+✔ failed metadata migration keeps the embedded save recoverable and retries without losing the loaded world (371.0682ms)
+✔ a corrupted stored Blob is rejected even if its key and byte length match (224.4211ms)
+✔ local GLB pack loads all tree, shrub, stone and bridge variants (174.9802ms)
+✔ imported self-contained GLB is normalized, persisted and participates in object history (878.7683ms)
+✔ bad GLB containers, external references and unknown model IDs are rejected before loading (213.6126ms)
+✔ format 2 migrates detail layers, model library and foliage defaults without losing old paint (476.548ms)
+✔ all new ground layers paint, erase and round-trip through history and project files (246.0828ms)
+✔ surface maps contain distinct color, height and roughness values and use mipmaps (19.0312ms)
+✔ ground tiles wrap without a color or height discontinuity at repeated edges (20.6365ms)
+✔ fine foliage is deterministic, bounded near the camera and releases departed chunks (22.8657ms)
+✔ foliage rebuild is spread over frames and remote impacts keep nearby buffers (20.5634ms)
+✔ IndexedDB worlds and last-session pointer survive reopening and previews are returned without project data (9.1317ms)
+✔ selection and deleting an inactive world leave the active session intact (1.9076ms)
+✔ failed IndexedDB writes atomically preserve both the project and session pointer (0.837ms)
+✔ an unsupported future database version is rejected without resetting its data (0.6141ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6276.5206

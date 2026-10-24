@@ -1,0 +1,10 @@
+
+> terrain-editor@0.19.0 verify:assets
+> tsc --noEmit -p tsconfig.verification.json && node scripts/build-asset-storage-check.mjs
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 116 modules transformed.
+rendering chunks...
+✓ built in 335ms
+Asset storage: dist/asset-storage-check.html (isolated IndexedDB)

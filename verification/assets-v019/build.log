@@ -1,0 +1,47 @@
+
+> terrain-editor@0.19.0 build
+> npm run build:models && node scripts/sync-entry.mjs && npm run typecheck && vite build && node scripts/build-offline.mjs && node scripts/build-webgpu.mjs
+
+
+> terrain-editor@0.19.0 build:models
+> node scripts/build-models.mjs
+
+THREE.GLTFExporter: Creating normalized normal attribute from the non-normalized one.
+THREE.GLTFExporter: Creating normalized normal attribute from the non-normalized one.
+Built local GLB library: 31 models
+
+> terrain-editor@0.19.0 typecheck
+> tsc --noEmit
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 128 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/webgpu_lab.html                       4.38 kB │ gzip:     2.08 kB
+dist/index.html                            7.90 kB │ gzip:     3.10 kB
+dist/terrain_editor.html                   7.90 kB │ gzip:     3.10 kB
+dist/assets/webgpu_lab-B3QymXPN.css        2.60 kB │ gzip:     1.13 kB
+dist/assets/main-BQ2Qird8.css             13.16 kB │ gzip:     3.68 kB
+dist/assets/OrbitControls-Cp98vi2-.js    628.66 kB │ gzip:   156.73 kB │ map: 3,045.34 kB
+dist/assets/webgpu_lab-fT_PXhcC.js       704.61 kB │ gzip:   199.64 kB │ map: 3,494.43 kB
+dist/assets/main-lw6zpIuA.js           5,974.32 kB │ gzip: 1,985.21 kB │ map: 7,332.15 kB
+
+✓ built in 510ms
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 116 modules transformed.
+rendering chunks...
+✓ built in 348ms
+Offline HTML: dist/terrain_editor_standalone.html (also copied to project root)
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 14 modules transformed.
+rendering chunks...
+✓ built in 273ms
+Offline WebGPU lab: webgpu_lab_standalone.html (root + dist)

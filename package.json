@@ -1,0 +1,41 @@
+{
+  "name": "terrain-editor",
+  "version": "0.22.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "typecheck": "tsc --noEmit",
+    "build:models": "node scripts/build-models.mjs",
+    "build": "npm run build:models && node scripts/sync-entry.mjs && npm run typecheck && vite build && node scripts/build-offline.mjs && node scripts/build-webgpu.mjs",
+    "preview": "vite preview --host 127.0.0.1",
+    "verify:surface": "node scripts/build-surface-check.mjs",
+    "verify:fog": "tsc --noEmit -p tsconfig.verification.json && node scripts/build-fog-check.mjs",
+    "verify:worlds": "tsc --noEmit -p tsconfig.verification.json && node scripts/build-world-studio-check.mjs",
+    "verify:jungle": "tsc --noEmit -p tsconfig.verification.json && tsx verification/build-jungle-worlds.ts && node scripts/build-jungle-check.mjs",
+    "verify:assets": "tsc --noEmit -p tsconfig.verification.json && node scripts/build-asset-storage-check.mjs",
+    "verify:animation": "tsc --noEmit -p tsconfig.verification.json && node scripts/build-animation-check.mjs",
+    "verify:balloon": "tsc --noEmit -p tsconfig.verification.json && node scripts/build-balloon-check.mjs",
+    "verify:graphics": "tsc --noEmit -p tsconfig.verification.json && tsx verification/graphics-budget.ts && node scripts/build-graphics-check.mjs",
+    "verify:walk": "tsc --noEmit -p tsconfig.verification.json && tsx verification/build-walk-example.ts && node scripts/build-walk-check.mjs",
+    "test": "tsx --test tests/*.test.ts",
+    "verify:water": "tsc --noEmit -p tsconfig.verification.json && tsx verification/build-water-dynamics.ts && node scripts/build-water-check.mjs",
+    "verify:storm": "tsc --noEmit -p tsconfig.verification.json && tsx verification/build-storm-coast.ts && node scripts/build-water-check.mjs storm",
+    "benchmark:impact": "tsx verification/benchmark-impact.ts",
+    "benchmark:balloon": "tsx verification/benchmark-balloon.ts"
+  },
+  "dependencies": {
+    "@dimforge/rapier3d-compat": "0.21.0",
+    "three": "0.186.1"
+  },
+  "devDependencies": {
+    "@types/three": "0.186.0",
+    "fake-indexeddb": "6.2.5",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3",
+    "vite": "8.3.4"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

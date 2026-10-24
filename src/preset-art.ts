@@ -1,0 +1,13 @@
+import type {WorldPresetId} from './world';
+
+// Small local vector landscapes keep the preset picker clear even without network access.
+const scenes: Record<WorldPresetId, string> = {
+    archipelago: '<path fill="#344e51" d="M0 0h160v75H0z"/><g fill="none" stroke="#83aaa1" opacity=".25"><path d="M-10 49Q35 21 70 45t100-2M-10 60Q35 32 70 56t100-2M-10 71Q35 43 70 67t100-2"/></g><path fill="#829079" d="M16 46q5-22 29-17l22 10-13 13-30 2ZM86 36q10-21 33-20l21 13-13 14-31 3Z"/><path fill="#b9ba92" d="m16 46 9 3 29-2 13-8-13 13-30 2Zm70-10 11 5 29-4 14-8-13 14-31 3Z"/><path fill="#c4c9a4" opacity=".4" d="m27 37 17-8 10 9-12 4Zm72-9 19-12 10 12-18 4Z"/>',
+    desert: '<path fill="#52453a" d="M0 0h160v75H0z"/><circle cx="125" cy="17" r="10" fill="#d7be89" opacity=".7"/><path fill="#92744d" d="M-10 52Q39-9 104 37t71 1v40H-10Z"/><path fill="#c2a06a" d="M-10 65q60-62 120-14t65-8v35H-10Z"/><path fill="#e0c393" d="M24 75q49-58 133-27-54-7-78 27Z"/><path fill="none" stroke="#e7cea0" opacity=".3" d="M4 62q44-51 98-17M50 75q53-42 109-20"/>',
+    taiga: '<path fill="#2a3f3b" d="M0 0h160v75H0z"/><path fill="#5c786b" d="m-10 63 53-47 38 38 30-28 60 41v10H0Z"/><path fill="#8ca28a" d="m43 16-14 26 15-7 14 8Z"/><path fill="#314d3f" d="M0 70 56 44l66 11 42 20Z"/><g fill="#9cae86"><path d="m22 65 7-29 7 29h-5v7h-4v-7Zm18 7 9-39 9 39h-7v6h-4v-6Zm56-3 8-35 8 35h-6v6h-4v-6Zm23-4 6-27 6 27h-4v8h-4v-8Z"/></g>',
+    'iron-islands': '<path fill="#35434a" d="M0 0h160v75H0z"/><path fill="none" stroke="#9aafac" opacity=".2" d="M0 53h160M0 63h160M0 73h160"/><path fill="#7a8781" d="m12 57 17-31 15 12 10-24 19 47-34 3Zm78 2 16-20 9-31 17 19 17 34-27 5Z"/><path fill="#b7bfb2" d="m29 26-5 19 9-3 11-4-10 4 5 22-27-7Zm86-18 5 29 12-10-9 14 7 23-23-5Z"/><path fill="#dae0cb" d="m54 14-5 15 10-5Zm61-6-4 12 10-4Z"/>',
+    fjords: '<path fill="#2b4650" d="M0 0h160v75H0z"/><path fill="#65847c" d="m0 0 46 9 28 42-27 24H0Zm160 0-43 9-21 29 14 25-18 12h68Z"/><path fill="#a2b3a0" d="m0 0 46 9 18 28-31-16 10 31-32 23H0Zm160 0-43 9-12 20 27-9-7 27 17 28h18Z"/><path fill="none" stroke="#a6cbc6" opacity=".3" d="m88 12-10 21 11 22-17 20M93 30l-7 9 9 15-13 20"/>',
+    jungle: '<path fill="#2a4039" d="M0 0h160v75H0z"/><path fill="#526e4f" d="m0 67 37-52 26 36 35-27 62 42v10H0Z"/><path fill="#799164" d="m37 15-14 34 14-9 13 7Zm61 9-18 30 18-7 20 9Z"/><path fill="#91a976" d="M0 67q24-24 46-3 19-28 44-8 17-20 35-2 17-14 35-2v23H0Z"/><path fill="#bfd2a0" d="M0 75V47q12-16 24 0-9-5-20 6v22Zm149 0V39q-12-15-23 0 11-5 19 6v30Z"/><path fill="none" stroke="#b1c4a2" opacity=".5" d="m77 47 8 10-7 10 6 8"/>',
+};
+
+export function presetArt(id:WorldPresetId) { return `<svg viewBox="0 0 160 75" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${scenes[id]}</svg>`; }

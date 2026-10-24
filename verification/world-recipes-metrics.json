@@ -1,0 +1,146 @@
+[
+  {
+    "preset": "archipelago",
+    "seed": 1337,
+    "ms": 187,
+    "dryPercent": 18,
+    "min": -21,
+    "max": 40
+  },
+  {
+    "preset": "desert",
+    "seed": 1337,
+    "ms": 37,
+    "dryPercent": 100,
+    "min": 17,
+    "max": 30
+  },
+  {
+    "preset": "taiga",
+    "seed": 1337,
+    "ms": 98,
+    "dryPercent": 100,
+    "min": 29,
+    "max": 54
+  },
+  {
+    "preset": "iron-islands",
+    "seed": 1337,
+    "ms": 143,
+    "dryPercent": 14,
+    "min": -21,
+    "max": 88
+  },
+  {
+    "preset": "fjords",
+    "seed": 1337,
+    "ms": 99,
+    "dryPercent": 62,
+    "min": -10,
+    "max": 196
+  },
+  {
+    "preset": "jungle",
+    "seed": 1337,
+    "ms": 95,
+    "dryPercent": 100,
+    "min": 33,
+    "max": 72
+  },
+  {
+    "preset": "archipelago",
+    "seed": 17,
+    "ms": 148,
+    "dryPercent": 23,
+    "min": -21,
+    "max": 37
+  },
+  {
+    "preset": "desert",
+    "seed": 17,
+    "ms": 40,
+    "dryPercent": 100,
+    "min": 17,
+    "max": 30
+  },
+  {
+    "preset": "taiga",
+    "seed": 17,
+    "ms": 78,
+    "dryPercent": 100,
+    "min": 29,
+    "max": 54
+  },
+  {
+    "preset": "iron-islands",
+    "seed": 17,
+    "ms": 124,
+    "dryPercent": 23,
+    "min": -21,
+    "max": 82
+  },
+  {
+    "preset": "fjords",
+    "seed": 17,
+    "ms": 183,
+    "dryPercent": 66,
+    "min": -10,
+    "max": 198
+  },
+  {
+    "preset": "jungle",
+    "seed": 17,
+    "ms": 81,
+    "dryPercent": 100,
+    "min": 34,
+    "max": 72
+  },
+  {
+    "preset": "archipelago",
+    "seed": 9001,
+    "ms": 143,
+    "dryPercent": 21,
+    "min": -21,
+    "max": 40
+  },
+  {
+    "preset": "desert",
+    "seed": 9001,
+    "ms": 36,
+    "dryPercent": 100,
+    "min": 17,
+    "max": 30
+  },
+  {
+    "preset": "taiga",
+    "seed": 9001,
+    "ms": 80,
+    "dryPercent": 100,
+    "min": 29,
+    "max": 53
+  },
+  {
+    "preset": "iron-islands",
+    "seed": 9001,
+    "ms": 113,
+    "dryPercent": 17,
+    "min": -21,
+    "max": 89
+  },
+  {
+    "preset": "fjords",
+    "seed": 9001,
+    "ms": 76,
+    "dryPercent": 61,
+    "min": -10,
+    "max": 192
+  },
+  {
+    "preset": "jungle",
+    "seed": 9001,
+    "ms": 71,
+    "dryPercent": 100,
+    "min": 32,
+    "max": 70
+  }
+]

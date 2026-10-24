@@ -1,0 +1,40 @@
+
+> terrain-editor@0.16.2 build
+> npm run build:models && node scripts/sync-entry.mjs && npm run typecheck && vite build && node scripts/build-offline.mjs && node scripts/build-webgpu.mjs
+
+
+> terrain-editor@0.16.2 build:models
+> node scripts/build-models.mjs
+
+Built local GLB library: 18 models
+
+> terrain-editor@0.16.2 typecheck
+> tsc --noEmit
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 117 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/webgpu_lab.html                       4.38 kB │ gzip:     2.07 kB
+dist/index.html                            6.87 kB │ gzip:     2.76 kB
+dist/terrain_editor.html                   6.87 kB │ gzip:     2.76 kB
+dist/assets/webgpu_lab-B3QymXPN.css        2.60 kB │ gzip:     1.13 kB
+dist/assets/main-BMaHFg3s.css             10.44 kB │ gzip:     2.98 kB
+dist/assets/OrbitControls-o0CrigvH.js    625.22 kB │ gzip:   155.31 kB │ map: 3,034.65 kB
+dist/assets/webgpu_lab-Dr_Nied_.js       704.62 kB │ gzip:   199.50 kB │ map: 3,494.42 kB
+dist/assets/main-D_mKh487.js           5,538.68 kB │ gzip: 1,891.55 kB │ map: 6,821.97 kB
+
+✓ built in 1.51s
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 105 modules transformed.
+rendering chunks...
+✓ built in 347ms
+Offline HTML: dist/terrain_editor_standalone.html (also copied to project root)
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 14 modules transformed.
+rendering chunks...
+✓ built in 276ms
+Offline WebGPU lab: webgpu_lab_standalone.html (root + dist)

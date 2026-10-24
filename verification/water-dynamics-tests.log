@@ -1,0 +1,20 @@
+✔ Gerstner waves preserve a calm endpoint, attenuate at the shore and distinguish sea, lake and river (2.2488ms)
+✔ physical surface inverts displaced horizontal vertices, including extreme wave settings (122.4978ms)
+✔ bounded water impacts reject dry ground, stay in their body, expire, and freeze without advancing time (75.8194ms)
+✔ current diverts around a submerged obstacle and CPU samples the same quantized, filtered flow map as the shader (137.3864ms)
+✔ ocean grid concentrates detail near the viewer without seams and local water has a bounded vertex budget (25.8757ms)
+✔ wave-aware swimming and current remain stable at 10, 60 and 144 FPS (178.8137ms)
+✔ Rapier buoyancy follows current, stays finite and is stable across render frequencies without modifying authored poses (788.7193ms)
+✔ floating props collide with the bed and denser props sink rather than receiving infinite lift (168.0821ms)
+✔ water optics and buoyancy settings save/load/undo and malformed additions are rejected atomically (1324.6636ms)
+✔ changing water appearance does not excavate a hand-edited bed a second time (147.844ms)
+✔ optical captures restore visibility, target, XR and shadows after success, resize and renderer failure (71.9067ms)
+✔ rain reaches visible water from a dry bank and paused footsteps do not emit stale splashes (53.9191ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4126.0316

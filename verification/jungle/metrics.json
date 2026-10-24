@@ -1,0 +1,110 @@
+[
+  {
+    "variant": "dense",
+    "seed": 424242,
+    "areaSize": 0.25,
+    "N": 256,
+    "objects": 439,
+    "trees": 318,
+    "rocks": 10,
+    "bushes": 107,
+    "emergents": 3,
+    "canopy": 210,
+    "understory": 105,
+    "logs": 4,
+    "coverage": 0.8768233387358185,
+    "clearingCoverage": 0,
+    "emergentHeight": [
+      36.199675866502176,
+      42.30699145207007
+    ],
+    "canopyHeight": [
+      22.5147126016041,
+      31.998935699365852
+    ],
+    "relief90": 2.6898670196533203,
+    "waterBodies": 2,
+    "cpuMs": 401
+  },
+  {
+    "variant": "river",
+    "seed": 424242,
+    "areaSize": 0.25,
+    "N": 256,
+    "objects": 480,
+    "trees": 328,
+    "rocks": 10,
+    "bushes": 140,
+    "emergents": 3,
+    "canopy": 192,
+    "understory": 133,
+    "logs": 2,
+    "coverage": 0.8920265780730897,
+    "clearingCoverage": 0,
+    "emergentHeight": [
+      36.199675866502176,
+      42.30699145207007
+    ],
+    "canopyHeight": [
+      22.61765688468872,
+      31.588786640415172
+    ],
+    "relief90": 2.6898670196533203,
+    "waterBodies": 2,
+    "cpuMs": 300
+  },
+  {
+    "variant": "clearing",
+    "seed": 424242,
+    "areaSize": 0.25,
+    "N": 256,
+    "objects": 400,
+    "trees": 244,
+    "rocks": 10,
+    "bushes": 139,
+    "emergents": 3,
+    "canopy": 136,
+    "understory": 105,
+    "logs": 7,
+    "coverage": 0.6545166402535658,
+    "clearingCoverage": 0.16666666666666666,
+    "emergentHeight": [
+      38.200387254267994,
+      48.79531002862913
+    ],
+    "canopyHeight": [
+      22.56445977230907,
+      31.998935699365852
+    ],
+    "relief90": 2.9484329223632812,
+    "waterBodies": 0,
+    "cpuMs": 302
+  },
+  {
+    "variant": "dense",
+    "seed": 424242,
+    "areaSize": 1,
+    "N": 128,
+    "objects": 10582,
+    "trees": 7488,
+    "rocks": 230,
+    "bushes": 2765,
+    "emergents": 73,
+    "canopy": 4940,
+    "understory": 2475,
+    "logs": 99,
+    "coverage": 0.8720958819913952,
+    "clearingCoverage": 0,
+    "emergentHeight": [
+      36.132971556676445,
+      49.91979844211917
+    ],
+    "canopyHeight": [
+      22.49864048221713,
+      32.129313706088865
+    ],
+    "relief90": 10.705318450927734,
+    "waterBodies": 2,
+    "cpuMs": 2428
+  }
+]

@@ -1,0 +1,212 @@
+{
+  "runs": [
+    {
+      "ms": 1082,
+      "objects": 433,
+      "variant": "dense"
+    },
+    {
+      "ms": 425,
+      "objects": 400,
+      "variant": "clearing"
+    },
+    {
+      "ms": 532,
+      "objects": 481,
+      "variant": "river"
+    }
+  ],
+  "balanced": {
+    "audio": {
+      "burner": false,
+      "loops": 3,
+      "meteorFlights": 0,
+      "steps": 0,
+      "time": 0,
+      "voices": 0
+    },
+    "balloon": {
+      "active": false,
+      "ballastEffect": 0,
+      "bodies": 0,
+      "canopies": 0,
+      "drawCalls": 0,
+      "seated": false
+    },
+    "calls": 451,
+    "colliders": 0,
+    "collisionUpdates": {
+      "lastUpdateMs": 0,
+      "objectCreates": 0,
+      "rebuilds": 0,
+      "terrainUpdates": 0
+    },
+    "contacts": {
+      "fullUpdates": 3,
+      "lastUpdateMs": 64.39999997615814,
+      "localUpdates": 0,
+      "pixels": 65536
+    },
+    "foliage": {
+      "chunks": 41,
+      "instances": 1620
+    },
+    "fps": 0.9931472837421776,
+    "frameTimeMs": 1006.9000000000016,
+    "objects": 2487,
+    "preview": {
+      "hits": 1,
+      "lastRenderMs": 80.30000007152557,
+      "renders": 3
+    },
+    "programs": 33,
+    "scenarios": {
+      "activeFlights": 0,
+      "capacity": 0,
+      "fires": 0,
+      "impact": null,
+      "impacts": 0,
+      "meteor": null,
+      "meteors": [],
+      "mode": null,
+      "particles": 0,
+      "peakFlights": 0,
+      "phase": "idle",
+      "seed": 0,
+      "spawned": 0,
+      "time": 0
+    },
+    "terrain": {
+      "levels": [
+        4,
+        6,
+        6
+      ],
+      "total": 16,
+      "triangles": 40864,
+      "visible": 8
+    },
+    "triangles": 2008947,
+    "vegetation": {
+      "levels": [
+        4,
+        0,
+        0
+      ],
+      "total": 4,
+      "visible": 4
+    },
+    "water": {
+      "captures": 62,
+      "floating": 0,
+      "impacts": 0,
+      "reflectionSize": 256,
+      "refractionSize": [
+        780,
+        405
+      ],
+      "refractions": 130,
+      "splashes": 0,
+      "steps": 6112,
+      "surfaces": 3,
+      "underwater": false
+    }
+  },
+  "low": {
+    "audio": {
+      "burner": false,
+      "loops": 3,
+      "meteorFlights": 0,
+      "steps": 0,
+      "time": 0,
+      "voices": 0
+    },
+    "balloon": {
+      "active": false,
+      "ballastEffect": 0,
+      "bodies": 0,
+      "canopies": 0,
+      "drawCalls": 0,
+      "seated": false
+    },
+    "calls": 214,
+    "colliders": 0,
+    "collisionUpdates": {
+      "lastUpdateMs": 0,
+      "objectCreates": 0,
+      "rebuilds": 0,
+      "terrainUpdates": 0
+    },
+    "contacts": {
+      "fullUpdates": 3,
+      "lastUpdateMs": 64.39999997615814,
+      "localUpdates": 0,
+      "pixels": 65536
+    },
+    "foliage": {
+      "chunks": 32,
+      "instances": 773
+    },
+    "fps": 0.99304865938431,
+    "frameTimeMs": 1007,
+    "objects": 1669,
+    "preview": {
+      "hits": 2,
+      "lastRenderMs": 80.30000007152557,
+      "renders": 3
+    },
+    "programs": 56,
+    "scenarios": {
+      "activeFlights": 0,
+      "capacity": 0,
+      "fires": 0,
+      "impact": null,
+      "impacts": 0,
+      "meteor": null,
+      "meteors": [],
+      "mode": null,
+      "particles": 0,
+      "peakFlights": 0,
+      "phase": "idle",
+      "seed": 0,
+      "spawned": 0,
+      "time": 0
+    },
+    "terrain": {
+      "levels": [
+        4,
+        0,
+        12
+      ],
+      "total": 16,
+      "triangles": 36064,
+      "visible": 8
+    },
+    "triangles": 1001018,
+    "vegetation": {
+      "levels": [
+        4,
+        0,
+        0
+      ],
+      "total": 4,
+      "visible": 4
+    },
+    "water": {
+      "captures": 63,
+      "floating": 0,
+      "impacts": 0,
+      "reflectionSize": 0,
+      "refractionSize": [
+        409,
+        212
+      ],
+      "refractions": 145,
+      "splashes": 0,
+      "steps": 7828,
+      "surfaces": 3,
+      "underwater": false
+    }
+  },
+  "errors": []
+}

@@ -1,0 +1,10 @@
+import {build} from 'vite';
+import {readFile,writeFile,mkdir,copyFile} from 'node:fs/promises';
+const result=await build({configFile:false,build:{target:'es2022',write:false,lib:{entry:'verification/graphics-check.ts',name:'GraphicsCheck',formats:['iife']}}});
+const output=(Array.isArray(result)?result:[result]).flatMap(bundle=>bundle.output),script=output.filter(x=>x.type==='chunk').map(x=>x.code).join('\n'),css=output.filter(x=>x.type==='asset'&&x.fileName.endsWith('.css')).map(x=>String(x.source)).join('\n');
+const gpu=await readFile('verification/graphics-gpu.js','utf8'),gpuTag=`<script>${gpu.replace(/<\/script/gi,'<\\/script')}</script>`;
+const html=(await readFile('index.html','utf8')).replace('</head>',()=>`<style>${css}</style>${gpuTag}</head>`).replace('<script type="module" src="/src/main.ts"></script>',()=>`<script>${script.replace(/<\/script/gi,'<\\/script')}</script>`);
+await mkdir('dist/examples',{recursive:true});await writeFile('dist/graphics-check.html',html);
+for(const file of ['storm-coast.json','impact-forest.json'])await copyFile('examples/'+file,'dist/examples/'+file);
+await writeFile('dist/graphics-before.html',(await readFile('verification/graphics-v017/before.html','utf8')).replace('</head>',()=>gpuTag+'</head>'));
+console.log('Graphics comparison: dist/graphics-check.html (isolated IndexedDB)');

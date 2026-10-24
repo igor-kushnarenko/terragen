@@ -1,0 +1,25 @@
+import type {EditorState} from './state';
+import {WORLD_PRESET_IDS,type WorldPresetId,type BiomeRegion,type LandscapePresetId} from './world';
+
+export interface WorldPreset {
+    name:string;description:string;climate:string;plantsLabel:string;color:string;
+    biome:BiomeRegion['kind'];settings:Partial<EditorState>;trees:readonly string[];shrubs:readonly string[];
+    ground:readonly [number,number,number,number];rockTint:number;sandTint?:number;waterDeep:number;waterShallow:number;
+}
+const common:Partial<EditorState>={octaves:5,island:true,water:12,snowLine:400,groundDetail:1,showScatter:true,showFoliage:true,dayCycle:false,wetness:0,precipitation:1,fogIntensity:1,lowFog:.15,windDir:70,waterOpacity:.65,clearingAmount:.35};
+export const WORLD_PRESETS:Record<WorldPresetId,WorldPreset>={
+    archipelago:{name:'Архипелаг',description:'Россыпь островов с бухтами, песчаными косами и мелководными лагунами.',climate:'Морской бриз · солнечный день',plantsLabel:'Кокосовые пальмы, прибрежные кустарники',color:'#70bdb8',biome:'coast',
+        settings:{...common,height:85,scale:1.3,sharp:1.8,mountains:.28,warp:.65,treeDensity:.16,rockDensity:.12,foliageDensity:.45,soilMoisture:.6,weather:'partly',sunEl:46,sunAz:160,fog:.08,windSpeed:.55,wave:.65,exposure:.6},trees:['palm'],shrubs:['coastal-bush'],ground:[0,.18,0,0],rockTint:0xa4a594,waterDeep:0x155466,waterShallow:0x4ea69c},
+    desert:{name:'Пустыня',description:'Длинные ветровые дюны, сухие каменистые гряды и редкие засухоустойчивые растения.',climate:'Сухо · тёплый низкий свет',plantsLabel:'Саксаул, кактусы, сухие кустарники',color:'#d7ad6f',biome:'coast',
+        settings:{...common,island:false,height:75,scale:1.8,sharp:1.4,mountains:.12,warp:.3,treeDensity:.05,rockDensity:.1,foliageDensity:.05,soilMoisture:.04,weather:'clear',sunEl:21,sunAz:245,fog:.08,lowFog:0,windSpeed:.8,wave:.1,exposure:.65,clearingAmount:.8},trees:['saxaul','cactus'],shrubs:['dry-bush'],ground:[1,0,0,0],rockTint:0xc4a17a,sandTint:0xffc66d,waterDeep:0x365c64,waterShallow:0x6c9b8b},
+    taiga:{name:'Тайга',description:'Хвойные леса на ледниковых холмах, прохладные низины и каменистые выходы.',climate:'Прохладно · мягкое утро',plantsLabel:'Лиственницы, ели, сосны, лесной мох',color:'#638d77',biome:'forest',
+        settings:{...common,island:false,height:125,scale:1.6,sharp:2,mountains:.4,warp:.45,snowLine:170,treeDensity:.36,rockDensity:.22,foliageDensity:.75,soilMoisture:.8,weather:'partly',sunEl:24,sunAz:115,fog:.24,lowFog:.5,windSpeed:.35,wave:.3,exposure:.59},trees:['larch','spruce','pine'],shrubs:['bush'],ground:[0,0,0,.35],rockTint:0x858c85,waterDeep:0x234655,waterShallow:0x5b8176},
+    'iron-islands':{name:'Железные Острова',description:'Суровые тёмные острова, ступенчатые скалы, обрывистые берега и ветреные пустоши.',climate:'Пасмурно · сильный морской ветер',plantsLabel:'Ветровые сосны, вереск, низкие кусты',color:'#78838c',biome:'mountains',
+        settings:{...common,height:150,scale:1.1,sharp:3.4,mountains:.75,warp:.8,snowLine:380,treeDensity:.1,rockDensity:.42,foliageDensity:.28,soilMoisture:.65,weather:'overcast',sunEl:19,sunAz:210,fog:.16,windSpeed:1.3,wave:1.3,wetness:.3,exposure:.62,clearingAmount:.65},trees:['wind-pine'],shrubs:['heather'],ground:[0,0,.68,.15],rockTint:0x505964,waterDeep:0x182e41,waterShallow:0x4c6b71},
+    fjords:{name:'Фьорды',description:'Глубокие извилистые морские заливы между высокими ледниковыми массивами.',climate:'Прохладно · переменная облачность',plantsLabel:'Горные берёзы, можжевельник, луговые цветы',color:'#81a3ae',biome:'mountains',
+        settings:{...common,height:250,scale:1.5,sharp:3.6,mountains:.85,warp:.5,snowLine:175,treeDensity:.16,rockDensity:.32,foliageDensity:.5,soilMoisture:.7,weather:'partly',sunEl:29,sunAz:145,fog:.13,windSpeed:.65,wave:.5,exposure:.61},trees:['mountain-birch'],shrubs:['juniper'],ground:[0,0,.32,.28],rockTint:0x89959c,waterDeep:0x143e53,waterShallow:0x418a8e},
+    jungle:{name:'Джунгли',description:'Мягкие тропические холмы, влажные низины и многоярусный лес под почти сомкнутым пологом.',climate:'Влажно · мягкая дымка · свет сквозь кроны',plantsLabel:'Деревья-гиганты, тропический полог, пальмы, лианы и папоротники',color:'#729b58',biome:'jungle',
+        settings:{...common,island:false,height:85,scale:1.5,sharp:1.2,mountains:.12,warp:.65,snowLine:500,treeDensity:.85,rockDensity:.12,foliageDensity:.9,soilMoisture:.9,weather:'partly',precipitation:.25,sunEl:48,sunAz:100,fog:.1,fogIntensity:.6,lowFog:.25,windSpeed:.2,wave:.15,wetness:.35,exposure:.68,clearingAmount:.08},trees:['jungle-emergent','jungle-emergent-vines','jungle-canopy','jungle-canopy-vines'],shrubs:['jungle-banana','jungle-tree-fern','jungle-broadleaf'],ground:[0,0,0,.5],rockTint:0x8e9b7d,waterDeep:0x204f48,waterShallow:0x72976b},
+};
+export function isWorldPreset(id:LandscapePresetId|string|null):id is WorldPresetId{return WORLD_PRESET_IDS.includes(id as WorldPresetId);}
+export function worldPreset(id:LandscapePresetId|null){return isWorldPreset(id)?WORLD_PRESETS[id]:undefined;}

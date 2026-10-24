@@ -1,0 +1,67 @@
+{
+  "grid": 512,
+  "objects": 3000,
+  "radius": 12,
+  "samples": [
+    {
+      "crater": 18.577800000000025,
+      "mesh": 22.526100000000042,
+      "range": 7.301999999999907,
+      "heightTexture": 6.169099999999844,
+      "vegetation": 5.284199999999828,
+      "transaction": 69.21709999999985,
+      "history": 9.3579000000002,
+      "collisions": 5.912399999999934,
+      "contactMap": 18.90560000000005,
+      "flow": 1.1059999999999945,
+      "collisionRebuilds": 1,
+      "terrainUpdates": 1,
+      "contactPixels": 12288
+    },
+    {
+      "crater": 6.936400000000049,
+      "mesh": 11.973500000000058,
+      "range": 1.213799999999992,
+      "heightTexture": 1.5188000000000557,
+      "vegetation": 2.7176999999999225,
+      "transaction": 30.890499999999975,
+      "history": 6.530299999999897,
+      "collisions": 3.064100000000053,
+      "contactMap": 9.118199999999888,
+      "flow": 0.9731999999999061,
+      "collisionRebuilds": 1,
+      "terrainUpdates": 1,
+      "contactPixels": 12288
+    },
+    {
+      "crater": 7.671800000000076,
+      "mesh": 9.914600000000064,
+      "range": 0.5064000000002125,
+      "heightTexture": 1.561500000000251,
+      "vegetation": 2.5043000000000575,
+      "transaction": 27.521499999999833,
+      "history": 5.362899999999172,
+      "collisions": 2.92890000000034,
+      "contactMap": 5.378899999999703,
+      "flow": 0.4062000000003536,
+      "collisionRebuilds": 1,
+      "terrainUpdates": 1,
+      "contactPixels": 12288
+    },
+    {
+      "crater": 6.131500000000415,
+      "mesh": 9.597399999999652,
+      "range": 1.1937000000002627,
+      "heightTexture": 1.6070999999997184,
+      "vegetation": 1.9877999999998792,
+      "transaction": 25.65229999999974,
+      "history": 5.134799999999814,
+      "collisions": 3.2946999999999207,
+      "contactMap": 4.865399999999681,
+      "flow": 0.32960000000002765,
+      "collisionRebuilds": 1,
+      "terrainUpdates": 1,
+      "contactPixels": 12288
+    }
+  ]
+}

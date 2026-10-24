@@ -1,0 +1,226 @@
+Browser tab: 3, Title: "Редактор ландшафта — Open World Terrain Editor", URL: "http://127.0.0.1:4184/world-studio-check.html".
+1 AXWebArea Редактор ландшафта — Open World Terrain Editor, URL: 127.0.0.1:4184/world-studio-check.html
+	2 container
+		3 image
+		4 container Description: Панель редактора, ID: panel
+			5 heading ⛰ Редактор ландшафта open world, Value: 1
+				6 text ⛰ Редактор ландшафта  open world
+			7 container worldStudio
+				8 button (expanded) ▾ Миры, Secondary Actions: Collapse
+					9 text ▾ 
+					10 text Миры
+				11 tab group Создание и хранение миров
+					12 tab (selected, settable, boolean) Создать, Value: 1, ID: world-tab-new
+					13 tab (selectable, settable, boolean) Мои миры, Value: 0, ID: world-tab-saved
+					14 tab (selectable, settable, boolean) Обработать, Value: 0, ID: world-tab-tools
+				15 container Description: Создать, ID: world-page-new
+					16 text Выберите мир. Рельеф, растения и атмосфера будут настроены вместе.
+					17 checkbox Description: Пресет Архипелаг, Value: 0
+						18 text Архипелаг
+					19 checkbox Description: Пресет Пустыня, Value: 0
+						20 text Пустыня
+					21 checkbox Description: Пресет Тайга, Value: 1
+						22 text Тайга
+					23 checkbox Description: Пресет Железные Острова, Value: 0
+						24 text Железные Острова
+					25 checkbox Description: Пресет Фьорды, Value: 0
+						26 text Фьорды
+					27 checkbox Description: Пресет Джунгли, Value: 0
+						28 text Джунгли
+					181 text Тайга
+					182 text Хвойные леса на ледниковых холмах, прохладные низины и каменистые выходы.
+					183 text Лиственницы, ели, сосны, лесной мох
+					184 text Прохладно · мягкое утро
+					29 container Параметры мира
+						30 text Параметры мира
+						31 container
+							32 text Сид
+							33 stepper (settable, integer) Description: Сид нового мира, Value: 1337
+							34 button Description: Случайный сид нового мира, Help: Выбрать новый сид без запуска генерации
+						35 container
+							36 text Размер территории
+							37 pop up button (collapsed, settable) Description: Размер нового мира, Value: 1024 м · вся карта, Secondary Actions: Expand
+								38 menu
+									39 (disabled) 128 м · островок
+									40 (disabled) 256 м
+									41 (disabled) 512 м
+									42 (disabled) 768 м
+									43 (disabled) 1024 м · вся карта
+						44 container
+							45 text Детальность рельефа
+							46 pop up button (collapsed, settable) Description: Детальность нового мира, Value: Обычная · 256, Secondary Actions: Expand
+								47 menu
+									48 (disabled) Быстрая · 128
+									49 (disabled) Обычная · 256
+									50 (disabled) Подробная · 512
+						51 button (collapsed) ▸ Настроить рецепт, Secondary Actions: Expand
+							52 text ▸ 
+							53 text Настроить рецепт
+					54 button Показать эскиз, ID: btnPreviewWorld
+					55 button Создать мир, ID: btnCreateWorld
+					56 text Текущий мир сохранится в библиотеке. Эрозия, растения и атмосфера применяются автоматически.
+			57 button (collapsed) ▸ Редактирование объектов, Secondary Actions: Expand
+				58 text ▸ 
+				59 text Редактирование объектов
+			60 button (collapsed) ▸ Озёра и реки, Secondary Actions: Expand
+				61 text ▸ 
+				62 text Озёра и реки
+			63 button (collapsed) ▸ Тропы по кривой, Secondary Actions: Expand
+				64 text ▸ 
+				65 text Тропы по кривой
+			66 container
+				67 button (expanded) ▾ Кисти, Secondary Actions: Collapse
+					68 text ▾ 
+					69 text Кисти
+				70 button Камера, Help: Камера (1)
+				71 button Поднять, Help: Поднять (2)
+				72 button Опустить, Help: Опустить (3)
+				73 button Сгладить, Help: Сгладить (4)
+				74 button Выровнять, Help: Выровнять (5)
+				75 button Шум, Help: Шум (6)
+				76 button Текстура, Help: Текстура (7)
+				77 text Радиус, м
+				78 slider (settable, integer) Description: Радиус, м, Value: 40
+				185 text 40 Сила
+				80 slider (settable, float) Description: Сила, Value: 0.5
+				186 text 0.50 Мягкость края
+				82 slider (settable, float) Description: Мягкость края, Value: 0.6000000238418579, Details: 0.6
+				187 text 0.60
+				84 button ↶ Отменить, Help: Отменить: Создать мир: Тайга, ID: btnUndo
+				85 button (disabled) ↷ Повторить, Help: Повторить, ID: btnRedo
+			86 button (collapsed) ▸ Материалы, Secondary Actions: Expand
+				87 text ▸ 
+				88 text Материалы
+			89 button (collapsed) ▸ Вода, Secondary Actions: Expand
+				90 text ▸ 
+				91 text Вода
+			92 button (collapsed) ▸ Небо и освещение, Secondary Actions: Expand
+				93 text ▸ 
+				94 text Небо и освещение
+			95 button (collapsed) ▸ Качество графики, Secondary Actions: Expand
+				96 text ▸ 
+				97 text Качество графики
+			98 button (collapsed) ▸ Растительность, Secondary Actions: Expand
+				99 text ▸ 
+				100 text Растительность
+			101 button (collapsed) ▸ Сиды операций, Secondary Actions: Expand
+				102 text ▸ 
+				103 text Сиды операций
+			104 button (collapsed) ▸ Добавление объектов, Secondary Actions: Expand
+				105 text ▸ 
+				106 text Добавление объектов
+			107 button (collapsed) ▸ Библиотека моделей, Secondary Actions: Expand
+				108 text ▸ 
+				109 text Библиотека моделей
+			110 button (collapsed) ▸ Природный звук, Secondary Actions: Expand
+				111 text ▸ 
+				112 text Природный звук
+			113 button (collapsed) ▸ Файлы, Secondary Actions: Expand
+				114 text ▸ 
+				115 text Файлы
+			116 button (collapsed) ▸ Камера, Secondary Actions: Expand
+				117 text ▸ 
+				118 text Камера
+			119 button (collapsed) ▸ Настройки прогулки, Secondary Actions: Expand
+				120 text ▸ 
+				121 text Настройки прогулки
+			122 container
+				123 button (expanded) ▾ Погода, Secondary Actions: Collapse
+					124 text ▾ 
+					125 text Погода
+				126 text Погода
+				127 pop up button (collapsed, settable) Value: Переменная облачность, ID: weatherSel, Secondary Actions: Expand
+					128 menu
+						129 Солнечно
+						130 (selected) Переменная облачность
+						131 Сплошная облачность
+						132 Туман
+						133 Дождь
+						134 Гроза
+						135 Снег
+				136 text Сила осадков
+				137 slider (settable, integer) Description: Сила осадков, Value: 1
+				188 text 100% Сила тумана
+				139 slider (settable, integer) Description: Сила тумана, Value: 1
+				189 text 100% Туман в низинах
+				141 slider (settable, float) Description: Туман в низинах, Value: 0.5
+				190 text 50% Влажность поверхностей: 0% Ветер качает растения; 0 отключает движение. Земля, камни и постройки намокают под дождём и медленно сохнут после него. Туман в низинах учитывает форму рельефа и уровни озёр. Смена дня и ночи настраивается в «Небо и освещение». Осадки регулируют дождь, грозовой дождь и снег. 0% отключает эффект, 100% — обычная сила. Туман выше 100% быстро уплотняется; при 200% видимость — около 3–4 м при любой погоде. Сила тумана применяется и к погоде, и к базовому туману. Направление ветра
+				143 slider (settable, integer) Description: Направление ветра, Value: 70
+				191 text 70° Сила ветра
+				145 slider (settable, float) Description: Сила ветра, Value: 0.3499999940395355, Details: 0.35
+				192 text 0.35 Смена погоды плавная (~3 с). Время суток — ползунок «Высота солнца» в разделе «Небо и освещение»: ниже ~10° появляются звёзды.
+			147 button (collapsed) ▸ Эксперименты, Secondary Actions: Expand
+				148 text ▸ 
+				149 text Эксперименты
+		150 container hud
+			151 text FPS: 
+			193 text 6
+			153 text Кадр: 
+			194 text 157.7
+			155 text  мс
+			156 text Объекты: 
+			195 text 7 003
+			158 text Вызовы: 
+			196 text 1 116
+			197 text 377 943
+			161 text  треуг.
+			162 text Чанки: 
+			198 text 16/16 · лес 64/64
+			164 text —
+		165 button ❔ Справка, Help: Справка (H), ID: helpBtn
+		199 text Тайга готов · 0.3 с
+		167 container worldStudioCheck
+			168 text Проверка миров 0.18
+			169 container worldCheckActions
+				170 button Проверить Архипелаг
+				171 button Проверить Пустыня
+				172 button Проверить Тайга
+				173 button Проверить Железные Острова
+				174 button Проверить Фьорды
+				175 button Проверить Джунгли
+				176 button Обзор
+				177 button На земле
+				178 button Скрыть проверку
+			200 text {
+  "preset": "taiga",
+  "seed": 1337,
+  "N": 256,
+  "busy": false,
+  "objects": 3789,
+  "species": [
+    "pine",
+    "spruce",
+    "larch",
+    "boulder",
+    "rock",
+    "bush"
+  ],
+  "weather": "partly",
+  "sunEl": 24,
+  "routes": 2,
+  "frames": 373,
+  "errors": [],
+  "runs": [
+    {
+      "preset": "archipelago",
+      "ok": true,
+      "ms": 355,
+      "objects": 128
+    },
+    {
+      "preset": "desert",
+      "ok": true,
+      "ms": 163,
+      "objects": 344
+    },
+    {
+      "preset": "taiga",
+      "ok": true,
+      "ms": 298,
+      "objects": 3789
+    }
+  ]
+}
+		180 button Фоторежим · F8, ID: photoBtn
+
+The focused UI element is 172 button Проверить Тайга

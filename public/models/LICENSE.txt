@@ -1,0 +1,1 @@
+These models were authored for GenTerrain. No third-party assets or network resources are used.

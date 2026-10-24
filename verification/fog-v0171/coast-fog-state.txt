@@ -1,0 +1,74 @@
+Browser tab: 1, Title: "Редактор ландшафта — Open World Terrain Editor", URL: "http://127.0.0.1:4184/fog-check.html".
+0 AXWebArea Редактор ландшафта — Open World Terrain Editor, URL: 127.0.0.1:4184/fog-check.html
+	1 container
+		2 image
+		3 container fogCheck
+			4 text Туман и непрерывность облаков
+			5 container fogActions
+				6 button Ясно
+				7 button Облака
+				8 button Пасмурно
+				9 button Туман
+				10 button Шторм
+				11 button Туман 0%
+				12 button Туман 50%
+				13 button Туман 100%
+				14 button Туман 200%
+				15 button Берег
+				16 button Море
+				17 button За картой
+				18 button Над облаками
+				19 button Экономный
+				20 button Высокий
+				21 button Ночь
+				22 button День
+				23 button Скрыть
+			61 text {
+  "view": "coast",
+  "weather": "fog",
+  "fogIntensity": 0.5,
+  "quality": "balanced",
+  "frames": 1060,
+  "band": [],
+  "errors": [],
+  "programs": 21,
+  "calls": 315
+}
+		25 container Description: Фоторежим, ID: photoControls
+			26 heading Фоторежим, Value: 2
+				27 text Фоторежим
+			28 text ЛКМ / ПКМ — обзор · колесо — масштаб · WASD — камера · Q/E — ниже/выше · Tab — скрыть панель · Esc / F8 — вернуться
+			29 container
+				30 text Угол обзора фото
+				31 slider (settable, integer) Description: Угол обзора фото, Value: 65
+				32 text 65
+			33 container
+				34 text Наклон кадра
+				35 slider (settable, integer) Description: Наклон кадра, Value: 0
+				36 text 0
+			37 container
+				38 text Экспозиция фото
+				39 slider (settable, float) Description: Экспозиция фото, Value: 0.550000011920929, Details: 0.55
+				40 text 0.55
+			41 container
+				42 checkbox (settable, integer) Description: Приостановить время и погоду, Value: 0
+				43 text  Приостановить время и погоду
+			44 container
+				45 checkbox (settable, integer) Description: Сетка третей, Value: 0
+				46 text  Сетка третей
+			47 pop up button (collapsed, settable) Description: Размер снимка, Value: Размер окна, Secondary Actions: Expand
+				48 menu
+					49 (selected) Размер окна
+					50 Ширина 1920 px
+					51 Ширина 3840 px
+			52 button Сохранить PNG
+			53 text field (settable) Description: Название ракурса, Value: coast
+			54 button Сохранить ракурс
+			55 pop up button (collapsed, settable) Description: Сохранённый ракурс, Secondary Actions: Expand
+			56 button Вернуться к ракурсу
+			57 button Удалить ракурс
+			58 button Скрыть интерфейс · Tab
+			59 button Выйти из фоторежима · Esc
+			60 text Снимок содержит только изображение мира
+
+The focused UI element is 12 button Туман 50%

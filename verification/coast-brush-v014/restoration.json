@@ -1,0 +1,19 @@
+{
+  "version": 8,
+  "seed": 3403971791,
+  "manualObjects": 193,
+  "counts": {
+    "pine": 125,
+    "grass": 68
+  },
+  "waterReflections": false,
+  "restoration": {
+    "heights": true,
+    "paint": true,
+    "world": true,
+    "seeds": true,
+    "operations": true,
+    "walkSettings": true,
+    "reflectionPreference": true
+  }
+}

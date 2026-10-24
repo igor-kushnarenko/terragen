@@ -1,0 +1,84 @@
+{
+  "renderValid": true,
+  "scene": "forest",
+  "canvas": [
+    1280,
+    720
+  ],
+  "quality": "balanced",
+  "errors": [],
+  "results": [
+    {
+      "scene": "forest",
+      "phase": "warmup",
+      "frames": 95,
+      "meanMs": 42.177894736842084,
+      "p95Ms": 69.29999999999927,
+      "maxMs": 69.40000000000146,
+      "over100ms": 0,
+      "cpuP95": 9.900000095367432,
+      "calls": 455.77894736842103,
+      "triangles": 506108.9894736842,
+      "programs": 15,
+      "foliage": {
+        "chunks": 69,
+        "instances": 3030
+      },
+      "scenarios": 0
+    },
+    {
+      "scene": "forest",
+      "phase": "baseline",
+      "frames": 194,
+      "meanMs": 41.30773195876289,
+      "p95Ms": 62.5,
+      "maxMs": 69.60000000000218,
+      "over100ms": 0,
+      "cpuP95": 8.5,
+      "calls": 456.5,
+      "triangles": 507135.6494845361,
+      "programs": 15,
+      "foliage": {
+        "chunks": 69,
+        "instances": 3030
+      },
+      "scenarios": 0
+    },
+    {
+      "scene": "forest",
+      "phase": "storm",
+      "frames": 464,
+      "meanMs": 43.17758620689656,
+      "p95Ms": 69.5,
+      "maxMs": 520.9000000000015,
+      "over100ms": 6,
+      "cpuP95": 17,
+      "calls": 470.3814655172414,
+      "triangles": 511300.4482758621,
+      "programs": 19,
+      "foliage": {
+        "chunks": 69,
+        "instances": 3030
+      },
+      "scenarios": 9
+    },
+    {
+      "scene": "forest",
+      "phase": "recovery",
+      "frames": 96,
+      "meanMs": 41.81041666666662,
+      "p95Ms": 69.30000000000291,
+      "maxMs": 152.8000000000029,
+      "over100ms": 2,
+      "cpuP95": 10.399999976158142,
+      "calls": 456.3958333333333,
+      "triangles": 508703,
+      "programs": 15,
+      "foliage": {
+        "chunks": 69,
+        "instances": 3030
+      },
+      "scenarios": 9
+    }
+  ]
+}

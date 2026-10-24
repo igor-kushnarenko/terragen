@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "src",
+    "verification/walk-check.ts",
+    "verification/walk-world.ts",
+    "verification/walk-metrics.ts",
+    "verification/route-driver.ts",
+    "verification/water-check.ts",
+    "verification/storm-check.ts",
+    "verification/graphics-check.ts",
+    "verification/fog-check.ts",
+    "verification/world-studio-check.ts",
+    "verification/jungle-check.ts",
+    "verification/jungle-world.ts",
+    "verification/asset-storage-check.ts",
+    "verification/animation-check.ts",
+    "verification/texture-check.ts",
+    "verification/animated-fixture.ts",
+    "verification/balloon-check.ts"
+  ]
+}

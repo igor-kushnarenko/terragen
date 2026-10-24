@@ -1,0 +1,283 @@
+Browser tab: 5, Title: "Редактор ландшафта — Open World Terrain Editor", URL: "http://127.0.0.1:4185/asset-storage-check.html".
+0 AXWebArea Редактор ландшафта — Open World Terrain Editor, URL: 127.0.0.1:4185/asset-storage-check.html
+	1 container
+		2 image
+		3 container Description: Панель редактора, ID: panel
+			4 heading ⛰ Редактор ландшафта open world, Value: 1
+				5 text ⛰ Редактор ландшафта  open world
+			6 container worldStudio
+				7 button (expanded) ▾ Миры, Secondary Actions: Collapse
+					8 text ▾ 
+					9 text Миры
+				10 tab group Создание и хранение миров
+					11 tab (selected, settable, boolean) Создать, Value: 1, ID: world-tab-new
+					12 tab (selectable, settable, boolean) Мои миры, Value: 0, ID: world-tab-saved
+					13 tab (selectable, settable, boolean) Обработать, Value: 0, ID: world-tab-tools
+				14 container Description: Создать, ID: world-page-new
+					15 text Выберите мир. Рельеф, растения и атмосфера будут настроены вместе.
+					16 checkbox Description: Пресет Архипелаг, Value: 1
+						17 text Архипелаг
+					18 checkbox Description: Пресет Пустыня, Value: 0
+						19 text Пустыня
+					20 checkbox Description: Пресет Тайга, Value: 0
+						21 text Тайга
+					22 checkbox Description: Пресет Железные Острова, Value: 0
+						23 text Железные Острова
+					24 checkbox Description: Пресет Фьорды, Value: 0
+						25 text Фьорды
+					26 checkbox Description: Пресет Джунгли, Value: 0
+						27 text Джунгли
+					174 text Архипелаг
+					175 text Россыпь островов с бухтами, песчаными косами и мелководными лагунами.
+					176 text Кокосовые пальмы, прибрежные кустарники
+					177 text Морской бриз · солнечный день
+					28 container Параметры мира
+						29 text Параметры мира
+						30 container
+							31 text Сид
+							32 stepper (settable, integer) Description: Сид нового мира, Value: 1337
+							33 button Description: Случайный сид нового мира, Help: Выбрать новый сид без запуска генерации
+						34 container
+							35 text Размер территории
+							36 pop up button (collapsed, settable) Description: Размер нового мира, Value: 1024 м · вся карта, Secondary Actions: Expand
+								37 menu
+									38 128 м · островок
+									39 256 м
+									40 512 м
+									41 768 м
+									42 (selected) 1024 м · вся карта
+						43 container
+							44 text Детальность рельефа
+							45 pop up button (collapsed, settable) Description: Детальность нового мира, Value: Обычная · 256, Secondary Actions: Expand
+								46 menu
+									47 Быстрая · 128
+									48 (selected) Обычная · 256
+									49 Подробная · 512
+						50 button (collapsed) ▸ Настроить рецепт, Secondary Actions: Expand
+							51 text ▸ 
+							52 text Настроить рецепт
+					53 button Показать эскиз, ID: btnPreviewWorld
+					54 button Создать мир, ID: btnCreateWorld
+					55 text Текущий мир сохранится в библиотеке. Эрозия, растения и атмосфера применяются автоматически.
+			247 container
+				248 button (expanded) ▾ Редактирование объектов, Secondary Actions: Collapse
+					249 text ▾ 
+					250 text Редактирование объектов
+				251 pop up button (collapsed, settable) Description: Выбранная модель или группа, Value: import-9mb · manual, Secondary Actions: Expand
+					252 menu
+						253 Выберите модель или группу
+						254 Камень 9 МБ · manual-check
+						255 (selected) import-9mb · manual
+				256 button Выбирать модели в сцене
+				257 button Перемещение · T
+				258 button Вращение · R
+				259 button Масштаб · V
+				260 text Выбрано: 1 · групп в мире: 0 Положение
+				261 stepper (settable, integer) Description: Положение X, Value: 0, Details: 0,000
+				262 stepper (settable, float) Description: Положение Y, Value: 27.458999633789062, Details: 27,459
+				263 stepper (settable, integer) Description: Положение Z, Value: 0, Details: 0,000
+				264 text Поворот
+				265 stepper (settable, integer) Description: Поворот X, Value: 0, Details: 0,000
+				266 stepper (settable, integer) Description: Поворот Y, Value: 0, Details: 0,000
+				267 stepper (settable, integer) Description: Поворот Z, Value: 0, Details: 0,000
+				268 text Масштаб
+				269 stepper (settable, integer) Description: Масштаб X, Value: 1, Details: 1,000
+				270 stepper (settable, integer) Description: Масштаб Y, Value: 1, Details: 1,000
+				271 stepper (settable, integer) Description: Масштаб Z, Value: 1, Details: 1,000
+				272 checkbox (settable, integer) Description: Привязать к рельефу, Value: 1
+				273 text  Привязать к рельефу
+				274 checkbox (settable, integer) Description: Плавучий предмет, Value: 0
+				275 text  Плавучий предмет (в прогулке) Плотность относительно воды
+				276 stepper (settable, float) Description: Плотность относительно воды, Value: 0.44999998807907104, Details: 0,45
+				277 text Плавучие предметы реагируют на волны, течение и столкновения во время прогулки. Плотность меньше 1 — плавание, больше 1 — погружение. Сохранённое положение задаёт точку запуска; до 64 предметов. В редакторе можно свободно менять исходное положение.
+				278 text field (settable) Description: Название группы, Value: Группа моделей
+				279 button Копировать · Ctrl+D
+				280 button Удалить · Delete
+				281 button Группировать · Ctrl+G
+				282 button Разгруппировать
+				283 button Показать выбранное
+				284 button Поставить на землю
+				285 text В режиме «Камера» клик ЛКМ по модели сразу включает редактирование; перетаскивание вращает камеру. Shift+ЛКМ — добавить / убрать модель. Группы выбираются целиком. Тяните цветные оси или используйте числовые поля. У группы масштаб равномерный. Редактирование расставленного объекта превращает его в ручной; генерация растительности его сохраняет. Esc — завершить выбор.
+			59 button (collapsed) ▸ Озёра и реки, Secondary Actions: Expand
+				60 text ▸ 
+				61 text Озёра и реки
+			62 button (collapsed) ▸ Тропы по кривой, Secondary Actions: Expand
+				63 text ▸ 
+				64 text Тропы по кривой
+			65 container
+				66 button (expanded) ▾ Кисти, Secondary Actions: Collapse
+					67 text ▾ 
+					68 text Кисти
+				69 button Камера, Help: Камера (1)
+				70 button Поднять, Help: Поднять (2)
+				71 button Опустить, Help: Опустить (3)
+				72 button Сгладить, Help: Сгладить (4)
+				73 button Выровнять, Help: Выровнять (5)
+				74 button Шум, Help: Шум (6)
+				75 button Текстура, Help: Текстура (7)
+				76 text Радиус, м
+				77 slider (settable, integer) Description: Радиус, м, Value: 40
+				286 text 40 Сила
+				79 slider (settable, float) Description: Сила, Value: 0.5
+				287 text 0.50 Мягкость края
+				81 slider (settable, float) Description: Мягкость края, Value: 0.6000000238418579, Details: 0.6
+				288 text 0.60
+				83 button ↶ Отменить, Help: Отменить: Добавить объект, ID: btnUndo
+				84 button (disabled) ↷ Повторить, Help: Повторить, ID: btnRedo
+			85 button (collapsed) ▸ Материалы, Secondary Actions: Expand
+				86 text ▸ 
+				87 text Материалы
+			88 button (collapsed) ▸ Вода, Secondary Actions: Expand
+				89 text ▸ 
+				90 text Вода
+			91 button (collapsed) ▸ Небо и освещение, Secondary Actions: Expand
+				92 text ▸ 
+				93 text Небо и освещение
+			94 button (collapsed) ▸ Качество графики, Secondary Actions: Expand
+				95 text ▸ 
+				96 text Качество графики
+			97 button (collapsed) ▸ Растительность, Secondary Actions: Expand
+				98 text ▸ 
+				99 text Растительность
+			100 button (collapsed) ▸ Сиды операций, Secondary Actions: Expand
+				101 text ▸ 
+				102 text Сиды операций
+			103 button (collapsed) ▸ Добавление объектов, Secondary Actions: Expand
+				104 text ▸ 
+				105 text Добавление объектов
+			194 container
+				195 button (expanded) ▾ Библиотека моделей, Secondary Actions: Collapse
+					246 text ▾ 
+					197 text Библиотека моделей
+				198 pop up button (collapsed, settable) Description: Модель для размещения, Value: import-9mb, Secondary Actions: Expand
+					199 menu
+						289 Кокосовая пальма
+						290 Тропическая пальма
+						291 Капок
+						292 Лиственница
+						293 Ветровая сосна
+						294 Горная берёза
+						295 Можжевельник
+						296 Кактус
+						297 Саксаул
+						298 Вереск
+						299 Сухой кустарник
+						300 Прибрежный кустарник
+						301 Тропический кустарник
+						302 Трава
+						303 Цветы
+						304 Папоротник
+						305 Мох
+						306 Сосна
+						307 Ель
+						308 Берёза
+						309 Дуб
+						310 Лесной куст
+						311 Камень
+						312 Валун
+						313 Бревно
+						314 Мост с пандусами
+						315 Деревянный причал
+						316 Лесной домик
+						317 Каменные руины
+						318 Каменная арка
+						319 Скальная пещера
+						320 Камень 9 МБ
+						321 (selected) import-9mb
+				232 button Разместить выбранную модель
+				233 pop up button (collapsed, settable) Description: Категория импортируемой модели, Value: Камень, Secondary Actions: Expand
+					234 menu
+						235 Дерево
+						236 Куст
+						237 (selected) Камень
+						238 Природный объект
+						239 Мост / настил
+						240 Постройка / пещера
+				241 button Импорт GLB / glTF
+				242 text Статические модели: до 32 МБ, до 256 МБ на мир и до 20 импортированных моделей. Для glTF выберите также BIN и текстуры. Модели хранятся в библиотеке отдельно и работают офлайн. Полный проект .terrain включает все модели.
+			109 button (collapsed) ▸ Природный звук, Secondary Actions: Expand
+				110 text ▸ 
+				111 text Природный звук
+			112 button (collapsed) ▸ Файлы, Secondary Actions: Expand
+				113 text ▸ 
+				114 text Файлы
+			115 button (collapsed) ▸ Камера, Secondary Actions: Expand
+				116 text ▸ 
+				117 text Камера
+			118 button (collapsed) ▸ Настройки прогулки, Secondary Actions: Expand
+				119 text ▸ 
+				120 text Настройки прогулки
+			121 container
+				122 button (expanded) ▾ Погода, Secondary Actions: Collapse
+					123 text ▾ 
+					124 text Погода
+				125 text Погода
+				126 pop up button (collapsed, settable) Value: Переменная облачность, ID: weatherSel, Secondary Actions: Expand
+					127 menu
+						128 Солнечно
+						129 (selected) Переменная облачность
+						130 Сплошная облачность
+						131 Туман
+						132 Дождь
+						133 Гроза
+						134 Снег
+				135 text Сила осадков
+				136 slider (settable, integer) Description: Сила осадков, Value: 1
+				322 text 100% Сила тумана
+				138 slider (settable, integer) Description: Сила тумана, Value: 1
+				323 text 100% Туман в низинах
+				140 slider (settable, float) Description: Туман в низинах, Value: 0.15000000596046448, Details: 0.15
+				324 text 15% Влажность поверхностей: 0% Ветер качает растения; 0 отключает движение. Земля, камни и постройки намокают под дождём и медленно сохнут после него. Туман в низинах учитывает форму рельефа и уровни озёр. Смена дня и ночи настраивается в «Небо и освещение». Осадки регулируют дождь, грозовой дождь и снег. 0% отключает эффект, 100% — обычная сила. Туман выше 100% быстро уплотняется; при 200% видимость — около 3–4 м при любой погоде. Сила тумана применяется и к погоде, и к базовому туману. Направление ветра
+				142 slider (settable, integer) Description: Направление ветра, Value: 70
+				325 text 70° Сила ветра
+				144 slider (settable, float) Description: Сила ветра, Value: 0.550000011920929, Details: 0.55
+				326 text 0.55 Смена погоды плавная (~3 с). Время суток — ползунок «Высота солнца» в разделе «Небо и освещение»: ниже ~10° появляются звёзды.
+			146 button (collapsed) ▸ Эксперименты, Secondary Actions: Expand
+				147 text ▸ 
+				148 text Эксперименты
+		149 container hud
+			150 text FPS: 
+			327 text 16
+			152 text Кадр: 
+			328 text 64.2
+			154 text  мс
+			155 text Объекты: 
+			329 text 2 864
+			157 text Вызовы: 
+			330 text 127
+			331 text 245 358
+			160 text  треуг.
+			161 text Чанки: 
+			332 text 9/16 · лес 1/1
+			163 text —
+		164 button ❔ Справка, Help: Справка (H), ID: helpBtn
+		333 text Добавить объект
+		166 container assetStorageCheck
+			167 text Проверка моделей · 0.19
+			334 text {
+  "assets": [
+    {
+      "name": "Камень 9 МБ",
+      "bytes": 9437184,
+      "key": "sha256:3040462ff3eb3b5…"
+    },
+    {
+      "name": "import-9mb",
+      "bytes": 9900,
+      "key": "sha256:befac8a6cf1b914…"
+    }
+  ],
+  "objects": 2,
+  "metadataBytes": 393,
+  "storedBytes": 9447084,
+  "inlineGLB": false,
+  "undo": 4,
+  "errors": []
+}
+			169 button Загрузить старый JSON с моделью 9 МБ
+			170 button Изменить объект
+			171 button Проверить хранилище
+			172 button Убрать проверку
+		173 button Фоторежим · F8, ID: photoBtn
+
+The focused UI element is 171 button Проверить хранилище

@@ -1,0 +1,10 @@
+
+> terrain-editor@0.18.0 verify:worlds
+> tsc --noEmit -p tsconfig.verification.json && node scripts/build-world-studio-check.mjs
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 114 modules transformed.
+rendering chunks...
+✓ built in 347ms
+World studio: dist/world-studio-check.html (isolated IndexedDB)

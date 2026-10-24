@@ -1,0 +1,66 @@
+{
+  "version": "0.15.0",
+  "checks": [
+    {
+      "file": "low-check.json",
+      "quality": "low",
+      "water": {
+        "surfaces": 4,
+        "reflectionSize": 0,
+        "captures": 959,
+        "refractions": 2652,
+        "refractionSize": [
+          313,
+          217
+        ],
+        "underwater": false,
+        "impacts": 6,
+        "steps": 13076,
+        "splashes": 5,
+        "floating": 3
+      },
+      "errors": 0
+    },
+    {
+      "file": "balanced-floating-check.json",
+      "quality": "balanced",
+      "water": {
+        "surfaces": 4,
+        "reflectionSize": 256,
+        "captures": 956,
+        "refractions": 1739,
+        "refractionSize": [
+          597,
+          414
+        ],
+        "underwater": false,
+        "impacts": 24,
+        "steps": 9481,
+        "splashes": 0,
+        "floating": 3
+      },
+      "errors": 0
+    },
+    {
+      "file": "high-rain-check.json",
+      "quality": "high",
+      "water": {
+        "surfaces": 4,
+        "reflectionSize": 512,
+        "captures": 771,
+        "refractions": 1423,
+        "refractionSize": [
+          895,
+          621
+        ],
+        "underwater": false,
+        "impacts": 13,
+        "steps": 6904,
+        "splashes": 0,
+        "floating": 0
+      },
+      "errors": 0
+    }
+  ],
+  "notes": "Functional snapshots, not a sustained performance benchmark; queued impacts can exceed the profile active-render limit."
+}

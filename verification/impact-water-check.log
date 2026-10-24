@@ -1,0 +1,11 @@
+
+> terrain-editor@0.16.2 verify:water
+> tsc --noEmit -p tsconfig.verification.json && tsx verification/build-water-dynamics.ts && node scripts/build-water-check.mjs
+
+Living water example: two lakes, river, shoreline, three buoyant logs and submerged rock
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 105 modules transformed.
+rendering chunks...
+✓ built in 332ms
+Verification: dist/water-check.html (isolated IndexedDB)

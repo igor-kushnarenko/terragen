@@ -1,0 +1,24 @@
+✔ meteor seeds reproduce size and trajectory; targets and entire paths stay in the world (99.0614ms)
+✔ meteor distribution includes pebble-sized bodies and rare giants without turning every small hit into a huge crater (0.3536ms)
+✔ swept contact finds a ridge and local lake before the intended endpoint (91.7434ms)
+✔ a giant meteor contacts the surface with its lower edge before its centre buries in the ground (71.8104ms)
+✔ impact excavates a bounded bowl and rim, destroys nearby models and chars only dry flammable ones (69.3551ms)
+✔ water impacts deform the bed, suppress fires and preserve submerged surroundings outside the blast (66.5528ms)
+✔ impact terrain, paint, objects and groups save and undo/redo as one transaction (355.3958ms)
+✔ Rapier removes destroyed obstacles and follows the new crater floor, including after undo (324.5738ms)
+✔ Armageddon launches simultaneous meteors, continues in random bursts and keeps a bounded shared effect budget (493.5826ms)
+✔ Armageddon pauses every meteor and produces the same ordered impacts at different rendering frequencies (375.1346ms)
+✔ meteor bursts reuse a fixed scene light count through flight, impact and repeated starts (182.2457ms)
+✔ impact refresh preserves distant instance buffers and matches a full vegetation rebuild (83.0288ms)
+✔ stopping Armageddon preserves consequences and the whole sequence can be undone to the original world (308.3848ms)
+✔ scenario pauses for menus/photo/busy state, lands exactly once at different FPS and cleans effects (258.6273ms)
+✔ leaving walk or replacing/editing the world cancels flight without damaging the new world (170.4336ms)
+✔ reflection preference persists, defaults for older saves and frees/recreates the reflection target (518.2712ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4243.364

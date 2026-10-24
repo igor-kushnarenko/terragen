@@ -1,0 +1,48 @@
+Browser tab: 8, Title: "Редактор ландшафта — Open World Terrain Editor", URL: "http://127.0.0.1:4185/balloon-check.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+~			125 text {
+  "ready": true,
+  "flight": {
+    "active": true,
+    "seated": true,
+    "bodies": 3,
+    "canopies": 0,
+    "drawCalls": 7,
+    "ballastEffect": 0,
+    "time": 185.0083333333294,
+    "position": [
+      11.189520835876465,
+      58.26524353027344,
+      3.975809335708618
+    ],
+    "temperature": 339.38013231194293,
+    "fuel": 43.537014360072604,
+    "ballast": 40
+  },
+  "paused": true,
+  "canBoard": false,
+  "metrics": {
+    "power": 0,
+    "agl": 27.54524353027344,
+    "tension": 0,
+    "grounded": false
+  },
+  "stored": true,
+  "restored": true,
+  "comparison": true,
+  "frames": 0,
+  "meanMs": "0.00",
+  "cpuP95": "0.00",
+  "calls": 85,
+  "colliders": 50,
+  "audio": {
+    "voices": 0,
+    "meteorFlights": 0,
+    "loops": 3,
+    "burner": false,
+    "steps": 0,
+    "time": 0
+  },
+  "errors": []
+}
+The focused UI element is 108 button Продолжить полёт

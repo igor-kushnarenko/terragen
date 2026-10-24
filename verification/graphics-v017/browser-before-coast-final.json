@@ -1,0 +1,48 @@
+{
+  "renderValid": true,
+  "scene": "coast",
+  "canvas": [
+    1280,
+    720
+  ],
+  "quality": "balanced",
+  "errors": [],
+  "results": [
+    {
+      "scene": "coast",
+      "phase": "warmup",
+      "frames": 77,
+      "meanMs": 52.128571428571355,
+      "p95Ms": 62.69999999999709,
+      "maxMs": 83.40000000000873,
+      "over100ms": 0,
+      "cpuP95": 4.700000047683716,
+      "calls": 328.38961038961037,
+      "triangles": 251619.35064935064,
+      "programs": 21,
+      "foliage": {
+        "chunks": 69,
+        "instances": 2773
+      },
+      "scenarios": 9
+    },
+    {
+      "scene": "coast",
+      "phase": "baseline",
+      "frames": 151,
+      "meanMs": 53.070860927152296,
+      "p95Ms": 76.5,
+      "maxMs": 104.40000000000873,
+      "over100ms": 1,
+      "cpuP95": 4.600000023841858,
+      "calls": 328.6887417218543,
+      "triangles": 251808.8344370861,
+      "programs": 21,
+      "foliage": {
+        "chunks": 69,
+        "instances": 2773
+      },
+      "scenarios": 9
+    }
+  ]
+}

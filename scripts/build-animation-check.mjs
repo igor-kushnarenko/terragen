@@ -1,0 +1,11 @@
+import {build} from 'vite';
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import {tsImport} from 'tsx/esm/api';
+globalThis.FileReader=class {async readAsArrayBuffer(blob){this.result=await blob.arrayBuffer();this.onloadend?.();}async readAsDataURL(blob){this.result=`data:${blob.type};base64,${Buffer.from(await blob.arrayBuffer()).toString('base64')}`;this.onloadend?.();}};
+const {animatedFixtureGLB}=await tsImport('../verification/animated-fixture.ts',import.meta.url);
+await mkdir('examples',{recursive:true});await writeFile('examples/animated-rig.glb',Buffer.from(await animatedFixtureGLB()));
+const template=await readFile('index.html','utf8');await writeFile('verification/animation.html',template.replace('/src/main.ts','/verification/animation-check.ts'));
+const result=await build({configFile:false,build:{target:'es2022',write:false,lib:{entry:'verification/animation-check.ts',name:'AnimationCheck',formats:['iife']}}});
+const output=(Array.isArray(result)?result:[result]).flatMap(x=>x.output),script=output.filter(x=>x.type==='chunk').map(x=>x.code).join('\n'),css=output.filter(x=>x.type==='asset'&&x.fileName.endsWith('.css')).map(x=>String(x.source)).join('\n');
+const html=template.replace('</head>',()=>`<style>${css}</style></head>`).replace('<script type="module" src="/src/main.ts"></script>',()=>`<script>${script.replace(/<\/script/gi,'<\\/script')}</script>`);
+await mkdir('dist',{recursive:true});await writeFile('dist/animation-check.html',html);console.log('Animation verification: /verification/animation.html or dist/animation-check.html; example: examples/animated-rig.glb');

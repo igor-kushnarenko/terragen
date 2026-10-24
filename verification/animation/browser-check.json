@@ -1,0 +1,29 @@
+{
+  "clip": "1",
+  "loop": false,
+  "play": "Воспроизвести",
+  "report": {
+    "animated": {
+      "instances": 2,
+      "playing": 0,
+      "skinnedMeshes": 2
+    },
+    "busy": false,
+    "errors": [],
+    "frames": 86,
+    "objects": 2,
+    "runs": [
+      {
+        "first": "manual",
+        "imported": true,
+        "second": "manual-1"
+      },
+      {
+        "bytes": 2909086,
+        "reload": true
+      }
+    ]
+  },
+  "speed": "1.5",
+  "timeline": "0.01 / 1.00 с"
+}

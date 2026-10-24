@@ -1,0 +1,87 @@
+{
+  "version": "0.15.0",
+  "water": {
+    "surfaces": 4,
+    "reflectionSize": 0,
+    "captures": 959,
+    "refractions": 2652,
+    "refractionSize": [
+      313,
+      217
+    ],
+    "underwater": false,
+    "impacts": 6,
+    "steps": 13076,
+    "splashes": 5,
+    "floating": 3
+  },
+  "statistics": {
+    "fps": 33.54380426203708,
+    "frameTimeMs": 29.811764705881668,
+    "triangles": 109886,
+    "calls": 386,
+    "objects": 2372,
+    "scenarios": {
+      "phase": "idle",
+      "time": 0,
+      "meteor": null,
+      "impact": null,
+      "fires": 0,
+      "particles": 0,
+      "capacity": 0
+    },
+    "preview": {
+      "renders": 1,
+      "hits": 9,
+      "lastRenderMs": 129.10000002384186
+    },
+    "foliage": {
+      "chunks": 32,
+      "instances": 752
+    },
+    "terrain": {
+      "total": 16,
+      "visible": 9,
+      "triangles": 36888,
+      "levels": [
+        4,
+        0,
+        12
+      ]
+    },
+    "vegetation": {
+      "total": 64,
+      "visible": 24,
+      "levels": [
+        4,
+        11,
+        49
+      ]
+    },
+    "water": {
+      "surfaces": 4,
+      "reflectionSize": 0,
+      "captures": 959,
+      "refractions": 2652,
+      "refractionSize": [
+        313,
+        217
+      ],
+      "underwater": false,
+      "impacts": 6,
+      "steps": 13076,
+      "splashes": 5,
+      "floating": 3
+    },
+    "audio": {
+      "voices": 1,
+      "loops": 3,
+      "steps": 18,
+      "time": 50.54166666666444
+    },
+    "colliders": 682
+  },
+  "errors": [],
+  "quality": "low",
+  "when": "2026-10-20T06:55:12.197Z"
+}

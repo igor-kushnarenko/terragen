@@ -1,0 +1,16 @@
+Browser tab: 2, Title: "Редактор ландшафта — Open World Terrain Editor", URL: "http://127.0.0.1:4184/fog-offline-check.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 9, 14, 165, 167, 170, 172-173, 176
++				181 text Последняя сессия восстановлена
++				182 container
++					183 image Карта мира «Мир 1337»
++					184 text Мир 1337 22.10.2026, 23:43:01
++					185 button (disabled) Открыть
++					186 button (disabled) Удалить
++			187 text 11
++			188 text 94.9
++			189 text 3 432
++			190 text 1 429
++			191 text 349 780
++			192 text 16/16 · лес 35/35
+The focused UI element is 0 AXWebArea Редактор ландшафта — Open World Terrain Editor, URL: 127.0.0.1:4184/fog-offline-check.html

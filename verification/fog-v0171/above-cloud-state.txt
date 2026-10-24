@@ -1,0 +1,15 @@
+Browser tab: 4, Title: "Редактор ландшафта — Open World Terrain Editor", URL: "http://127.0.0.1:4184/fog-check.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 62
++			66 text {
+  "view": "above",
+  "weather": "overcast",
+  "fogIntensity": 0,
+  "quality": "balanced",
+  "frames": 571,
+  "band": [],
+  "errors": [],
+  "programs": 21,
+  "calls": 155
+}
+The focused UI element is 19 button Над облаками

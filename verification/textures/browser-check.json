@@ -1,0 +1,161 @@
+{
+  "busy": false,
+  "errors": [],
+  "runs": [
+    {
+      "animated": false,
+      "bytes": 53421052,
+      "materials": [
+        {
+          "colorSize": [
+            4096,
+            4096
+          ],
+          "map": true,
+          "name": "Body",
+          "normal": true,
+          "roughness": true,
+          "specular": true
+        },
+        {
+          "colorSize": [
+            1024,
+            1024
+          ],
+          "map": true,
+          "name": "material",
+          "normal": true,
+          "roughness": false,
+          "specular": false
+        }
+      ],
+      "name": "tyrant_king_-_tyrannosaurus.glb"
+    },
+    {
+      "bytes": 56309123,
+      "extensions": [
+        "KHR_materials_pbrSpecularGlossiness"
+      ],
+      "materials": [
+        {
+          "doubleSided": true,
+          "extensions": {
+            "KHR_materials_pbrSpecularGlossiness": {
+              "diffuseFactor": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "diffuseTexture": {
+                "index": 0
+              },
+              "glossinessFactor": 0.5021502735853215,
+              "specularFactor": [
+                0.1306535194595037,
+                0.1306535194595037,
+                0.1306535194595037
+              ],
+              "specularGlossinessTexture": {
+                "index": 1
+              }
+            }
+          },
+          "name": "Body",
+          "normalTexture": {
+            "index": 2
+          },
+          "occlusionTexture": {
+            "index": 3
+          }
+        },
+        {
+          "doubleSided": true,
+          "extensions": {
+            "KHR_materials_pbrSpecularGlossiness": {
+              "diffuseFactor": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "diffuseTexture": {
+                "index": 4
+              },
+              "glossinessFactor": 0.10702864035024488,
+              "specularFactor": [
+                0.05,
+                0.05,
+                0.05
+              ]
+            }
+          },
+          "name": "material",
+          "normalTexture": {
+            "index": 5
+          }
+        }
+      ],
+      "reload": true
+    },
+    {
+      "animated": true,
+      "bytes": 15942168,
+      "materials": [
+        {
+          "colorSize": [
+            2048,
+            2048
+          ],
+          "map": true,
+          "name": "material_0",
+          "normal": true,
+          "roughness": true,
+          "specular": true
+        }
+      ],
+      "name": "animated_3d_tyrannosaurus_rex_dinosaur_loop.glb"
+    },
+    {
+      "bytes": 18830332,
+      "extensions": [
+        "KHR_materials_pbrSpecularGlossiness"
+      ],
+      "materials": [
+        {
+          "doubleSided": true,
+          "extensions": {
+            "KHR_materials_pbrSpecularGlossiness": {
+              "diffuseFactor": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "diffuseTexture": {
+                "index": 0
+              },
+              "glossinessFactor": 1,
+              "specularFactor": [
+                1,
+                1,
+                1
+              ],
+              "specularGlossinessTexture": {
+                "index": 1
+              }
+            }
+          },
+          "name": "material_0",
+          "normalTexture": {
+            "index": 2
+          },
+          "occlusionTexture": {
+            "index": 3
+          }
+        }
+      ],
+      "reload": true
+    }
+  ]
+}

@@ -1,0 +1,448 @@
+{
+  "version": "0.16.2",
+  "wind": 3,
+  "beach": {
+    "minGap": -1.7170694600077319,
+    "maxGap": 0.7608130421672143
+  },
+  "equipment": {
+    "equippedLight": "none",
+    "lightEnabled": false,
+    "speed": 4.5,
+    "sprint": 2.2,
+    "swimSpeed": 1.6,
+    "eyeHeight": 1.7,
+    "gravity": 22,
+    "jumpSpeed": 7,
+    "sensitivity": 0.0022,
+    "fov": 70,
+    "bob": true
+  },
+  "scenarios": {
+    "phase": "idle",
+    "mode": null,
+    "time": 0,
+    "seed": 16016,
+    "spawned": 12,
+    "impacts": 9,
+    "activeFlights": 0,
+    "peakFlights": 4,
+    "meteor": null,
+    "meteors": [],
+    "impact": {
+      "craterRadius": 39.11167125970739,
+      "destroyed": 8,
+      "ignited": 31,
+      "underwater": false
+    },
+    "fires": 0,
+    "particles": 0,
+    "capacity": 0
+  },
+  "collisions": {
+    "rebuilds": 4,
+    "terrainUpdates": 16,
+    "objectCreates": 3898,
+    "lastUpdateMs": 0.6000000238418579
+  },
+  "contacts": {
+    "fullUpdates": 4,
+    "localUpdates": 16,
+    "pixels": 6144,
+    "lastUpdateMs": 1
+  },
+  "performance": [
+    {
+      "phase": "warmup",
+      "frames": 157,
+      "meanMs": 51.22038216560513,
+      "p95Ms": 83.30000000000291,
+      "maxMs": 180.60000000000582,
+      "over100ms": 3,
+      "cpuP95": 9,
+      "cpuMax": 16.100000023841858,
+      "programs": 21,
+      "scenarios": {
+        "phase": "idle",
+        "mode": null,
+        "time": 0,
+        "seed": 16016,
+        "spawned": 12,
+        "impacts": 9,
+        "activeFlights": 0,
+        "peakFlights": 4,
+        "meteor": null,
+        "meteors": [],
+        "impact": {
+          "craterRadius": 39.11167125970739,
+          "destroyed": 17,
+          "ignited": 64,
+          "underwater": false
+        },
+        "fires": 0,
+        "particles": 0,
+        "capacity": 0
+      },
+      "collisions": {
+        "rebuilds": 4,
+        "terrainUpdates": 8,
+        "objectCreates": 3878,
+        "lastUpdateMs": 3.099999964237213
+      },
+      "contacts": {
+        "fullUpdates": 4,
+        "localUpdates": 8,
+        "pixels": 65536,
+        "lastUpdateMs": 9.5
+      }
+    },
+    {
+      "phase": "baseline",
+      "frames": 158,
+      "meanMs": 50.763924050632895,
+      "p95Ms": 83.30000000000291,
+      "maxMs": 90.19999999999709,
+      "over100ms": 0,
+      "cpuP95": 9.5,
+      "cpuMax": 11.399999976158142,
+      "programs": 21,
+      "scenarios": {
+        "phase": "idle",
+        "mode": null,
+        "time": 0,
+        "seed": 16016,
+        "spawned": 12,
+        "impacts": 9,
+        "activeFlights": 0,
+        "peakFlights": 4,
+        "meteor": null,
+        "meteors": [],
+        "impact": {
+          "craterRadius": 39.11167125970739,
+          "destroyed": 17,
+          "ignited": 64,
+          "underwater": false
+        },
+        "fires": 0,
+        "particles": 0,
+        "capacity": 0
+      },
+      "collisions": {
+        "rebuilds": 4,
+        "terrainUpdates": 8,
+        "objectCreates": 3878,
+        "lastUpdateMs": 3.099999964237213
+      },
+      "contacts": {
+        "fullUpdates": 4,
+        "localUpdates": 8,
+        "pixels": 65536,
+        "lastUpdateMs": 9.5
+      }
+    },
+    {
+      "phase": "storm",
+      "frames": 389,
+      "meanMs": 51.484832904884335,
+      "p95Ms": 83.39999999999418,
+      "maxMs": 187.59999999997672,
+      "over100ms": 7,
+      "cpuP95": 12,
+      "cpuMax": 103.19999998807907,
+      "programs": 25,
+      "scenarios": {
+        "phase": "flight",
+        "mode": "armageddon",
+        "time": 20.0999999999995,
+        "seed": 16016,
+        "spawned": 12,
+        "impacts": 9,
+        "activeFlights": 3,
+        "peakFlights": 4,
+        "meteor": {
+          "seed": 1904274176,
+          "radius": 6.222334251941478,
+          "start": [
+            -221.222745616707,
+            217.02713516540825,
+            97.73803643572332
+          ],
+          "target": [
+            74.4886142421054,
+            21.984803993278,
+            157.86683886814495
+          ],
+          "duration": 5.576198366470635
+        },
+        "meteors": [
+          {
+            "id": "meteor-10",
+            "phase": "flight",
+            "time": 6.2500000000001,
+            "position": [
+              -52.67204834130346,
+              27.909513829579197,
+              -169.82065775474894
+            ],
+            "plan": {
+              "seed": 810520235,
+              "radius": 4.857609079576171,
+              "start": [
+                -42.09388520909731,
+                235.88523713406175,
+                -497.89543933767203
+              ],
+              "target": [
+                -53.277795868528614,
+                16,
+                -151.03379606571553
+              ],
+              "duration": 6.6078997598961
+            }
+          },
+          {
+            "id": "meteor-11",
+            "phase": "flight",
+            "time": 1.1916666666666649,
+            "position": [
+              -90.48601615140095,
+              227.4728457221024,
+              -153.2980462590964
+            ],
+            "plan": {
+              "seed": 1180266148,
+              "radius": 2.828685883547754,
+              "start": [
+                -125.06495801252704,
+                277.47659870423377,
+                -144.02285773980208
+              ],
+              "target": [
+                50.02424085893948,
+                24.284436683490938,
+                -190.98743328254778
+              ],
+              "duration": 6.033960287924856
+            }
+          },
+          {
+            "id": "meteor-9",
+            "phase": "aftermath",
+            "time": 0.8249999999999995,
+            "position": [
+              74.4886142421054,
+              21.984803993278,
+              157.86683886814495
+            ],
+            "plan": {
+              "seed": 1904274176,
+              "radius": 6.222334251941478,
+              "start": [
+                -221.222745616707,
+                217.02713516540825,
+                97.73803643572332
+              ],
+              "target": [
+                74.4886142421054,
+                21.984803993278,
+                157.86683886814495
+              ],
+              "duration": 5.576198366470635
+            }
+          },
+          {
+            "id": "meteor-12",
+            "phase": "flight",
+            "time": 1.1916666666666649,
+            "position": [
+              260.61152216209103,
+              213.57752010946612,
+              289.8427791841958
+            ],
+            "plan": {
+              "seed": 1349863745,
+              "radius": 2.2542503587830445,
+              "start": [
+                292.97288876461636,
+                257.6335307583213,
+                315.3443702125652
+              ],
+              "target": [
+                123.63112924474353,
+                27.09560408988426,
+                181.89869876297692
+              ],
+              "duration": 6.235797535162419
+            }
+          },
+          {
+            "id": "meteor-5",
+            "phase": "aftermath",
+            "time": 6.366666666666773,
+            "position": [
+              151.64674686072942,
+              31.63268704073114,
+              115.68957524853694
+            ],
+            "plan": {
+              "seed": 176834993,
+              "radius": 0.2991426595959442,
+              "start": [
+                -43.05987931593805,
+                250.2462433092296,
+                387.47420559152613
+              ],
+              "target": [
+                151.64674686072942,
+                31.63268704073114,
+                115.68957524853694
+              ],
+              "duration": 5.990766227245331
+            }
+          },
+          {
+            "id": "meteor-6",
+            "phase": "aftermath",
+            "time": 6.400000000000108,
+            "position": [
+              206.37484862634196,
+              31.106064203979205,
+              -48.62570026995491
+            ],
+            "plan": {
+              "seed": 1487209758,
+              "radius": 0.3304347600679647,
+              "start": [
+                -36.99995967150804,
+                283.3878349978477,
+                -152.87165867892867
+              ],
+              "target": [
+                206.37484862634196,
+                31.106064203979205,
+                -48.62570026995491
+              ],
+              "duration": 5.965933609753847
+            }
+          },
+          {
+            "id": "meteor-7",
+            "phase": "aftermath",
+            "time": 3.3166666666666575,
+            "position": [
+              87.15835599183583,
+              24.358017736365433,
+              106.73533326885125
+            ],
+            "plan": {
+              "seed": 3901295668,
+              "radius": 0.5113210389953851,
+              "start": [
+                230.29816626871173,
+                243.95417543128133,
+                -70.60949977972001
+              ],
+              "target": [
+                87.15835599183583,
+                24.358017736365433,
+                106.73533326885125
+              ],
+              "duration": 6.125430090352893
+            }
+          },
+          {
+            "id": "meteor-8",
+            "phase": "aftermath",
+            "time": 2.699999999999993,
+            "position": [
+              197.2518383398598,
+              33.25406691352495,
+              -93.37510196608427
+            ],
+            "plan": {
+              "seed": 51464179,
+              "radius": 5.029023403583729,
+              "start": [
+                70.93238069130669,
+                297.4407870648429,
+                -230.55012540434114
+              ],
+              "target": [
+                197.2518383398598,
+                33.25406691352495,
+                -93.37510196608427
+              ],
+              "duration": 6.855812938883901
+            }
+          }
+        ],
+        "impact": {
+          "craterRadius": 39.11167125970739,
+          "destroyed": 8,
+          "ignited": 31,
+          "underwater": false
+        },
+        "fires": 4,
+        "particles": 401,
+        "capacity": 832
+      },
+      "collisions": {
+        "rebuilds": 4,
+        "terrainUpdates": 16,
+        "objectCreates": 3898,
+        "lastUpdateMs": 0.6000000238418579
+      },
+      "contacts": {
+        "fullUpdates": 4,
+        "localUpdates": 16,
+        "pixels": 6144,
+        "lastUpdateMs": 1
+      }
+    },
+    {
+      "phase": "recovery",
+      "frames": 157,
+      "meanMs": 51.21974522292994,
+      "p95Ms": 83.10000000000582,
+      "maxMs": 83.29999999998836,
+      "over100ms": 0,
+      "cpuP95": 9.800000011920929,
+      "cpuMax": 11.399999976158142,
+      "programs": 21,
+      "scenarios": {
+        "phase": "idle",
+        "mode": null,
+        "time": 0,
+        "seed": 16016,
+        "spawned": 12,
+        "impacts": 9,
+        "activeFlights": 0,
+        "peakFlights": 4,
+        "meteor": null,
+        "meteors": [],
+        "impact": {
+          "craterRadius": 39.11167125970739,
+          "destroyed": 8,
+          "ignited": 31,
+          "underwater": false
+        },
+        "fires": 0,
+        "particles": 0,
+        "capacity": 0
+      },
+      "collisions": {
+        "rebuilds": 4,
+        "terrainUpdates": 16,
+        "objectCreates": 3898,
+        "lastUpdateMs": 0.6000000238418579
+      },
+      "contacts": {
+        "fullUpdates": 4,
+        "localUpdates": 16,
+        "pixels": 6144,
+        "lastUpdateMs": 1
+      }
+    }
+  ],
+  "errors": []
+}

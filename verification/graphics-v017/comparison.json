@@ -1,0 +1,153 @@
+{
+  "forest": [
+    {
+      "phase": "baseline",
+      "before": {
+        "scene": "forest",
+        "phase": "baseline",
+        "frames": 160,
+        "meanMs": 50.04375,
+        "p95Ms": 55.69999999999891,
+        "maxMs": 97.5,
+        "over100ms": 0,
+        "cpuP95": 5.5,
+        "calls": 489.35,
+        "triangles": 530668.15,
+        "programs": 15,
+        "foliage": {
+          "chunks": 69,
+          "instances": 3030
+        },
+        "scenarios": 0
+      },
+      "after": {
+        "scene": "forest",
+        "phase": "baseline",
+        "frames": 177,
+        "meanMs": 45.432203389830505,
+        "p95Ms": 48.900000000001455,
+        "maxMs": 83.5,
+        "over100ms": 0,
+        "cpuP95": 5.100000023841858,
+        "calls": 465.6779661016949,
+        "triangles": 520203.5593220339,
+        "programs": 15,
+        "foliage": {
+          "chunks": 69,
+          "instances": 3030
+        },
+        "scenarios": 0
+      },
+      "gpuBefore": {
+        "samples": 161,
+        "meanMs": 43.1670487204969,
+        "p95Ms": 45.162707
+      },
+      "gpuAfter": {
+        "samples": 178,
+        "meanMs": 38.432575988764064,
+        "p95Ms": 40.550155
+      }
+    },
+    {
+      "phase": "storm",
+      "before": {
+        "scene": "forest",
+        "phase": "storm",
+        "frames": 398,
+        "meanMs": 50.35477386934673,
+        "p95Ms": 83.5,
+        "maxMs": 194.40000000000146,
+        "over100ms": 5,
+        "cpuP95": 9.200000047683716,
+        "calls": 500.286432160804,
+        "triangles": 530723.487437186,
+        "programs": 19,
+        "foliage": {
+          "chunks": 69,
+          "instances": 3030
+        },
+        "scenarios": 9
+      },
+      "after": {
+        "scene": "forest",
+        "phase": "storm",
+        "frames": 438,
+        "meanMs": 45.72465753424658,
+        "p95Ms": 69.59999999999854,
+        "maxMs": 173.60000000000218,
+        "over100ms": 5,
+        "cpuP95": 9.100000023841858,
+        "calls": 477.4474885844749,
+        "triangles": 521302.6392694064,
+        "programs": 19,
+        "foliage": {
+          "chunks": 69,
+          "instances": 3030
+        },
+        "scenarios": 9
+      },
+      "gpuBefore": {
+        "samples": 399,
+        "meanMs": 43.31139617794488,
+        "p95Ms": 45.414582
+      },
+      "gpuAfter": {
+        "samples": 439,
+        "meanMs": 38.60796337357629,
+        "p95Ms": 40.943072
+      }
+    }
+  ],
+  "coast": [
+    {
+      "phase": "baseline",
+      "before": {
+        "scene": "coast",
+        "phase": "baseline",
+        "frames": 151,
+        "meanMs": 53.070860927152296,
+        "p95Ms": 76.5,
+        "maxMs": 104.40000000000873,
+        "over100ms": 1,
+        "cpuP95": 4.600000023841858,
+        "calls": 328.6887417218543,
+        "triangles": 251808.8344370861,
+        "programs": 21,
+        "foliage": {
+          "chunks": 69,
+          "instances": 2773
+        },
+        "scenarios": 9
+      },
+      "after": {
+        "scene": "coast",
+        "phase": "baseline",
+        "frames": 172,
+        "meanMs": 46.59186046511628,
+        "p95Ms": 76.39999999999782,
+        "maxMs": 90.40000000000146,
+        "over100ms": 0,
+        "cpuP95": 4.5,
+        "calls": 318.9593023255814,
+        "triangles": 247614.87209302327,
+        "programs": 21,
+        "foliage": {
+          "chunks": 69,
+          "instances": 2780
+        },
+        "scenarios": 0
+      },
+      "gpuBefore": {
+        "samples": 151,
+        "meanMs": 45.791535701986795,
+        "p95Ms": 47.478905
+      },
+      "gpuAfter": {
+        "samples": 172,
+        "meanMs": 40.0287954360465,
+        "p95Ms": 41.644113
+      }
+    }
+  ]
+}

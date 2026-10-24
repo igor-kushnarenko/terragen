@@ -1,0 +1,30 @@
+{
+  "algorithmVersion": 6,
+  "consoleErrors": 0,
+  "results": [
+    {
+      "sharp": 0,
+      "seed": 1337,
+      "min": 6,
+      "max": 6,
+      "range": 0,
+      "exactWorkerMatch": true,
+      "projectValidated": true
+    },
+    {
+      "sharp": 5,
+      "seed": 1337,
+      "min": 6.251506328582764,
+      "max": 215.95590209960938,
+      "range": 209.7043957710266,
+      "exactWorkerMatch": true,
+      "projectValidated": true
+    }
+  ],
+  "ui": {
+    "sharpMin": 0,
+    "heightMin": 0,
+    "octaveMaxAtScale3": 7,
+    "octaveMaxAtScalePoint3": 3
+  }
+}

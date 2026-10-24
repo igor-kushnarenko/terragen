@@ -1,0 +1,87 @@
+{
+  "version": "0.17.0",
+  "renderValid": true,
+  "scene": "forest",
+  "canvas": [
+    1280,
+    720
+  ],
+  "quality": "balanced",
+  "visibility": "visible",
+  "adapter": "ANGLE (Intel, Intel(R) UHD Graphics (0x000046A3) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "errors": [],
+  "results": [
+    {
+      "scene": "forest",
+      "phase": "warmup",
+      "frames": 89,
+      "meanMs": 45.646067415730336,
+      "p95Ms": 48.900000000001455,
+      "maxMs": 83.40000000000146,
+      "over100ms": 0,
+      "cpuP95": 4.700000047683716,
+      "calls": 464.86516853932585,
+      "triangles": 519046.2696629214,
+      "programs": 15,
+      "foliage": {
+        "chunks": 69,
+        "instances": 3030
+      },
+      "scenarios": 0
+    },
+    {
+      "scene": "forest",
+      "phase": "baseline",
+      "frames": 177,
+      "meanMs": 45.432203389830505,
+      "p95Ms": 48.900000000001455,
+      "maxMs": 83.5,
+      "over100ms": 0,
+      "cpuP95": 5.100000023841858,
+      "calls": 465.6779661016949,
+      "triangles": 520203.5593220339,
+      "programs": 15,
+      "foliage": {
+        "chunks": 69,
+        "instances": 3030
+      },
+      "scenarios": 0
+    },
+    {
+      "scene": "forest",
+      "phase": "storm",
+      "frames": 438,
+      "meanMs": 45.72465753424658,
+      "p95Ms": 69.59999999999854,
+      "maxMs": 173.60000000000218,
+      "over100ms": 5,
+      "cpuP95": 9.100000023841858,
+      "calls": 477.4474885844749,
+      "triangles": 521302.6392694064,
+      "programs": 19,
+      "foliage": {
+        "chunks": 69,
+        "instances": 3030
+      },
+      "scenarios": 9
+    },
+    {
+      "scene": "forest",
+      "phase": "recovery",
+      "frames": 91,
+      "meanMs": 44.110989010988995,
+      "p95Ms": 76.39999999999418,
+      "maxMs": 159.60000000000582,
+      "over100ms": 1,
+      "cpuP95": 7,
+      "calls": 461.7032967032967,
+      "triangles": 515917.8241758242,
+      "programs": 15,
+      "foliage": {
+        "chunks": 69,
+        "instances": 3030
+      },
+      "scenarios": 9
+    }
+  ]
+}

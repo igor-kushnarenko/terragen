@@ -1,0 +1,46 @@
+✔ Rapier preserves open doors, archways and cave interiors while solid walls block movement (442.9631ms)
+✔ pier deck remains walkable and object transforms rebuild the mesh collider (65.3493ms)
+✔ Rapier capsule stops at trunks and rocks and releases after object removal (74.3454ms)
+✔ Rapier movement and jumping are stable across render rates (164.6687ms)
+✔ Rapier follows bridge ramps and holds the character on the deck (62.7807ms)
+✔ Rapier steps over small obstacles and stops at tall steps (72.0315ms)
+✔ terrain collider is rebuilt after edits and cannot leave feet below the new terrain (56.896ms)
+✔ Rapier climbs gentle slopes while rejecting steep ascent (130.3738ms)
+✔ walking crosses non-planar terrain cells without sprinting or jumping at different render rates (156.6415ms)
+✔ structured terrain collision has exactly the rendered triangle heights, including partial updates (62.8015ms)
+✔ local edits reuse object colliders and preserve floating body positions and velocities (29.4622ms)
+✔ meteor seeds reproduce size and trajectory; targets and entire paths stay in the world (115.6039ms)
+✔ meteor distribution includes pebble-sized bodies and rare giants without turning every small hit into a huge crater (0.3645ms)
+✔ swept contact finds a ridge and local lake before the intended endpoint (94.1297ms)
+✔ a giant meteor contacts the surface with its lower edge before its centre buries in the ground (84.5842ms)
+✔ impact excavates a bounded bowl and rim, destroys nearby models and chars only dry flammable ones (94.0016ms)
+✔ water impacts deform the bed, suppress fires and preserve submerged surroundings outside the blast (80.2766ms)
+✔ impact terrain, paint, objects and groups save and undo/redo as one transaction (404.895ms)
+✔ Rapier removes destroyed obstacles and follows the new crater floor, including after undo (245.9922ms)
+✔ Armageddon launches simultaneous meteors, continues in random bursts and keeps a bounded shared effect budget (462.2879ms)
+✔ Armageddon pauses every meteor and produces the same ordered impacts at different rendering frequencies (325.621ms)
+✔ meteor bursts reuse a fixed scene light count through flight, impact and repeated starts (152.7249ms)
+✔ impact refresh preserves distant instance buffers and matches a full vegetation rebuild (73.7558ms)
+✔ local contact shading matches a full calculation after coalesced impacts and falls back after an unrelated edit (151.367ms)
+✔ stopping Armageddon preserves consequences and the whole sequence can be undone to the original world (281.2487ms)
+✔ scenario pauses for menus/photo/busy state, lands exactly once at different FPS and cleans effects (231.8942ms)
+✔ leaving walk or replacing/editing the world cancels flight without damaging the new world (190.1664ms)
+✔ reflection preference persists, defaults for older saves and frees/recreates the reflection target (479.7663ms)
+✔ ecological scattering repeats from the seed, preserves manual objects and changes with moisture (102.7903ms)
+✔ generated models avoid one another, transformed manual objects and the full width of paths (82.4373ms)
+✔ forest and meadow biomes produce forest interiors and clearings with smooth edges (41.4397ms)
+✔ all terrain LODs retain identical full-resolution boundary vertices and upward winding (1.5603ms)
+✔ neighboring terrain chunks share positions and normals after editing at a boundary (64.8172ms)
+✔ chunk LOD and frustum selection reduce rendered terrain while leaving physics and export intact (191.5496ms)
+✔ tree and rock LODs reduce triangles while bridges keep the same geometry (2.9146ms)
+✔ fine plants do not occupy paths or declared flooded lakes (50.0179ms)
+✔ contact shading is moderate, responds to grounded objects and excludes floating props (114.6216ms)
+✔ format 3 migrates quality and audio defaults; new settings round-trip and undo atomically (499.8796ms)
+ℹ tests 38
+ℹ suites 0
+ℹ pass 38
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4269.5155

@@ -1,0 +1,7207 @@
+{
+  "supported": true,
+  "disjoint": 0,
+  "method": "EXT_disjoint_timer_query_webgl2; async, no gl.finish; milliseconds on GPU, not FPS",
+  "samples": [
+    {
+      "timestamp": 7207.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.697552
+    },
+    {
+      "timestamp": 7241.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.787186
+    },
+    {
+      "timestamp": 7311.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.620156
+    },
+    {
+      "timestamp": 7353,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.949895
+    },
+    {
+      "timestamp": 7401.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.343697
+    },
+    {
+      "timestamp": 7443.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.900572
+    },
+    {
+      "timestamp": 7491.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 41.041561
+    },
+    {
+      "timestamp": 7533.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.725885
+    },
+    {
+      "timestamp": 7582,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.712395
+    },
+    {
+      "timestamp": 7623.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.638228
+    },
+    {
+      "timestamp": 7672.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.008072
+    },
+    {
+      "timestamp": 7714.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.859009
+    },
+    {
+      "timestamp": 7769.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.440884
+    },
+    {
+      "timestamp": 7811.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.218697
+    },
+    {
+      "timestamp": 7853,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.253541
+    },
+    {
+      "timestamp": 7901.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.894895
+    },
+    {
+      "timestamp": 7929.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.066353
+    },
+    {
+      "timestamp": 7991.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.345677
+    },
+    {
+      "timestamp": 8033.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.174322
+    },
+    {
+      "timestamp": 8082,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.648958
+    },
+    {
+      "timestamp": 8123.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.737238
+    },
+    {
+      "timestamp": 8144.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.227656
+    },
+    {
+      "timestamp": 8214.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.571561
+    },
+    {
+      "timestamp": 8241.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.769895
+    },
+    {
+      "timestamp": 8318.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.199895
+    },
+    {
+      "timestamp": 8359.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.564582
+    },
+    {
+      "timestamp": 8408.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.883176
+    },
+    {
+      "timestamp": 8450,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.900259
+    },
+    {
+      "timestamp": 8498.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.813332
+    },
+    {
+      "timestamp": 8540.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.19703
+    },
+    {
+      "timestamp": 8588.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.997707
+    },
+    {
+      "timestamp": 8630.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.814113
+    },
+    {
+      "timestamp": 8679.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.391145
+    },
+    {
+      "timestamp": 8720.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.91927
+    },
+    {
+      "timestamp": 8769.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.330884
+    },
+    {
+      "timestamp": 8818.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.859687
+    },
+    {
+      "timestamp": 8859.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.393697
+    },
+    {
+      "timestamp": 8908.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.767343
+    },
+    {
+      "timestamp": 8950.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.145571
+    },
+    {
+      "timestamp": 8991.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.536614
+    },
+    {
+      "timestamp": 9040.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.30354
+    },
+    {
+      "timestamp": 9081.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.185208
+    },
+    {
+      "timestamp": 9130.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.529478
+    },
+    {
+      "timestamp": 9172.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.058958
+    },
+    {
+      "timestamp": 9220.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.27151
+    },
+    {
+      "timestamp": 9269.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.019218
+    },
+    {
+      "timestamp": 9311.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.34979
+    },
+    {
+      "timestamp": 9359.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.840104
+    },
+    {
+      "timestamp": 9401.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.185312
+    },
+    {
+      "timestamp": 9443.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.948124
+    },
+    {
+      "timestamp": 9491.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.310051
+    },
+    {
+      "timestamp": 9540.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.000363
+    },
+    {
+      "timestamp": 9582.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.479426
+    },
+    {
+      "timestamp": 9623.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.458749
+    },
+    {
+      "timestamp": 9672.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.015832
+    },
+    {
+      "timestamp": 9714,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.056927
+    },
+    {
+      "timestamp": 9762.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.072812
+    },
+    {
+      "timestamp": 9811,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.993229
+    },
+    {
+      "timestamp": 9852.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.395781
+    },
+    {
+      "timestamp": 9901.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.905051
+    },
+    {
+      "timestamp": 9943,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.346301
+    },
+    {
+      "timestamp": 9991.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.55203
+    },
+    {
+      "timestamp": 10033.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.947238
+    },
+    {
+      "timestamp": 10081.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.496301
+    },
+    {
+      "timestamp": 10123.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.476561
+    },
+    {
+      "timestamp": 10172.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.173593
+    },
+    {
+      "timestamp": 10214,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.854373
+    },
+    {
+      "timestamp": 10262.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.01328
+    },
+    {
+      "timestamp": 10304.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.159895
+    },
+    {
+      "timestamp": 10352.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.97703
+    },
+    {
+      "timestamp": 10394.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.93078
+    },
+    {
+      "timestamp": 10443,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.007759
+    },
+    {
+      "timestamp": 10484.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.252862
+    },
+    {
+      "timestamp": 10533.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.525311
+    },
+    {
+      "timestamp": 10575,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.916977
+    },
+    {
+      "timestamp": 10616.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.087187
+    },
+    {
+      "timestamp": 10665.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 41.077291
+    },
+    {
+      "timestamp": 10706.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.428801
+    },
+    {
+      "timestamp": 10755.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.558645
+    },
+    {
+      "timestamp": 10797.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.847759
+    },
+    {
+      "timestamp": 10845.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.267239
+    },
+    {
+      "timestamp": 10894.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.671822
+    },
+    {
+      "timestamp": 10936.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.278436
+    },
+    {
+      "timestamp": 10984.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.821457
+    },
+    {
+      "timestamp": 11026.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.978019
+    },
+    {
+      "timestamp": 11068.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.915885
+    },
+    {
+      "timestamp": 11116.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.621509
+    },
+    {
+      "timestamp": 11158.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.751197
+    },
+    {
+      "timestamp": 11206.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.89453
+    },
+    {
+      "timestamp": 11248.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.903072
+    },
+    {
+      "timestamp": 11311.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.132291
+    },
+    {
+      "timestamp": 11352.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.574739
+    },
+    {
+      "timestamp": 11401.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.47677
+    },
+    {
+      "timestamp": 11443.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.961978
+    },
+    {
+      "timestamp": 11491.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.038853
+    },
+    {
+      "timestamp": 11533.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.01651
+    },
+    {
+      "timestamp": 11582.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.38104
+    },
+    {
+      "timestamp": 11623.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.800728
+    },
+    {
+      "timestamp": 11672.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.943124
+    },
+    {
+      "timestamp": 11714,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.18677
+    },
+    {
+      "timestamp": 11762.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.513281
+    },
+    {
+      "timestamp": 11804.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.880052
+    },
+    {
+      "timestamp": 11852.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.331302
+    },
+    {
+      "timestamp": 11901.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.017551
+    },
+    {
+      "timestamp": 11943.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.473436
+    },
+    {
+      "timestamp": 11984.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.808436
+    },
+    {
+      "timestamp": 12033.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.247656
+    },
+    {
+      "timestamp": 12075,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.278437
+    },
+    {
+      "timestamp": 12123.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.721249
+    },
+    {
+      "timestamp": 12165.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.12401
+    },
+    {
+      "timestamp": 12186.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.290519
+    },
+    {
+      "timestamp": 12269.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.564842
+    },
+    {
+      "timestamp": 12318,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.630936
+    },
+    {
+      "timestamp": 12359.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.305832
+    },
+    {
+      "timestamp": 12401.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.919791
+    },
+    {
+      "timestamp": 12450,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.453281
+    },
+    {
+      "timestamp": 12491.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.638592
+    },
+    {
+      "timestamp": 12540.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.376509
+    },
+    {
+      "timestamp": 12582,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.905468
+    },
+    {
+      "timestamp": 12630.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.379999
+    },
+    {
+      "timestamp": 12672.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.820312
+    },
+    {
+      "timestamp": 12721,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.389843
+    },
+    {
+      "timestamp": 12769.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.431509
+    },
+    {
+      "timestamp": 12811.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.557447
+    },
+    {
+      "timestamp": 12859.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.892083
+    },
+    {
+      "timestamp": 12901.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.330989
+    },
+    {
+      "timestamp": 12950.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.65177
+    },
+    {
+      "timestamp": 12998.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.364894
+    },
+    {
+      "timestamp": 13040.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.654842
+    },
+    {
+      "timestamp": 13082.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.214375
+    },
+    {
+      "timestamp": 13130.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.550312
+    },
+    {
+      "timestamp": 13172.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.236926
+    },
+    {
+      "timestamp": 13220.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.570415
+    },
+    {
+      "timestamp": 13262.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.231561
+    },
+    {
+      "timestamp": 13311,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.488749
+    },
+    {
+      "timestamp": 13352.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.407812
+    },
+    {
+      "timestamp": 13401.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.613593
+    },
+    {
+      "timestamp": 13443.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.985416
+    },
+    {
+      "timestamp": 13491.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.647499
+    },
+    {
+      "timestamp": 13533.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.24677
+    },
+    {
+      "timestamp": 13581.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.624009
+    },
+    {
+      "timestamp": 13623.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.037187
+    },
+    {
+      "timestamp": 13672.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.960311
+    },
+    {
+      "timestamp": 13714.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.270051
+    },
+    {
+      "timestamp": 13762.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.878645
+    },
+    {
+      "timestamp": 13804.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.174165
+    },
+    {
+      "timestamp": 13852.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.27802
+    },
+    {
+      "timestamp": 13894.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.12281
+    },
+    {
+      "timestamp": 13936.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.382812
+    },
+    {
+      "timestamp": 13984.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.398176
+    },
+    {
+      "timestamp": 14033.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.967499
+    },
+    {
+      "timestamp": 14075.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.300363
+    },
+    {
+      "timestamp": 14123.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.815729
+    },
+    {
+      "timestamp": 14165.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.212082
+    },
+    {
+      "timestamp": 14213.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.087812
+    },
+    {
+      "timestamp": 14255.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.100624
+    },
+    {
+      "timestamp": 14304.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.487343
+    },
+    {
+      "timestamp": 14345.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 41.077915
+    },
+    {
+      "timestamp": 14394.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.995364
+    },
+    {
+      "timestamp": 14436.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.306197
+    },
+    {
+      "timestamp": 14484.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.039895
+    },
+    {
+      "timestamp": 14533.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.190937
+    },
+    {
+      "timestamp": 14574.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.999478
+    },
+    {
+      "timestamp": 14623.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.391457
+    },
+    {
+      "timestamp": 14665.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.062551
+    },
+    {
+      "timestamp": 14713.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.343333
+    },
+    {
+      "timestamp": 14755.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.721561
+    },
+    {
+      "timestamp": 14804.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.330311
+    },
+    {
+      "timestamp": 14845.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.934635
+    },
+    {
+      "timestamp": 14894.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.862551
+    },
+    {
+      "timestamp": 14936.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.57953
+    },
+    {
+      "timestamp": 14984.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.588384
+    },
+    {
+      "timestamp": 15026.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.578905
+    },
+    {
+      "timestamp": 15075.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.024947
+    },
+    {
+      "timestamp": 15116.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.692343
+    },
+    {
+      "timestamp": 15165.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.4725
+    },
+    {
+      "timestamp": 15206.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.071718
+    },
+    {
+      "timestamp": 15227.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.934634
+    },
+    {
+      "timestamp": 15311.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.495364
+    },
+    {
+      "timestamp": 15352.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.682134
+    },
+    {
+      "timestamp": 15401.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.013385
+    },
+    {
+      "timestamp": 15443,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.649426
+    },
+    {
+      "timestamp": 15491.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.516249
+    },
+    {
+      "timestamp": 15533.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.906196
+    },
+    {
+      "timestamp": 15581.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.338488
+    },
+    {
+      "timestamp": 15623.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.680259
+    },
+    {
+      "timestamp": 15672.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.339322
+    },
+    {
+      "timestamp": 15713.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.938645
+    },
+    {
+      "timestamp": 15762.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.320467
+    },
+    {
+      "timestamp": 15811.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.624218
+    },
+    {
+      "timestamp": 15852.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.454061
+    },
+    {
+      "timestamp": 15894.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.124478
+    },
+    {
+      "timestamp": 15943.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.339322
+    },
+    {
+      "timestamp": 15984.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.550885
+    },
+    {
+      "timestamp": 16033.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.528072
+    },
+    {
+      "timestamp": 16074.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.953749
+    },
+    {
+      "timestamp": 16123.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.984374
+    },
+    {
+      "timestamp": 16165.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.157135
+    },
+    {
+      "timestamp": 16213.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.462915
+    },
+    {
+      "timestamp": 16269.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.081093
+    },
+    {
+      "timestamp": 16318.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.267707
+    },
+    {
+      "timestamp": 16359.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.987447
+    },
+    {
+      "timestamp": 16408.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.806613
+    },
+    {
+      "timestamp": 16449.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.031562
+    },
+    {
+      "timestamp": 16498.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.925781
+    },
+    {
+      "timestamp": 16540.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.117604
+    },
+    {
+      "timestamp": 16588.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.447968
+    },
+    {
+      "timestamp": 16630.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.846353
+    },
+    {
+      "timestamp": 16679.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.437864
+    },
+    {
+      "timestamp": 16720.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.945103
+    },
+    {
+      "timestamp": 16769.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.317447
+    },
+    {
+      "timestamp": 16817.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.588488
+    },
+    {
+      "timestamp": 16859.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 41.186718
+    },
+    {
+      "timestamp": 16908.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.752291
+    },
+    {
+      "timestamp": 16950,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.355677
+    },
+    {
+      "timestamp": 16998.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.171822
+    },
+    {
+      "timestamp": 17040.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.01953
+    },
+    {
+      "timestamp": 17088.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.630572
+    },
+    {
+      "timestamp": 17130.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.449791
+    },
+    {
+      "timestamp": 17179,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.036249
+    },
+    {
+      "timestamp": 17220.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.303384
+    },
+    {
+      "timestamp": 17269.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.897187
+    },
+    {
+      "timestamp": 17311.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.224009
+    },
+    {
+      "timestamp": 17359.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.652603
+    },
+    {
+      "timestamp": 17373.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.637864
+    },
+    {
+      "timestamp": 17449.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.190624
+    },
+    {
+      "timestamp": 17491.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.542811
+    },
+    {
+      "timestamp": 17540.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.049166
+    },
+    {
+      "timestamp": 17581.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.595155
+    },
+    {
+      "timestamp": 17630.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.584947
+    },
+    {
+      "timestamp": 17672.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.97703
+    },
+    {
+      "timestamp": 17720.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.333489
+    },
+    {
+      "timestamp": 17762.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.982343
+    },
+    {
+      "timestamp": 17810.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.084217
+    },
+    {
+      "timestamp": 17852.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.900884
+    },
+    {
+      "timestamp": 17880.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.872343
+    },
+    {
+      "timestamp": 17942.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.426457
+    },
+    {
+      "timestamp": 17991.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.545052
+    },
+    {
+      "timestamp": 18033.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.000832
+    },
+    {
+      "timestamp": 18074.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.549218
+    },
+    {
+      "timestamp": 18123.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.867551
+    },
+    {
+      "timestamp": 18165.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.563593
+    },
+    {
+      "timestamp": 18213.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.029166
+    },
+    {
+      "timestamp": 18255.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.008437
+    },
+    {
+      "timestamp": 18304.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.059218
+    },
+    {
+      "timestamp": 18345.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.619999
+    },
+    {
+      "timestamp": 18394.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.157499
+    },
+    {
+      "timestamp": 18435.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.996509
+    },
+    {
+      "timestamp": 18484.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.353072
+    },
+    {
+      "timestamp": 18526.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.947968
+    },
+    {
+      "timestamp": 18575,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.283645
+    },
+    {
+      "timestamp": 18616.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.621562
+    },
+    {
+      "timestamp": 18665.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.851666
+    },
+    {
+      "timestamp": 18706.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.559843
+    },
+    {
+      "timestamp": 18755.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.318489
+    },
+    {
+      "timestamp": 18797.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.016405
+    },
+    {
+      "timestamp": 18845.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.337499
+    },
+    {
+      "timestamp": 18887.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.019374
+    },
+    {
+      "timestamp": 18936,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.276302
+    },
+    {
+      "timestamp": 18977.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.830676
+    },
+    {
+      "timestamp": 19005.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.63776
+    },
+    {
+      "timestamp": 19067.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.204791
+    },
+    {
+      "timestamp": 19109.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.93104
+    },
+    {
+      "timestamp": 19109.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 0.000052
+    },
+    {
+      "timestamp": 19158.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.799374
+    },
+    {
+      "timestamp": 19158.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 0.000104
+    },
+    {
+      "timestamp": 19199.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.956197
+    },
+    {
+      "timestamp": 19248.4,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.606718
+    },
+    {
+      "timestamp": 19304.1,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 37.709843
+    },
+    {
+      "timestamp": 19345.7,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.483854
+    },
+    {
+      "timestamp": 19394.2,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 37.761197
+    },
+    {
+      "timestamp": 19442.8,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.386561
+    },
+    {
+      "timestamp": 19484.5,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 37.926717
+    },
+    {
+      "timestamp": 19533.1,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.619895
+    },
+    {
+      "timestamp": 19581.7,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 35.528437
+    },
+    {
+      "timestamp": 19630.3,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.357394
+    },
+    {
+      "timestamp": 19672.1,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 38.202135
+    },
+    {
+      "timestamp": 19713.7,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 38.064218
+    },
+    {
+      "timestamp": 19762.4,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 35.570363
+    },
+    {
+      "timestamp": 19811,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 41.079374
+    },
+    {
+      "timestamp": 19852.6,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 37.66625
+    },
+    {
+      "timestamp": 19901.1,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 38.209634
+    },
+    {
+      "timestamp": 19942.8,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 37.734635
+    },
+    {
+      "timestamp": 19991.6,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.526926
+    },
+    {
+      "timestamp": 20033.1,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 35.613958
+    },
+    {
+      "timestamp": 20082,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.268541
+    },
+    {
+      "timestamp": 20123.6,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 38.35375
+    },
+    {
+      "timestamp": 20172.2,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.74276
+    },
+    {
+      "timestamp": 20213.8,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 35.551874
+    },
+    {
+      "timestamp": 20234.5,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 35.671874
+    },
+    {
+      "timestamp": 20317.9,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 37.925364
+    },
+    {
+      "timestamp": 20359.7,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 37.949322
+    },
+    {
+      "timestamp": 20408.2,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 38.106562
+    },
+    {
+      "timestamp": 20450,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 38.001665
+    },
+    {
+      "timestamp": 20498.5,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.557447
+    },
+    {
+      "timestamp": 20540.2,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 35.587133
+    },
+    {
+      "timestamp": 20588.7,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 38.101978
+    },
+    {
+      "timestamp": 20630.5,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 38.067864
+    },
+    {
+      "timestamp": 20678.9,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 41.273801
+    },
+    {
+      "timestamp": 20720.8,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 38.275207
+    },
+    {
+      "timestamp": 20741.7,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 38.065104
+    },
+    {
+      "timestamp": 20811.1,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.454478
+    },
+    {
+      "timestamp": 20859.6,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 37.833697
+    },
+    {
+      "timestamp": 20908,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.342864
+    },
+    {
+      "timestamp": 20949.9,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 35.584114
+    },
+    {
+      "timestamp": 20998.4,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.414062
+    },
+    {
+      "timestamp": 21040,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 37.906353
+    },
+    {
+      "timestamp": 21088.7,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 38.103906
+    },
+    {
+      "timestamp": 21130.4,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 37.905519
+    },
+    {
+      "timestamp": 21179,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.368749
+    },
+    {
+      "timestamp": 21220.6,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 38.400884
+    },
+    {
+      "timestamp": 21262.4,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.570051
+    },
+    {
+      "timestamp": 21311,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 35.554166
+    },
+    {
+      "timestamp": 21352.6,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.280676
+    },
+    {
+      "timestamp": 21401.2,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 38.141613
+    },
+    {
+      "timestamp": 21449.8,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.563853
+    },
+    {
+      "timestamp": 21491.4,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 35.625885
+    },
+    {
+      "timestamp": 21540.2,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.451561
+    },
+    {
+      "timestamp": 21581.7,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 35.626248
+    },
+    {
+      "timestamp": 21630.3,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.480312
+    },
+    {
+      "timestamp": 21672,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 37.986665
+    },
+    {
+      "timestamp": 21720.6,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.61901
+    },
+    {
+      "timestamp": 21762.4,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 38.369374
+    },
+    {
+      "timestamp": 21810.9,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 38.046769
+    },
+    {
+      "timestamp": 21852.7,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 38.170728
+    },
+    {
+      "timestamp": 21901.2,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.338802
+    },
+    {
+      "timestamp": 21942.9,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 37.767604
+    },
+    {
+      "timestamp": 21991.5,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.386406
+    },
+    {
+      "timestamp": 22033.3,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 35.620259
+    },
+    {
+      "timestamp": 22074.9,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 38.141718
+    },
+    {
+      "timestamp": 22123.5,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 35.677238
+    },
+    {
+      "timestamp": 22172,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 37.987708
+    },
+    {
+      "timestamp": 22213.7,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 38.047759
+    },
+    {
+      "timestamp": 22262.3,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.451197
+    },
+    {
+      "timestamp": 22304.2,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 35.512656
+    },
+    {
+      "timestamp": 22352.6,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.622291
+    },
+    {
+      "timestamp": 22394.2,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 38.450467
+    },
+    {
+      "timestamp": 22443,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.930259
+    },
+    {
+      "timestamp": 22484.6,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 38.276978
+    },
+    {
+      "timestamp": 22533.2,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 38.195936
+    },
+    {
+      "timestamp": 22574.9,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 38.264217
+    },
+    {
+      "timestamp": 22623.5,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.518229
+    },
+    {
+      "timestamp": 22665,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 35.730833
+    },
+    {
+      "timestamp": 22713.7,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.463488
+    },
+    {
+      "timestamp": 22755.3,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 35.497447
+    },
+    {
+      "timestamp": 22804.1,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.374374
+    },
+    {
+      "timestamp": 22845.5,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 38.382968
+    },
+    {
+      "timestamp": 22894.2,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 38.07078
+    },
+    {
+      "timestamp": 22935.9,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 38.221041
+    },
+    {
+      "timestamp": 22984.6,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.093957
+    },
+    {
+      "timestamp": 23026.1,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 37.74177
+    },
+    {
+      "timestamp": 23074.9,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 37.936458
+    },
+    {
+      "timestamp": 23116.5,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 38.41526
+    },
+    {
+      "timestamp": 23165.2,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 40.653853
+    },
+    {
+      "timestamp": 23213.6,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 35.524009
+    },
+    {
+      "timestamp": 23227.7,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 37.712031
+    },
+    {
+      "timestamp": 23310.9,
+      "scene": "forest",
+      "phase": "warmup",
+      "ms": 37.983801
+    },
+    {
+      "timestamp": 23359.5,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.159426
+    },
+    {
+      "timestamp": 23401.2,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.144686
+    },
+    {
+      "timestamp": 23449.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.662812
+    },
+    {
+      "timestamp": 23491.4,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.001874
+    },
+    {
+      "timestamp": 23533.2,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.201093
+    },
+    {
+      "timestamp": 23581.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.415104
+    },
+    {
+      "timestamp": 23623.4,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.847447
+    },
+    {
+      "timestamp": 23672.1,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.374374
+    },
+    {
+      "timestamp": 23713.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.604322
+    },
+    {
+      "timestamp": 23762.3,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.334582
+    },
+    {
+      "timestamp": 23810.9,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.82052
+    },
+    {
+      "timestamp": 23852.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.344166
+    },
+    {
+      "timestamp": 23901.3,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.334322
+    },
+    {
+      "timestamp": 23942.9,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.47177
+    },
+    {
+      "timestamp": 23991.4,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.075104
+    },
+    {
+      "timestamp": 24033,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.465155
+    },
+    {
+      "timestamp": 24074.7,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.928072
+    },
+    {
+      "timestamp": 24130.3,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.998228
+    },
+    {
+      "timestamp": 24172.1,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.245051
+    },
+    {
+      "timestamp": 24220.5,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.091405
+    },
+    {
+      "timestamp": 24269.3,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.568958
+    },
+    {
+      "timestamp": 24317.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.491718
+    },
+    {
+      "timestamp": 24366.5,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.01729
+    },
+    {
+      "timestamp": 24408.1,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.106926
+    },
+    {
+      "timestamp": 24456.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.498437
+    },
+    {
+      "timestamp": 24498.6,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.970624
+    },
+    {
+      "timestamp": 24540.1,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.675937
+    },
+    {
+      "timestamp": 24588.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.049895
+    },
+    {
+      "timestamp": 24637.3,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.774634
+    },
+    {
+      "timestamp": 24679,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.020728
+    },
+    {
+      "timestamp": 24727.6,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.113541
+    },
+    {
+      "timestamp": 24776.1,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.161041
+    },
+    {
+      "timestamp": 24817.9,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.94854
+    },
+    {
+      "timestamp": 24866.5,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.432135
+    },
+    {
+      "timestamp": 24908.2,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.907135
+    },
+    {
+      "timestamp": 24956.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.24276
+    },
+    {
+      "timestamp": 24998.5,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.578801
+    },
+    {
+      "timestamp": 25047.1,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.681145
+    },
+    {
+      "timestamp": 25088.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.610311
+    },
+    {
+      "timestamp": 25137.3,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.307343
+    },
+    {
+      "timestamp": 25179.1,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.966925
+    },
+    {
+      "timestamp": 25227.5,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.031822
+    },
+    {
+      "timestamp": 25269.1,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.160728
+    },
+    {
+      "timestamp": 25317.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.483072
+    },
+    {
+      "timestamp": 25359.4,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.606769
+    },
+    {
+      "timestamp": 25408.2,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.425364
+    },
+    {
+      "timestamp": 25449.9,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.783072
+    },
+    {
+      "timestamp": 25498.5,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.120989
+    },
+    {
+      "timestamp": 25540,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.695677
+    },
+    {
+      "timestamp": 25588.6,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.511145
+    },
+    {
+      "timestamp": 25630.4,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.936144
+    },
+    {
+      "timestamp": 25678.9,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.354947
+    },
+    {
+      "timestamp": 25720.5,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.916562
+    },
+    {
+      "timestamp": 25769.2,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.356718
+    },
+    {
+      "timestamp": 25810.9,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.575728
+    },
+    {
+      "timestamp": 25859.3,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.371249
+    },
+    {
+      "timestamp": 25901.1,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.718072
+    },
+    {
+      "timestamp": 25949.7,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.097551
+    },
+    {
+      "timestamp": 25991.4,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.574114
+    },
+    {
+      "timestamp": 26040,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.19052
+    },
+    {
+      "timestamp": 26081.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.093333
+    },
+    {
+      "timestamp": 26130.3,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.781144
+    },
+    {
+      "timestamp": 26172.1,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.704738
+    },
+    {
+      "timestamp": 26199.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.121509
+    },
+    {
+      "timestamp": 26262.3,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.347187
+    },
+    {
+      "timestamp": 26310.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.026197
+    },
+    {
+      "timestamp": 26352.5,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.474374
+    },
+    {
+      "timestamp": 26394,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.558541
+    },
+    {
+      "timestamp": 26442.9,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.271926
+    },
+    {
+      "timestamp": 26484.5,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.645156
+    },
+    {
+      "timestamp": 26533.2,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.024895
+    },
+    {
+      "timestamp": 26574.7,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.257343
+    },
+    {
+      "timestamp": 26623.3,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.699166
+    },
+    {
+      "timestamp": 26664.9,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.137499
+    },
+    {
+      "timestamp": 26713.6,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.120728
+    },
+    {
+      "timestamp": 26755.2,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.969479
+    },
+    {
+      "timestamp": 26803.9,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.234634
+    },
+    {
+      "timestamp": 26845.5,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.83427
+    },
+    {
+      "timestamp": 26894.1,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.343125
+    },
+    {
+      "timestamp": 26936,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.564687
+    },
+    {
+      "timestamp": 26984.5,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.350468
+    },
+    {
+      "timestamp": 27026.1,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.925364
+    },
+    {
+      "timestamp": 27074.9,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.107812
+    },
+    {
+      "timestamp": 27116.3,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.263958
+    },
+    {
+      "timestamp": 27165.1,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.111041
+    },
+    {
+      "timestamp": 27206.7,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.135884
+    },
+    {
+      "timestamp": 27227.4,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.084165
+    },
+    {
+      "timestamp": 27310.9,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.140936
+    },
+    {
+      "timestamp": 27352.5,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.900937
+    },
+    {
+      "timestamp": 27401.2,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.021249
+    },
+    {
+      "timestamp": 27442.9,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.003436
+    },
+    {
+      "timestamp": 27491.5,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.522968
+    },
+    {
+      "timestamp": 27532.9,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.969322
+    },
+    {
+      "timestamp": 27581.7,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.525312
+    },
+    {
+      "timestamp": 27623.4,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.454373
+    },
+    {
+      "timestamp": 27671.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.532499
+    },
+    {
+      "timestamp": 27713.7,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.136979
+    },
+    {
+      "timestamp": 27762.3,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.009947
+    },
+    {
+      "timestamp": 27810.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.109478
+    },
+    {
+      "timestamp": 27831.5,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.073802
+    },
+    {
+      "timestamp": 27901.1,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.58052
+    },
+    {
+      "timestamp": 27942.9,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.087655
+    },
+    {
+      "timestamp": 27991.3,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.205884
+    },
+    {
+      "timestamp": 28033.2,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.867863
+    },
+    {
+      "timestamp": 28074.7,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.019114
+    },
+    {
+      "timestamp": 28123.2,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.661458
+    },
+    {
+      "timestamp": 28172,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.055989
+    },
+    {
+      "timestamp": 28213.6,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.164062
+    },
+    {
+      "timestamp": 28262.1,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.320676
+    },
+    {
+      "timestamp": 28310.9,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.903801
+    },
+    {
+      "timestamp": 28359.5,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.449635
+    },
+    {
+      "timestamp": 28401.2,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.557343
+    },
+    {
+      "timestamp": 28449.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.266406
+    },
+    {
+      "timestamp": 28491.5,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.705572
+    },
+    {
+      "timestamp": 28540.1,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.33901
+    },
+    {
+      "timestamp": 28581.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.036926
+    },
+    {
+      "timestamp": 28630.3,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.079999
+    },
+    {
+      "timestamp": 28671.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.478332
+    },
+    {
+      "timestamp": 28720.7,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.059478
+    },
+    {
+      "timestamp": 28769.1,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.200832
+    },
+    {
+      "timestamp": 28810.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.226717
+    },
+    {
+      "timestamp": 28859.4,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.572656
+    },
+    {
+      "timestamp": 28901.1,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.000936
+    },
+    {
+      "timestamp": 28949.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.912656
+    },
+    {
+      "timestamp": 28998.3,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.391509
+    },
+    {
+      "timestamp": 29040,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.652395
+    },
+    {
+      "timestamp": 29081.6,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.301717
+    },
+    {
+      "timestamp": 29130.1,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.567343
+    },
+    {
+      "timestamp": 29172,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.428383
+    },
+    {
+      "timestamp": 29220.5,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.417447
+    },
+    {
+      "timestamp": 29262.2,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.050051
+    },
+    {
+      "timestamp": 29310.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.132759
+    },
+    {
+      "timestamp": 29352.5,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.422081
+    },
+    {
+      "timestamp": 29400.9,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.601978
+    },
+    {
+      "timestamp": 29442.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.485103
+    },
+    {
+      "timestamp": 29491.4,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.86703
+    },
+    {
+      "timestamp": 29533.2,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.550155
+    },
+    {
+      "timestamp": 29581.6,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.729061
+    },
+    {
+      "timestamp": 29623.4,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.026457
+    },
+    {
+      "timestamp": 29671.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.962916
+    },
+    {
+      "timestamp": 29713.5,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.304166
+    },
+    {
+      "timestamp": 29762.3,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.075884
+    },
+    {
+      "timestamp": 29803.9,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.344322
+    },
+    {
+      "timestamp": 29852.6,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.937187
+    },
+    {
+      "timestamp": 29900.9,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.433541
+    },
+    {
+      "timestamp": 29942.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.830156
+    },
+    {
+      "timestamp": 29984.3,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.374947
+    },
+    {
+      "timestamp": 30033.1,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.80901
+    },
+    {
+      "timestamp": 30074.6,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.40979
+    },
+    {
+      "timestamp": 30123.5,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.594791
+    },
+    {
+      "timestamp": 30172,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.41927
+    },
+    {
+      "timestamp": 30213.5,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.78802
+    },
+    {
+      "timestamp": 30255.2,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.215155
+    },
+    {
+      "timestamp": 30303.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.041249
+    },
+    {
+      "timestamp": 30345.5,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.603436
+    },
+    {
+      "timestamp": 30394.1,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.533072
+    },
+    {
+      "timestamp": 30435.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.294999
+    },
+    {
+      "timestamp": 30484.5,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.953072
+    },
+    {
+      "timestamp": 30533,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.471614
+    },
+    {
+      "timestamp": 30567.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.660727
+    },
+    {
+      "timestamp": 30623.3,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.484687
+    },
+    {
+      "timestamp": 30665,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.963592
+    },
+    {
+      "timestamp": 30713.6,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.211354
+    },
+    {
+      "timestamp": 30755.3,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.307863
+    },
+    {
+      "timestamp": 30803.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.51177
+    },
+    {
+      "timestamp": 30845.5,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.268801
+    },
+    {
+      "timestamp": 30887.2,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.506562
+    },
+    {
+      "timestamp": 30935.8,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.624114
+    },
+    {
+      "timestamp": 30984.2,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.578697
+    },
+    {
+      "timestamp": 31026.1,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.297394
+    },
+    {
+      "timestamp": 31074.7,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.222603
+    },
+    {
+      "timestamp": 31116.3,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.413332
+    },
+    {
+      "timestamp": 31165,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 40.770103
+    },
+    {
+      "timestamp": 31206.6,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.497602
+    },
+    {
+      "timestamp": 31227.5,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 35.554374
+    },
+    {
+      "timestamp": 31310.7,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.145676
+    },
+    {
+      "timestamp": 31352.4,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 37.908749
+    },
+    {
+      "timestamp": 31401,
+      "scene": "forest",
+      "phase": "baseline",
+      "ms": 38.152499
+    },
+    {
+      "timestamp": 31449.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.065675
+    },
+    {
+      "timestamp": 31623.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 41.31104
+    },
+    {
+      "timestamp": 31651,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.204634
+    },
+    {
+      "timestamp": 31657.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.708228
+    },
+    {
+      "timestamp": 31664.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.797968
+    },
+    {
+      "timestamp": 31692.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.75026
+    },
+    {
+      "timestamp": 31741.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.338957
+    },
+    {
+      "timestamp": 31776,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.006978
+    },
+    {
+      "timestamp": 31824.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.099895
+    },
+    {
+      "timestamp": 31873.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.704687
+    },
+    {
+      "timestamp": 31914.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.701718
+    },
+    {
+      "timestamp": 31963.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.228333
+    },
+    {
+      "timestamp": 32005.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.620885
+    },
+    {
+      "timestamp": 32054,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.260572
+    },
+    {
+      "timestamp": 32095.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.261352
+    },
+    {
+      "timestamp": 32144.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.272447
+    },
+    {
+      "timestamp": 32192.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.652708
+    },
+    {
+      "timestamp": 32241.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.615624
+    },
+    {
+      "timestamp": 32289.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.530988
+    },
+    {
+      "timestamp": 32338.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.53927
+    },
+    {
+      "timestamp": 32380.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.505363
+    },
+    {
+      "timestamp": 32428.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.127187
+    },
+    {
+      "timestamp": 32470.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.721197
+    },
+    {
+      "timestamp": 32519.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.13052
+    },
+    {
+      "timestamp": 32567.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.110051
+    },
+    {
+      "timestamp": 32609.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.895103
+    },
+    {
+      "timestamp": 32657.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.48703
+    },
+    {
+      "timestamp": 32699.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.076197
+    },
+    {
+      "timestamp": 32748.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.238384
+    },
+    {
+      "timestamp": 32789.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.97078
+    },
+    {
+      "timestamp": 32838.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.161978
+    },
+    {
+      "timestamp": 32880.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.482604
+    },
+    {
+      "timestamp": 32928.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.606197
+    },
+    {
+      "timestamp": 32977.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.355624
+    },
+    {
+      "timestamp": 33019.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.262134
+    },
+    {
+      "timestamp": 33067.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.313437
+    },
+    {
+      "timestamp": 33109.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.853592
+    },
+    {
+      "timestamp": 33157.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.151874
+    },
+    {
+      "timestamp": 33199.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.446354
+    },
+    {
+      "timestamp": 33248.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.628072
+    },
+    {
+      "timestamp": 33296.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.407186
+    },
+    {
+      "timestamp": 33338.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.947968
+    },
+    {
+      "timestamp": 33387.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.055832
+    },
+    {
+      "timestamp": 33428.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.429166
+    },
+    {
+      "timestamp": 33477.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.749479
+    },
+    {
+      "timestamp": 33519.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.12854
+    },
+    {
+      "timestamp": 33560.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.453333
+    },
+    {
+      "timestamp": 33609.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.629166
+    },
+    {
+      "timestamp": 33658,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.361822
+    },
+    {
+      "timestamp": 33699.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.065468
+    },
+    {
+      "timestamp": 33748.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.344427
+    },
+    {
+      "timestamp": 33789.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.928853
+    },
+    {
+      "timestamp": 33838.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.335468
+    },
+    {
+      "timestamp": 33880.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.120312
+    },
+    {
+      "timestamp": 33928.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.943072
+    },
+    {
+      "timestamp": 33970.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.948489
+    },
+    {
+      "timestamp": 34018.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.738124
+    },
+    {
+      "timestamp": 34060.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.67229
+    },
+    {
+      "timestamp": 34109.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.595364
+    },
+    {
+      "timestamp": 34150.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.986562
+    },
+    {
+      "timestamp": 34199.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.391041
+    },
+    {
+      "timestamp": 34241.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.873541
+    },
+    {
+      "timestamp": 34290,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.602708
+    },
+    {
+      "timestamp": 34331.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.912082
+    },
+    {
+      "timestamp": 34380.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.426717
+    },
+    {
+      "timestamp": 34421.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.092811
+    },
+    {
+      "timestamp": 34470.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 41.090312
+    },
+    {
+      "timestamp": 34512,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.57703
+    },
+    {
+      "timestamp": 34560.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.576666
+    },
+    {
+      "timestamp": 34602.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.507291
+    },
+    {
+      "timestamp": 34651,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.37552
+    },
+    {
+      "timestamp": 34692.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.941979
+    },
+    {
+      "timestamp": 34741.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.994895
+    },
+    {
+      "timestamp": 34782.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.966301
+    },
+    {
+      "timestamp": 34831.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.334895
+    },
+    {
+      "timestamp": 34873.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.712447
+    },
+    {
+      "timestamp": 34921.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.28802
+    },
+    {
+      "timestamp": 34963.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.823645
+    },
+    {
+      "timestamp": 35012.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.220363
+    },
+    {
+      "timestamp": 35053.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.170989
+    },
+    {
+      "timestamp": 35102.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.391978
+    },
+    {
+      "timestamp": 35144.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.426666
+    },
+    {
+      "timestamp": 35192.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.55802
+    },
+    {
+      "timestamp": 35234.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.279739
+    },
+    {
+      "timestamp": 35262,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.664791
+    },
+    {
+      "timestamp": 35338.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.559269
+    },
+    {
+      "timestamp": 35387.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.892759
+    },
+    {
+      "timestamp": 35428.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.594218
+    },
+    {
+      "timestamp": 35470.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.621614
+    },
+    {
+      "timestamp": 35519,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.453853
+    },
+    {
+      "timestamp": 35560.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.474999
+    },
+    {
+      "timestamp": 35609.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.322499
+    },
+    {
+      "timestamp": 35657.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.624062
+    },
+    {
+      "timestamp": 35699.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.426874
+    },
+    {
+      "timestamp": 35748.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.884895
+    },
+    {
+      "timestamp": 35796.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.451666
+    },
+    {
+      "timestamp": 35838.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.781353
+    },
+    {
+      "timestamp": 35886.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.981406
+    },
+    {
+      "timestamp": 35928.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.865729
+    },
+    {
+      "timestamp": 35977.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.349166
+    },
+    {
+      "timestamp": 36019,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.60703
+    },
+    {
+      "timestamp": 36067.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 41.027603
+    },
+    {
+      "timestamp": 36109.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.248592
+    },
+    {
+      "timestamp": 36157.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.995519
+    },
+    {
+      "timestamp": 36199.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.14604
+    },
+    {
+      "timestamp": 36248.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.552395
+    },
+    {
+      "timestamp": 36303.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.979374
+    },
+    {
+      "timestamp": 36352.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.305885
+    },
+    {
+      "timestamp": 36394.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.621769
+    },
+    {
+      "timestamp": 36442.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.082551
+    },
+    {
+      "timestamp": 36484.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.609947
+    },
+    {
+      "timestamp": 36532.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.512603
+    },
+    {
+      "timestamp": 36574.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.041249
+    },
+    {
+      "timestamp": 36616.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.582135
+    },
+    {
+      "timestamp": 36664.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.663489
+    },
+    {
+      "timestamp": 36706.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.211144
+    },
+    {
+      "timestamp": 36755.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.061249
+    },
+    {
+      "timestamp": 36803.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.317135
+    },
+    {
+      "timestamp": 36845.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.645103
+    },
+    {
+      "timestamp": 36894,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.367552
+    },
+    {
+      "timestamp": 36935.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.86677
+    },
+    {
+      "timestamp": 36984.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.335989
+    },
+    {
+      "timestamp": 37025.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.765
+    },
+    {
+      "timestamp": 37074.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.167447
+    },
+    {
+      "timestamp": 37116.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.992446
+    },
+    {
+      "timestamp": 37206.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.553332
+    },
+    {
+      "timestamp": 37227.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.617134
+    },
+    {
+      "timestamp": 37262,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.178905
+    },
+    {
+      "timestamp": 37303.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.559478
+    },
+    {
+      "timestamp": 37352.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.585936
+    },
+    {
+      "timestamp": 37394.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.397968
+    },
+    {
+      "timestamp": 37435.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.711249
+    },
+    {
+      "timestamp": 37484.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.016041
+    },
+    {
+      "timestamp": 37525.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.058124
+    },
+    {
+      "timestamp": 37574.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.289583
+    },
+    {
+      "timestamp": 37616.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.03401
+    },
+    {
+      "timestamp": 37664.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.684009
+    },
+    {
+      "timestamp": 37755.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.160989
+    },
+    {
+      "timestamp": 37761.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.625259
+    },
+    {
+      "timestamp": 37796.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.419426
+    },
+    {
+      "timestamp": 37845.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.173384
+    },
+    {
+      "timestamp": 37894.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.970416
+    },
+    {
+      "timestamp": 37935.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.61854
+    },
+    {
+      "timestamp": 37984.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.005937
+    },
+    {
+      "timestamp": 38026,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.434166
+    },
+    {
+      "timestamp": 38074.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.97401
+    },
+    {
+      "timestamp": 38116.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.565259
+    },
+    {
+      "timestamp": 38164.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.517916
+    },
+    {
+      "timestamp": 38206.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.733488
+    },
+    {
+      "timestamp": 38255,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.641978
+    },
+    {
+      "timestamp": 38296.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.372812
+    },
+    {
+      "timestamp": 38345.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.449322
+    },
+    {
+      "timestamp": 38394,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.131249
+    },
+    {
+      "timestamp": 38435.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.997186
+    },
+    {
+      "timestamp": 38484.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.200885
+    },
+    {
+      "timestamp": 38525.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.635259
+    },
+    {
+      "timestamp": 38567.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.417395
+    },
+    {
+      "timestamp": 38616.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.541301
+    },
+    {
+      "timestamp": 38657.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.354426
+    },
+    {
+      "timestamp": 38706.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.407603
+    },
+    {
+      "timestamp": 38748.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.791301
+    },
+    {
+      "timestamp": 38796.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.266145
+    },
+    {
+      "timestamp": 38838.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.330571
+    },
+    {
+      "timestamp": 38887.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.989062
+    },
+    {
+      "timestamp": 38935.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.38302
+    },
+    {
+      "timestamp": 38977.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.734322
+    },
+    {
+      "timestamp": 39025.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.376927
+    },
+    {
+      "timestamp": 39067.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.578384
+    },
+    {
+      "timestamp": 39116.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.69651
+    },
+    {
+      "timestamp": 39158,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.115935
+    },
+    {
+      "timestamp": 39206.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.467707
+    },
+    {
+      "timestamp": 39255.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.669113
+    },
+    {
+      "timestamp": 39303.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 41.196978
+    },
+    {
+      "timestamp": 39352.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.637603
+    },
+    {
+      "timestamp": 39505,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 39.65854
+    },
+    {
+      "timestamp": 39546.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.659165
+    },
+    {
+      "timestamp": 39560.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 36.0513
+    },
+    {
+      "timestamp": 39588.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 41.024009
+    },
+    {
+      "timestamp": 39609.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.85927
+    },
+    {
+      "timestamp": 39651,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.669321
+    },
+    {
+      "timestamp": 39692.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.53203
+    },
+    {
+      "timestamp": 39741.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.825155
+    },
+    {
+      "timestamp": 39789.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 41.224269
+    },
+    {
+      "timestamp": 39838.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.574269
+    },
+    {
+      "timestamp": 39880.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.06979
+    },
+    {
+      "timestamp": 39921.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.847708
+    },
+    {
+      "timestamp": 39963.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.50927
+    },
+    {
+      "timestamp": 40018.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.928749
+    },
+    {
+      "timestamp": 40088.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.109791
+    },
+    {
+      "timestamp": 40095.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.47302
+    },
+    {
+      "timestamp": 40143.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.057499
+    },
+    {
+      "timestamp": 40185.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 41.08302
+    },
+    {
+      "timestamp": 40213.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.631926
+    },
+    {
+      "timestamp": 40289.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 41.041249
+    },
+    {
+      "timestamp": 40331.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.244999
+    },
+    {
+      "timestamp": 40380.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.541561
+    },
+    {
+      "timestamp": 40421.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.984686
+    },
+    {
+      "timestamp": 40470.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.032759
+    },
+    {
+      "timestamp": 40511.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.189895
+    },
+    {
+      "timestamp": 40560.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.203958
+    },
+    {
+      "timestamp": 40602.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.687291
+    },
+    {
+      "timestamp": 40651,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.592187
+    },
+    {
+      "timestamp": 40692.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.664165
+    },
+    {
+      "timestamp": 40741.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.563332
+    },
+    {
+      "timestamp": 40789.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.670051
+    },
+    {
+      "timestamp": 40831.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.39677
+    },
+    {
+      "timestamp": 40880,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.485259
+    },
+    {
+      "timestamp": 40921.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.52927
+    },
+    {
+      "timestamp": 40970.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.129635
+    },
+    {
+      "timestamp": 41012,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.310571
+    },
+    {
+      "timestamp": 41060.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.166926
+    },
+    {
+      "timestamp": 41109.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.972082
+    },
+    {
+      "timestamp": 41150.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.917498
+    },
+    {
+      "timestamp": 41199.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.10776
+    },
+    {
+      "timestamp": 41241.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.925936
+    },
+    {
+      "timestamp": 41289.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.176457
+    },
+    {
+      "timestamp": 41331.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.713644
+    },
+    {
+      "timestamp": 41373,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.468489
+    },
+    {
+      "timestamp": 41421.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.626874
+    },
+    {
+      "timestamp": 41463.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.15427
+    },
+    {
+      "timestamp": 41511.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.021196
+    },
+    {
+      "timestamp": 41553.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.972186
+    },
+    {
+      "timestamp": 41602.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.936717
+    },
+    {
+      "timestamp": 41650.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.935989
+    },
+    {
+      "timestamp": 41692.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.512134
+    },
+    {
+      "timestamp": 41734.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.644739
+    },
+    {
+      "timestamp": 41886.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 41.620624
+    },
+    {
+      "timestamp": 41928.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.256354
+    },
+    {
+      "timestamp": 41935.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.962186
+    },
+    {
+      "timestamp": 41949.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.2025
+    },
+    {
+      "timestamp": 41991,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.082134
+    },
+    {
+      "timestamp": 42032.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.18104
+    },
+    {
+      "timestamp": 42102.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.508593
+    },
+    {
+      "timestamp": 42116,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.811145
+    },
+    {
+      "timestamp": 42192.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.101457
+    },
+    {
+      "timestamp": 42206.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.537134
+    },
+    {
+      "timestamp": 42248,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.110364
+    },
+    {
+      "timestamp": 42296.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.282812
+    },
+    {
+      "timestamp": 42338.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.515884
+    },
+    {
+      "timestamp": 42393.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.421354
+    },
+    {
+      "timestamp": 42435.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.978489
+    },
+    {
+      "timestamp": 42477.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.002395
+    },
+    {
+      "timestamp": 42525.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.293437
+    },
+    {
+      "timestamp": 42567.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.575156
+    },
+    {
+      "timestamp": 42609.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.92328
+    },
+    {
+      "timestamp": 42685.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.566458
+    },
+    {
+      "timestamp": 42699.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.213749
+    },
+    {
+      "timestamp": 42747.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.671718
+    },
+    {
+      "timestamp": 42796.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.589218
+    },
+    {
+      "timestamp": 42845.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.790676
+    },
+    {
+      "timestamp": 42879.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.376353
+    },
+    {
+      "timestamp": 42935.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.725677
+    },
+    {
+      "timestamp": 42970.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.973905
+    },
+    {
+      "timestamp": 43025.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.50151
+    },
+    {
+      "timestamp": 43095.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.429478
+    },
+    {
+      "timestamp": 43102.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.352238
+    },
+    {
+      "timestamp": 43150.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.52427
+    },
+    {
+      "timestamp": 43206.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.009583
+    },
+    {
+      "timestamp": 43254.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.71026
+    },
+    {
+      "timestamp": 43296.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.300312
+    },
+    {
+      "timestamp": 43338.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.47302
+    },
+    {
+      "timestamp": 43386.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.440989
+    },
+    {
+      "timestamp": 43428.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.826354
+    },
+    {
+      "timestamp": 43477.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 41.056613
+    },
+    {
+      "timestamp": 43532.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.007082
+    },
+    {
+      "timestamp": 43560.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.119479
+    },
+    {
+      "timestamp": 43616.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.867447
+    },
+    {
+      "timestamp": 43657.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.929374
+    },
+    {
+      "timestamp": 43699.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.791978
+    },
+    {
+      "timestamp": 43748,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.217499
+    },
+    {
+      "timestamp": 43796.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.757811
+    },
+    {
+      "timestamp": 43838.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.348229
+    },
+    {
+      "timestamp": 43886.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.864583
+    },
+    {
+      "timestamp": 43928.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.24026
+    },
+    {
+      "timestamp": 43977.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.164895
+    },
+    {
+      "timestamp": 44018.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.59729
+    },
+    {
+      "timestamp": 44074.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.541926
+    },
+    {
+      "timestamp": 44144,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.07177
+    },
+    {
+      "timestamp": 44157.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.290676
+    },
+    {
+      "timestamp": 44199.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.212968
+    },
+    {
+      "timestamp": 44247.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.798125
+    },
+    {
+      "timestamp": 44303.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.557239
+    },
+    {
+      "timestamp": 44345.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.74229
+    },
+    {
+      "timestamp": 44400.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.820624
+    },
+    {
+      "timestamp": 44435.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.458072
+    },
+    {
+      "timestamp": 44484.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.605624
+    },
+    {
+      "timestamp": 44525.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.447499
+    },
+    {
+      "timestamp": 44567.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.585103
+    },
+    {
+      "timestamp": 44616.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.946093
+    },
+    {
+      "timestamp": 44657.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.143176
+    },
+    {
+      "timestamp": 44706.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.617759
+    },
+    {
+      "timestamp": 44755,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.78151
+    },
+    {
+      "timestamp": 44796.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.585155
+    },
+    {
+      "timestamp": 44845.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.579895
+    },
+    {
+      "timestamp": 44893.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.970051
+    },
+    {
+      "timestamp": 44935.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.072186
+    },
+    {
+      "timestamp": 44984.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.250885
+    },
+    {
+      "timestamp": 45025.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.966405
+    },
+    {
+      "timestamp": 45039.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.092343
+    },
+    {
+      "timestamp": 45116,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 41.374635
+    },
+    {
+      "timestamp": 45157.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.650416
+    },
+    {
+      "timestamp": 45206.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.611457
+    },
+    {
+      "timestamp": 45248.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.011926
+    },
+    {
+      "timestamp": 45296.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.275572
+    },
+    {
+      "timestamp": 45345.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.952447
+    },
+    {
+      "timestamp": 45387.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.458123
+    },
+    {
+      "timestamp": 45435.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.781927
+    },
+    {
+      "timestamp": 45477.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.553697
+    },
+    {
+      "timestamp": 45518.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.034166
+    },
+    {
+      "timestamp": 45567.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.350259
+    },
+    {
+      "timestamp": 45616,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.604947
+    },
+    {
+      "timestamp": 45657.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.199165
+    },
+    {
+      "timestamp": 45706.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.715312
+    },
+    {
+      "timestamp": 45748,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.145988
+    },
+    {
+      "timestamp": 45796.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.133124
+    },
+    {
+      "timestamp": 45838.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.650155
+    },
+    {
+      "timestamp": 45887,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.124634
+    },
+    {
+      "timestamp": 45928.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.262291
+    },
+    {
+      "timestamp": 45977.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.959531
+    },
+    {
+      "timestamp": 46025.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.969582
+    },
+    {
+      "timestamp": 46067.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.994113
+    },
+    {
+      "timestamp": 46116,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.15151
+    },
+    {
+      "timestamp": 46157.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.769634
+    },
+    {
+      "timestamp": 46199.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.069739
+    },
+    {
+      "timestamp": 46352,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 41.784321
+    },
+    {
+      "timestamp": 46366,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.941301
+    },
+    {
+      "timestamp": 46393.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.97677
+    },
+    {
+      "timestamp": 46407.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.058645
+    },
+    {
+      "timestamp": 46449.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.545624
+    },
+    {
+      "timestamp": 46511.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.942081
+    },
+    {
+      "timestamp": 46546.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.225364
+    },
+    {
+      "timestamp": 46581.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.271562
+    },
+    {
+      "timestamp": 46622.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.465259
+    },
+    {
+      "timestamp": 46671.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.16729
+    },
+    {
+      "timestamp": 46748,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.211041
+    },
+    {
+      "timestamp": 46768.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 41.225416
+    },
+    {
+      "timestamp": 46803.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.031977
+    },
+    {
+      "timestamp": 46852.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.277238
+    },
+    {
+      "timestamp": 46907.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.103541
+    },
+    {
+      "timestamp": 46977.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.603801
+    },
+    {
+      "timestamp": 46984.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.735885
+    },
+    {
+      "timestamp": 47039.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.848539
+    },
+    {
+      "timestamp": 47088.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.174634
+    },
+    {
+      "timestamp": 47164.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.435832
+    },
+    {
+      "timestamp": 47171.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.987343
+    },
+    {
+      "timestamp": 47213.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.080051
+    },
+    {
+      "timestamp": 47268.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.965051
+    },
+    {
+      "timestamp": 47317.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.221822
+    },
+    {
+      "timestamp": 47366.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.879843
+    },
+    {
+      "timestamp": 47407.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.863593
+    },
+    {
+      "timestamp": 47449.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.497083
+    },
+    {
+      "timestamp": 47525.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.684739
+    },
+    {
+      "timestamp": 47539.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.136666
+    },
+    {
+      "timestamp": 47609.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.228488
+    },
+    {
+      "timestamp": 47636.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.61177
+    },
+    {
+      "timestamp": 47678.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.07229
+    },
+    {
+      "timestamp": 47727.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.889009
+    },
+    {
+      "timestamp": 47782.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.496041
+    },
+    {
+      "timestamp": 47817.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.996302
+    },
+    {
+      "timestamp": 47866.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.172499
+    },
+    {
+      "timestamp": 47907.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.525259
+    },
+    {
+      "timestamp": 47963.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.133593
+    },
+    {
+      "timestamp": 47998.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.787135
+    },
+    {
+      "timestamp": 48046.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.052863
+    },
+    {
+      "timestamp": 48088.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.424634
+    },
+    {
+      "timestamp": 48143.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.456197
+    },
+    {
+      "timestamp": 48185.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 41.390052
+    },
+    {
+      "timestamp": 48234.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.674739
+    },
+    {
+      "timestamp": 48282.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 41.503749
+    },
+    {
+      "timestamp": 48324.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.30052
+    },
+    {
+      "timestamp": 48407.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.79052
+    },
+    {
+      "timestamp": 48428.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.143853
+    },
+    {
+      "timestamp": 48470.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.237916
+    },
+    {
+      "timestamp": 48518.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.915936
+    },
+    {
+      "timestamp": 48567.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.067656
+    },
+    {
+      "timestamp": 48602.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.93354
+    },
+    {
+      "timestamp": 48650.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.96802
+    },
+    {
+      "timestamp": 48699.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.581718
+    },
+    {
+      "timestamp": 48747.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.244582
+    },
+    {
+      "timestamp": 48782.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 41.042343
+    },
+    {
+      "timestamp": 48831.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.921406
+    },
+    {
+      "timestamp": 48879.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.364739
+    },
+    {
+      "timestamp": 48921.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.712759
+    },
+    {
+      "timestamp": 48963.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.424582
+    },
+    {
+      "timestamp": 49011.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.070676
+    },
+    {
+      "timestamp": 49060.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.969582
+    },
+    {
+      "timestamp": 49102.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.142968
+    },
+    {
+      "timestamp": 49150.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.529842
+    },
+    {
+      "timestamp": 49192.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.948748
+    },
+    {
+      "timestamp": 49282.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.513124
+    },
+    {
+      "timestamp": 49289.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.048801
+    },
+    {
+      "timestamp": 49296.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.111145
+    },
+    {
+      "timestamp": 49372.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.939582
+    },
+    {
+      "timestamp": 49421.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.104999
+    },
+    {
+      "timestamp": 49463.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.666249
+    },
+    {
+      "timestamp": 49505,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.925885
+    },
+    {
+      "timestamp": 49553.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.096665
+    },
+    {
+      "timestamp": 49602,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.762811
+    },
+    {
+      "timestamp": 49643.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.195363
+    },
+    {
+      "timestamp": 49692.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.623593
+    },
+    {
+      "timestamp": 49734.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.463489
+    },
+    {
+      "timestamp": 49782.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.99802
+    },
+    {
+      "timestamp": 49824.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.049531
+    },
+    {
+      "timestamp": 49866,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.566249
+    },
+    {
+      "timestamp": 49914.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.436822
+    },
+    {
+      "timestamp": 49963.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.159166
+    },
+    {
+      "timestamp": 50004.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.602915
+    },
+    {
+      "timestamp": 50053.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.901562
+    },
+    {
+      "timestamp": 50095,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.336873
+    },
+    {
+      "timestamp": 50143.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.770624
+    },
+    {
+      "timestamp": 50185.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.199738
+    },
+    {
+      "timestamp": 50234,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.395416
+    },
+    {
+      "timestamp": 50275.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.471509
+    },
+    {
+      "timestamp": 50324.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.168072
+    },
+    {
+      "timestamp": 50366.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.948593
+    },
+    {
+      "timestamp": 50518.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.200104
+    },
+    {
+      "timestamp": 50532.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.461666
+    },
+    {
+      "timestamp": 50539.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.967031
+    },
+    {
+      "timestamp": 50567.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.821874
+    },
+    {
+      "timestamp": 50615.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.245468
+    },
+    {
+      "timestamp": 50671.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.790051
+    },
+    {
+      "timestamp": 50699.3,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.165728
+    },
+    {
+      "timestamp": 50748,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.815363
+    },
+    {
+      "timestamp": 50796.6,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.251718
+    },
+    {
+      "timestamp": 50845,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.455416
+    },
+    {
+      "timestamp": 50879.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.786144
+    },
+    {
+      "timestamp": 50928.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.2875
+    },
+    {
+      "timestamp": 50970.1,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.675156
+    },
+    {
+      "timestamp": 51018.8,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.45026
+    },
+    {
+      "timestamp": 51102,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.417551
+    },
+    {
+      "timestamp": 51115.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.371666
+    },
+    {
+      "timestamp": 51185.4,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.451093
+    },
+    {
+      "timestamp": 51199.2,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.09953
+    },
+    {
+      "timestamp": 51261.9,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.805833
+    },
+    {
+      "timestamp": 51296.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 38.040832
+    },
+    {
+      "timestamp": 51352,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 37.896926
+    },
+    {
+      "timestamp": 51393.7,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 40.804375
+    },
+    {
+      "timestamp": 51435.5,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 35.385155
+    },
+    {
+      "timestamp": 51477,
+      "scene": "forest",
+      "phase": "storm",
+      "ms": 41.173645
+    },
+    {
+      "timestamp": 51650.5,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 39.328645
+    },
+    {
+      "timestamp": 51664.5,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.969947
+    },
+    {
+      "timestamp": 51671.5,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.60276
+    },
+    {
+      "timestamp": 51678.3,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.863541
+    },
+    {
+      "timestamp": 51713.1,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.816978
+    },
+    {
+      "timestamp": 51768.7,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 40.551249
+    },
+    {
+      "timestamp": 51810.5,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.706822
+    },
+    {
+      "timestamp": 51859,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 40.048593
+    },
+    {
+      "timestamp": 51893.7,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.861561
+    },
+    {
+      "timestamp": 51942.2,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 38.071666
+    },
+    {
+      "timestamp": 51990.8,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 38.473281
+    },
+    {
+      "timestamp": 52032.5,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 40.491092
+    },
+    {
+      "timestamp": 52067.3,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.792812
+    },
+    {
+      "timestamp": 52150.6,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 38.013905
+    },
+    {
+      "timestamp": 52164.5,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 38.609061
+    },
+    {
+      "timestamp": 52206.2,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 35.3575
+    },
+    {
+      "timestamp": 52365.8,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 41.497289
+    },
+    {
+      "timestamp": 52400.6,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 36.986249
+    },
+    {
+      "timestamp": 52421.4,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 38.153384
+    },
+    {
+      "timestamp": 52428.4,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 35.552916
+    },
+    {
+      "timestamp": 52456.1,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 38.106509
+    },
+    {
+      "timestamp": 52532.6,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.783854
+    },
+    {
+      "timestamp": 52546.4,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.933593
+    },
+    {
+      "timestamp": 52602.3,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 35.40052
+    },
+    {
+      "timestamp": 52671.4,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 40.835468
+    },
+    {
+      "timestamp": 52685.3,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.75927
+    },
+    {
+      "timestamp": 52727,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.636509
+    },
+    {
+      "timestamp": 52789.5,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 40.723801
+    },
+    {
+      "timestamp": 52831.2,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 38.21729
+    },
+    {
+      "timestamp": 52865.9,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.598541
+    },
+    {
+      "timestamp": 52914.6,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 40.328696
+    },
+    {
+      "timestamp": 52984.1,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.866406
+    },
+    {
+      "timestamp": 52997.8,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 40.316666
+    },
+    {
+      "timestamp": 53039.6,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 35.553749
+    },
+    {
+      "timestamp": 53088.1,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 38.009114
+    },
+    {
+      "timestamp": 53129.9,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.853333
+    },
+    {
+      "timestamp": 53178.4,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.909165
+    },
+    {
+      "timestamp": 53220.1,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 38.056093
+    },
+    {
+      "timestamp": 53268.7,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.878853
+    },
+    {
+      "timestamp": 53310.4,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.507499
+    },
+    {
+      "timestamp": 53324.3,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 35.472082
+    },
+    {
+      "timestamp": 53400.7,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 39.982916
+    },
+    {
+      "timestamp": 53491,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 40.316561
+    },
+    {
+      "timestamp": 53497.9,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.867134
+    },
+    {
+      "timestamp": 53532.5,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 38.471665
+    },
+    {
+      "timestamp": 53574.3,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 40.334791
+    },
+    {
+      "timestamp": 53623,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.870364
+    },
+    {
+      "timestamp": 53671.5,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 38.209895
+    },
+    {
+      "timestamp": 53713.2,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 35.463801
+    },
+    {
+      "timestamp": 53761.7,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 40.352916
+    },
+    {
+      "timestamp": 53803.3,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.908489
+    },
+    {
+      "timestamp": 53852,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.839635
+    },
+    {
+      "timestamp": 53893.6,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.80552
+    },
+    {
+      "timestamp": 53942.4,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 40.232656
+    },
+    {
+      "timestamp": 53983.9,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.81927
+    },
+    {
+      "timestamp": 54032.5,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 40.201666
+    },
+    {
+      "timestamp": 54074.3,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 35.441717
+    },
+    {
+      "timestamp": 54122.8,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.941666
+    },
+    {
+      "timestamp": 54164.6,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 38.171301
+    },
+    {
+      "timestamp": 54206.2,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.965416
+    },
+    {
+      "timestamp": 54254.9,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 35.581249
+    },
+    {
+      "timestamp": 54303.4,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 40.338228
+    },
+    {
+      "timestamp": 54345.1,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 35.450832
+    },
+    {
+      "timestamp": 54393.7,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.873958
+    },
+    {
+      "timestamp": 54435.3,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 35.571926
+    },
+    {
+      "timestamp": 54477,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.945363
+    },
+    {
+      "timestamp": 54525.5,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.913072
+    },
+    {
+      "timestamp": 54567.3,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 40.199842
+    },
+    {
+      "timestamp": 54615.8,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.906405
+    },
+    {
+      "timestamp": 54657.7,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 40.991301
+    },
+    {
+      "timestamp": 54706.2,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.830572
+    },
+    {
+      "timestamp": 54748,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 40.545155
+    },
+    {
+      "timestamp": 54789.6,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 38.090416
+    },
+    {
+      "timestamp": 54838.1,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 40.145936
+    },
+    {
+      "timestamp": 54886.7,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.60651
+    },
+    {
+      "timestamp": 54928.5,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 40.19479
+    },
+    {
+      "timestamp": 54977,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.78151
+    },
+    {
+      "timestamp": 55018.8,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 40.118437
+    },
+    {
+      "timestamp": 55067.1,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 35.423281
+    },
+    {
+      "timestamp": 55108.9,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 38.076457
+    },
+    {
+      "timestamp": 55157.4,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 38.1225
+    },
+    {
+      "timestamp": 55199.2,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 40.935155
+    },
+    {
+      "timestamp": 55254.8,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 38.094426
+    },
+    {
+      "timestamp": 55303.4,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 40.575468
+    },
+    {
+      "timestamp": 55345,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.928436
+    },
+    {
+      "timestamp": 55393.8,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 40.239947
+    },
+    {
+      "timestamp": 55435.3,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.783072
+    },
+    {
+      "timestamp": 55483.9,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.95927
+    },
+    {
+      "timestamp": 55525.5,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 35.566197
+    },
+    {
+      "timestamp": 55574.2,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 40.202239
+    },
+    {
+      "timestamp": 55615.7,
+      "scene": "forest",
+      "phase": "recovery",
+      "ms": 37.584479
+    },
+    {
+      "timestamp": 55664.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.989687
+    },
+    {
+      "timestamp": 55712.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.418229
+    },
+    {
+      "timestamp": 55761.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.316041
+    },
+    {
+      "timestamp": 55831.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 35.587968
+    },
+    {
+      "timestamp": 55845.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.247603
+    },
+    {
+      "timestamp": 55893.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.801197
+    },
+    {
+      "timestamp": 55935.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.17729
+    },
+    {
+      "timestamp": 55984,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.901302
+    },
+    {
+      "timestamp": 56025.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.022029
+    },
+    {
+      "timestamp": 56074.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 35.495364
+    },
+    {
+      "timestamp": 56115.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.081145
+    },
+    {
+      "timestamp": 56164.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.088957
+    },
+    {
+      "timestamp": 56206.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.576822
+    },
+    {
+      "timestamp": 56261.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.501405
+    },
+    {
+      "timestamp": 56310.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.526665
+    },
+    {
+      "timestamp": 56352,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.946666
+    },
+    {
+      "timestamp": 56400.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.16578
+    },
+    {
+      "timestamp": 56442.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.69953
+    },
+    {
+      "timestamp": 56491,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.255936
+    },
+    {
+      "timestamp": 56532.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 35.593436
+    },
+    {
+      "timestamp": 56581.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.922238
+    },
+    {
+      "timestamp": 56622.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.652603
+    },
+    {
+      "timestamp": 56671.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.180937
+    },
+    {
+      "timestamp": 56713,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.928593
+    },
+    {
+      "timestamp": 56761.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.155051
+    },
+    {
+      "timestamp": 56810.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.485468
+    },
+    {
+      "timestamp": 56852.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.290624
+    },
+    {
+      "timestamp": 56893.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.046197
+    },
+    {
+      "timestamp": 56942.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.051457
+    },
+    {
+      "timestamp": 56990.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.731145
+    },
+    {
+      "timestamp": 57032.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.311614
+    },
+    {
+      "timestamp": 57081.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.627031
+    },
+    {
+      "timestamp": 57122.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.998385
+    },
+    {
+      "timestamp": 57164.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.74927
+    },
+    {
+      "timestamp": 57213.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.46104
+    },
+    {
+      "timestamp": 57254.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.013905
+    },
+    {
+      "timestamp": 57303.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.784113
+    },
+    {
+      "timestamp": 57345,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.150155
+    },
+    {
+      "timestamp": 57393.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.379478
+    },
+    {
+      "timestamp": 57435.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.703593
+    },
+    {
+      "timestamp": 57484,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.364062
+    },
+    {
+      "timestamp": 57525.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 35.527759
+    },
+    {
+      "timestamp": 57574.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.16552
+    },
+    {
+      "timestamp": 57615.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.982968
+    },
+    {
+      "timestamp": 57664.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.10927
+    },
+    {
+      "timestamp": 57706.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.882291
+    },
+    {
+      "timestamp": 57754.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.011406
+    },
+    {
+      "timestamp": 57796.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 35.484583
+    },
+    {
+      "timestamp": 57845,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.770885
+    },
+    {
+      "timestamp": 57886.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 35.578905
+    },
+    {
+      "timestamp": 57935.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.390572
+    },
+    {
+      "timestamp": 57976.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.927291
+    },
+    {
+      "timestamp": 58025.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.170364
+    },
+    {
+      "timestamp": 58067.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.751458
+    },
+    {
+      "timestamp": 58088,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 35.463384
+    },
+    {
+      "timestamp": 58157.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.829635
+    },
+    {
+      "timestamp": 58206.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 35.506301
+    },
+    {
+      "timestamp": 58247.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.323696
+    },
+    {
+      "timestamp": 58289.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.879791
+    },
+    {
+      "timestamp": 58338.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.027707
+    },
+    {
+      "timestamp": 58379.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.995103
+    },
+    {
+      "timestamp": 58428.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.35302
+    },
+    {
+      "timestamp": 58470,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 35.511353
+    },
+    {
+      "timestamp": 58518.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.299895
+    },
+    {
+      "timestamp": 58560.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.976041
+    },
+    {
+      "timestamp": 58609,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.029635
+    },
+    {
+      "timestamp": 58650.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.755467
+    },
+    {
+      "timestamp": 58699.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.187343
+    },
+    {
+      "timestamp": 58740.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.853645
+    },
+    {
+      "timestamp": 58789.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.329114
+    },
+    {
+      "timestamp": 58831.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.888592
+    },
+    {
+      "timestamp": 58879.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.568489
+    },
+    {
+      "timestamp": 58921.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 35.808697
+    },
+    {
+      "timestamp": 58969.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.494166
+    },
+    {
+      "timestamp": 59011.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.601041
+    },
+    {
+      "timestamp": 59060.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.379426
+    },
+    {
+      "timestamp": 59101.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.98453
+    },
+    {
+      "timestamp": 59150.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.060103
+    },
+    {
+      "timestamp": 59192.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.173958
+    },
+    {
+      "timestamp": 59240.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.42026
+    },
+    {
+      "timestamp": 59296.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 35.745885
+    },
+    {
+      "timestamp": 59337.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.404114
+    },
+    {
+      "timestamp": 59386.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.506666
+    },
+    {
+      "timestamp": 59428.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.872967
+    },
+    {
+      "timestamp": 59476.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 35.457551
+    },
+    {
+      "timestamp": 59518.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.196093
+    },
+    {
+      "timestamp": 59567.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 35.461562
+    },
+    {
+      "timestamp": 59608.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.099009
+    },
+    {
+      "timestamp": 59657.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 35.533697
+    },
+    {
+      "timestamp": 59699.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.790989
+    },
+    {
+      "timestamp": 59747.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.725468
+    },
+    {
+      "timestamp": 59796.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.121562
+    },
+    {
+      "timestamp": 59838,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.005936
+    },
+    {
+      "timestamp": 59886.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.297655
+    },
+    {
+      "timestamp": 59928.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.347655
+    },
+    {
+      "timestamp": 59970,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.468801
+    },
+    {
+      "timestamp": 60018.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.168385
+    },
+    {
+      "timestamp": 60060.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.84203
+    },
+    {
+      "timestamp": 60108.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.981041
+    },
+    {
+      "timestamp": 60129.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.411353
+    },
+    {
+      "timestamp": 60199.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.243332
+    },
+    {
+      "timestamp": 60247.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.011353
+    },
+    {
+      "timestamp": 60282.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.962238
+    },
+    {
+      "timestamp": 60344.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 35.447343
+    },
+    {
+      "timestamp": 60386.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.079843
+    },
+    {
+      "timestamp": 60435.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.317395
+    },
+    {
+      "timestamp": 60476.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.264009
+    },
+    {
+      "timestamp": 60525.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 35.536405
+    },
+    {
+      "timestamp": 60567.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.013228
+    },
+    {
+      "timestamp": 60615.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.885207
+    },
+    {
+      "timestamp": 60657.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.841248
+    },
+    {
+      "timestamp": 60706,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 35.448697
+    },
+    {
+      "timestamp": 60754.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.315103
+    },
+    {
+      "timestamp": 60796.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.899218
+    },
+    {
+      "timestamp": 60845.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.811249
+    },
+    {
+      "timestamp": 60886.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.838436
+    },
+    {
+      "timestamp": 60935.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.149583
+    },
+    {
+      "timestamp": 60976.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.426248
+    },
+    {
+      "timestamp": 61018.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.376354
+    },
+    {
+      "timestamp": 61067.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.858229
+    },
+    {
+      "timestamp": 61108.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.125104
+    },
+    {
+      "timestamp": 61157.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.785051
+    },
+    {
+      "timestamp": 61206,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.615051
+    },
+    {
+      "timestamp": 61289.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.12828
+    },
+    {
+      "timestamp": 61331,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.902707
+    },
+    {
+      "timestamp": 61338.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 35.477187
+    },
+    {
+      "timestamp": 61386.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.12901
+    },
+    {
+      "timestamp": 61428.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 35.597343
+    },
+    {
+      "timestamp": 61476.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.800937
+    },
+    {
+      "timestamp": 61518.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 35.60802
+    },
+    {
+      "timestamp": 61567.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.348333
+    },
+    {
+      "timestamp": 61608.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.177863
+    },
+    {
+      "timestamp": 61657.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.078645
+    },
+    {
+      "timestamp": 61699,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 35.639478
+    },
+    {
+      "timestamp": 61747.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.303488
+    }
+  ]
+}

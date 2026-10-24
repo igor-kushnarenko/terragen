@@ -1,0 +1,89 @@
+{
+  "version": "0.17.0",
+  "renderValid": true,
+  "scene": "forest",
+  "canvas": [
+    1194,
+    828
+  ],
+  "quality": "balanced",
+  "visibility": "visible",
+  "adapter": "ANGLE (Intel, Intel(R) UHD Graphics (0x000046A3) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "errors": [],
+  "results": [
+    {
+      "scene": "forest",
+      "phase": "warmup",
+      "frames": 9,
+      "meanMs": 516.2111111111112,
+      "p95Ms": 1006.8999999999942,
+      "maxMs": 1006.8999999999942,
+      "over100ms": 5,
+      "cpuP95": 7.099999904632568,
+      "calls": 423.22222222222223,
+      "triangles": 491694.6666666667,
+      "programs": 15,
+      "foliage": {
+        "chunks": 69,
+        "instances": 3030
+      },
+      "scenarios": 0
+    },
+    {
+      "scene": "forest",
+      "phase": "baseline",
+      "frames": 8,
+      "meanMs": 1005.1875,
+      "p95Ms": 1006.9999999999999,
+      "maxMs": 1006.9999999999999,
+      "over100ms": 8,
+      "cpuP95": 6,
+      "calls": 461,
+      "triangles": 547060,
+      "programs": 15,
+      "foliage": {
+        "chunks": 69,
+        "instances": 3030
+      },
+      "scenarios": 0
+    },
+    {
+      "scene": "forest",
+      "phase": "storm",
+      "frames": 20,
+      "meanMs": 1005.1849999999998,
+      "p95Ms": 1006.9999999999999,
+      "maxMs": 1006.9999999999999,
+      "over100ms": 20,
+      "cpuP95": 144,
+      "calls": 471.5,
+      "triangles": 550137.2,
+      "programs": 19,
+      "foliage": {
+        "chunks": 69,
+        "instances": 3030
+      },
+      "scenarios": 10
+    },
+    {
+      "scene": "forest",
+      "phase": "recovery",
+      "frames": 4,
+      "meanMs": 1005.2000000000007,
+      "p95Ms": 1006.9999999999999,
+      "maxMs": 1006.9999999999999,
+      "over100ms": 4,
+      "cpuP95": 69.5,
+      "calls": 461,
+      "triangles": 545684,
+      "programs": 15,
+      "foliage": {
+        "chunks": 69,
+        "instances": 3030
+      },
+      "scenarios": 10
+    }
+  ],
+  "measurementValid": false,
+  "exclusionReason": "requestAnimationFrame throttled to approximately 1 Hz; excluded from performance comparison"
+}

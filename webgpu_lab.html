@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>WebGPU · Лаборатория ландшафта</title></head>
+<body>
+<main>
+    <header><div><p class="eyebrow">РЕДАКТОР ЛАНДШАФТА / ЭКСПЕРИМЕНТ 31</p><h1>Лаборатория WebGPU</h1><p>Один пейзаж, три способа отрисовки. Земля, ветер в растениях и вода перенесены на TSL.</p></div><a id="editor" href="./index.html">Открыть редактор ↗</a></header>
+    <section class="toolbar" aria-label="Настройки сравнения">
+        <label>Рендер<select id="backend"><option value="webgl">WebGL · GLSL</option><option value="tsl-webgl">WebGL · TSL</option><option value="webgpu">WebGPU · TSL</option></select></label>
+        <label>Нагрузка<select id="load"><option value="small">Поляна · 1 580 растений</option><option value="dense">Лес · 13 100 растений</option></select></label>
+        <label>Влажность <output id="wet-value">35%</output><input id="wet" type="range" min="0" max="1" value=".35" step=".05"></label>
+        <label>Ветер <output id="wind-value">100%</output><input id="wind" type="range" min="0" max="2" value="1" step=".05"></label>
+        <button id="animation" aria-pressed="false">Включить анимацию</button><button id="reset">Вернуть камеру</button>
+    </section>
+    <section class="stage"><div id="viewport"></div><div class="stage-label"><span id="active-backend">Подготовка…</span><span>960 × 540 · DPR 1 · без MSAA и теней</span></div></section>
+    <p class="hint">Мышь: вращение, колесо: приближение. Снимки и тест возвращают одинаковые камеру и время. Свободный просмотр не влияет на условия сравнения.</p>
+    <div class="actions"><button id="compare" class="primary">Сравнить все рендеры</button><button id="cancel" disabled>Отменить</button><button id="export" disabled>Скачать отчёт JSON</button></div>
+    <progress id="progress" value="0" max="100" aria-label="Прогресс сравнения"></progress>
+    <p id="status" role="status" aria-live="polite">Подготовка сцены…</p><p id="capability" class="hint"></p>
+    <section class="results"><h2>Результаты</h2><p id="result-settings" class="hint"></p><p>24 кадра прогрева, затем 24 пакета по 4 кадра. Замер включает CPU, драйвер, GPU и синхронизацию: WebGL fence (опрос 1 мс) / WebGPU queue.onSubmittedWorkDone(). Это пропускная способность без VSync, а не FPS прогулки и не чистое время GPU. p95 относится к среднему времени кадра в пакете; задержка опроса входит в замер.</p>
+    <div class="table-scroll"><table><thead><tr><th>Рендер</th><th>Медиана, мс</th><th>p95, мс</th><th>Кадров/с</th><th>Вызовы</th><th>Треугольники</th><th>Состояние</th></tr></thead><tbody id="results"></tbody></table></div>
+    <p id="live" class="hint"></p><p id="difference" class="hint"></p><div id="shots" class="shots"></div></section>
+    <footer>Прототип использует карты земли из редактора и согласованные формулы GLSL/TSL. В него пока не входят полная система биомов, отражения, тени, погода и постобработка. Выводы о скорости относятся только к этой сцене и этому устройству. WebGPU требует подходящий браузер и графический адаптер; WebGL-замена не засчитывается как WebGPU.</footer>
+</main><script type="module" src="/src/webgpu/main.ts"></script>
+</body></html>

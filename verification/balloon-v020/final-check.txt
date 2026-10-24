@@ -1,0 +1,49 @@
+Browser tab: 8, Title: "Редактор ландшафта — Open World Terrain Editor", URL: "http://127.0.0.1:4185/balloon-check.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+~			135 text Помощник высоты · горелка 61%. Пробел — нагрев · V — клапан · C — камера · U — панель · Esc — пауза
+~			136 text {
+  "ready": true,
+  "flight": {
+    "active": true,
+    "seated": true,
+    "bodies": 3,
+    "canopies": 0,
+    "drawCalls": 7,
+    "ballastEffect": 0,
+    "time": 205.56666666664404,
+    "position": [
+      13.26526165008545,
+      60.22340774536133,
+      4.697546482086182
+    ],
+    "temperature": 337.93590324437264,
+    "fuel": 43.30182674862656,
+    "ballast": 40
+  },
+  "paused": false,
+  "canBoard": false,
+  "metrics": {
+    "power": 0.6121075761418754,
+    "agl": 29.505242614746095,
+    "tension": 0,
+    "grounded": false
+  },
+  "stored": true,
+  "restored": true,
+  "comparison": true,
+  "frames": 0,
+  "meanMs": "0.00",
+  "cpuP95": "0.00",
+  "calls": 87,
+  "colliders": 50,
+  "audio": {
+    "voices": 0,
+    "meteorFlights": 0,
+    "loops": 3,
+    "burner": true,
+    "steps": 0,
+    "time": 0
+  },
+  "errors": []
+}
+The focused UI element is 117 button Дневной полёт

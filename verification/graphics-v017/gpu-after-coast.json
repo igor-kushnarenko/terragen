@@ -1,0 +1,5935 @@
+{
+  "supported": true,
+  "disjoint": 0,
+  "method": "EXT_disjoint_timer_query_webgl2; async, no gl.finish; milliseconds on GPU, not FPS",
+  "samples": [
+    {
+      "timestamp": 168.632,
+      "scene": "Загрузка…",
+      "phase": "idle",
+      "ms": 48.741142
+    },
+    {
+      "timestamp": 538.1,
+      "scene": "Загрузка…",
+      "phase": "idle",
+      "ms": 40.476561
+    },
+    {
+      "timestamp": 559,
+      "scene": "Загрузка…",
+      "phase": "idle",
+      "ms": 39.623749
+    },
+    {
+      "timestamp": 579.8,
+      "scene": "Загрузка…",
+      "phase": "idle",
+      "ms": 49.094785
+    },
+    {
+      "timestamp": 1156.2,
+      "scene": "Загрузка…",
+      "phase": "idle",
+      "ms": 104.508541
+    },
+    {
+      "timestamp": 1183.9,
+      "scene": "Загрузка…",
+      "phase": "idle",
+      "ms": 47.830156
+    },
+    {
+      "timestamp": 1295.1,
+      "scene": "Загрузка…",
+      "phase": "idle",
+      "ms": 46.939374
+    },
+    {
+      "timestamp": 1315.9,
+      "scene": "Загрузка…",
+      "phase": "idle",
+      "ms": 47.030676
+    },
+    {
+      "timestamp": 1350.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 58.628175
+    },
+    {
+      "timestamp": 1635.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 42.674061
+    },
+    {
+      "timestamp": 1649.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.158854
+    },
+    {
+      "timestamp": 1670.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.985467
+    },
+    {
+      "timestamp": 1704.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.04302
+    },
+    {
+      "timestamp": 1753.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 41.010989
+    },
+    {
+      "timestamp": 1802,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.116666
+    },
+    {
+      "timestamp": 1843.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.007915
+    },
+    {
+      "timestamp": 1892.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.299895
+    },
+    {
+      "timestamp": 1934.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.867499
+    },
+    {
+      "timestamp": 1982.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.40427
+    },
+    {
+      "timestamp": 2031.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 93.301406
+    },
+    {
+      "timestamp": 2073,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.112811
+    },
+    {
+      "timestamp": 2121.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.524686
+    },
+    {
+      "timestamp": 2163.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.951353
+    },
+    {
+      "timestamp": 2267.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.474686
+    },
+    {
+      "timestamp": 2309,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.01677
+    },
+    {
+      "timestamp": 2343.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.911145
+    },
+    {
+      "timestamp": 2399.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.424218
+    },
+    {
+      "timestamp": 2447.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.229895
+    },
+    {
+      "timestamp": 2489.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 41.055571
+    },
+    {
+      "timestamp": 2531.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.343072
+    },
+    {
+      "timestamp": 2579.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.646718
+    },
+    {
+      "timestamp": 2621.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.069479
+    },
+    {
+      "timestamp": 2670.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.25703
+    },
+    {
+      "timestamp": 2718.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.019947
+    },
+    {
+      "timestamp": 2760.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.498697
+    },
+    {
+      "timestamp": 2809,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.994218
+    },
+    {
+      "timestamp": 2850.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.200832
+    },
+    {
+      "timestamp": 2899.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.653749
+    },
+    {
+      "timestamp": 2941,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.386353
+    },
+    {
+      "timestamp": 2989.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.00151
+    },
+    {
+      "timestamp": 3031.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.523852
+    },
+    {
+      "timestamp": 3079.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.446197
+    },
+    {
+      "timestamp": 3121.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.34078
+    },
+    {
+      "timestamp": 3274.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.407655
+    },
+    {
+      "timestamp": 3281.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.352082
+    },
+    {
+      "timestamp": 3288,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.612916
+    },
+    {
+      "timestamp": 3329.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.505989
+    },
+    {
+      "timestamp": 3399.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.714218
+    },
+    {
+      "timestamp": 3441,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.901978
+    },
+    {
+      "timestamp": 3468.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.287916
+    },
+    {
+      "timestamp": 3510.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.96302
+    },
+    {
+      "timestamp": 3545.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.548541
+    },
+    {
+      "timestamp": 3593.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.423488
+    },
+    {
+      "timestamp": 3635.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.538749
+    },
+    {
+      "timestamp": 3677,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.867656
+    },
+    {
+      "timestamp": 3725.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.015364
+    },
+    {
+      "timestamp": 3767.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.083436
+    },
+    {
+      "timestamp": 3823,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.550728
+    },
+    {
+      "timestamp": 3857.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.433541
+    },
+    {
+      "timestamp": 3906.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.001614
+    },
+    {
+      "timestamp": 3947.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.706457
+    },
+    {
+      "timestamp": 3996.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.162708
+    },
+    {
+      "timestamp": 4038.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.540207
+    },
+    {
+      "timestamp": 4079.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.893645
+    },
+    {
+      "timestamp": 4128.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.996093
+    },
+    {
+      "timestamp": 4170.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.903385
+    },
+    {
+      "timestamp": 4218.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.978801
+    },
+    {
+      "timestamp": 4260.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.814687
+    },
+    {
+      "timestamp": 4309,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.364218
+    },
+    {
+      "timestamp": 4350.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.724843
+    },
+    {
+      "timestamp": 4378.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.07052
+    },
+    {
+      "timestamp": 4440.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.594425
+    },
+    {
+      "timestamp": 4489.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.957603
+    },
+    {
+      "timestamp": 4531.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.373176
+    },
+    {
+      "timestamp": 4579.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.632707
+    },
+    {
+      "timestamp": 4621.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.521353
+    },
+    {
+      "timestamp": 4670,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.508488
+    },
+    {
+      "timestamp": 4711.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.895467
+    },
+    {
+      "timestamp": 4753.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.370104
+    },
+    {
+      "timestamp": 4781.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.939375
+    },
+    {
+      "timestamp": 4857.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.143541
+    },
+    {
+      "timestamp": 4885.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.485208
+    },
+    {
+      "timestamp": 4954.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.347864
+    },
+    {
+      "timestamp": 5003.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.708592
+    },
+    {
+      "timestamp": 5052.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.158906
+    },
+    {
+      "timestamp": 5100.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.993072
+    },
+    {
+      "timestamp": 5142.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.523176
+    },
+    {
+      "timestamp": 5184.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.047551
+    },
+    {
+      "timestamp": 5232.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.990208
+    },
+    {
+      "timestamp": 5274.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.273906
+    },
+    {
+      "timestamp": 5322.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.619895
+    },
+    {
+      "timestamp": 5364.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.652604
+    },
+    {
+      "timestamp": 5406.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.152447
+    },
+    {
+      "timestamp": 5461.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.307551
+    },
+    {
+      "timestamp": 5503.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.693905
+    },
+    {
+      "timestamp": 5559,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.987447
+    },
+    {
+      "timestamp": 5607.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.217343
+    },
+    {
+      "timestamp": 5649.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.003957
+    },
+    {
+      "timestamp": 5697.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.783541
+    },
+    {
+      "timestamp": 5739.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.360312
+    },
+    {
+      "timestamp": 5788.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.641354
+    },
+    {
+      "timestamp": 5829.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.665677
+    },
+    {
+      "timestamp": 5878.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.165884
+    },
+    {
+      "timestamp": 5920.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.233281
+    },
+    {
+      "timestamp": 5968.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.692968
+    },
+    {
+      "timestamp": 6017.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.09052
+    },
+    {
+      "timestamp": 6065.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.227707
+    },
+    {
+      "timestamp": 6107.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.622654
+    },
+    {
+      "timestamp": 6156.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.532968
+    },
+    {
+      "timestamp": 6197.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.636718
+    },
+    {
+      "timestamp": 6246.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.669791
+    },
+    {
+      "timestamp": 6288.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.150988
+    },
+    {
+      "timestamp": 6322.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.202603
+    },
+    {
+      "timestamp": 6378.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.473489
+    },
+    {
+      "timestamp": 6427.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.581301
+    },
+    {
+      "timestamp": 6468.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.272915
+    },
+    {
+      "timestamp": 6517.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.23354
+    },
+    {
+      "timestamp": 6531.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.260676
+    },
+    {
+      "timestamp": 6614.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.528592
+    },
+    {
+      "timestamp": 6663.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.735156
+    },
+    {
+      "timestamp": 6704.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.595572
+    },
+    {
+      "timestamp": 6753.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.465416
+    },
+    {
+      "timestamp": 6794.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.57276
+    },
+    {
+      "timestamp": 6843.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.962187
+    },
+    {
+      "timestamp": 6864.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.136196
+    },
+    {
+      "timestamp": 6933.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.441666
+    },
+    {
+      "timestamp": 6982.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.010781
+    },
+    {
+      "timestamp": 7024.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.46703
+    },
+    {
+      "timestamp": 7072.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.655208
+    },
+    {
+      "timestamp": 7114.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.487447
+    },
+    {
+      "timestamp": 7163.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.121822
+    },
+    {
+      "timestamp": 7204.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.365415
+    },
+    {
+      "timestamp": 7253.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.129166
+    },
+    {
+      "timestamp": 7295.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.296301
+    },
+    {
+      "timestamp": 7343.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.195311
+    },
+    {
+      "timestamp": 7385.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.567291
+    },
+    {
+      "timestamp": 7433.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.110885
+    },
+    {
+      "timestamp": 7475.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.147446
+    },
+    {
+      "timestamp": 7524.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.638593
+    },
+    {
+      "timestamp": 7572.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.404479
+    },
+    {
+      "timestamp": 7614.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.053227
+    },
+    {
+      "timestamp": 7663.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.623436
+    },
+    {
+      "timestamp": 7704.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.928958
+    },
+    {
+      "timestamp": 7753.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.565572
+    },
+    {
+      "timestamp": 7794.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.532135
+    },
+    {
+      "timestamp": 7843.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.743853
+    },
+    {
+      "timestamp": 7885.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.668072
+    },
+    {
+      "timestamp": 7927,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.243645
+    },
+    {
+      "timestamp": 7975.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.850468
+    },
+    {
+      "timestamp": 8024.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.042343
+    },
+    {
+      "timestamp": 8065.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.027655
+    },
+    {
+      "timestamp": 8114.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.464582
+    },
+    {
+      "timestamp": 8156,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.05177
+    },
+    {
+      "timestamp": 8204.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.302968
+    },
+    {
+      "timestamp": 8246.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.039114
+    },
+    {
+      "timestamp": 8295.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.02979
+    },
+    {
+      "timestamp": 8336.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.02953
+    },
+    {
+      "timestamp": 8385.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.14953
+    },
+    {
+      "timestamp": 8427,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.228176
+    },
+    {
+      "timestamp": 8475.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.560781
+    },
+    {
+      "timestamp": 8517.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.965051
+    },
+    {
+      "timestamp": 8565.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.021874
+    },
+    {
+      "timestamp": 8607.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.011353
+    },
+    {
+      "timestamp": 8656.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.600833
+    },
+    {
+      "timestamp": 8697.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.141353
+    },
+    {
+      "timestamp": 8746.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.504687
+    },
+    {
+      "timestamp": 8788,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.013124
+    },
+    {
+      "timestamp": 8836.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.336353
+    },
+    {
+      "timestamp": 8878.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.021302
+    },
+    {
+      "timestamp": 8926.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 41.056822
+    },
+    {
+      "timestamp": 8968.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.247551
+    },
+    {
+      "timestamp": 9017.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.502238
+    },
+    {
+      "timestamp": 9059,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.644062
+    },
+    {
+      "timestamp": 9107.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.481353
+    },
+    {
+      "timestamp": 9149.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.160572
+    },
+    {
+      "timestamp": 9197.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.359738
+    },
+    {
+      "timestamp": 9239.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.126405
+    },
+    {
+      "timestamp": 9288.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.437551
+    },
+    {
+      "timestamp": 9329.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.57526
+    },
+    {
+      "timestamp": 9378.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.365468
+    },
+    {
+      "timestamp": 9420,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.601927
+    },
+    {
+      "timestamp": 9440.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.664478
+    },
+    {
+      "timestamp": 9510.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.159635
+    },
+    {
+      "timestamp": 9531.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.256875
+    },
+    {
+      "timestamp": 9614.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.589426
+    },
+    {
+      "timestamp": 9656,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.66427
+    },
+    {
+      "timestamp": 9704.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.615728
+    },
+    {
+      "timestamp": 9746.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.122343
+    },
+    {
+      "timestamp": 9795,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.663645
+    },
+    {
+      "timestamp": 9836.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.526093
+    },
+    {
+      "timestamp": 9885.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.162447
+    },
+    {
+      "timestamp": 9927,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.180676
+    },
+    {
+      "timestamp": 9975.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.914999
+    },
+    {
+      "timestamp": 10024.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.698124
+    },
+    {
+      "timestamp": 10065.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.774217
+    },
+    {
+      "timestamp": 10114.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.11703
+    },
+    {
+      "timestamp": 10163,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.630312
+    },
+    {
+      "timestamp": 10204.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.669062
+    },
+    {
+      "timestamp": 10253.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.537968
+    },
+    {
+      "timestamp": 10295.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.305676
+    },
+    {
+      "timestamp": 10343.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.164218
+    },
+    {
+      "timestamp": 10385.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.519374
+    },
+    {
+      "timestamp": 10433.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.756874
+    },
+    {
+      "timestamp": 10475.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.09755
+    },
+    {
+      "timestamp": 10510.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.463645
+    },
+    {
+      "timestamp": 10579.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.618072
+    },
+    {
+      "timestamp": 10621.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.286613
+    },
+    {
+      "timestamp": 10669.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.36776
+    },
+    {
+      "timestamp": 10711.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.190416
+    },
+    {
+      "timestamp": 10760.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.490364
+    },
+    {
+      "timestamp": 10801.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.963802
+    },
+    {
+      "timestamp": 10850.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.48177
+    },
+    {
+      "timestamp": 10892.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.693749
+    },
+    {
+      "timestamp": 10940.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.484687
+    },
+    {
+      "timestamp": 10989.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.417082
+    },
+    {
+      "timestamp": 11031.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.472916
+    },
+    {
+      "timestamp": 11079.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.453332
+    },
+    {
+      "timestamp": 11121.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.644322
+    },
+    {
+      "timestamp": 11169.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.614999
+    },
+    {
+      "timestamp": 11218.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.608645
+    },
+    {
+      "timestamp": 11260.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.031718
+    },
+    {
+      "timestamp": 11308.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.157343
+    },
+    {
+      "timestamp": 11350.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.963592
+    },
+    {
+      "timestamp": 11399.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.433749
+    },
+    {
+      "timestamp": 11440.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.174946
+    },
+    {
+      "timestamp": 11468.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.675468
+    },
+    {
+      "timestamp": 11531.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 43.846927
+    },
+    {
+      "timestamp": 11579.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.316509
+    },
+    {
+      "timestamp": 11621.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 41.218957
+    },
+    {
+      "timestamp": 11663.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.758177
+    },
+    {
+      "timestamp": 11718.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.315259
+    },
+    {
+      "timestamp": 11760.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 36.797759
+    },
+    {
+      "timestamp": 11808.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 41.456145
+    },
+    {
+      "timestamp": 11857.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 39.210052
+    },
+    {
+      "timestamp": 11899,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 39.341144
+    },
+    {
+      "timestamp": 11947.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 36.752082
+    },
+    {
+      "timestamp": 11996.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 41.563072
+    },
+    {
+      "timestamp": 12037.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.902082
+    },
+    {
+      "timestamp": 12086.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.238281
+    },
+    {
+      "timestamp": 12128.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.167187
+    },
+    {
+      "timestamp": 12176.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.709531
+    },
+    {
+      "timestamp": 12225.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.240884
+    },
+    {
+      "timestamp": 12267.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.305415
+    },
+    {
+      "timestamp": 12315.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.032811
+    },
+    {
+      "timestamp": 12357.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.247655
+    },
+    {
+      "timestamp": 12406.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.065832
+    },
+    {
+      "timestamp": 12447.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.489165
+    },
+    {
+      "timestamp": 12496.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.052186
+    },
+    {
+      "timestamp": 12538.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.459634
+    },
+    {
+      "timestamp": 12586.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.261145
+    },
+    {
+      "timestamp": 12628.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.995208
+    },
+    {
+      "timestamp": 12676.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.278645
+    },
+    {
+      "timestamp": 12725.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.69354
+    },
+    {
+      "timestamp": 12767.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.102187
+    },
+    {
+      "timestamp": 12815.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.53125
+    },
+    {
+      "timestamp": 12857.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.977342
+    },
+    {
+      "timestamp": 12885.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.761093
+    },
+    {
+      "timestamp": 12947.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.985833
+    },
+    {
+      "timestamp": 12996.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.132968
+    },
+    {
+      "timestamp": 13038.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.482239
+    },
+    {
+      "timestamp": 13079.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.839165
+    },
+    {
+      "timestamp": 13128.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.355416
+    },
+    {
+      "timestamp": 13169.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.540416
+    },
+    {
+      "timestamp": 13218.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.593385
+    },
+    {
+      "timestamp": 13260.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.596197
+    },
+    {
+      "timestamp": 13309,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.252083
+    },
+    {
+      "timestamp": 13350.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.088332
+    },
+    {
+      "timestamp": 13399,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 41.145051
+    },
+    {
+      "timestamp": 13440.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.666405
+    },
+    {
+      "timestamp": 13489.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.22203
+    },
+    {
+      "timestamp": 13531,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.194582
+    },
+    {
+      "timestamp": 13593.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.368645
+    },
+    {
+      "timestamp": 13635.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.181353
+    },
+    {
+      "timestamp": 13683.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.953436
+    },
+    {
+      "timestamp": 13725.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.659009
+    },
+    {
+      "timestamp": 13774,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.637812
+    },
+    {
+      "timestamp": 13815.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.253853
+    },
+    {
+      "timestamp": 13864.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.050207
+    },
+    {
+      "timestamp": 13905.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.957916
+    },
+    {
+      "timestamp": 13954.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.064062
+    },
+    {
+      "timestamp": 14003.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.558749
+    },
+    {
+      "timestamp": 14044.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.059583
+    },
+    {
+      "timestamp": 14093.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.913228
+    },
+    {
+      "timestamp": 14135,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.067082
+    },
+    {
+      "timestamp": 14176.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.390885
+    },
+    {
+      "timestamp": 14225.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.147551
+    },
+    {
+      "timestamp": 14267.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.126614
+    },
+    {
+      "timestamp": 14315.7,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.749218
+    },
+    {
+      "timestamp": 14364.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.69927
+    },
+    {
+      "timestamp": 14405.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.705884
+    },
+    {
+      "timestamp": 14454.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.603124
+    },
+    {
+      "timestamp": 14496.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.430415
+    },
+    {
+      "timestamp": 14551.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.621562
+    },
+    {
+      "timestamp": 14600.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.974582
+    },
+    {
+      "timestamp": 14641.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.883072
+    },
+    {
+      "timestamp": 14690.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.034686
+    },
+    {
+      "timestamp": 14732.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.612291
+    },
+    {
+      "timestamp": 14780.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.362083
+    },
+    {
+      "timestamp": 14822.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.852759
+    },
+    {
+      "timestamp": 14871.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.770676
+    },
+    {
+      "timestamp": 14912.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.683853
+    },
+    {
+      "timestamp": 14961.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.712291
+    },
+    {
+      "timestamp": 15003.3,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.801041
+    },
+    {
+      "timestamp": 15051.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.509062
+    },
+    {
+      "timestamp": 15093.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.029739
+    },
+    {
+      "timestamp": 15142.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.767291
+    },
+    {
+      "timestamp": 15183.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.031093
+    },
+    {
+      "timestamp": 15232.4,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.415572
+    },
+    {
+      "timestamp": 15274.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.634791
+    },
+    {
+      "timestamp": 15322.5,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.178593
+    },
+    {
+      "timestamp": 15364.2,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.619165
+    },
+    {
+      "timestamp": 15412.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 40.387968
+    },
+    {
+      "timestamp": 15412.9,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 0.000677
+    },
+    {
+      "timestamp": 15454.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 35.446405
+    },
+    {
+      "timestamp": 15454.6,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 0.000104
+    },
+    {
+      "timestamp": 15503.1,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 38.05151
+    },
+    {
+      "timestamp": 15551.8,
+      "scene": "Готово: forest",
+      "phase": "idle",
+      "ms": 37.83927
+    },
+    {
+      "timestamp": 15600.4,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 95.207758
+    },
+    {
+      "timestamp": 15815.6,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 42.22026
+    },
+    {
+      "timestamp": 15822.5,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 40.72328
+    },
+    {
+      "timestamp": 15836.4,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 38.439061
+    },
+    {
+      "timestamp": 15878.1,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 39.926458
+    },
+    {
+      "timestamp": 16031,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 41.505781
+    },
+    {
+      "timestamp": 16044.7,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 40.160155
+    },
+    {
+      "timestamp": 16072.5,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 39.916248
+    },
+    {
+      "timestamp": 16086.4,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 40.077863
+    },
+    {
+      "timestamp": 16142,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 41.507811
+    },
+    {
+      "timestamp": 16190.7,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 40.09026
+    },
+    {
+      "timestamp": 16232.5,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 41.16953
+    },
+    {
+      "timestamp": 16281,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 37.278488
+    },
+    {
+      "timestamp": 16336.4,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 41.426666
+    },
+    {
+      "timestamp": 16371.2,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 37.258384
+    },
+    {
+      "timestamp": 16419.8,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 41.426406
+    },
+    {
+      "timestamp": 16468.5,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 37.369583
+    },
+    {
+      "timestamp": 16517.1,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 41.149634
+    },
+    {
+      "timestamp": 16572.7,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 39.874322
+    },
+    {
+      "timestamp": 16621.1,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 38.677343
+    },
+    {
+      "timestamp": 16655.8,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 39.876509
+    },
+    {
+      "timestamp": 16697.5,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 37.429686
+    },
+    {
+      "timestamp": 16746.1,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 41.563176
+    },
+    {
+      "timestamp": 16801.6,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 39.693177
+    },
+    {
+      "timestamp": 16836.4,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 41.754322
+    },
+    {
+      "timestamp": 16892.1,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 40.101301
+    },
+    {
+      "timestamp": 16961.5,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 41.217291
+    },
+    {
+      "timestamp": 16989.2,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 39.967499
+    },
+    {
+      "timestamp": 17037.8,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 39.991301
+    },
+    {
+      "timestamp": 17072.5,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 38.733905
+    },
+    {
+      "timestamp": 17128.2,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 40.016197
+    },
+    {
+      "timestamp": 17176.9,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 41.232655
+    },
+    {
+      "timestamp": 17225.5,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 37.236145
+    },
+    {
+      "timestamp": 17280.8,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 38.991822
+    },
+    {
+      "timestamp": 17315.6,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 39.458593
+    },
+    {
+      "timestamp": 17364.4,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 41.65927
+    },
+    {
+      "timestamp": 17406.1,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 39.931614
+    },
+    {
+      "timestamp": 17454.7,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 41.461249
+    },
+    {
+      "timestamp": 17503.1,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 39.51302
+    },
+    {
+      "timestamp": 17544.8,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 38.742654
+    },
+    {
+      "timestamp": 17593.6,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 39.644947
+    },
+    {
+      "timestamp": 17642.1,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 38.802603
+    },
+    {
+      "timestamp": 17683.8,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 39.610051
+    },
+    {
+      "timestamp": 17704.5,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 39.70552
+    },
+    {
+      "timestamp": 17780.9,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 41.19026
+    },
+    {
+      "timestamp": 17822.7,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 39.865155
+    },
+    {
+      "timestamp": 17871.3,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 41.464062
+    },
+    {
+      "timestamp": 17919.8,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 40.216718
+    },
+    {
+      "timestamp": 17961.6,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 41.348592
+    },
+    {
+      "timestamp": 18010.2,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 39.766562
+    },
+    {
+      "timestamp": 18058.8,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 41.25802
+    },
+    {
+      "timestamp": 18107.5,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 39.717968
+    },
+    {
+      "timestamp": 18155.9,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 41.172134
+    },
+    {
+      "timestamp": 18197.7,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 39.543436
+    },
+    {
+      "timestamp": 18246.3,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 41.255937
+    },
+    {
+      "timestamp": 18294.7,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 39.698801
+    },
+    {
+      "timestamp": 18336.5,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 41.140676
+    },
+    {
+      "timestamp": 18385,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 39.573384
+    },
+    {
+      "timestamp": 18433.7,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 41.719791
+    },
+    {
+      "timestamp": 18475.4,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 39.783176
+    },
+    {
+      "timestamp": 18524,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 41.599739
+    },
+    {
+      "timestamp": 18572.5,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 39.590207
+    },
+    {
+      "timestamp": 18607.3,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 41.124947
+    },
+    {
+      "timestamp": 18663,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 37.244166
+    },
+    {
+      "timestamp": 18711.6,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 38.907603
+    },
+    {
+      "timestamp": 18753,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 39.541458
+    },
+    {
+      "timestamp": 18801.6,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 38.945781
+    },
+    {
+      "timestamp": 18850.3,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 39.728593
+    },
+    {
+      "timestamp": 18891.9,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 41.26479
+    },
+    {
+      "timestamp": 18940.7,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 39.683958
+    },
+    {
+      "timestamp": 18989.4,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 41.860312
+    },
+    {
+      "timestamp": 19037.7,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 37.145468
+    },
+    {
+      "timestamp": 19079.6,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 38.724843
+    },
+    {
+      "timestamp": 19128,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 39.528906
+    },
+    {
+      "timestamp": 19176.7,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 41.121353
+    },
+    {
+      "timestamp": 19218.4,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 39.619947
+    },
+    {
+      "timestamp": 19218.4,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 0.000052
+    },
+    {
+      "timestamp": 19267,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 41.639843
+    },
+    {
+      "timestamp": 19267,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 0.000052
+    },
+    {
+      "timestamp": 19315.6,
+      "scene": "Готово: coast",
+      "phase": "idle",
+      "ms": 39.708906
+    },
+    {
+      "timestamp": 19357.3,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.462498
+    },
+    {
+      "timestamp": 19412.7,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.785936
+    },
+    {
+      "timestamp": 19454.4,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.209635
+    },
+    {
+      "timestamp": 19503.2,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 40.095155
+    },
+    {
+      "timestamp": 19551.8,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.318854
+    },
+    {
+      "timestamp": 19600.3,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 37.303332
+    },
+    {
+      "timestamp": 19649.1,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.343019
+    },
+    {
+      "timestamp": 19697.5,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.61427
+    },
+    {
+      "timestamp": 19746.1,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.096822
+    },
+    {
+      "timestamp": 19787.9,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.891822
+    },
+    {
+      "timestamp": 19836.5,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.325156
+    },
+    {
+      "timestamp": 19885,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.764791
+    },
+    {
+      "timestamp": 19898.9,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.54177
+    },
+    {
+      "timestamp": 19975.3,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 38.827863
+    },
+    {
+      "timestamp": 20017.1,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.735572
+    },
+    {
+      "timestamp": 20065.7,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 38.848332
+    },
+    {
+      "timestamp": 20114.1,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 40.551822
+    },
+    {
+      "timestamp": 20155.9,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.527863
+    },
+    {
+      "timestamp": 20204.6,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.989635
+    },
+    {
+      "timestamp": 20239.4,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.383176
+    },
+    {
+      "timestamp": 20308.7,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.74802
+    },
+    {
+      "timestamp": 20357.2,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.253281
+    },
+    {
+      "timestamp": 20405.8,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.905572
+    },
+    {
+      "timestamp": 20454.4,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.417135
+    },
+    {
+      "timestamp": 20496.2,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.829478
+    },
+    {
+      "timestamp": 20544.8,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.824061
+    },
+    {
+      "timestamp": 20593.3,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.94026
+    },
+    {
+      "timestamp": 20635.1,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 38.887029
+    },
+    {
+      "timestamp": 20683.7,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.763489
+    },
+    {
+      "timestamp": 20732.3,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.266613
+    },
+    {
+      "timestamp": 20780.9,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.770364
+    },
+    {
+      "timestamp": 20822.6,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.347604
+    },
+    {
+      "timestamp": 20871.4,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 40.285103
+    },
+    {
+      "timestamp": 20919.8,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 38.97052
+    },
+    {
+      "timestamp": 20961.5,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 37.331561
+    },
+    {
+      "timestamp": 20982.4,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 37.36427
+    },
+    {
+      "timestamp": 21058.7,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.494947
+    },
+    {
+      "timestamp": 21107.4,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 37.265937
+    },
+    {
+      "timestamp": 21155.8,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 38.664061
+    },
+    {
+      "timestamp": 21197.6,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 40.093802
+    },
+    {
+      "timestamp": 21211.6,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 37.314894
+    },
+    {
+      "timestamp": 21301.7,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 38.645729
+    },
+    {
+      "timestamp": 21322.5,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.941354
+    },
+    {
+      "timestamp": 21398.8,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.021144
+    },
+    {
+      "timestamp": 21440.6,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.497447
+    },
+    {
+      "timestamp": 21454.6,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.878176
+    },
+    {
+      "timestamp": 21530.9,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 38.652864
+    },
+    {
+      "timestamp": 21544.7,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.741197
+    },
+    {
+      "timestamp": 21628.1,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 38.669374
+    },
+    {
+      "timestamp": 21669.9,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 40.221353
+    },
+    {
+      "timestamp": 21683.7,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.913906
+    },
+    {
+      "timestamp": 21760,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.209895
+    },
+    {
+      "timestamp": 21808.5,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.625937
+    },
+    {
+      "timestamp": 21857.2,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.032864
+    },
+    {
+      "timestamp": 21905.7,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.554791
+    },
+    {
+      "timestamp": 21919.7,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.982551
+    },
+    {
+      "timestamp": 21996.2,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.112864
+    },
+    {
+      "timestamp": 22037.7,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.740468
+    },
+    {
+      "timestamp": 22093.3,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.09703
+    },
+    {
+      "timestamp": 22135,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 37.300935
+    },
+    {
+      "timestamp": 22183.6,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.598749
+    },
+    {
+      "timestamp": 22232.2,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.729062
+    },
+    {
+      "timestamp": 22273.9,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.393905
+    },
+    {
+      "timestamp": 22322.5,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.424374
+    },
+    {
+      "timestamp": 22371.3,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 38.921458
+    },
+    {
+      "timestamp": 22419.6,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 37.361509
+    },
+    {
+      "timestamp": 22461.3,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 38.684843
+    },
+    {
+      "timestamp": 22510,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.666979
+    },
+    {
+      "timestamp": 22551.8,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.078176
+    },
+    {
+      "timestamp": 22600.3,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.690988
+    },
+    {
+      "timestamp": 22649,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.842343
+    },
+    {
+      "timestamp": 22697.4,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.853958
+    },
+    {
+      "timestamp": 22739.3,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.481196
+    },
+    {
+      "timestamp": 22787.8,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.954375
+    },
+    {
+      "timestamp": 22822.6,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.108645
+    },
+    {
+      "timestamp": 22878,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.605416
+    },
+    {
+      "timestamp": 22898.9,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.909062
+    },
+    {
+      "timestamp": 22975.2,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.155467
+    },
+    {
+      "timestamp": 23017.1,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.773019
+    },
+    {
+      "timestamp": 23065.6,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.342968
+    },
+    {
+      "timestamp": 23114.3,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 37.304582
+    },
+    {
+      "timestamp": 23155.8,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 38.805728
+    },
+    {
+      "timestamp": 23204.5,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 40.193437
+    },
+    {
+      "timestamp": 23253,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 41.289686
+    },
+    {
+      "timestamp": 23301.5,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 39.851457
+    },
+    {
+      "timestamp": 23343.5,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 40.983957
+    },
+    {
+      "timestamp": 23391.9,
+      "scene": "coast",
+      "phase": "warmup",
+      "ms": 37.34302
+    },
+    {
+      "timestamp": 23440.5,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.07953
+    },
+    {
+      "timestamp": 23482.2,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.714113
+    },
+    {
+      "timestamp": 23537.8,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.498072
+    },
+    {
+      "timestamp": 23565.4,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 37.34828
+    },
+    {
+      "timestamp": 23572.4,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.820208
+    },
+    {
+      "timestamp": 23627.9,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.126874
+    },
+    {
+      "timestamp": 23676.7,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.746093
+    },
+    {
+      "timestamp": 23718.4,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 38.908801
+    },
+    {
+      "timestamp": 23767,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 37.31979
+    },
+    {
+      "timestamp": 23808.7,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.558802
+    },
+    {
+      "timestamp": 23857.3,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.773177
+    },
+    {
+      "timestamp": 23905.7,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.093593
+    },
+    {
+      "timestamp": 23954.7,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 37.345625
+    },
+    {
+      "timestamp": 23996.2,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.341249
+    },
+    {
+      "timestamp": 24037.7,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 37.297499
+    },
+    {
+      "timestamp": 24093.3,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.678645
+    },
+    {
+      "timestamp": 24134.9,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 37.28755
+    },
+    {
+      "timestamp": 24183.7,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.43776
+    },
+    {
+      "timestamp": 24197.6,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 40.058385
+    },
+    {
+      "timestamp": 24287.7,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 38.99203
+    },
+    {
+      "timestamp": 24336.4,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.836822
+    },
+    {
+      "timestamp": 24384.9,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 38.870885
+    },
+    {
+      "timestamp": 24426.7,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.785363
+    },
+    {
+      "timestamp": 24475.2,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 38.829062
+    },
+    {
+      "timestamp": 24523.7,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.797968
+    },
+    {
+      "timestamp": 24565.5,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 38.867238
+    },
+    {
+      "timestamp": 24614.2,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 40.065051
+    },
+    {
+      "timestamp": 24662.7,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.427134
+    },
+    {
+      "timestamp": 24704.3,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.824426
+    },
+    {
+      "timestamp": 24752.9,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.609895
+    },
+    {
+      "timestamp": 24780.8,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 40.111405
+    },
+    {
+      "timestamp": 24850.2,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.589687
+    },
+    {
+      "timestamp": 24899.1,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.818958
+    },
+    {
+      "timestamp": 24940.5,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.483593
+    },
+    {
+      "timestamp": 24989.2,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.947447
+    },
+    {
+      "timestamp": 25037.7,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 38.749062
+    },
+    {
+      "timestamp": 25079.5,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.831874
+    },
+    {
+      "timestamp": 25134.9,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.412551
+    },
+    {
+      "timestamp": 25176.5,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.784583
+    },
+    {
+      "timestamp": 25239.2,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 38.747604
+    },
+    {
+      "timestamp": 25287.6,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 37.425416
+    },
+    {
+      "timestamp": 25329.5,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.644113
+    },
+    {
+      "timestamp": 25378.1,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.618541
+    },
+    {
+      "timestamp": 25426.6,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.113176
+    },
+    {
+      "timestamp": 25468.3,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.65427
+    },
+    {
+      "timestamp": 25516.8,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 38.752447
+    },
+    {
+      "timestamp": 25565.5,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.9175
+    },
+    {
+      "timestamp": 25607,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 38.651717
+    },
+    {
+      "timestamp": 25621,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.532603
+    },
+    {
+      "timestamp": 25704.5,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.049218
+    },
+    {
+      "timestamp": 25718.3,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 37.29828
+    },
+    {
+      "timestamp": 25794.7,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.19802
+    },
+    {
+      "timestamp": 25808.6,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 37.259582
+    },
+    {
+      "timestamp": 25885,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.757499
+    },
+    {
+      "timestamp": 25933.5,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.71302
+    },
+    {
+      "timestamp": 25982.2,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 38.726562
+    },
+    {
+      "timestamp": 26030.6,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 37.265312
+    },
+    {
+      "timestamp": 26072.5,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.390988
+    },
+    {
+      "timestamp": 26120.9,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.78302
+    },
+    {
+      "timestamp": 26169.6,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.19078
+    },
+    {
+      "timestamp": 26211.3,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.634218
+    },
+    {
+      "timestamp": 26260.1,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.084738
+    },
+    {
+      "timestamp": 26308.5,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 40.048645
+    },
+    {
+      "timestamp": 26357.3,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 38.83479
+    },
+    {
+      "timestamp": 26398.8,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 37.248696
+    },
+    {
+      "timestamp": 26447.4,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.373853
+    },
+    {
+      "timestamp": 26489.3,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.677186
+    },
+    {
+      "timestamp": 26537.9,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.227812
+    },
+    {
+      "timestamp": 26586.4,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.725416
+    },
+    {
+      "timestamp": 26634.9,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.109947
+    },
+    {
+      "timestamp": 26676.6,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.810572
+    },
+    {
+      "timestamp": 26725.3,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 38.704947
+    },
+    {
+      "timestamp": 26773.8,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.695781
+    },
+    {
+      "timestamp": 26815.5,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.065936
+    },
+    {
+      "timestamp": 26829.4,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 40.189947
+    },
+    {
+      "timestamp": 26912.7,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.28526
+    },
+    {
+      "timestamp": 26926.5,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 40.000416
+    },
+    {
+      "timestamp": 27002.9,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.198437
+    },
+    {
+      "timestamp": 27023.7,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.590051
+    },
+    {
+      "timestamp": 27093.2,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 38.993958
+    },
+    {
+      "timestamp": 27141.8,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.803175
+    },
+    {
+      "timestamp": 27190.4,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.326093
+    },
+    {
+      "timestamp": 27239.1,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.607082
+    },
+    {
+      "timestamp": 27280.9,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.113748
+    },
+    {
+      "timestamp": 27329.4,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.842864
+    },
+    {
+      "timestamp": 27377.9,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.17828
+    },
+    {
+      "timestamp": 27419.7,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 40.165572
+    },
+    {
+      "timestamp": 27468.2,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.41177
+    },
+    {
+      "timestamp": 27516.9,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.629791
+    },
+    {
+      "timestamp": 27558.7,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 43.359947
+    },
+    {
+      "timestamp": 27607.1,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.303281
+    },
+    {
+      "timestamp": 27655.8,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.242395
+    },
+    {
+      "timestamp": 27704.7,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.794947
+    },
+    {
+      "timestamp": 27745.9,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.185988
+    },
+    {
+      "timestamp": 27794.6,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.86625
+    },
+    {
+      "timestamp": 27843.4,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.091666
+    },
+    {
+      "timestamp": 27857.3,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.71375
+    },
+    {
+      "timestamp": 27940.6,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 38.900311
+    },
+    {
+      "timestamp": 27954.4,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 40.064374
+    },
+    {
+      "timestamp": 28030.8,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.400988
+    },
+    {
+      "timestamp": 28072.4,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 40.326874
+    },
+    {
+      "timestamp": 28121,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.74526
+    },
+    {
+      "timestamp": 28169.7,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.922238
+    },
+    {
+      "timestamp": 28218.3,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 38.924947
+    },
+    {
+      "timestamp": 28232.1,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.789426
+    },
+    {
+      "timestamp": 28322.5,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.454062
+    },
+    {
+      "timestamp": 28371,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.742499
+    },
+    {
+      "timestamp": 28412.8,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.387655
+    },
+    {
+      "timestamp": 28461.3,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 37.379062
+    },
+    {
+      "timestamp": 28509.9,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 38.958905
+    },
+    {
+      "timestamp": 28558.5,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 37.249478
+    },
+    {
+      "timestamp": 28600.1,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 38.974113
+    },
+    {
+      "timestamp": 28648.9,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.852499
+    },
+    {
+      "timestamp": 28697.5,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.510677
+    },
+    {
+      "timestamp": 28738.9,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 37.264322
+    },
+    {
+      "timestamp": 28787.8,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.312239
+    },
+    {
+      "timestamp": 28836.3,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 40.014114
+    },
+    {
+      "timestamp": 28877.9,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.300677
+    },
+    {
+      "timestamp": 28926.6,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.657916
+    },
+    {
+      "timestamp": 28975.2,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.759583
+    },
+    {
+      "timestamp": 28996,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 37.27651
+    },
+    {
+      "timestamp": 29072.3,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.673436
+    },
+    {
+      "timestamp": 29114.2,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.930624
+    },
+    {
+      "timestamp": 29162.7,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 38.823385
+    },
+    {
+      "timestamp": 29211.4,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.574739
+    },
+    {
+      "timestamp": 29266.8,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.156613
+    },
+    {
+      "timestamp": 29315.4,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.75651
+    },
+    {
+      "timestamp": 29364.1,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.158385
+    },
+    {
+      "timestamp": 29405.7,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.686353
+    },
+    {
+      "timestamp": 29454.6,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 38.735728
+    },
+    {
+      "timestamp": 29503,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 40.162968
+    },
+    {
+      "timestamp": 29544.8,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.337603
+    },
+    {
+      "timestamp": 29593.4,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.769061
+    },
+    {
+      "timestamp": 29641.8,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 38.629114
+    },
+    {
+      "timestamp": 29683.6,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.752342
+    },
+    {
+      "timestamp": 29732.1,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.296927
+    },
+    {
+      "timestamp": 29780.7,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.508176
+    },
+    {
+      "timestamp": 29822.4,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.26526
+    },
+    {
+      "timestamp": 29871,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.622604
+    },
+    {
+      "timestamp": 29919.7,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 40.87927
+    },
+    {
+      "timestamp": 29961.4,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 37.202551
+    },
+    {
+      "timestamp": 30016.8,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.840052
+    },
+    {
+      "timestamp": 30051.5,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.981926
+    },
+    {
+      "timestamp": 30107,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.352499
+    },
+    {
+      "timestamp": 30148.9,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.641561
+    },
+    {
+      "timestamp": 30197.3,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.294895
+    },
+    {
+      "timestamp": 30246.1,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.754166
+    },
+    {
+      "timestamp": 30294.4,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.081822
+    },
+    {
+      "timestamp": 30336.2,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.533801
+    },
+    {
+      "timestamp": 30384.9,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.171353
+    },
+    {
+      "timestamp": 30433.5,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.583124
+    },
+    {
+      "timestamp": 30475.1,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.304114
+    },
+    {
+      "timestamp": 30523.9,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.698489
+    },
+    {
+      "timestamp": 30572.3,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.091979
+    },
+    {
+      "timestamp": 30614,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 40.09354
+    },
+    {
+      "timestamp": 30662.6,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.293958
+    },
+    {
+      "timestamp": 30711.2,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.880155
+    },
+    {
+      "timestamp": 30753,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.252915
+    },
+    {
+      "timestamp": 30801.6,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.651926
+    },
+    {
+      "timestamp": 30850.2,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.20526
+    },
+    {
+      "timestamp": 30891.9,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.817239
+    },
+    {
+      "timestamp": 30940.6,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.172552
+    },
+    {
+      "timestamp": 30954.4,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 37.259322
+    },
+    {
+      "timestamp": 31030.7,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 38.767812
+    },
+    {
+      "timestamp": 31079.3,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 40.251145
+    },
+    {
+      "timestamp": 31127.8,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.520259
+    },
+    {
+      "timestamp": 31176.5,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.832916
+    },
+    {
+      "timestamp": 31218.4,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 41.190156
+    },
+    {
+      "timestamp": 31266.8,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 37.265103
+    },
+    {
+      "timestamp": 31315.3,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 38.649842
+    },
+    {
+      "timestamp": 31357.1,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 39.742187
+    },
+    {
+      "timestamp": 31405.6,
+      "scene": "coast",
+      "phase": "baseline",
+      "ms": 38.790416
+    },
+    {
+      "timestamp": 31454.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.146093
+    },
+    {
+      "timestamp": 31558.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.865676
+    },
+    {
+      "timestamp": 31628,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.203749
+    },
+    {
+      "timestamp": 31669.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.624999
+    },
+    {
+      "timestamp": 31683.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.981197
+    },
+    {
+      "timestamp": 31725.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.783177
+    },
+    {
+      "timestamp": 31773.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.233228
+    },
+    {
+      "timestamp": 31822.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.749947
+    },
+    {
+      "timestamp": 31863.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.144218
+    },
+    {
+      "timestamp": 31912.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.24354
+    },
+    {
+      "timestamp": 31961.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.824738
+    },
+    {
+      "timestamp": 32009.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.788125
+    },
+    {
+      "timestamp": 32051.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.37078
+    },
+    {
+      "timestamp": 32100.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.194843
+    },
+    {
+      "timestamp": 32141.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.484531
+    },
+    {
+      "timestamp": 32190.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.100832
+    },
+    {
+      "timestamp": 32211.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.891769
+    },
+    {
+      "timestamp": 32294.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.569114
+    },
+    {
+      "timestamp": 32343.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.225051
+    },
+    {
+      "timestamp": 32391.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.816562
+    },
+    {
+      "timestamp": 32433.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.986562
+    },
+    {
+      "timestamp": 32482.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.764166
+    },
+    {
+      "timestamp": 32530.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.612864
+    },
+    {
+      "timestamp": 32572.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.278853
+    },
+    {
+      "timestamp": 32621,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.171978
+    },
+    {
+      "timestamp": 32655.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.340259
+    },
+    {
+      "timestamp": 32711.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.182864
+    },
+    {
+      "timestamp": 32759.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.753593
+    },
+    {
+      "timestamp": 32808.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.073645
+    },
+    {
+      "timestamp": 32850.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.170051
+    },
+    {
+      "timestamp": 32898.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.865937
+    },
+    {
+      "timestamp": 32947.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.288644
+    },
+    {
+      "timestamp": 32995.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.790103
+    },
+    {
+      "timestamp": 33009.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.857083
+    },
+    {
+      "timestamp": 33093.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.411301
+    },
+    {
+      "timestamp": 33134.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.304947
+    },
+    {
+      "timestamp": 33183.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.748593
+    },
+    {
+      "timestamp": 33225.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.155259
+    },
+    {
+      "timestamp": 33252.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.958957
+    },
+    {
+      "timestamp": 33329.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.437447
+    },
+    {
+      "timestamp": 33377.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.465676
+    },
+    {
+      "timestamp": 33426.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.236822
+    },
+    {
+      "timestamp": 33468.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.662447
+    },
+    {
+      "timestamp": 33516.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.365155
+    },
+    {
+      "timestamp": 33565.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.525988
+    },
+    {
+      "timestamp": 33614,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.199218
+    },
+    {
+      "timestamp": 33655.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.251925
+    },
+    {
+      "timestamp": 33704.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.433176
+    },
+    {
+      "timestamp": 33746,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.688853
+    },
+    {
+      "timestamp": 33794.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.964895
+    },
+    {
+      "timestamp": 33843.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.234218
+    },
+    {
+      "timestamp": 33884.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.890833
+    },
+    {
+      "timestamp": 33933.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.193853
+    },
+    {
+      "timestamp": 33982,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.392342
+    },
+    {
+      "timestamp": 34030.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.631822
+    },
+    {
+      "timestamp": 34065.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.329999
+    },
+    {
+      "timestamp": 34120.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.610155
+    },
+    {
+      "timestamp": 34169.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.328749
+    },
+    {
+      "timestamp": 34218,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.686301
+    },
+    {
+      "timestamp": 34259.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.46354
+    },
+    {
+      "timestamp": 34308.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.68052
+    },
+    {
+      "timestamp": 34357,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.714426
+    },
+    {
+      "timestamp": 34398.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.88854
+    },
+    {
+      "timestamp": 34447.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.72427
+    },
+    {
+      "timestamp": 34495.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.628801
+    },
+    {
+      "timestamp": 34544.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.244739
+    },
+    {
+      "timestamp": 34586.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.50578
+    },
+    {
+      "timestamp": 34634.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.990468
+    },
+    {
+      "timestamp": 34676.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.636926
+    },
+    {
+      "timestamp": 34725.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.020728
+    },
+    {
+      "timestamp": 34773.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.421041
+    },
+    {
+      "timestamp": 34822.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.372447
+    },
+    {
+      "timestamp": 34863.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.337187
+    },
+    {
+      "timestamp": 34912.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.313333
+    },
+    {
+      "timestamp": 34954,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.777707
+    },
+    {
+      "timestamp": 34981.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.275208
+    },
+    {
+      "timestamp": 35051.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.290364
+    },
+    {
+      "timestamp": 35099.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.489165
+    },
+    {
+      "timestamp": 35141.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.085832
+    },
+    {
+      "timestamp": 35190.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.584843
+    },
+    {
+      "timestamp": 35238.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.317447
+    },
+    {
+      "timestamp": 35280.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.788176
+    },
+    {
+      "timestamp": 35329.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.37229
+    },
+    {
+      "timestamp": 35377.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.230103
+    },
+    {
+      "timestamp": 35419.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.784634
+    },
+    {
+      "timestamp": 35468.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.710468
+    },
+    {
+      "timestamp": 35516.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.314895
+    },
+    {
+      "timestamp": 35558.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.614114
+    },
+    {
+      "timestamp": 35607.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.063229
+    },
+    {
+      "timestamp": 35655.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.690988
+    },
+    {
+      "timestamp": 35697.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.897187
+    },
+    {
+      "timestamp": 35745.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.553853
+    },
+    {
+      "timestamp": 35794.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.346301
+    },
+    {
+      "timestamp": 35836.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.771821
+    },
+    {
+      "timestamp": 35884.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.317239
+    },
+    {
+      "timestamp": 35933.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.020624
+    },
+    {
+      "timestamp": 35975,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.429166
+    },
+    {
+      "timestamp": 36023.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.8375
+    },
+    {
+      "timestamp": 36072.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.100936
+    },
+    {
+      "timestamp": 36114,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.334686
+    },
+    {
+      "timestamp": 36134.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.848801
+    },
+    {
+      "timestamp": 36211.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.829582
+    },
+    {
+      "timestamp": 36231.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.155208
+    },
+    {
+      "timestamp": 36315.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.59781
+    },
+    {
+      "timestamp": 36357.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.693385
+    },
+    {
+      "timestamp": 36405.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.502239
+    },
+    {
+      "timestamp": 36454.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.312603
+    },
+    {
+      "timestamp": 36502.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.743072
+    },
+    {
+      "timestamp": 36544.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.181509
+    },
+    {
+      "timestamp": 36593.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.497915
+    },
+    {
+      "timestamp": 36641.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.571249
+    },
+    {
+      "timestamp": 36690.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.291978
+    },
+    {
+      "timestamp": 36732,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.840728
+    },
+    {
+      "timestamp": 36780.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.378645
+    },
+    {
+      "timestamp": 36829.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.804947
+    },
+    {
+      "timestamp": 36871,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.446145
+    },
+    {
+      "timestamp": 36919.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.007083
+    },
+    {
+      "timestamp": 36968.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.857343
+    },
+    {
+      "timestamp": 37016.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.923333
+    },
+    {
+      "timestamp": 37058.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.660155
+    },
+    {
+      "timestamp": 37107.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.25104
+    },
+    {
+      "timestamp": 37141.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.390051
+    },
+    {
+      "timestamp": 37204.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.044061
+    },
+    {
+      "timestamp": 37225,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.866352
+    },
+    {
+      "timestamp": 37308.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.31901
+    },
+    {
+      "timestamp": 37357,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.592342
+    },
+    {
+      "timestamp": 37398.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.11828
+    },
+    {
+      "timestamp": 37447.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.81401
+    },
+    {
+      "timestamp": 37495.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.659061
+    },
+    {
+      "timestamp": 37537.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.007708
+    },
+    {
+      "timestamp": 37586.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.517499
+    },
+    {
+      "timestamp": 37634.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.650885
+    },
+    {
+      "timestamp": 37676.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.223541
+    },
+    {
+      "timestamp": 37725.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.136822
+    },
+    {
+      "timestamp": 37773.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.849322
+    },
+    {
+      "timestamp": 37822.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.520051
+    },
+    {
+      "timestamp": 37863.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.512082
+    },
+    {
+      "timestamp": 37912.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.165677
+    },
+    {
+      "timestamp": 37954.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.235155
+    },
+    {
+      "timestamp": 38002.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.147083
+    },
+    {
+      "timestamp": 38051.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.578072
+    },
+    {
+      "timestamp": 38100.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.765259
+    },
+    {
+      "timestamp": 38148.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.272708
+    },
+    {
+      "timestamp": 38190.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.513697
+    },
+    {
+      "timestamp": 38239,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.276249
+    },
+    {
+      "timestamp": 38287.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.689218
+    },
+    {
+      "timestamp": 38329.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.987135
+    },
+    {
+      "timestamp": 38377.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.660156
+    },
+    {
+      "timestamp": 38426.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.206822
+    },
+    {
+      "timestamp": 38468.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.63052
+    },
+    {
+      "timestamp": 38516.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.424322
+    },
+    {
+      "timestamp": 38565.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.339479
+    },
+    {
+      "timestamp": 38607.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.519218
+    },
+    {
+      "timestamp": 38655.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.955416
+    },
+    {
+      "timestamp": 38704.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.955467
+    },
+    {
+      "timestamp": 38745.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.549843
+    },
+    {
+      "timestamp": 38794.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.324374
+    },
+    {
+      "timestamp": 38843.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.236613
+    },
+    {
+      "timestamp": 38891.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.247499
+    },
+    {
+      "timestamp": 38933.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.584739
+    },
+    {
+      "timestamp": 38982.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.45302
+    },
+    {
+      "timestamp": 39030.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.621874
+    },
+    {
+      "timestamp": 39072.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.178436
+    },
+    {
+      "timestamp": 39120.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.056093
+    },
+    {
+      "timestamp": 39169.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.58875
+    },
+    {
+      "timestamp": 39211.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.792291
+    },
+    {
+      "timestamp": 39259.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.779791
+    },
+    {
+      "timestamp": 39308.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.214739
+    },
+    {
+      "timestamp": 39349.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.339322
+    },
+    {
+      "timestamp": 39398.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.484947
+    },
+    {
+      "timestamp": 39447,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.331041
+    },
+    {
+      "timestamp": 39488.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.184165
+    },
+    {
+      "timestamp": 39537.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.862707
+    },
+    {
+      "timestamp": 39586,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.099739
+    },
+    {
+      "timestamp": 39627.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.452603
+    },
+    {
+      "timestamp": 39676.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.948697
+    },
+    {
+      "timestamp": 39718.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.820103
+    },
+    {
+      "timestamp": 39766.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.742134
+    },
+    {
+      "timestamp": 39815.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.347551
+    },
+    {
+      "timestamp": 39863.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.453437
+    },
+    {
+      "timestamp": 39912.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.360625
+    },
+    {
+      "timestamp": 39954.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.183177
+    },
+    {
+      "timestamp": 39981.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.294843
+    },
+    {
+      "timestamp": 40051.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.315312
+    },
+    {
+      "timestamp": 40093,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.017135
+    },
+    {
+      "timestamp": 40141.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.753593
+    },
+    {
+      "timestamp": 40183.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.962395
+    },
+    {
+      "timestamp": 40231.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.910989
+    },
+    {
+      "timestamp": 40287.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.898331
+    },
+    {
+      "timestamp": 40336,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.421041
+    },
+    {
+      "timestamp": 40384.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.86151
+    },
+    {
+      "timestamp": 40433.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.896197
+    },
+    {
+      "timestamp": 40474.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.724999
+    },
+    {
+      "timestamp": 40523.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.322864
+    },
+    {
+      "timestamp": 40572.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.646301
+    },
+    {
+      "timestamp": 40613.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.824999
+    },
+    {
+      "timestamp": 40662.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.621093
+    },
+    {
+      "timestamp": 40711,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.774634
+    },
+    {
+      "timestamp": 40752.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.718072
+    },
+    {
+      "timestamp": 40801.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.48177
+    },
+    {
+      "timestamp": 40849.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.28552
+    },
+    {
+      "timestamp": 40898.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.921978
+    },
+    {
+      "timestamp": 40940.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.974322
+    },
+    {
+      "timestamp": 40988.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.589947
+    },
+    {
+      "timestamp": 41037.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.744583
+    },
+    {
+      "timestamp": 41058.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.093124
+    },
+    {
+      "timestamp": 41127.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.538124
+    },
+    {
+      "timestamp": 41176.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.134687
+    },
+    {
+      "timestamp": 41224.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.859999
+    },
+    {
+      "timestamp": 41280.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.83505
+    },
+    {
+      "timestamp": 41301.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.97203
+    },
+    {
+      "timestamp": 41370.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.259738
+    },
+    {
+      "timestamp": 41419.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.639791
+    },
+    {
+      "timestamp": 41468.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.266666
+    },
+    {
+      "timestamp": 41509.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.683072
+    },
+    {
+      "timestamp": 41558.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.940936
+    },
+    {
+      "timestamp": 41606.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.679061
+    },
+    {
+      "timestamp": 41648.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.60953
+    },
+    {
+      "timestamp": 41697.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.830937
+    },
+    {
+      "timestamp": 41745.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.699322
+    },
+    {
+      "timestamp": 41794.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.640155
+    },
+    {
+      "timestamp": 41836.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.144062
+    },
+    {
+      "timestamp": 41884.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.717291
+    },
+    {
+      "timestamp": 41933.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.23401
+    },
+    {
+      "timestamp": 41982,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.539634
+    },
+    {
+      "timestamp": 42072.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.123958
+    },
+    {
+      "timestamp": 42079,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.505468
+    },
+    {
+      "timestamp": 42120.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.583802
+    },
+    {
+      "timestamp": 42162.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.921196
+    },
+    {
+      "timestamp": 42210.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.489479
+    },
+    {
+      "timestamp": 42259.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.857759
+    },
+    {
+      "timestamp": 42308.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.208853
+    },
+    {
+      "timestamp": 42336.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.246041
+    },
+    {
+      "timestamp": 42391.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.371979
+    },
+    {
+      "timestamp": 42440.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.787499
+    },
+    {
+      "timestamp": 42489,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.195468
+    },
+    {
+      "timestamp": 42530.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.730676
+    },
+    {
+      "timestamp": 42579.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.573906
+    },
+    {
+      "timestamp": 42627.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.307864
+    },
+    {
+      "timestamp": 42676.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.005833
+    },
+    {
+      "timestamp": 42718,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.266717
+    },
+    {
+      "timestamp": 42766.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.286458
+    },
+    {
+      "timestamp": 42815.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.146249
+    },
+    {
+      "timestamp": 42856.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.233645
+    },
+    {
+      "timestamp": 42905.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.7575
+    },
+    {
+      "timestamp": 42954.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.615989
+    },
+    {
+      "timestamp": 42995.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.846978
+    },
+    {
+      "timestamp": 43030.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.875572
+    },
+    {
+      "timestamp": 43093,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.232499
+    },
+    {
+      "timestamp": 43141.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.508281
+    },
+    {
+      "timestamp": 43190,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.191822
+    },
+    {
+      "timestamp": 43231.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.699217
+    },
+    {
+      "timestamp": 43259.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.767499
+    },
+    {
+      "timestamp": 43322,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.092342
+    },
+    {
+      "timestamp": 43370.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.062447
+    },
+    {
+      "timestamp": 43419.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.433957
+    },
+    {
+      "timestamp": 43460.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.682394
+    },
+    {
+      "timestamp": 43509.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.313333
+    },
+    {
+      "timestamp": 43558.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.565156
+    },
+    {
+      "timestamp": 43606.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 43.768072
+    },
+    {
+      "timestamp": 43648.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.648019
+    },
+    {
+      "timestamp": 43697.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.124947
+    },
+    {
+      "timestamp": 43752.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.992447
+    },
+    {
+      "timestamp": 43808.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.363228
+    },
+    {
+      "timestamp": 43849.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.873488
+    },
+    {
+      "timestamp": 43891.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 44.936145
+    },
+    {
+      "timestamp": 43947,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.949218
+    },
+    {
+      "timestamp": 43995.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.611041
+    },
+    {
+      "timestamp": 44044.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.65604
+    },
+    {
+      "timestamp": 44092.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.901926
+    },
+    {
+      "timestamp": 44141.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.666197
+    },
+    {
+      "timestamp": 44190.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.297239
+    },
+    {
+      "timestamp": 44231.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.893333
+    },
+    {
+      "timestamp": 44280.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.311197
+    },
+    {
+      "timestamp": 44329,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.843384
+    },
+    {
+      "timestamp": 44363.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.962603
+    },
+    {
+      "timestamp": 44419.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.776665
+    },
+    {
+      "timestamp": 44468,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.592343
+    },
+    {
+      "timestamp": 44516.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.304843
+    },
+    {
+      "timestamp": 44558.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.252707
+    },
+    {
+      "timestamp": 44606.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.267291
+    },
+    {
+      "timestamp": 44655.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.784895
+    },
+    {
+      "timestamp": 44697.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.619843
+    },
+    {
+      "timestamp": 44710.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.603437
+    },
+    {
+      "timestamp": 44801.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.002551
+    },
+    {
+      "timestamp": 44822.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.778437
+    },
+    {
+      "timestamp": 44898.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.713593
+    },
+    {
+      "timestamp": 44940.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.928697
+    },
+    {
+      "timestamp": 44988.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.014583
+    },
+    {
+      "timestamp": 45037.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.801092
+    },
+    {
+      "timestamp": 45078.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.289531
+    },
+    {
+      "timestamp": 45127.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.748489
+    },
+    {
+      "timestamp": 45176.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.207759
+    },
+    {
+      "timestamp": 45224.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.80578
+    },
+    {
+      "timestamp": 45273.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.157395
+    },
+    {
+      "timestamp": 45315.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.671092
+    },
+    {
+      "timestamp": 45363.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.548697
+    },
+    {
+      "timestamp": 45412.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.990052
+    },
+    {
+      "timestamp": 45454.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.819633
+    },
+    {
+      "timestamp": 45502.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.164999
+    },
+    {
+      "timestamp": 45530.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.939322
+    },
+    {
+      "timestamp": 45593,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.638905
+    },
+    {
+      "timestamp": 45641.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.335884
+    },
+    {
+      "timestamp": 45690.1,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.403176
+    },
+    {
+      "timestamp": 45731.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.989426
+    },
+    {
+      "timestamp": 45780.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.616406
+    },
+    {
+      "timestamp": 45829,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.89052
+    },
+    {
+      "timestamp": 45877.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.391666
+    },
+    {
+      "timestamp": 45919.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.865884
+    },
+    {
+      "timestamp": 45946.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 40.443697
+    },
+    {
+      "timestamp": 46016.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.437863
+    },
+    {
+      "timestamp": 46044.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.193956
+    },
+    {
+      "timestamp": 46072.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.72479
+    },
+    {
+      "timestamp": 46155.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.128853
+    },
+    {
+      "timestamp": 46197,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.710572
+    },
+    {
+      "timestamp": 46245.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.367551
+    },
+    {
+      "timestamp": 46294.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.930729
+    },
+    {
+      "timestamp": 46335.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.232967
+    },
+    {
+      "timestamp": 46384.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.706927
+    },
+    {
+      "timestamp": 46405.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.698853
+    },
+    {
+      "timestamp": 46474.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.455625
+    },
+    {
+      "timestamp": 46509.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.618281
+    },
+    {
+      "timestamp": 46571.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 42.111926
+    },
+    {
+      "timestamp": 46613.8,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.792343
+    },
+    {
+      "timestamp": 46662.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.857655
+    },
+    {
+      "timestamp": 46710.9,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.788437
+    },
+    {
+      "timestamp": 46759.5,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.175572
+    },
+    {
+      "timestamp": 46801.3,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 37.274582
+    },
+    {
+      "timestamp": 46849.7,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 38.735207
+    },
+    {
+      "timestamp": 46898.4,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.68453
+    },
+    {
+      "timestamp": 46940.2,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 41.149687
+    },
+    {
+      "timestamp": 46988.6,
+      "scene": "Замер завершён",
+      "phase": "idle",
+      "ms": 39.585624
+    }
+  ]
+}

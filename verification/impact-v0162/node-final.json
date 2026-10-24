@@ -1,0 +1,67 @@
+{
+  "grid": 512,
+  "objects": 3000,
+  "radius": 12,
+  "samples": [
+    {
+      "crater": 21.587099999999964,
+      "mesh": 10.639599999999973,
+      "range": 8.040300000000002,
+      "heightTexture": 5.086099999999988,
+      "vegetation": 4.463700000000017,
+      "transaction": 60.28100000000006,
+      "history": 10.464200000000119,
+      "collisions": 7.197499999999991,
+      "contactMap": 20.44690000000014,
+      "flow": 1.2632000000000971,
+      "collisionRebuilds": 1,
+      "terrainUpdates": 1,
+      "contactPixels": 12288
+    },
+    {
+      "crater": 5.93769999999995,
+      "mesh": 1.9803999999999178,
+      "range": 1.1911000000000058,
+      "heightTexture": 1.6286999999999807,
+      "vegetation": 3.1585999999999785,
+      "transaction": 21.403400000000147,
+      "history": 7.506900000000314,
+      "collisions": 4.387300000000096,
+      "contactMap": 9.734699999999975,
+      "flow": 0.7836999999999534,
+      "collisionRebuilds": 1,
+      "terrainUpdates": 1,
+      "contactPixels": 12288
+    },
+    {
+      "crater": 7.509399999999914,
+      "mesh": 7.774499999999989,
+      "range": 0.3487999999999829,
+      "heightTexture": 4.846700000000055,
+      "vegetation": 2.643000000000029,
+      "transaction": 29.032899999999927,
+      "history": 5.910499999999956,
+      "collisions": 5.061900000000151,
+      "contactMap": 7.460000000000036,
+      "flow": 0.8423999999999978,
+      "collisionRebuilds": 1,
+      "terrainUpdates": 1,
+      "contactPixels": 12288
+    },
+    {
+      "crater": 7.524499999999989,
+      "mesh": 1.646600000000035,
+      "range": 0.3127999999999247,
+      "heightTexture": 1.610400000000027,
+      "vegetation": 3.7088000000001102,
+      "transaction": 20.442200000000184,
+      "history": 5.639100000000099,
+      "collisions": 3.6560000000001764,
+      "contactMap": 6.410699999999906,
+      "flow": 0.7348999999999251,
+      "collisionRebuilds": 1,
+      "terrainUpdates": 1,
+      "contactPixels": 12288
+    }
+  ]
+}

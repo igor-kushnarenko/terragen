@@ -1,0 +1,22 @@
+Browser tab: 3, Title: "Редактор ландшафта — Open World Terrain Editor", URL: "http://127.0.0.1:4184/world-studio-check.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+~			193 text {
+  "preset": "archipelago",
+  "seed": 1337,
+  "N": 256,
+  "busy": false,
+  "objects": 240,
+  "species": [
+    "palm",
+    "rock",
+    "boulder",
+    "coastal-bush"
+  ],
+  "weather": "partly",
+  "sunEl": 46,
+  "routes": 2,
+  "frames": 1287,
+  "errors": [],
+  "runs": []
+}
+The focused UI element is 0 AXWebArea Редактор ландшафта — Open World Terrain Editor, URL: 127.0.0.1:4184/world-studio-check.html

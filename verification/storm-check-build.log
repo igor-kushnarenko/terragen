@@ -1,0 +1,11 @@
+
+> terrain-editor@0.16.0 verify:storm
+> tsc --noEmit -p tsconfig.verification.json && tsx verification/build-storm-coast.ts && node scripts/build-water-check.mjs storm
+
+Storm coast example: gentle beach, wind 3, empty hands, 284 models
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 105 modules transformed.
+rendering chunks...
+✓ built in 337ms
+Verification: dist/storm-check.html (isolated IndexedDB)
