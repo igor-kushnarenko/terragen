@@ -282,6 +282,12 @@ export function createStorage(model: EditorModel, terrain: TerrainSystem, feedba
             validateWorld({...model.world,assets:replaceId?model.world.assets.map(a=>a.id===replaceId?{...asset,id:replaceId}:a):[...model.world.assets,asset]},model.state,false,false,false);
         });}finally{feedback.setBusy(false);feedback.syncAllUI();}
     }
+    async function prepareModelCollision(id:string,collider:ModelAsset['collider']){
+        if(model.busy||loading)throw new Error('Дождитесь завершения операции');
+        const previous=model.world.assets.find(a=>a.id===id);if(!previous)throw new Error('Выберите импортированную модель');
+        const asset={...previous,collider};feedback.setBusy(true);
+        try{await prepareModelAssets([asset],vault);return asset;}finally{feedback.setBusy(false);}
+    }
     function bindView(capture: () => ProjectView, restore: (view: ProjectView) => void) {
         captureView = capture;
         restoreView = restore;
@@ -329,6 +335,6 @@ export function createStorage(model: EditorModel, terrain: TerrainSystem, feedba
         };
         picker.click();
     }
-    return { buildOBJ, encodePNG16, decodePNG, projectJSON, loadProjectText,loadProjectFile,buildProjectBlob,importModel:importAsset, importHeightmap, exportPNG16, exportOBJ, saveProject, pickFile, bindView, };
+    return { buildOBJ, encodePNG16, decodePNG, projectJSON, loadProjectText,loadProjectFile,buildProjectBlob,importModel:importAsset,prepareModelCollision, importHeightmap, exportPNG16, exportOBJ, saveProject, pickFile, bindView, };
 }
 export type StorageSystem = ReturnType<typeof createStorage>;

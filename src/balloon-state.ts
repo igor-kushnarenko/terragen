@@ -3,7 +3,7 @@ export type Rotation4=[number,number,number,number];
 export interface BalloonPose {position:Vec3;rotation:Rotation4;velocity:Vec3;angular:Vec3;}
 export const BALLOON_KEYS={board:'KeyB',boost:'Space',vent:'KeyV',ballast:'KeyZ',anchor:'KeyX',camera:'KeyC',increase:'ArrowUp',decrease:'ArrowDown'} as const;
 export type BalloonAction=keyof typeof BALLOON_KEYS;
-export const RESERVED_BALLOON_KEYS=new Set(['KeyU','KeyW','KeyA','KeyS','KeyD','KeyE','KeyI','KeyF','KeyP','KeyR','KeyH','Escape','F1','F8','Tab','Digit0','Digit1','Digit2']);
+export const RESERVED_BALLOON_KEYS=new Set(['KeyG','KeyU','KeyW','KeyA','KeyS','KeyD','KeyE','KeyI','KeyF','KeyP','KeyR','KeyH','Escape','F1','F8','Tab','Digit0','Digit1','Digit2']);
 export interface BalloonOptions {mode:'scenic'|'manual';assist:boolean;targetAGL:number;unlimited:boolean;reduceMotion:boolean;external:boolean;bindings:Record<BalloonAction,string>;}
 export interface BalloonState {
     version:1;seed:number;time:number;started:boolean;seated:boolean;moored:boolean;

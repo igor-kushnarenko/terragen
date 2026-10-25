@@ -37,7 +37,7 @@ export function createBalloonScenario(model:EditorModel,terrain:TerrainSystem,re
         notify();
     }
     function safeReturn(preferred:Vec3){return input.starts.nearest(preferred[0],preferred[2])?.point??null;}
-    function placePlayer(point:Vec3){input.walk.feet.fromArray(point);input.walk.start=new THREE.Vector3(...point);input.walk.vy=0;input.walk.grounded=true;input.walk.swim=false;input.walk.autoWalking=false;input.synchronize();}
+    function placePlayer(point:Vec3){input.walk.feet.fromArray(point);input.walk.start=new THREE.Vector3(...point);input.walk.vy=0;input.walk.flying=false;input.walk.grounded=true;input.walk.swim=false;input.walk.autoWalking=false;input.synchronize();}
     function stop(returnPlayer=true){
         if(!s&&!model.balloon)return;
         const old=s??model.balloon!,wasSeated=old.seated;
@@ -65,7 +65,7 @@ export function createBalloonScenario(model:EditorModel,terrain:TerrainSystem,re
     }
     function setPointer(open:boolean){pointerUI=open;if(open){body?.releaseKeys();if(document.pointerLockElement)document.exitPointerLock();}notify();}
     function board(){
-        if(!canBoard()||!s)return false;s.seated=true;s.started=true;input.walk.autoWalking=false;input.clearKeys();body!.invalidateMass();collisions.setPassenger(true);setPointer(true);input.setPaused(false);void audio.unlock();dirty();say('Вы в корзине. Отпустите швартовку для взлёта. U — панель пилота, Space — горелка, V — клапан.');return true;
+        if(!canBoard()||!s)return false;input.setFlight(false);s.seated=true;s.started=true;input.walk.autoWalking=false;input.clearKeys();body!.invalidateMass();collisions.setPassenger(true);setPointer(true);input.setPaused(false);void audio.unlock();dirty();say('Вы в корзине. Отпустите швартовку для взлёта. U — панель пилота, Space — горелка, V — клапан.');return true;
     }
     function approach(){if(!s?.moored||s.seated)return false;const point=safeReturn([s.spawn[0]+3,s.spawn[1],s.spawn[2]]);if(!point)return false;placePlayer(point);input.walk.yaw=Math.atan2(point[0]-s.basket.position[0],point[2]-s.basket.position[2]);input.walk.pitch=-.12;input.setPaused(false);return true;}
     function exit(){

@@ -8,7 +8,7 @@ export interface AssetRepository {
 }
 export const validAssetKey=(key:unknown):key is string=>typeof key==='string'&&/^sha256:[a-f0-9]{64}$/.test(key);
 export async function describeAsset(blob:Blob):Promise<StoredAsset>{
-    if(blob.size>MAX_ASSET_BYTES)throw new Error('GLB должен быть не больше 64 МБ');
+    if(blob.size>MAX_ASSET_BYTES)throw new Error('Неверный размер контейнера GLB 2.0');
     const bytes=await blob.arrayBuffer();readGLB(bytes);
     const digest=await crypto.subtle.digest('SHA-256',bytes);
     const key='sha256:'+Array.from(new Uint8Array(digest),v=>v.toString(16).padStart(2,'0')).join('');

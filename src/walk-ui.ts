@@ -14,6 +14,7 @@ export function createWalkInterface(model: EditorModel, input: ControlsSystem, e
     function button(parent: HTMLElement, text: string, action: () => void) {
         const item = element('button', parent, text); item.className = 'btn'; item.type = 'button'; item.onclick = action; return item;
     }
+    const flight = button(bar,'Полёт · G',input.toggleFlight);
     const automatic = button(bar, 'Автопрогулка · R', input.toggleAutoWalk);
     const soundButton=button(bar,'🔊 Звук',()=>{edits.setPreferences({soundEnabled:!model.state.soundEnabled});void audio.unlock();});
     const inventoryButton=button(bar,'Инвентарь · I',()=>input.setInventory(!input.inventory.open));
@@ -144,9 +145,10 @@ export function createWalkInterface(model: EditorModel, input: ControlsSystem, e
         inventoryToggle.textContent=lightOn?'Выключить свет · F':'Включить свет · F';inventoryToggle.disabled=model.busy||empty;
         for(const select of equipmentButtons){const selected=select.closest<HTMLElement>('[data-item]')!.dataset.item===model.walkSettings.equippedLight;select.setAttribute('aria-pressed',String(selected));select.closest('.inventory-item')!.classList.toggle('selected',selected);select.disabled=model.busy;}
         if(!inventoryBackdrop.hidden && !inventoryWasOpen)inventoryClose.focus({preventScroll:true});inventoryWasOpen=!inventoryBackdrop.hidden;
-        const flying=!!model.balloon?.seated;bar.querySelector('strong')!.textContent=flying?'Полёт на шаре':'🚶 Прогулка';resume.textContent=flying?'Продолжить полёт':'Продолжить прогулку';
-        automatic.setAttribute('aria-pressed', String(walk.autoWalking)); automatic.textContent = walk.autoWalking ? 'Остановить · R' : 'Автопрогулка · R'; automatic.disabled = walk.paused || model.busy||flying;
-        hint.textContent = flying?'U — панель пилота · мышь — обзор · E — редактор · Esc — пауза':walk.autoWalking ? 'Автопрогулка · мышь — обзор · R или WASD — остановить · E — панель · Esc — меню'
+        flight.setAttribute('aria-pressed',String(input.walk.flying));flight.textContent=input.walk.flying?'Гравитация · G':'Полёт · G';flight.disabled=walk.paused||model.busy||!!model.balloon?.seated;
+        const flying=!!model.balloon?.seated;bar.querySelector('strong')!.textContent=flying?'Полёт на шаре':walk.flying?'Полёт':'🚶 Прогулка';resume.textContent=flying?'Продолжить полёт':'Продолжить прогулку';
+        automatic.setAttribute('aria-pressed', String(walk.autoWalking)); automatic.textContent = walk.autoWalking ? 'Остановить · R' : 'Автопрогулка · R'; automatic.disabled = walk.paused || model.busy||flying||walk.flying;
+        hint.textContent = walk.flying?'WASD — полёт · Пробел — вверх · Shift — вниз · Ctrl — ускорение · G — гравитация · E — панель':flying?'U — панель пилота · мышь — обзор · E — редактор · Esc — пауза':walk.autoWalking ? 'Автопрогулка · мышь — обзор · R или WASD — остановить · E — панель · Esc — меню'
             : 'WASD — идти · Shift — бег · Пробел — прыжок · I — инвентарь · F — свет · E — панель · Esc — меню';
         const reason = picking.assessment?.reason ?? 'Кликните по местности: зелёный маркер — безопасный старт';
         if (pickText.textContent !== reason) pickText.textContent = reason;

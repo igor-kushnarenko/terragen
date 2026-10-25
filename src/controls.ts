@@ -92,8 +92,15 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
         if (open && document.pointerLockElement) document.exitPointerLock();
         notify(); if (!open) render.renderer.domElement.focus({ preventScroll: true });
     }
+    function setFlight(on:boolean){
+        if(!walk.on||walk.paused||model.busy||vehicle?.seated)return;
+        simulation.setFlying(on);notify();
+        feedback.setStatus(on?'Полёт: WASD — движение · Пробел — вверх · Shift — вниз · Ctrl — ускорение · G — гравитация':'Полёт выключен: гравитация включена');
+        render.renderer.domElement.focus({preventScroll:true});
+    }
+    function toggleFlight(){setFlight(!walk.flying);}
     function toggleAutoWalk() {
-        if (!walk.on || walk.paused || model.busy||vehicle?.seated) return;
+        if (!walk.on || walk.paused || walk.flying || model.busy||vehicle?.seated) return;
         walk.autoWalking = !walk.autoWalking;
         if (walk.autoWalking && !starts.assess(walk.feet.x, walk.feet.z).safe) {
             walk.autoWalking = false; feedback.setStatus('Автопрогулка доступна на свободной сухой площадке');
@@ -110,7 +117,7 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
         terrainTool?.cancel();
         brushes.endStroke(); history.flush(); cancelPick();
         simulation.clearKeys(); walk.paused = false; walkPanel.open = false; inventory.open = false;
-        walk.on = on;
+        walk.on = on;walk.flying=false;
         if (on) {
             walk.saved = { pos: render.camera.position.clone(), target: render.controls.target.clone(), near: render.camera.near };
             walk.start = new THREE.Vector3(...start!.point);
@@ -336,6 +343,9 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
         if(photoMode.on){if(/^(Key[WASDQE]|Shift)/.test(e.code))keys[e.code]=true;return;}
         if (tag === 'BUTTON' && (e.code === 'Space' || e.key === 'Enter')) return;
         if(terrainTool?.active&&!walk.on&&terrainTool.keyDown(e))return;
+        if(walk.on&&walk.flying&&!walk.paused&&!model.busy&&!e.metaKey&&/^(Space|Shift|Control|Key[WASD]|Arrow)/.test(e.code)){
+            e.preventDefault();keys[e.code]=true;return;
+        }
         if ((walk.on && !walkPanel.open || picking.on) && (e.ctrlKey || e.metaKey)) return;
         if (e.ctrlKey || e.metaKey) {
             if (e.code === 'KeyZ' && !e.shiftKey) {
@@ -368,6 +378,7 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
             return;
         }
         if (walk.on && e.code === 'KeyE' && !e.repeat) { e.preventDefault(); toggleWalkPanel(); return; }
+        if(walk.on&&e.code==='KeyG'&&!e.repeat){e.preventDefault();toggleFlight();return;}
         if(walk.on&&!walk.paused&&!model.busy&&vehicle?.keyDown(e)){e.preventDefault();return;}
         if (walk.on && !e.repeat && walkToolKey?.(e)) { e.preventDefault(); return; }
         if (walk.on && e.code === 'KeyR' && !e.repeat) { e.preventDefault(); toggleAutoWalk(); return; }
@@ -443,7 +454,7 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
     }
     function resetCamera() { render.camera.position.set(-330, 260, 600); render.controls.target.set(0, 30, 0); render.controls.update(); }
     function setPhotoMode(on:boolean){photoMode.on=on;simulation.clearKeys();if(on){terrainTool?.cancel();brushes.endStroke();cancelPick();walk.paused=true;if(document.pointerLockElement)document.exitPointerLock();render.controls.enabled=true;materials.terrainUniforms.uBrushOn.value=0;brushes.interaction.hoverHit=null;}else render.controls.enabled=!walk.on;}
-    return { photoMode,setPhotoMode, walk, walkPanel, inventory, picking, starts, findLand, setWalk, chooseStart, cancelPick, previewStart, setPaused, setWalkPanel, setInventory, toggleWalkPanel, toggleAutoWalk,
+    return { photoMode,setPhotoMode, walk, walkPanel, inventory, picking, starts, findLand, setWalk, chooseStart, cancelPick, previewStart, setPaused, setWalkPanel, setInventory, toggleWalkPanel, toggleAutoWalk,setFlight,toggleFlight,
         get terrainToolActive(){return !!terrainTool?.active;},
         bindWalkToolKeys(callback: (event: KeyboardEvent) => boolean) { walkToolKey = callback; },
         bindVehicle(next:WalkVehicle){vehicle=next;},

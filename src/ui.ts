@@ -297,10 +297,19 @@ export function createInterface(model: EditorModel, feedback: Feedback, actions:
     });
     const imports = el('div',{class:'asset-import'},library);
     el('h3',{text:'Своя модель'},imports);
-    el('p',{class:'hint',text:'GLB / glTF · скелеты и анимации · до 64 МБ'},imports);
+    el('p',{class:'hint',text:'GLB / glTF · скелеты и анимации · без лимитов размера и сложности'},imports);
     el('label',{for:'importModelCategory',text:'Категория'},imports);
     const category = el('select', { id:'importModelCategory','aria-label': 'Категория импортируемой модели' }, imports);
     for (const [id, label] of [['tree','Дерево'],['shrub','Куст'],['rock','Камень'],['wood','Природный объект'],['bridge','Мост / настил'],['structure','Постройка / пещера'],['animated','Персонаж / анимированный объект']]) el('option', { value: id, text: label }, category);
+    category.value='structure';
+    const collision=el('select',{'aria-label':'Коллизии импортируемой модели'},imports);
+    for(const [value,text]of [['mesh','Точная геометрия: палубы, стены, проходы'],['convex','Выпуклая оболочка'],['trunk','Ствол'],['none','Без коллизий']])el('option',{value,text},collision);
+    collision.value='mesh';
+    button(imports,'Применить коллизии к выбранной модели',async()=>{
+        const asset=await storage.prepareModelCollision(assetSelect.value,collision.value as ModelAsset['collider']);
+        edits.replaceWorld({assets:model.world.assets.map(a=>a.id===asset.id?asset:a)},'Коллизии модели');
+        feedback.setStatus('Коллизии модели обновлены');
+    });
     let importingModel = false;
     function chooseImport(replaceId?:string) {
         if (importingModel || model.busy) return;
@@ -312,7 +321,7 @@ export function createInterface(model: EditorModel, feedback: Feedback, actions:
                 importingModel = true; importButton.disabled = true;
                 feedback.setStatus('Загрузка модели…');
                 const kind = (replaceId?model.world.assets.find(a=>a.id===replaceId)!.category:category.value) as ModelAsset['category'];
-                const imported = await storage.importModel([...picker.files], kind, kind === 'tree' ? 'trunk' : kind === 'shrub' ? 'none' : kind === 'bridge' || kind === 'structure' ? 'mesh' : 'convex',replaceId);
+                const imported = await storage.importModel([...picker.files], kind, collision.value as ModelAsset['collider'],replaceId);
                 const asset=replaceId?{...imported,id:replaceId}:imported;
                 if (model.busy) throw new Error('Дождитесь завершения операции и повторите импорт');
                 edits.replaceWorld({ assets: replaceId?model.world.assets.map(a=>a.id===replaceId?asset:a):[...model.world.assets, asset] }, replaceId?'Заменить модель':'Импорт модели'); assetSelect.value = asset.id;
@@ -326,7 +335,7 @@ export function createInterface(model: EditorModel, feedback: Feedback, actions:
     function syncReplacement(){replaceButton.disabled=importingModel||model.busy||!model.world.assets.some(a=>a.id===assetSelect.value);}
     assetSelect.addEventListener('change',syncReplacement);feedback.uiSync.modelReplacement=syncReplacement;syncReplacement();
     el('p',{class:'hint',text:'Замена обновляет все экземпляры выбранной модели, сохраняя их положение и масштаб. Действие можно отменить.'},imports);
-    el('div', { class: 'hint', text: 'Скелеты и клипы определяются автоматически. После размещения выберите объект: клип, пауза, скорость и повтор доступны в его параметрах. До 128 анимированных экземпляров, по умолчанию без коллизий. Для glTF выберите также BIN и текстуры. До 64 МБ на модель, 512 МБ на мир и 20 импортированных моделей. Полный проект .terrain включает модели и анимации для работы офлайн.' }, library);
+    el('div', { class: 'hint', text: 'Скелеты и клипы определяются автоматически. После размещения выберите объект: клип, пауза, скорость и повтор доступны в его параметрах. Коллизии по умолчанию точные; для анимации используется исходная поза. Для glTF выберите также BIN и текстуры. Лимиты размера, числа моделей, частей, вершин, костей и клипов сняты. Фактический объём зависит от памяти и хранилища браузера. Полный проект .terrain включает модели и анимации для работы офлайн.' }, library);
     const biomeSection=section('Локальные биомы',false),biomeKind=el('select',{'aria-label':'Вид биома'},biomeSection);biomeSection.id='biomeSettings';
     for(const [id,name]of [['forest','Лес'],['meadow','Луг / поляна'],['coast','Побережье'],['mountains','Горы'],['valley','Долина'],['taiga','Тайга / Boreal Forest'],['jungle','Джунгли / Tropical Jungle']])el('option',{value:id,text:name},biomeKind);
     const biomeRadius=el('input',{type:'number',min:10,max:512,value:100,'aria-label':'Радиус биома, м'},biomeSection);

@@ -8,7 +8,6 @@ import {getModel,modelEntries} from '../src/model-library';
 import {captureDocument,decodeProject} from '../src/project';
 import {readGLB,base64Binary} from '../src/asset-format';
 import {BUILTIN_GLB} from '../src/builtin-models';
-import {MAX_ANIMATED_OBJECTS} from '../src/world';
 
 // GLTFExporter uses the browser FileReader API; the importer/exporter otherwise run unchanged.
 Object.defineProperty(globalThis,'FileReader',{configurable:true,value:class {result:unknown;onloadend?:()=>void;async readAsArrayBuffer(blob:Blob){this.result=await blob.arrayBuffer();this.onloadend?.();}async readAsDataURL(blob:Blob){this.result=`data:${blob.type};base64,${Buffer.from(await blob.arrayBuffer()).toString('base64')}`;this.onloadend?.();}}});
@@ -21,7 +20,7 @@ function skin(root:T.Object3D){let result:T.SkinnedMesh|undefined;root.traverse(
 const close=(a:number,b:number)=>assert.ok(Math.abs(a-b)<1e-5,`${a} != ${b}`);
 
 test('actual GLB import preserves source bytes, bones and clips while normalization remains an outer transform',async()=>{
-    const f=await fixture(),t=getModel(f.asset.id);assert.equal(f.asset.category,'animated');assert.equal(f.asset.collider,'none');assert.equal(t.rig?.bones,2);assert.equal(t.rig?.clips.length,2);close(t.bounds.min.y,0);close(t.bounds.max.y,1.8);
+    const f=await fixture(),t=getModel(f.asset.id);assert.equal(f.asset.category,'animated');assert.equal(f.asset.collider,'trunk');assert.equal(t.rig?.bones,2);assert.equal(t.rig?.clips.length,2);close(t.bounds.min.y,0);close(t.bounds.max.y,1.8);
     const bytes=await(await f.vault.resolve(f.asset)).arrayBuffer(),json=readGLB(bytes);assert.deepEqual(new Uint8Array(bytes),new Uint8Array(f.bytes));assert.equal(f.asset.normalize,true);assert.equal((json.skins as unknown[]).length,1);assert.equal((json.animations as unknown[]).length,2);
     const loaded=await new GLTFLoader().parseAsync(bytes,'');assert.equal(loaded.animations[0].name,'Покачивание');const mesh=skin(loaded.scene);assert.equal(mesh.skeleton.bones.length,2);
     const mixer=new T.AnimationMixer(loaded.scene);mixer.clipAction(loaded.animations[0]).play();mixer.update(.5);close(mesh.skeleton.bones[1].quaternion.z,Math.sin(.65/2));
@@ -65,12 +64,12 @@ test('animation settings and complete rigs survive portable project reload and u
     const receiver=editorFixture();await receiver.storage.loadProjectFile(await f.storage.buildProjectBlob());assert.deepEqual(receiver.model.world,f.model.world);close(receiver.vegetation.animationState(f.id)!.time,.4);
     receiver.history.undo();assert.equal(receiver.vegetation.statistics.animated.instances,0);receiver.history.redo();assert.equal(receiver.vegetation.statistics.animated.instances,1);
     const before=captureDocument(receiver.model),raw=JSON.parse(receiver.storage.projectJSON());raw.world.objects[0].animation.clip=12;await assert.rejects(receiver.storage.loadProjectText(JSON.stringify(raw)),/клип/);assert.deepEqual(captureDocument(receiver.model),before);
-    for(const patch of [{speed:NaN},{speed:0},{time:-1},{playing:'true'},{loop:'invalid'},{clip:128}]){const bad=JSON.parse(receiver.storage.projectJSON());Object.assign(bad.world.objects[0].animation,patch);assert.throws(()=>decodeProject(JSON.stringify(bad)));}
+    for(const patch of [{speed:NaN},{speed:0},{time:-1},{playing:'true'},{loop:'invalid'},{clip:-2}]){const bad=JSON.parse(receiver.storage.projectJSON());Object.assign(bad.world.objects[0].animation,patch);assert.throws(()=>decodeProject(JSON.stringify(bad)));}
 });
 
-test('animation object budget is checked before changing the scene; static imports continue using instancing',async()=>{
-    const f=await fixture(),before=captureDocument(f.model),object=f.model.world.objects[0];
-    assert.throws(()=>f.edits.replaceWorld({objects:Array.from({length:MAX_ANIMATED_OBJECTS+1},(_,i)=>({...structuredClone(object),id:'actor-'+i}))}),/128/);assert.deepEqual(captureDocument(f.model),before);
+test('animated instances are no longer capped at 128; static imports continue using instancing',async()=>{
+    const f=await fixture(),object=f.model.world.objects[0];
+    assert.doesNotThrow(()=>f.edits.replaceWorld({objects:Array.from({length:129},(_,i)=>({...structuredClone(object),id:'actor-'+i}))}));
     const asset=await f.storage.importModel([new File([base64Binary(BUILTIN_GLB.boulder)],'static.glb')],'rock','convex');f.edits.replaceWorld({assets:[...f.model.world.assets,asset]});const id=f.edits.addObject(asset.id,8,8)!;
     assert.equal(getModel(asset.id).rig,undefined);assert.equal(f.vegetation.animationState(id),null);assert.ok(f.render.scene.children.some(o=>o instanceof T.InstancedMesh));assert.equal(modelEntries(f.model.world).filter(t=>t.rig).length,1);
 });

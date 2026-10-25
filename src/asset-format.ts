@@ -1,5 +1,5 @@
-export const MAX_ASSET_BYTES = 64 * 1024 * 1024;
-export const MAX_ASSET_TOTAL = 512 * 1024 * 1024;
+// GLB 2.0 stores its container length in an unsigned 32-bit header. No application size budget.
+export const MAX_ASSET_BYTES = 0xffffffff;
 export function binaryBase64(buffer: ArrayBuffer) {
     const bytes = new Uint8Array(buffer); let text = '';
     for (let i = 0; i < bytes.length; i += 0x8000) text += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
@@ -10,7 +10,7 @@ export function base64Binary(text: string) {
     return Uint8Array.from(atob(text), c => c.charCodeAt(0)).buffer;
 }
 export function readGLB(buffer: ArrayBuffer, external = false): Record<string, unknown> {
-    if (buffer.byteLength < 20 || buffer.byteLength > MAX_ASSET_BYTES) throw new Error('GLB должен быть не больше 64 МБ');
+    if (buffer.byteLength < 20 || buffer.byteLength > MAX_ASSET_BYTES) throw new Error('Неверный размер контейнера GLB 2.0');
     const view = new DataView(buffer);
     if (view.getUint32(0, true) !== 0x46546c67 || view.getUint32(4, true) !== 2 || view.getUint32(8, true) !== buffer.byteLength) throw new Error('Неверный контейнер GLB 2.0');
     let offset = 12, json: Record<string, unknown> | undefined;
@@ -26,8 +26,7 @@ export function readGLB(buffer: ArrayBuffer, external = false): Record<string, u
 }
 export function validateGLTF(json: Record<string, unknown>, external = false) {
     if ((json.asset as { version?: string })?.version !== '2.0') throw new Error('Требуется glTF 2.0');
-    if (Array.isArray(json.animations) && json.animations.length > 128) throw new Error('Лимит модели: 128 анимационных клипов');
-    for(const skin of (json.skins??[]) as {joints?:unknown[]}[])if(!Array.isArray(skin.joints)||!skin.joints.length||skin.joints.length>512)throw new Error('Лимит скелета: от 1 до 512 костей');
+    for(const skin of (json.skins??[]) as {joints?:unknown[]}[])if(!Array.isArray(skin.joints)||!skin.joints.length)throw new Error('В скелете отсутствуют кости');
     const required = json.extensionsRequired as string[] | undefined;
     if (required?.some(x => ['KHR_draco_mesh_compression', 'EXT_meshopt_compression', 'KHR_texture_basisu'].includes(x))) throw new Error('Сжатые Draco / Meshopt / KTX2 модели пока не поддерживаются; экспортируйте обычный GLB');
     for (const collection of ['buffers', 'images']) for (const item of (json[collection] ?? []) as { uri?: string }[]) {

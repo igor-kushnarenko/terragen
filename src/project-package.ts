@@ -1,4 +1,3 @@
-import {MAX_ASSET_TOTAL} from './asset-format';
 import {describeAsset,type AssetVault} from './asset-vault';
 import {decodeProject,type DecodedProject} from './project';
 
@@ -19,20 +18,20 @@ export async function buildProjectPackage(text:string,vault:AssetVault):Promise<
 }
 export async function readProjectPackage(file:Blob):Promise<{project:DecodedProject;provided:Map<string,Blob>}>{
     const fail=():never=>{throw new Error('Неверный или повреждённый проект .terrain');};
-    if(file.size<HEADER||file.size>HEADER+MAX_JSON+MAX_ASSET_TOTAL+20*RECORD)fail();
+    if(file.size<HEADER)fail();
     const header=new Uint8Array(await file.slice(0,HEADER).arrayBuffer()),view=new DataView(header.buffer);
     if(!MAGIC.every((v,i)=>header[i]===v)||view.getUint32(8,true)!==1)fail();
     const jsonLength=view.getUint32(12,true),count=view.getUint32(16,true);
-    if(jsonLength>MAX_JSON||count>20||HEADER+jsonLength>file.size)fail();
+    if(jsonLength>MAX_JSON||HEADER+jsonLength+count*RECORD>file.size)fail();
     const project=decodeProject(await file.slice(HEADER,HEADER+jsonLength).text());
     if(![10,11].includes(project.sourceVersion)||project.embeddedAssets.length)fail();
     const expected=new Map(project.world.assets.map(a=>[a.blob,a.byteLength])),provided=new Map<string,Blob>();
-    if(expected.size!==count)fail();let offset=HEADER+jsonLength,total=0;
+    if(expected.size!==count)fail();let offset=HEADER+jsonLength;
     for(let i=0;i<count;i++){
         if(offset+RECORD>file.size)fail();
         const record=await file.slice(offset,offset+RECORD).arrayBuffer(),bytes=new DataView(record),key='sha256:'+new TextDecoder().decode(record.slice(0,64)),length=bytes.getUint32(64,true);
-        offset+=RECORD;total+=length;
-        if(expected.get(key)!==length||provided.has(key)||offset+length>file.size||total>MAX_ASSET_TOTAL)fail();
+        offset+=RECORD;
+        if(expected.get(key)!==length||provided.has(key)||offset+length>file.size)fail();
         const blob=file.slice(offset,offset+length,'model/gltf-binary');
         if((await describeAsset(blob)).key!==key)fail();
         provided.set(key,blob);offset+=length;

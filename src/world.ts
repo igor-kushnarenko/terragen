@@ -1,7 +1,6 @@
 import type {JungleSettings} from './jungle-settings';
 import type {TaigaSettings} from './taiga-settings';
 export const MAX_WORLD_OBJECTS = 20000;
-export const MAX_ANIMATED_OBJECTS = 128;
 export interface ObjectAnimation {
     clip:number;
     playing:boolean;

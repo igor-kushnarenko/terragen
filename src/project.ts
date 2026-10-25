@@ -1,4 +1,4 @@
-import { readGLB, base64Binary, MAX_ASSET_TOTAL, MAX_ASSET_BYTES } from './asset-format';
+import { readGLB, base64Binary, MAX_ASSET_BYTES } from './asset-format';
 import {validAssetKey} from './asset-vault';
 import {validateBalloon,type BalloonState} from './balloon-state';
 import { BUILTIN_INFO } from './model-shapes';
@@ -7,10 +7,10 @@ import {validateJungle} from './jungle-settings';
 import {validateTaiga} from './taiga-settings';
 import type { WalkPose } from './physics';
 import { createModel, RESOLUTIONS, SIZE, SPLAT_RES, type EditorModel, type EditorState } from './state';
-import { DEFAULT_WALK_SETTINGS, MAX_WORLD_OBJECTS, MAX_ANIMATED_OBJECTS, WORLD_PRESET_IDS, deriveSeeds, type ObjectAnimation, type OperationRecord, type OperationSeeds, type Vec2, type Vec3, type WalkSettings, type WorldData } from './world';
+import { DEFAULT_WALK_SETTINGS, MAX_WORLD_OBJECTS, WORLD_PRESET_IDS, deriveSeeds, type ObjectAnimation, type OperationRecord, type OperationSeeds, type Vec2, type Vec3, type WalkSettings, type WorldData } from './world';
 export const PROJECT_VERSION = 11;
 function validateObjectAnimation(value:unknown,path:string):ObjectAnimation {
-    const a=object(value,path);return {clip:number(a.clip,path+'.clip',-1,127,true),playing:bool(a.playing,path+'.playing'),speed:number(a.speed,path+'.speed',.1,4),loop:choice(a.loop,['repeat','once'],path+'.loop'),time:number(a.time,path+'.time',0,86400),...(a.restart===undefined?{}:{restart:number(a.restart,path+'.restart',0,0xffffffff,true)})};
+    const a=object(value,path);return {clip:number(a.clip,path+'.clip',-1,Number.MAX_SAFE_INTEGER,true),playing:bool(a.playing,path+'.playing'),speed:number(a.speed,path+'.speed',.1,4),loop:choice(a.loop,['repeat','once'],path+'.loop'),time:number(a.time,path+'.time',0,86400),...(a.restart===undefined?{}:{restart:number(a.restart,path+'.restart',0,0xffffffff,true)})};
 }
 export interface ProjectView {
     camera: {
@@ -173,16 +173,15 @@ export function validateWorld(value: unknown, state: EditorState, legacy = false
         ids.add(result);
         return result;
     }
-    const assetIds = new Set<string>(Object.keys(BUILTIN_INFO)),blobSizes=new Map<string,number>(); let total = 0;
-    const assets = list(input.assets ?? [], 'world.assets', 20).map((item, i) => {
+    const assetIds = new Set<string>(Object.keys(BUILTIN_INFO)),blobSizes=new Map<string,number>();
+    const assets = list(input.assets ?? [], 'world.assets', Number.MAX_SAFE_INTEGER).map((item, i) => {
         const p = `world.assets[${i}]`, asset = object(item, p), assetId = text(asset.id, p + '.id', 64);
         if (!/^custom-[a-zA-Z0-9_.-]+$/.test(assetId) || assetIds.has(assetId)) fail(p + '.id');
         assetIds.add(assetId);
         const blob=text(asset.blob,p+'.blob',71);if(!validAssetKey(blob)||asset.glb!==undefined)fail(p+'.blob');
         const byteLength=number(asset.byteLength,p+'.byteLength',20,MAX_ASSET_BYTES,true),known=blobSizes.get(blob);
         if(known!==undefined&&known!==byteLength)fail(p+'.byteLength');
-        if(known===undefined){blobSizes.set(blob,byteLength);total+=byteLength;}
-        if (total > MAX_ASSET_TOTAL) fail('world.assets: не больше 512 МБ');
+        if(known===undefined){blobSizes.set(blob,byteLength);}
         return { id: assetId, name: text(asset.name, p + '.name'), blob,byteLength,
             ...(asset.normalize===undefined?{}:{normalize:bool(asset.normalize,p+'.normalize')}),
             category: choice(asset.category, ['tree', 'shrub', 'rock', 'wood', 'bridge', 'structure', 'animated'], p + '.category'),
@@ -200,8 +199,6 @@ export function validateWorld(value: unknown, state: EditorState, legacy = false
             ...(o.animation===undefined?{}:{animation:validateObjectAnimation(o.animation,p+'.animation')}) };
     });
     if(objects.filter(o=>o.floating).length>64)fail('world.objects: не больше 64 плавающих предметов');
-    const animatedAssets=new Set(assets.filter(a=>a.category==='animated').map(a=>a.id));
-    if(objects.filter(o=>animatedAssets.has(o.asset)).length>MAX_ANIMATED_OBJECTS)fail('world.objects: не больше '+MAX_ANIMATED_OBJECTS+' анимированных объектов');
     for(const o of objects)if(o.floating&&(o.followTerrain||o.source==='scatter'))fail('world.objects: плавающий предмет не должен быть привязан к рельефу или расстановке');
     const grouped=new Set<string>(),objectIds=new Set(objects.map(o=>o.id));
     const groups=list(preV7&&input.groups===undefined?[]:input.groups,'world.groups',1000).map((item,i)=>{
@@ -323,7 +320,7 @@ function validateView(value: unknown): ProjectView {
         const saved = w.saved === null ? null : object(w.saved, 'view.walk.saved');
         result.walk = { on: bool(w.on, 'view.walk.on'), feet, yaw: number(w.yaw, 'view.walk.yaw', -1e6, 1e6), pitch: number(w.pitch, 'view.walk.pitch', -1.55, 1.55),
             start: w.start === undefined || w.start === null ? null : vec3(w.start, 'view.walk.start'), autoWalking: w.autoWalking === undefined ? false : bool(w.autoWalking, 'view.walk.autoWalking'),
-            vy: number(w.vy, 'view.walk.vy', -1000, 1000), grounded: bool(w.grounded, 'view.walk.grounded'), swim: bool(w.swim, 'view.walk.swim'), bob: number(w.bob, 'view.walk.bob', 0, 1e9),
+            vy: number(w.vy, 'view.walk.vy', -1000, 1000), grounded: bool(w.grounded, 'view.walk.grounded'), swim: bool(w.swim, 'view.walk.swim'),flying:w.flying===undefined?false:bool(w.flying,'view.walk.flying'), bob: number(w.bob, 'view.walk.bob', 0, 1e9),
             saved: saved ? { pos: vec3(saved.pos, 'view.walk.saved.pos', -1e6, 1e6), target: vec3(saved.target, 'view.walk.saved.target', -1e6, 1e6), near: number(saved.near, 'view.walk.saved.near', 0.01, 10) } : null };
         if (result.walk.on && !result.walk.saved)
             fail('view.walk.saved');
@@ -369,7 +366,7 @@ export function decodeProject(source: string): DecodedProject {
     const embeddedAssets:{id:string;blob:Blob}[]=[];
     if((data.version as number)<10){
         const world=object(data.world,'world');
-        world.assets=list(world.assets??[],'world.assets',20).map((item,i)=>{
+        world.assets=list(world.assets??[],'world.assets',Number.MAX_SAFE_INTEGER).map((item,i)=>{
             const asset=object(item,`world.assets[${i}]`);
             if(asset.glb===undefined)return asset; // Reference-only test/migration documents are also accepted.
             const bytes=base64Binary(text(asset.glb,`world.assets[${i}].glb`,Math.ceil(MAX_ASSET_BYTES/3)*4));readGLB(bytes);

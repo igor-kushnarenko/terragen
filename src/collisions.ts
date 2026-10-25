@@ -22,6 +22,7 @@ export function modelTriangles(asset: string, scale: number[]) {
         const index = part.geometry.index;
         for (let i = 0; i < (index?.count ?? position.count); i++) indices.push(base + (index ? index.getX(i) : i));
     }
+    if(scale[0]*scale[1]*scale[2]<0)for(let i=0;i<indices.length;i+=3)[indices[i+1],indices[i+2]]=[indices[i+2],indices[i+1]];
     return { vertices: Float32Array.from(vertices), indices: Uint32Array.from(indices) };
 }
 export function createCollisions(model: EditorModel, terrain: TerrainSystem) {
@@ -30,7 +31,7 @@ export function createCollisions(model: EditorModel, terrain: TerrainSystem) {
     let center = 0, supportRadius = .2;
     const surfaces=new Map<number,StepSurface>();
     const floating=new Map<string,FloatingBody>();let stepped=false;
-    let ground:RAPIER.Collider,geometry=terrain.geo;
+    let ground:RAPIER.Collider,geometry=terrain.geo,assets=model.world.assets;
     const records=new Map<string,{item:WorldObject;key:string;collider:RAPIER.Collider;y:number;body?:RAPIER.RigidBody}>();
     const statistics={rebuilds:0,terrainUpdates:0,objectCreates:0,lastUpdateMs:0};
     let participant:CollisionParticipant|undefined,passenger=false;
@@ -81,10 +82,10 @@ export function createCollisions(model: EditorModel, terrain: TerrainSystem) {
         controller.setSlideEnabled(true);
         controller.enableAutostep(WALK_STEP_HEIGHT, 0.2, false); controller.enableSnapToGround(WALK_GROUND_SNAP);
         revision = model.terrainRevision; objects = model.world.objects; visibility = model.state.showScatter; height = model.walkSettings.eyeHeight; water = model.state.water;bodies=model.world.waterBodies;
-        geometry=terrain.geo;participant?.attach(world);syncQueries();statistics.lastUpdateMs=performance.now()-started;
+        geometry=terrain.geo;assets=model.world.assets;participant?.attach(world);syncQueries();statistics.lastUpdateMs=performance.now()-started;
     }
     function ensure() {
-        if(!world||geometry!==terrain.geo||visibility!==model.state.showScatter||height!==model.walkSettings.eyeHeight||water!==model.state.water||bodies!==model.world.waterBodies){rebuild();return;}
+        if(!world||geometry!==terrain.geo||assets!==model.world.assets||visibility!==model.state.showScatter||height!==model.walkSettings.eyeHeight||water!==model.state.water||bodies!==model.world.waterBodies){rebuild();return;}
         if(revision===model.terrainRevision&&objects===model.world.objects)return;
         const started=performance.now(),terrainChanged=revision!==model.terrainRevision;
         if(terrainChanged){ground.setShape(field());statistics.terrainUpdates++;}
@@ -115,10 +116,11 @@ export function createCollisions(model: EditorModel, terrain: TerrainSystem) {
         return hit;
     }
     const motion: WalkMotion = {
-        resolve(feet, movement, dt) {
+        resolve(feet, movement, dt, flying=false) {
             ensure(); world!.timestep = dt;
             const feetY = Math.max(feet.y, terrain.getSurfaceH(feet.x, feet.z));
             capsule.setTranslation({ x: feet.x, y: feetY + center, z: feet.z }); if(!stepped)world!.step();stepped=false;
+            if(flying){controller.disableSnapToGround();controller.disableAutostep();}else{controller.enableSnapToGround(WALK_GROUND_SNAP);controller.enableAutostep(WALK_STEP_HEIGHT,.2,false);}
             controller.computeColliderMovement(capsule, movement, undefined, undefined, collider => collider.handle !== capsule.handle);
             const actual = controller.computedMovement();
             return { position: new Vector3(feet.x + actual.x, feetY + actual.y, feet.z + actual.z), grounded: controller.computedGrounded() };

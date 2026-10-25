@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {IDBFactory} from 'fake-indexeddb';
-import {base64Binary,MAX_ASSET_BYTES,MAX_ASSET_TOTAL,readGLB} from '../src/asset-format';
+import {base64Binary,MAX_ASSET_BYTES,readGLB} from '../src/asset-format';
 import {BUILTIN_GLB} from '../src/builtin-models';
 import {createAssetVault,createMemoryAssetRepository,describeAsset} from '../src/asset-vault';
 import {prepareModelAssets,modelEntries} from '../src/model-library';
@@ -74,13 +74,11 @@ test('missing references and damaged binary packages leave scene, view and histo
     await assert.rejects(empty.storage.loadProjectFile(new Blob([bytes.subarray(0,-100)])));assert.deepEqual(captureDocument(empty.model),before);
 });
 
-test('bad metadata, mismatched sizes and model/world budgets are checked without payloads',()=>{
-    assert.equal(MAX_ASSET_BYTES,64*1024*1024);assert.equal(MAX_ASSET_TOTAL,512*1024*1024);
-    assert.doesNotThrow(()=>readGLB(paddedGLB(MAX_ASSET_BYTES)));
-    assert.throws(()=>readGLB(new ArrayBuffer(MAX_ASSET_BYTES+4)),/64 МБ/);
-    const f=editorFixture(),asset=(i:number):ModelAsset=>({id:'custom-'+i,name:'Модель',category:'rock',collider:'none',blob:'sha256:'+i.toString(16).padStart(64,'0'),byteLength:MAX_ASSET_BYTES});
-    assert.doesNotThrow(()=>validateWorld({...f.model.world,assets:Array.from({length:8},(_,i)=>asset(i))},f.model.state));
-    assert.throws(()=>validateWorld({...f.model.world,assets:Array.from({length:9},(_,i)=>asset(i))},f.model.state),/512 МБ/);
+test('large assets and more than twenty model references are accepted while corrupt metadata is rejected',()=>{
+    const large=65*1024*1024;assert.doesNotThrow(()=>readGLB(paddedGLB(large)));
+    assert.throws(()=>readGLB(new ArrayBuffer(32)),/контейнер/);
+    const f=editorFixture(),asset=(i:number):ModelAsset=>({id:'custom-'+i,name:'Модель',category:'rock',collider:'none',blob:'sha256:'+i.toString(16).padStart(64,'0'),byteLength:large});
+    assert.doesNotThrow(()=>validateWorld({...f.model.world,assets:Array.from({length:25},(_,i)=>asset(i))},f.model.state));
     assert.throws(()=>validateWorld({...f.model.world,assets:[{...asset(0),byteLength:MAX_ASSET_BYTES+1}]},f.model.state),/byteLength/);
     assert.throws(()=>validateWorld({...f.model.world,assets:[{...asset(0),blob:'https://example.com/tree.glb'}]},f.model.state),/blob/);
     assert.throws(()=>validateWorld({...f.model.world,assets:[asset(0),{...asset(1),blob:asset(0).blob,byteLength:20}]},f.model.state),/byteLength/);
@@ -145,4 +143,15 @@ test('a corrupted stored Blob is rejected even if its key and byte length match'
     await repo.putAssets([{key:f.asset.blob,blob:new Blob([data])}]);
     const target=editorFixture(undefined,createAssetVault(async()=>repo)),before=captureDocument(target.model);
     await assert.rejects(target.storage.loadProjectText(f.storage.projectJSON()),/Повреждены/);assert.deepEqual(captureDocument(target.model),before);
+});
+
+test('portable projects round-trip more than twenty distinct GLB payloads',async()=>{
+    const f=editorFixture();
+    for(let i=0;i<25;i++){
+        const bytes=new Uint8Array(paddedGLB(binary().byteLength+128));bytes[bytes.length-1]=i+1;
+        const asset=await f.storage.importModel([new File([bytes],'model-'+i+'.glb')],'rock','mesh');
+        f.edits.replaceWorld({assets:[...f.model.world.assets,asset]});
+    }
+    const blob=await f.storage.buildProjectBlob(),header=new DataView(await blob.slice(0,20).arrayBuffer());assert.equal(header.getUint32(16,true),25);
+    const receiver=editorFixture();await receiver.storage.loadProjectFile(blob);assert.equal(receiver.model.world.assets.length,25);
 });

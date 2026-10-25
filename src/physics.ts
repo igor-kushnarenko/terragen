@@ -9,7 +9,7 @@ export const PHYSICS_STEP = 1 / 120;
 export const WALK_STEP_HEIGHT = .5;
 export const WALK_GROUND_SNAP = .4;
 export interface WalkMotion {
-    resolve(feet: Vector3, movement: Vector3, dt: number): { position: Vector3; grounded: boolean };
+    resolve(feet: Vector3, movement: Vector3, dt: number, flying?:boolean): { position: Vector3; grounded: boolean };
     ground(x: number, z: number, y: number): number;
 }
 /** Catch up ordinary low-FPS frames; discard only pauses longer than one second. */
@@ -35,6 +35,7 @@ export interface WalkPose {
     vy: number;
     grounded: boolean;
     swim: boolean;
+    flying?: boolean;
     bob: number;
     start?: Vec3 | null;
     autoWalking?: boolean;
@@ -47,7 +48,7 @@ export interface WalkPose {
 export function createWalkSimulation(model: EditorModel, getH: (x: number, z: number) => number, canAutoMove: (x: number, z: number) => boolean = () => true, motion?: WalkMotion,waterQuery?:WaterQuery) {
     const surface=waterQuery??((x:number,z:number)=>waterAt(model.state.water,model.world.waterBodies,x,z));
     const walk = {
-        on: false, yaw: 0, pitch: 0, vy: 0, grounded: true, swim: false, bob: 0,
+        on: false, yaw: 0, pitch: 0, vy: 0, grounded: true, swim: false, flying:false,bob: 0,
         jumpReq: false, feet: new Vector3(), previousFeet: new Vector3(), previousBob: 0,
         saved: null as {
             pos: Vector3;
@@ -63,6 +64,7 @@ export function createWalkSimulation(model: EditorModel, getH: (x: number, z: nu
     function synchronize() { walk.previousFeet.copy(walk.feet); walk.previousBob = walk.bob; }
     function clearKeys() { for (const key in keys)
         keys[key] = false; walk.jumpReq = false; walk.dragging = false; walk.autoWalking = false; automaticStall = 0; }
+    function setFlying(on:boolean){walk.flying=on;walk.vy=0;walk.grounded=false;walk.swim=false;clearKeys();synchronize();}
     function step(dt: number) {
         const settings = model.walkSettings;
         synchronize();
@@ -79,6 +81,17 @@ export function createWalkSimulation(model: EditorModel, getH: (x: number, z: nu
             move.add(right);
         if (keys.KeyA || keys.ArrowLeft)
             move.sub(right);
+        if(walk.flying){
+            walk.vy=0;walk.grounded=false;walk.swim=false;walk.jumpReq=false;
+            move.y=(keys.Space?1:0)-(keys.ShiftLeft||keys.ShiftRight?1:0);
+            if(move.lengthSq()>0)move.normalize().multiplyScalar(settings.speed*2.5*(keys.ControlLeft||keys.ControlRight?settings.sprint:1)*dt);
+            move.x=clamp(walk.feet.x+move.x,-HALF+1,HALF-1)-walk.feet.x;
+            move.z=clamp(walk.feet.z+move.z,-HALF+1,HALF-1)-walk.feet.z;
+            move.y=clamp(walk.feet.y+move.y,-59999,59999)-walk.feet.y;
+            if(motion)walk.feet.copy(motion.resolve(walk.feet,move,dt,true).position);
+            else {walk.feet.add(move);walk.feet.y=Math.max(getH(walk.feet.x,walk.feet.z),walk.feet.y);}
+            return;
+        }
         const ground = motion ? motion.ground(walk.feet.x, walk.feet.z, walk.feet.y) : getH(walk.feet.x, walk.feet.z);
         const water=surface(walk.feet.x,walk.feet.z);
         const swimFloor = water.level - settings.eyeHeight + 0.25;
@@ -104,7 +117,7 @@ export function createWalkSimulation(model: EditorModel, getH: (x: number, z: nu
             walk.grounded = false;
         }
         walk.jumpReq = false;
-        walk.vy -= settings.gravity * dt * (walk.swim ? 0.2 : 1);
+        walk.vy = Math.max(-80,walk.vy-settings.gravity * dt * (walk.swim ? 0.2 : 1));
         if (motion) {
             if (!moved) move.set(0, 0, 0);
             move.y = walk.vy * dt;
@@ -143,7 +156,7 @@ export function createWalkSimulation(model: EditorModel, getH: (x: number, z: nu
     }
     function capture(): WalkPose {
         return { on: walk.on, feet: walk.feet.toArray() as Vec3, yaw: walk.yaw, pitch: walk.pitch, vy: walk.vy,
-            grounded: walk.grounded, swim: walk.swim, bob: walk.bob, start: walk.start ? walk.start.toArray() as Vec3 : null, autoWalking: walk.autoWalking,
+            grounded: walk.grounded, swim: walk.swim, flying:walk.flying,bob: walk.bob, start: walk.start ? walk.start.toArray() as Vec3 : null, autoWalking: walk.autoWalking,
             saved: walk.saved ? { pos: walk.saved.pos.toArray() as Vec3, target: walk.saved.target.toArray() as Vec3, near: walk.saved.near } : null };
     }
     function restore(pose: WalkPose) {
@@ -153,7 +166,7 @@ export function createWalkSimulation(model: EditorModel, getH: (x: number, z: nu
         walk.pitch = pose.pitch;
         walk.vy = pose.vy;
         walk.grounded = pose.grounded;
-        walk.swim = pose.swim;
+        walk.swim = pose.swim;walk.flying=pose.flying??false;
         walk.bob = pose.bob;
         walk.start = pose.start ? new Vector3().fromArray(pose.start) : null;
         walk.paused = false;
@@ -161,5 +174,5 @@ export function createWalkSimulation(model: EditorModel, getH: (x: number, z: nu
         clearKeys();
         synchronize();
     }
-    return { walk, keys, step, eyePosition, synchronize, clearKeys, capture, restore };
+    return { walk, keys, step, eyePosition, synchronize, clearKeys, capture, restore,setFlying };
 }
