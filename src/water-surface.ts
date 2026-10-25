@@ -19,11 +19,13 @@ const smooth=(a:number,b:number,x:number)=>{const t=Math.max(0,Math.min(1,(x-a)/
 export const WATER_SPECTRUM_SUM=WATER_WAVES.reduce((sum,w)=>sum+w.amplitude,0);
 export function waveSettings(kind:WaterBody['kind'],wave:number,windSpeed:number,depth:number){
     const wind=Math.max(0,Math.min(3,windSpeed)),factor=kind==='ocean'?1:kind==='lake'?.38:.12;
-    const base=40*(1-Math.exp(-Math.max(0,wave)*factor*(.18+.5*wind+1.6*wind*wind)/40)),peak=base*WATER_SPECTRUM_SUM;
-    const runup=Math.min(kind==='ocean'?2.8:kind==='lake'?1.4:.45,peak*(kind==='river'?.15:.3));
-    const shoal=1+.4*(1-smooth(1,12,depth)),limit=Math.max(0,depth)*.5+runup;
+    // The storm boost is ocean-only and fades in above a fresh breeze. Zero waves stay zero.
+    const storm=kind==='ocean'?smooth(1.2,3,wind):0,capacity=40+16*storm;
+    const base=capacity*(1-Math.exp(-Math.max(0,wave)*factor*(.18+.5*wind+1.6*wind*wind)*(1+1.4*storm)/capacity)),peak=base*WATER_SPECTRUM_SUM;
+    const runup=Math.min(kind==='ocean'?2.8+3.2*storm:kind==='lake'?1.4:.45,peak*(kind==='river'?.15:.3+.16*storm));
+    const shoal=1+(.4+.3*storm)*(1-smooth(1,12,depth)),limit=Math.max(0,depth)*.5+runup;
     const localPeak=Math.min(peak*shoal,limit)*(1-smooth(0,Math.max(.03,runup*1.5),-depth));
-    return {amplitude:localPeak/WATER_SPECTRUM_SUM,length:kind==='ocean'?1+wind*wind*.9:kind==='lake'?.6*(1+wind*wind*.45):.32*(1+wind*wind*.12),chop:.18*smooth(0,Math.max(3,peak*2),depth),peak,runup};
+    return {amplitude:localPeak/WATER_SPECTRUM_SUM,length:kind==='ocean'?1+wind*wind*(.9+.25*storm):kind==='lake'?.6*(1+wind*wind*.45):.32*(1+wind*wind*.12),chop:(.18+.12*storm)*smooth(0,Math.max(3,peak*2),depth),peak,runup};
 }
 export function gerstnerOffset(x:number,z:number,time:number,angle:number,amplitude:number,length:number,flowX=0,flowZ=0,chop=.18){
     let ox=0,oy=0,oz=0,gx=0,gz=0;
@@ -70,9 +72,10 @@ uniform float uTime,uWave,uWindSpeed,uWindAngle,uWaterKind,uBodyIndex;
 uniform vec4 uImpacts[${MAX_WATER_IMPACTS}],uImpactMeta[${MAX_WATER_IMPACTS}];uniform int uImpactCount;
 float rippleHeight(vec2 p){float h=0.0;for(int i=0;i<${MAX_WATER_IMPACTS};i++){if(i>=uImpactCount)break;vec4 hit=uImpacts[i];float age=uTime-hit.z;if(age<0.0||age>4.5||abs(uImpactMeta[i].x-uBodyIndex)>.5)continue;float d=length(p-hit.xy),front=d-age*2.6,spread=.32+age*.18+uImpactMeta[i].y;h+=hit.w*sin(front*7.0)*exp(-front*front/(spread*spread))*exp(-age*1.05)/sqrt(1.0+d);}return h;}
 vec2 rippleGradient(vec2 p){vec2 g=vec2(0.0);for(int i=0;i<${MAX_WATER_IMPACTS};i++){if(i>=uImpactCount)break;vec4 hit=uImpacts[i];float age=uTime-hit.z;if(age<0.0||age>4.5||abs(uImpactMeta[i].x-uBodyIndex)>.5)continue;vec2 delta=p-hit.xy;float d=length(delta),front=d-age*2.6,spread=.32+age*.18+uImpactMeta[i].y;if(abs(front)>spread*3.0)continue;float envelope=hit.w*exp(-front*front/(spread*spread))*exp(-age*1.05)/sqrt(1.0+d);float gradient=envelope*(7.0*cos(front*7.0)-sin(front*7.0)*(2.0*front/(spread*spread)+.5/(1.0+d)));g+=delta/max(.001,d)*gradient;}return g;}
-float waterBasePeak(){float wind=clamp(uWindSpeed,0.0,3.0),factor=uWaterKind<.5?1.0:uWaterKind<1.5?.38:.12;return 40.0*(1.0-exp(-max(0.0,uWave)*factor*(.18+.5*wind+1.6*wind*wind)/40.0))*${f(WATER_SPECTRUM_SUM)};}
-float waterRunup(){return min(uWaterKind<.5?2.8:uWaterKind<1.5?1.4:.45,waterBasePeak()*(uWaterKind>1.5?.15:.3));}
-vec3 waveParameters(float depth){float wind=clamp(uWindSpeed,0.0,3.0),peak=waterBasePeak(),runup=waterRunup();float shoal=1.0+.4*(1.0-smoothstep(1.0,12.0,depth)),limit=max(0.0,depth)*.5+runup;float localPeak=min(peak*shoal,limit)*(1.0-smoothstep(0.0,max(.03,runup*1.5),-depth));float lengthScale=uWaterKind<.5?1.0+wind*wind*.9:uWaterKind<1.5?.6*(1.0+wind*wind*.45):.32*(1.0+wind*wind*.12);return vec3(localPeak/${f(WATER_SPECTRUM_SUM)},lengthScale,.18*smoothstep(0.0,max(3.0,peak*2.0),depth));}
+float waterStorm(){return uWaterKind<.5?smoothstep(1.2,3.0,clamp(uWindSpeed,0.0,3.0)):0.0;}
+float waterBasePeak(){float wind=clamp(uWindSpeed,0.0,3.0),factor=uWaterKind<.5?1.0:uWaterKind<1.5?.38:.12;float storm=waterStorm(),capacity=40.0+16.0*storm;return capacity*(1.0-exp(-max(0.0,uWave)*factor*(.18+.5*wind+1.6*wind*wind)*(1.0+1.4*storm)/capacity))*${f(WATER_SPECTRUM_SUM)};}
+float waterRunup(){return min(uWaterKind<.5?2.8+3.2*waterStorm():uWaterKind<1.5?1.4:.45,waterBasePeak()*(uWaterKind>1.5?.15:.3+.16*waterStorm()));}
+vec3 waveParameters(float depth){float wind=clamp(uWindSpeed,0.0,3.0),peak=waterBasePeak(),runup=waterRunup();float storm=waterStorm();float shoal=1.0+(.4+.3*storm)*(1.0-smoothstep(1.0,12.0,depth)),limit=max(0.0,depth)*.5+runup;float localPeak=min(peak*shoal,limit)*(1.0-smoothstep(0.0,max(.03,runup*1.5),-depth));float lengthScale=uWaterKind<.5?1.0+wind*wind*(.9+.25*storm):uWaterKind<1.5?.6*(1.0+wind*wind*.45):.32*(1.0+wind*wind*.12);return vec3(localPeak/${f(WATER_SPECTRUM_SUM)},lengthScale,(.18+.12*storm)*smoothstep(0.0,max(3.0,peak*2.0),depth));}
 vec2 waterGradient(vec2 p,float depth,vec2 flow){vec3 settings=waveParameters(depth);float amplitude=settings.x,lengthScale=settings.y;vec2 g=vec2(0.0);
 ${WATER_WAVES.map(w=>`{float a=uWindAngle+${f(w.angle)};vec2 d=vec2(sin(a),cos(a));float k=6.28318530718/(${f(w.length)}*lengthScale),phase=k*dot(d,p-flow*uTime)-sqrt(9.81*k)*uTime+${f(w.phase)};g+=d*k*${f(w.amplitude)}*amplitude*cos(phase);}`).join('\n')}
 return g+rippleGradient(p);}

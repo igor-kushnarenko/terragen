@@ -74,11 +74,11 @@ transmitted+=vec3(.045,.07,.055)*caustic*(1.0-smoothstep(.1,5.0,depth))*sun*min(
 float spec=pow(max(dot(R,uSunDir),0.0),280.0)*6.0;
 vec3 col=mix(transmitted,sky,fres*uReflectionsEnabled)+uSunColor*spec*uReflectionsEnabled;
 float foamNoise=vnoise(p*.9-flow*uTime*.25),wash=.5+.5*sin(uTime*1.6+p.x*.13+p.y*.11);
-float shore=(1.0-smoothstep(.05,.75+wash*.5,depth))*smoothstep(.35,.8,foamNoise+wash*.2)*smoothstep(0.0,.06,depth)*min(1.0,uWave*(.22+min(3.0,uWindSpeed)*.62));
+float shore=(1.0-smoothstep(.05,.75+wash*.5+waterStorm()*waterRunup()*.65,depth))*smoothstep(.35,.8,foamNoise+wash*.2)*smoothstep(0.0,.06,depth)*min(1.0,uWave*(.22+min(3.0,uWindSpeed)*.62));
 float rapids=smoothstep(.65,.95,foamNoise)*pow(max(0.0,sin((vTravel-uTime*length(flow))*2.2)),8.0)*min(1.0,length(flow))*.3;
 float localPeak=waveParameters(vMeanLevel-th).x*${.18+.085+.038+.016},crest=smoothstep(.12,.7,(vWPos.y-vMeanLevel)/max(.05,localPeak));
 float breaker=crest*(1.0-smoothstep(1.0,3.0+waterBasePeak()*1.5,max(0.0,vMeanLevel-th)))*(.45+.55*foamNoise);
-float whitecap=smoothstep(1.3,3.0,uWindSpeed)*crest*smoothstep(.55,.9,foamNoise)*.5;
+float whitecap=smoothstep(1.3,3.0,uWindSpeed)*crest*smoothstep(.55,.9,foamNoise)*(.5+.4*waterStorm());
 float foam=max(max(shore,rapids),max(breaker,whitecap))*uFoamStrength*(below?0.0:1.0);
 float fallingNoise=vnoise(vec2(vTravel*.7,vWPos.y*.55+uTime*3.0));
 float splash=(1.0-smoothstep(uCascade.z*.25,max(.01,uCascade.z),distance(p,uCascade.xy)))*min(1.0,uCascade.w/3.0);

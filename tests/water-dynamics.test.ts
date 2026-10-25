@@ -30,14 +30,14 @@ test('Gerstner waves preserve a calm endpoint, attenuate at the shore and distin
 test('physical surface inverts displaced horizontal vertices, including extreme wave settings',()=>{
     const f=editorFixture(),water=createWaterSurface(f.model,()=>-50);Object.assign(f.model.state,{wave:10,windSpeed:3,windDir:67});water.advance(1.25);
     const s=waveSettings('ocean',10,3,66);
-    for(const [x,z]of [[0,0],[7,4],[-14,22],[300,-450]]){const w=gerstnerOffset(x,z,water.time,67*Math.PI/180,s.amplitude,s.length),surface=water.sample(x+w.x,z+w.z);assert.ok(Math.abs(surface.level-(16+w.y))<.035);assert.ok(Number.isFinite(surface.normal.y)&&surface.normal.y>0);}
+    for(const [x,z]of [[0,0],[7,4],[-14,22],[300,-450]]){const w=gerstnerOffset(x,z,water.time,67*Math.PI/180,s.amplitude,s.length,0,0,s.chop),surface=water.sample(x+w.x,z+w.z);assert.ok(Math.abs(surface.level-(16+w.y))<.035);assert.ok(Number.isFinite(surface.normal.y)&&surface.normal.y>0);}
 });
 test('strong wind creates metre-high long swells while breaking limits the shallow-water height',()=>{
     const calm=waveSettings('ocean',1,.5,60),storm=waveSettings('ocean',1,3,60),shore=waveSettings('ocean',1,3,1);assert.ok(storm.peak>3);assert.ok(storm.amplitude>calm.amplitude*10);assert.ok(storm.length>calm.length*5);assert.ok(shore.amplitude*.319<=.5+shore.runup+1e-8);assert.ok(waveSettings('ocean',0,3,0).amplitude===0);
 });
 test('storm crests run over a dry beach and recede instead of disappearing at the mean shoreline',()=>{
     const f=editorFixture();Object.assign(f.model.state,{wave:1,windSpeed:3,windDir:90});const water=createWaterSurface(f.model,x=>16+x*.12),ground=16.36,levels:number[]=[];
-    for(let i=0;i<1200;i++){water.advance(1/60);levels.push(water.sample(3,0).level);assert.equal(water.sample(40,0).level,16);}
+    for(let i=0;i<1200;i++){water.advance(1/60);levels.push(water.sample(3,0).level);assert.ok(water.sample(40,0).level<20.8);assert.equal(water.sample(80,0).level,16);}
     assert.ok(Math.max(...levels)>ground+.15);assert.ok(Math.min(...levels)<ground-.2);
 });
 test('local water has a padded bank mesh for swash but cannot flood lower land outside its authored outline',()=>{
@@ -119,4 +119,17 @@ test('waterfall clipping is disabled by default for the sea, lakes and ordinary 
     f.model.world.waterBodies=[...f.model.world.waterBodies];rendering.update(0);
     for(const mesh of rendering.group.children)assert.equal((mesh as any).material.uniforms.uCascade.value.w,0);
     rendering.dispose();
+});
+
+test('ocean storms build larger swells and several metres of swash without changing a breeze',()=>{
+    const breeze=waveSettings('ocean',1,.5,60),storm=waveSettings('ocean',1,3,60);
+    assert.ok(Math.abs(breeze.peak-.2620419131)<1e-8);
+    assert.ok(storm.peak>8&&storm.peak<10);assert.ok(storm.runup>4&&storm.runup<6);
+    assert.ok(storm.length>10);assert.ok(storm.chop>breeze.chop);
+    assert.ok(waveSettings('lake',1,3,60).runup<=1.4);assert.ok(waveSettings('river',1,3,60).runup<=.45);
+    let peak=0;for(let i=0;i<=100;i++){const s=waveSettings('ocean',1,i*.03,60);assert.ok(s.peak>=peak);peak=s.peak;}
+    const f=editorFixture();Object.assign(f.model.state,{wave:1,windSpeed:3,windDir:90});const water=createWaterSurface(f.model,x=>16+x*.12);
+    let wet=0,dry=0;
+    for(let i=0;i<2400;i++){water.advance(1/60);const h=water.sample(12,0).level;if(h>17.44)wet++;else dry++;}
+    assert.ok(wet>30&&dry>30,'storm must wash up and drain back from higher beach ground');
 });

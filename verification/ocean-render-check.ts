@@ -2,15 +2,15 @@ import * as T from 'three';
 import {createModel} from '../src/state';
 import {createMaterials} from '../src/materials';
 import {createTerrain} from '../src/terrain';
-import {createWaterSurface} from '../src/water-surface';
+import {createWaterSurface,waveSettings,WATER_WAVE_GLSL} from '../src/water-surface';
 import {createWaterRendering} from '../src/water-rendering';
 import type {RenderingSystem} from '../src/rendering';
 import type {WaterBody} from '../src/world';
 
 /** Real WebGL regression: compare visible water to bare seabed and compare two wave times. */
-export function checkOceanRendering(){
+export function checkOceanRendering(windSpeed=1.5){
     const model=createModel();model.N=model.state.N=32;model.heights=new Float32Array(33**2);
-    Object.assign(model.state,{water:16,wave:1,windSpeed:1.5,lowFog:0,waterReflections:false});
+    Object.assign(model.state,{water:16,wave:1,windSpeed,lowFog:0,waterReflections:false});
     const renderer=new T.WebGLRenderer({preserveDrawingBuffer:true,antialias:false});renderer.setSize(256,192);renderer.setPixelRatio(1);
     renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=.65;
     document.body.append(renderer.domElement);
@@ -35,4 +35,22 @@ export function checkOceanRendering(){
     water.dispose();renderer.dispose();renderer.forceContextLoss();renderer.domElement.remove();
     for(const result of results)if(result.waterPixels<1000||result.movingPixels<25)throw new Error('Ocean surface or waves missing: '+JSON.stringify(result));
     return results;
+}
+
+
+/** Read the production GLSL profile back from a float render target and compare it to physics. */
+export function checkWaveShaderParity(){
+    const renderer=new T.WebGLRenderer(),target=new T.WebGLRenderTarget(1,1,{type:T.FloatType,depthBuffer:false});renderer.setSize(1,1);
+    const uniforms={uWave:{value:1},uWindSpeed:{value:0},uWaterKind:{value:0},uDepth:{value:0}};
+    const material=new T.ShaderMaterial({uniforms,vertexShader:'void main(){gl_Position=vec4(position.xy,0.0,1.0);}',fragmentShader:WATER_WAVE_GLSL+'\nuniform float uDepth;void main(){vec3 p=waveParameters(uDepth);gl_FragColor=vec4(p.xy,waterRunup(),waterBasePeak());}'});
+    const scene=new T.Scene(),quad=new T.Mesh(new T.PlaneGeometry(2,2),material);scene.add(quad);const camera=new T.Camera(),pixel=new Float32Array(4);let cases=0,maxError=0;
+    try{
+        for(const [kindIndex,kind]of (['ocean','lake','river'] as const).entries())for(const wind of [.5,2,3])for(const wave of [0,1,3])for(const depth of [-3,0,5,60]){
+            uniforms.uWave.value=wave;uniforms.uWindSpeed.value=wind;uniforms.uWaterKind.value=kindIndex;uniforms.uDepth.value=depth;
+            renderer.setRenderTarget(target);renderer.render(scene,camera);renderer.readRenderTargetPixels(target,0,0,1,1,pixel);
+            const cpu=waveSettings(kind,wave,wind,depth),expected=[cpu.amplitude,cpu.length,cpu.runup,cpu.peak];
+            for(let k=0;k<4;k++){const error=Math.abs(expected[k]-pixel[k]);maxError=Math.max(maxError,error);if(!Number.isFinite(pixel[k])||error>.001)throw new Error('CPU/GPU wave mismatch: '+JSON.stringify({kind,wind,wave,depth,expected,actual:[...pixel]}));}cases++;
+        }
+        return {cases,maxError};
+    }finally{quad.geometry.dispose();material.dispose();target.dispose();renderer.dispose();renderer.forceContextLoss();}
 }
