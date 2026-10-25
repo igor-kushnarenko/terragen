@@ -48,7 +48,7 @@ test('two model IDs and copied worlds share one binary while selection preserves
     const repo=await openWorldRepository(new IDBFactory());t.after(()=>repo.close());const f=await assetFixture(repo);
     const second={...f.asset,id:'custom-second',name:'Ещё камень'};f.edits.replaceWorld({assets:[f.asset,second]});
     const entries=modelEntries(f.model.world);assert.equal(entries.find(a=>a.id===second.id)?.name,second.name);
-    const autosave=autosaveFor(f,repo);t.after(()=>autosave.dispose());await autosave.initialize();await autosave.saveNow(true);await autosave.saveCopy('Копия');
+    const autosave=autosaveFor(f,repo);t.after(()=>autosave.dispose());await autosave.initialize();await autosave.saveNow(true);await autosave.saveCopy('Копия');await autosave.saveNow(true);
     const worlds=await repo.list();assert.equal(worlds.length,2);
     for(const world of worlds)assert.deepEqual((await repo.get(world.id))!.assetKeys,[f.asset.blob]);
     const pack=await readProjectPackage(await f.storage.buildProjectBlob());assert.equal(pack.provided.size,1);

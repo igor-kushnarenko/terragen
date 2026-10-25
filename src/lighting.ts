@@ -12,8 +12,8 @@ export function createLighting(model: EditorModel, render: RenderingSystem, mate
     function applySun() {
         const el = THREE.MathUtils.degToRad(elevation), az = THREE.MathUtils.degToRad(azimuth);
         render.sunDir.set(Math.cos(el) * Math.sin(az), Math.sin(el), Math.cos(el) * Math.cos(az)).normalize();
-        render.sky.material.uniforms.sunPosition.value.copy(render.sunDir);
-        render.envSky.material.uniforms.sunPosition.value.copy(render.sunDir);
+        render.sky.material.uniforms.sunPosition.value.copy(render.sunDir).multiplyScalar(450000);
+        render.envSky.material.uniforms.sunPosition.value.copy(render.sunDir).multiplyScalar(450000);
         render.sun.position.copy(render.sunDir).multiplyScalar(1800);
         render.sun.target.position.set(0, 0, 0);
         const day = smoothstep(-4, 12, elevation), warm = smoothstep(2, 35, elevation);
@@ -55,7 +55,7 @@ export function createLighting(model: EditorModel, render: RenderingSystem, mate
         render.scene.environment = rt.texture;
     }
     function updateFog() { const d = 0.00003 + model.state.fog * 0.0012; render.fog.density = d; materials.waterUniforms.uFogDensity.value = d; render.atmosBase.fogDensity = d; }
-    function updateShadows() { render.sun.castShadow = model.state.shadows && qualityProfile(model).shadowSize>0; }
+    function updateShadows() { render.sun.castShadow = model.state.shadows && qualityProfile(model).shadowSize>0 && render.sun.intensity>.08; }
     const focus=new THREE.Vector3(),right=new THREE.Vector3(),up=new THREE.Vector3();let lastRatio=0;
     function updateView(terrain:TerrainSystem,walking:boolean) {
         const profile=qualityProfile(model),ratio=Math.min(window.devicePixelRatio||1,profile.pixelRatio);
@@ -72,7 +72,7 @@ export function createLighting(model: EditorModel, render: RenderingSystem, mate
         const u=focus.dot(right),v=focus.dot(up);focus.addScaledVector(right,Math.round(u/texel)*texel-u).addScaledVector(up,Math.round(v/texel)*texel-v);
         render.sun.target.position.copy(focus);render.sun.position.copy(focus).addScaledVector(render.sunDir,1800);
         const camera=render.sun.shadow.camera;camera.left=camera.bottom=-radius;camera.right=camera.top=radius;camera.near=50;camera.far=4000;camera.updateProjectionMatrix();
-        render.sun.shadow.bias=-0.00004;render.sun.shadow.normalBias=Math.max(0.025,texel*0.3);render.sun.shadow.radius=2;
+        render.sun.shadow.bias=-0.00004;render.sun.shadow.normalBias=Math.max(0.025,texel*0.3);render.sun.shadow.radius=2+5*(1-Math.min(1,render.sun.intensity/Math.max(.001,render.atmosBase.sunInt)));
     }
     return { updateSun, updateEnv, updateFog, updateShadows, updateView, update, setTime, get sunElevation(){return elevation;} };
 }

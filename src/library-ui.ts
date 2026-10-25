@@ -22,7 +22,7 @@ export function createLibraryInterface(autosave: AutosaveSystem, model: EditorMo
         parent.append(button); libraryButtons.push(button); return button;
     }
     button(buttons, 'Сохранить сейчас', () => autosave.saveNow(true));
-    button(buttons, 'Сохранить копию', () => autosave.saveCopy((name.value || autosave.status.name) + ' — копия'));
+    button(buttons, 'Создать копию', () => autosave.saveCopy((name.value || autosave.status.name) + ' — копия'));
     button(buttons, 'Новый мир', onNewWorld);
     button(buttons, 'Обновить список', refresh);
     name.addEventListener('input', () => autosave.rename(name.value));
@@ -38,7 +38,7 @@ export function createLibraryInterface(autosave: AutosaveSystem, model: EditorMo
         if (ticket !== refreshing) return;
         // Keep only the four permanent controls in this collection.
         libraryButtons.splice(4); list.replaceChildren();
-        if (!worlds.length) { const hint = document.createElement('div'); hint.className = 'hint'; hint.textContent = 'Сохранённые миры появятся здесь.'; list.append(hint); }
+        if (!worlds.length) { const hint = document.createElement('div'); hint.className = 'hint'; hint.textContent = 'Нажмите «Сохранить сейчас», чтобы добавить текущий мир в этот список.'; list.append(hint); }
         for (const world of worlds) {
             const card = document.createElement('article'); card.className = 'world-card';
             const image = document.createElement('img'); image.alt = 'Карта мира «' + world.name + '»'; image.width = 240; image.height = 160;

@@ -40,10 +40,10 @@ export function createAutosave(options: Options) {
         status.saving = true; report('Сохранение…');
         writing = (async () => {
             try {
-                await repository!.put(world);
+                await repository!.put(world,force);
                 dirty = revision !== capturedRevision;
                 lastView = capturedView;
-                report(dirty ? 'Есть несохранённые изменения' : 'Сохранено ' + new Date(world.updatedAt).toLocaleTimeString('ru-RU'));
+                report(dirty ? 'Есть несохранённые изменения' : (force?'Сохранено в «Мои миры» ':'Сессия сохранена ') + new Date(world.updatedAt).toLocaleTimeString('ru-RU'));
                 if (dirty) schedule();
                 return true;
             } catch (error) { dirty = true; report('Автосохранение: ' + errorMessage(error)); throw error; }
@@ -73,7 +73,7 @@ export function createAutosave(options: Options) {
             if (dirty && !writing) void saveNow().catch(() => {});
         }, 15000);
         // Lazy, recoverable migration: the old embedded record stays intact if the write fails.
-        if(migrate&&restored){dirty=true;revision++;await saveNow(true).catch(()=>{});}
+        if(migrate&&restored){dirty=true;revision++;await saveNow().catch(()=>{});}
         return restored;
     }
     const unsubscribe = history.onChange(markDirty);
@@ -84,11 +84,12 @@ export function createAutosave(options: Options) {
         transition = true;
         try {
             if (!paused) {
-                if (!await saveNow(true)) throw new Error('Текущий мир ещё не сохранён');
+                dirty=true; revision++;
+                if (!await saveNow()) throw new Error('Текущий мир ещё не сохранён');
                 while (dirty) if (!await saveNow()) throw new Error('Текущий мир ещё не сохранён');
             }
             // A library write can fail after generation. Keep the previous scene and identity recoverable.
-            const previous = { project: storage.projectJSON(), id: status.id, name: status.name, paused };
+            const previous = { project: storage.projectJSON(), id: status.id, name: status.name, paused, updatedAt:Date.now(), preview:options.preview(),assetKeys:assetKeys() };
             const restoreHistory = history.checkpoint();
             switching = true; clearTimeout(timer);
             try {
@@ -99,7 +100,7 @@ export function createAutosave(options: Options) {
                 await storage.loadProjectText(previous.project);
                 restoreHistory();
                 status.id = previous.id; status.name = previous.name; paused = previous.paused;
-                try { if (await repository.get(previous.id)) await repository.select(previous.id); } catch { /* Original error is more useful. */ }
+                try { if(!previous.paused)await repository.put(previous,false); } catch { /* Original error is more useful. */ }
                 throw error;
             }
             finally { switching = false; notify(); }
@@ -115,21 +116,21 @@ export function createAutosave(options: Options) {
                 const world = await repository!.get(id);
                 if (!world) throw new Error('Мир не найден');
                 await repository!.select(id); const migrated=await storage.loadProjectText(world.project);
-                if(migrated)await repository!.put({...world,project:storage.projectJSON(),assetKeys:assetKeys()});
+                if(migrated)await repository!.put({...world,project:storage.projectJSON(),assetKeys:assetKeys()},false);
                 status.id = id; status.name = world.name; report('Мир открыт');
             });
         },
         async saveCopy(name: string) {
             await switchWorld(async () => {
                 const world = { id: uid(), name: name.trim().slice(0, 128) || 'Копия мира', updatedAt: Date.now(), project: storage.projectJSON(), preview: options.preview(),assetKeys:assetKeys() };
-                await repository!.put(world); status.id = world.id; status.name = world.name; report('Копия сохранена');
+                await repository!.put(world,false); status.id = world.id; status.name = world.name; report('Копия готова. Нажмите «Сохранить сейчас», чтобы добавить её в список');
             });
         },
         async newWorld() {
             await switchWorld(async () => {
                 if (!await options.newWorld()) return false;
                 const world = { id: uid(), name: 'Мир ' + model.state.seed, updatedAt: Date.now(), project: storage.projectJSON(), preview: options.preview(),assetKeys:assetKeys() };
-                await repository!.put(world); status.id = world.id; status.name = world.name; report('Новый мир создан');
+                await repository!.put(world,false); status.id = world.id; status.name = world.name; report('Новый мир создан. В список он попадёт после «Сохранить сейчас»');
             });
         },
         rename(name: string) { if (name.trim() && !switching) { status.name = name.trim().slice(0, 128); markDirty(); } },

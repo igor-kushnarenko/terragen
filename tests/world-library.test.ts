@@ -37,3 +37,13 @@ test('an unsupported future database version is rejected without resetting its d
     const future = await new Promise<IDBDatabase>(resolve => { const request = factory.open(WORLD_DB_NAME, 3); request.onsuccess = () => resolve(request.result); });
     future.close(); await assert.rejects(openWorldRepository(factory));
 });
+
+test('draft sessions survive reopening without entering the library or overwriting a saved snapshot',async()=>{
+    const factory=new IDBFactory(),repo=await openWorldRepository(factory);
+    await repo.put(world('draft'),false);assert.deepEqual(await repo.list(),[]);repo.close();
+    const reopened=await openWorldRepository(factory);assert.deepEqual(await reopened.last(),world('draft'));
+    await reopened.put(world('draft',2));await reopened.put(world('draft',3),false);
+    assert.equal((await reopened.get('draft'))!.updatedAt,2);assert.equal((await reopened.last())!.updatedAt,3);
+    await reopened.put(world('new',4),false);assert.equal((await reopened.list()).length,1);assert.equal((await reopened.last())!.id,'new');
+    reopened.close();
+});

@@ -11,7 +11,7 @@ interface WeatherSettings {
     storm: number;
 }
 import * as THREE from 'three';
-import { weatherStrengths, CLOUD_ALTITUDE } from './atmosphere-settings';
+import { weatherStrengths, directSunlight,CLOUD_ALTITUDE } from './atmosphere-settings';
 import { createSkyAtmosphere, skyFogGLSL } from './sky-atmosphere';
 import type { Feedback } from './feedback';
 import type { LightingSystem } from './lighting';
@@ -232,8 +232,11 @@ void main(){
         }
         const fl = flash * W.storm;
         // свет
-        render.sun.intensity = render.atmosBase.sunInt * W.sun;
-        render.hemi.intensity = render.atmosBase.hemiInt * (1 - 0.25 * W.overcast) + fl * 2.5;
+        const direct=directSunlight(lighting.sunElevation,W.cover,W.overcast,effects.rain,effects.snow,effects.fog);
+        render.sun.intensity = render.atmosBase.sunInt * W.sun * direct;
+        render.sky.material.uniforms.showSunDisc.value=direct;
+        render.envSky.material.uniforms.showSunDisc.value=0;
+        render.hemi.intensity = render.atmosBase.hemiInt * (1 + .35 * W.overcast) + fl * 2.5;
         // туман
         const d = effects.fog;
         render.fog.density = d;
@@ -248,7 +251,7 @@ void main(){
         materials.waterUniforms.uFogColor.value.copy(_c1);
         materials.waterUniforms.uSkyHorizon.value.copy(render.atmosBase.skyHorizon).lerp(_c1, W.sat);
         materials.waterUniforms.uSkyZenith.value.copy(render.atmosBase.skyZenith).lerp(_c1, W.sat);
-        materials.waterUniforms.uSunColor.value.copy(render.atmosBase.sunColor).multiplyScalar(W.sun * (1 - W.overcast * 0.9));
+        materials.waterUniforms.uSunColor.value.copy(render.atmosBase.sunColor).multiplyScalar(W.sun * direct);
         // небо: обесцвечивание
         for (const s of [render.sky, render.envSky]) {
             const u = s.material.uniforms;
@@ -265,6 +268,7 @@ void main(){
         cloudUniforms.uCover.value = W.cover;
         cloudUniforms.uForeground.value=render.camera.position.y>CLOUD_ALTITUDE-1||model.maxH>CLOUD_ALTITUDE-1?1:0;
         clouds.visible=cloudUniforms.uForeground.value>.5&&W.cover>.01;
+        cloudUniforms.uClearSky.value=(1-W.sat)*smoothstep(0,15,lighting.sunElevation);
         cloudUniforms.uDark.value = W.dark;
         cloudUniforms.uFlash.value = fl;
         const warm = smoothstep(2, 35, lighting.sunElevation);

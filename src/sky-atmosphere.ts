@@ -7,7 +7,7 @@ float atmosphereFog(float distance){float opticalDepth=uFogDensity*distance;retu
 float skyFogPath(float elevation){return ${SKY_FOG_HEIGHT.toFixed(1)}/max(${SKY_FOG_MIN_ELEVATION.toFixed(3)},elevation);}
 `;
 const cloudGLSL=`
-uniform float uTime,uCover,uDark,uFlash,uFogDensity,uForeground,uIsEnvironment;
+uniform float uTime,uCover,uDark,uFlash,uFogDensity,uForeground,uIsEnvironment,uClearSky;
 uniform vec2 uOffset;
 uniform vec3 uLit,uShade,uSunDir,uFogColor,uObserverOffset;
 ${skyFogGLSL}
@@ -52,7 +52,7 @@ vec4 cloudLayer(vec3 direction,out float distance){
 /** One background pass; independent of map extents and the camera's far plane. */
 export function createSkyAtmosphere(render:Pick<RenderingSystem,'sky'|'envSky'|'sunDir'|'camera'|'scene'>){
     const uniforms={uTime:{value:0},uCover:{value:0},uDark:{value:0},uFlash:{value:0},uOffset:{value:new T.Vector2()},
-        uLit:{value:new T.Color()},uShade:{value:new T.Color()},uSunDir:{value:render.sunDir},uFogColor:{value:new T.Color()},uFogDensity:{value:0},uForeground:{value:0}};
+        uLit:{value:new T.Color()},uShade:{value:new T.Color()},uSunDir:{value:render.sunDir},uFogColor:{value:new T.Color()},uFogDensity:{value:0},uForeground:{value:0},uClearSky:{value:0}};
     for(const sky of [render.sky,render.envSky]){
         const material=sky.material;
         Object.assign(material.uniforms,uniforms,{uObserverOffset:{value:sky===render.envSky?render.camera.position:new T.Vector3()},uIsEnvironment:{value:sky===render.envSky?1:0}});
@@ -62,8 +62,19 @@ export function createSkyAtmosphere(render:Pick<RenderingSystem,'sky'|'envSky'|'
         material.vertexShader=material.vertexShader
             .replace('modelMatrix * vec4( position, 1.0 )','modelMatrix * vec4( position, 0.0 ) + vec4( cameraPosition, 1.0 )')
             .replace('projectionMatrix * modelViewMatrix * vec4( position, 1.0 )','projectionMatrix * viewMatrix * worldPosition');
-        material.fragmentShader=cloudGLSL+material.fragmentShader.replace('#include <colorspace_fragment>',`
+        material.fragmentShader=cloudGLSL+material.fragmentShader
+            .replace('vec3 sundiscColor = ( 760.0 * sundisc ) * min( vSunE * Fex, 80.0 );','vec3 sundiscColor = vec3(0.0);')
+            .replace('#include <colorspace_fragment>',`
             #include <colorspace_fragment>
+            // Composite the solar disc after tone mapping, so its edge does not disappear into a clipped halo.
+            vec3 clearBlue=mix(vec3(.64,.79,.93),vec3(.15,.43,.78),smoothstep(0.0,.65,max(0.0,direction.y)));
+            gl_FragColor.rgb=mix(gl_FragColor.rgb,clearBlue,uClearSky*.85);
+            float sunAngle=acos(clamp(dot(direction,uSunDir),-1.0,1.0));
+            float pixel=max(.00005,fwidth(sunAngle));
+            float disc=1.0-smoothstep(.00465-pixel,.00465+pixel,sunAngle);
+            float halo=exp(-sunAngle*sunAngle/.0008)*.16;
+            gl_FragColor.rgb=mix(gl_FragColor.rgb,vec3(1.0,.91,.72),halo*showSunDisc);
+            gl_FragColor.rgb=mix(gl_FragColor.rgb,vec3(1.0,.98,.88),disc*showSunDisc);
             vec3 fogOutput=linearToOutputTexel(vec4(uFogColor,1.0)).rgb;
             float skyFog=atmosphereFog(skyFogPath(direction.y));
             gl_FragColor.rgb=mix(gl_FragColor.rgb,fogOutput,skyFog);

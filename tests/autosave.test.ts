@@ -7,14 +7,14 @@ import { editorFixture } from './fixture';
 import {createMemoryAssetRepository} from '../src/asset-vault';
 
 function memoryRepository() {
-    const worlds = new Map<string, SavedWorld>(); let last: string | undefined;
+    const worlds = new Map<string, SavedWorld>(); let last: SavedWorld | undefined;
     const repository: WorldRepository = {
         ...createMemoryAssetRepository(),
         async list() { return [...worlds.values()].map(({ project: _project, ...summary }) => structuredClone(summary)); },
-        async get(id) { return structuredClone(worlds.get(id)); }, async last() { return structuredClone(worlds.get(last!)); },
-        async put(world) { worlds.set(world.id, structuredClone(world)); last = world.id; },
-        async select(id) { if (!worlds.has(id)) throw new Error('Missing world'); last = id; },
-        async remove(id) { worlds.delete(id); if (last === id) last = undefined; }, close() {},
+        async get(id) { return structuredClone(worlds.get(id)); }, async last() { return structuredClone(last); },
+        async put(world,library=true) { if(library)worlds.set(world.id, structuredClone(world)); last = structuredClone(world); },
+        async select(id) { if (!worlds.has(id)) throw new Error('Missing world'); last = structuredClone(worlds.get(id)); },
+        async remove(id) { worlds.delete(id); if (last?.id === id) last = undefined; }, close() {},
     };
     return { repository, worlds };
 }
@@ -32,7 +32,7 @@ test('autosave persists committed edits, preview and camera and restores the las
     assert.equal(await first.autosave.initialize(), false);
     first.edits.addObject('pine', 2, 3); first.render.camera.position.set(1, 2, 3);
     await first.autosave.saveNow();
-    const world = worlds.get(first.autosave.status.id)!;
+    const world = (await repository.last())!; assert.equal(worlds.size,0);
     assert.equal(decodeProject(world.project).world.objects.length, 1); assert.ok(world.preview);
     const restored = setup(repository); t.after(() => restored.autosave.dispose());
     assert.equal(await restored.autosave.initialize(), true);
@@ -47,19 +47,19 @@ test('unfinished transactions and busy operations are never autosaved', async t 
     assert.equal(await fixture.autosave.saveNow(true), false); assert.equal(worlds.size, 0);
     edit.commit(); fixture.model.busy = true;
     assert.equal(await fixture.autosave.saveNow(), false); assert.equal(worlds.size, 0);
-    fixture.model.busy = false; assert.equal(await fixture.autosave.saveNow(), true); assert.equal(worlds.size, 1);
+    fixture.model.busy = false; assert.equal(await fixture.autosave.saveNow(), true); assert.equal(worlds.size, 0);
 });
 
 test('edits made during a pending database write are saved in order', async t => {
     const { repository, worlds } = memoryRepository(), fixture = setup(repository); t.after(() => fixture.autosave.dispose());
     await fixture.autosave.initialize();
     const original = repository.put; let release!: () => void;
-    repository.put = async world => { await new Promise<void>(resolve => { release = resolve; }); await original(world); };
+    repository.put = async (world,library) => { await new Promise<void>(resolve => { release = resolve; }); await original(world,library); };
     fixture.edits.addObject('pine', 1, 2); const saving = fixture.autosave.saveNow();
     fixture.edits.addObject('rock', 3, 4); release(); await saving;
     assert.match(fixture.autosave.status.message, /несохранённые/);
     repository.put = original; await fixture.autosave.saveNow();
-    assert.equal(decodeProject(worlds.get(fixture.autosave.status.id)!.project).world.objects.length, 2);
+    assert.equal(decodeProject((await repository.last())!.project).world.objects.length, 2);
 });
 
 test('quota errors keep the previous save and later retry captures current edits', async t => {
@@ -70,14 +70,14 @@ test('quota errors keep the previous save and later retry captures current edits
     fixture.edits.addObject('rock', 3, 4);
     await assert.rejects(fixture.autosave.saveNow(), /quota/); assert.deepEqual(worlds.get(fixture.autosave.status.id), before);
     assert.match(fixture.autosave.status.message, /Недостаточно места/);
-    repository.put = original; await fixture.autosave.saveNow(); assert.equal(decodeProject(worlds.get(fixture.autosave.status.id)!.project).world.objects.length, 1);
+    repository.put = original; await fixture.autosave.saveNow(); assert.equal(decodeProject((await repository.last())!.project).world.objects.length, 1);
 });
 
 test('copy, rename, opening and deletion keep world identities and the last-session pointer consistent', async t => {
     const { repository, worlds } = memoryRepository(), fixture = setup(repository); t.after(() => fixture.autosave.dispose());
     await fixture.autosave.initialize(); await fixture.autosave.saveNow(true); const firstId = fixture.autosave.status.id;
     await fixture.autosave.saveCopy('Лес'); const copyId = fixture.autosave.status.id;
-    fixture.autosave.rename('Остров'); fixture.edits.addObject('pine', 5, 6); await fixture.autosave.saveNow();
+    assert.equal(worlds.size,1); fixture.autosave.rename('Остров'); fixture.edits.addObject('pine', 5, 6); await fixture.autosave.saveNow(true);
     assert.equal(worlds.get(copyId)!.name, 'Остров'); assert.equal(worlds.size, 2);
     await fixture.autosave.open(firstId); assert.equal(fixture.model.world.objects.length, 0); assert.equal((await repository.last())!.id, firstId);
     await assert.rejects(fixture.autosave.remove(firstId), /другой мир/);
@@ -97,7 +97,7 @@ test('a failed write after new-world generation restores the previous scene and 
     const { repository, worlds } = memoryRepository(), fixture = setup(repository); t.after(() => fixture.autosave.dispose());
     await fixture.autosave.initialize(); await fixture.autosave.saveNow(true);
     const previous = fixture.model.heights.slice(), id = fixture.autosave.status.id, put = repository.put; let count = 0;
-    repository.put = async world => { if (++count === 2) throw new Error('write failure'); await put(world); };
+    repository.put = async (world,library) => { if (++count === 2) throw new Error('write failure'); await put(world,library); };
     await assert.rejects(fixture.autosave.newWorld(), /write failure/);
     assert.deepEqual(fixture.model.heights, previous); assert.equal(fixture.autosave.status.id, id); assert.equal(worlds.size, 1);
 });
@@ -106,4 +106,13 @@ test('storage unavailability leaves the editor usable and reports the limitation
     const fixture = editorFixture(), autosave = createAutosave({ ...fixture, repository: async () => { throw new Error('denied'); }, preview: () => '', viewKey: () => '', newWorld: async () => true, id: () => 'id' });
     t.after(autosave.dispose); assert.equal(await autosave.initialize(), false); assert.equal(autosave.status.available, false);
     assert.match(autosave.status.message, /недоступно/); fixture.edits.addObject('pine', 2, 3); assert.equal(fixture.model.world.objects.length, 1);
+});
+
+test('generating and editing worlds saves only the session until an explicit save',async t=>{
+    const {repository,worlds}=memoryRepository(),f=setup(repository);t.after(()=>f.autosave.dispose());await f.autosave.initialize();
+    await f.autosave.newWorld();await f.autosave.newWorld();assert.equal(worlds.size,0);
+    await f.autosave.saveNow(true);const id=f.autosave.status.id,before=worlds.get(id)!.project;
+    f.edits.addObject('pine',1,2);await f.autosave.saveNow();assert.equal(worlds.get(id)!.project,before);
+    assert.equal(decodeProject((await repository.last())!.project).world.objects.length,1);
+    await f.autosave.saveNow(true);assert.equal(worlds.size,1);assert.equal(decodeProject(worlds.get(id)!.project).world.objects.length,1);
 });

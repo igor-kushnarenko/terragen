@@ -6,7 +6,7 @@ export interface WorldRepository extends AssetRepository {
     list(): Promise<WorldSummary[]>;
     get(id: string): Promise<SavedWorld | undefined>;
     last(): Promise<SavedWorld | undefined>;
-    put(world: SavedWorld): Promise<void>;
+    put(world: SavedWorld, library?: boolean): Promise<void>;
     select(id: string): Promise<void>;
     remove(id: string): Promise<void>;
     close(): void;
@@ -65,13 +65,14 @@ export function openWorldRepository(factory: IDBFactory = indexedDB, databaseNam
                     const read = session.get('last');
                     read.onsuccess = () => {
                         if (!read.result) { result(undefined); return; }
+                        if(read.result.world){result(read.result.world);return;}
                         const world = worlds.get(read.result.id); world.onsuccess = () => result(world.result);
                     };
                 }),
                 // The world and the last-session pointer either both commit or neither commits.
-                put: world => transaction('readwrite', (worlds, session, result) => {
+                put: (world, library = true) => transaction('readwrite', (worlds, session, result) => {
                     const keys=[...new Set(world.assetKeys??[])];let pending=keys.length;
-                    const write=()=>{worlds.put(world);session.put({key:'last',id:world.id});result(undefined);};
+                    const write=()=>{if(library)worlds.put(world);session.put({key:'last',id:world.id,world});result(undefined);};
                     if(!pending){write();return;}
                     const assets=worlds.transaction.objectStore('assets');
                     for(const key of keys){

@@ -1,4 +1,12 @@
-import { clamp } from './noise';
+import { clamp,smoothstep } from './noise';
+
+/** Direct sunlight vanishes under an opaque sky; ambient daylight remains. */
+export function directSunlight(elevation:number,cover:number,overcast:number,rain:number,snow:number,fog:number){
+    const cloud=(1-.4*clamp(cover,0,1))*(1-smoothstep(.55,.95,cover));
+    const precipitation=1-smoothstep(0,.2,Math.max(rain,snow));
+    const haze=1-skyFogAmount(fog,Math.sin(elevation*Math.PI/180));
+    return smoothstep(-1,4,elevation)*cloud*(1-clamp(overcast,0,1))*precipitation*haze;
+}
 
 export const SKY_FOG_HEIGHT = 90;
 export const SKY_FOG_MIN_ELEVATION = .005;
