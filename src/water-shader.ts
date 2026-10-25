@@ -39,6 +39,9 @@ vec3 toCam=cameraPosition-vWPos;float dist=length(toCam);vec3 V=toCam/max(.001,d
 vec2 flow=riverFlow(p,vFlow/max(uFlowSpeed,.001));
 vec2 gradient=waterGradient(p,vMeanLevel-th,flow);vec3 N=normalize(vec3(-gradient.x,1.0,-gradient.y));
 vec3 faceNormal=normalize(cross(dFdx(vWPos),dFdy(vWPos)));float waterfall=1.0-smoothstep(.25,.7,abs(faceNormal.y));
+// Sea-level tails use the ocean surface; a separate layered effect renders the falling water.
+if(uCascade.w>0.0&&vMeanLevel<=uWater+.06)discard;
+if(uCascade.w>.75&&waterfall>.35)discard;
 if(!gl_FrontFacing)faceNormal=-faceNormal;N=normalize(mix(N,faceNormal,waterfall));
 N=normalize(mix(N,vec3(0.0,1.0,0.0),smoothstep(150.0,2500.0,dist)*.85));
 float cycle=fract(uTime*.12),blend=abs(cycle-.5)*2.0;

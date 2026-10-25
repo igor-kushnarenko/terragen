@@ -10,13 +10,14 @@ import {createWaterFlow} from './water-flow';
 import type {WaterSurface} from './water-surface';
 import {waterBounds,waterPath} from './water-math';
 import {WATER_PROFILES} from './quality';
+import {createWaterfallEffects} from './waterfall-effects';
 
 export function createWaterRendering(model:EditorModel,render:RenderingSystem,materials:MaterialsSystem,surface?:WaterSurface,getH:(x:number,z:number)=>number=()=>0) {
     const group=new T.Group();group.name='Local water surfaces';render.scene.add(group);
     const optics=createWaterOptics(render,materials,group,surface),flow=createWaterFlow(model,getH);surface?.bindFlow(flow.sample);
     let quality=model.state.quality;
     let bodies:typeof model.world.waterBodies|undefined,reflector:Reflector|undefined,size=-1,timer=Infinity,captures=0;
-    const uniforms=materials.waterUniforms,inverse=new T.Matrix4(),fallbackReflection=uniforms.uReflection.value;
+    const uniforms=materials.waterUniforms,falls=createWaterfallEffects(model,render.scene,uniforms),inverse=new T.Matrix4(),fallbackReflection=uniforms.uReflection.value;
     function rebuild(){
         for(const child of [...group.children]){const mesh=child as T.Mesh<T.BufferGeometry,T.ShaderMaterial>;mesh.geometry.dispose();mesh.material.uniforms.uDomainMap.value?.dispose();mesh.material.dispose();}group.clear();
         for(const [index,body] of model.world.waterBodies.entries()){if(body.kind==='ocean')continue;
@@ -35,7 +36,7 @@ export function createWaterRendering(model:EditorModel,render:RenderingSystem,ma
         bodies=model.world.waterBodies;quality=model.state.quality;timer=Infinity;
     }
     function update(dt:number){
-        if(bodies!==model.world.waterBodies||quality!==model.state.quality)rebuild();materials.updateWater();flow.ensure();
+        if(bodies!==model.world.waterBodies||quality!==model.state.quality)rebuild();materials.updateWater();flow.ensure();falls.update(render.camera);
         materials.water.position.x=render.camera.position.x;materials.water.position.z=render.camera.position.z;
         if(surface){const data=surface.upload(WATER_PROFILES[model.state.quality].impacts);uniforms.uTime.value=surface.time;uniforms.uImpacts.value=data.packed;uniforms.uImpactMeta.value=data.meta;uniforms.uImpactCount.value=data.count;}
         for(const child of group.children){const mesh=child as T.Mesh<T.BufferGeometry,T.ShaderMaterial>,body=mesh.userData.waterBody,field=flow.map(body);mesh.material.uniforms.uFlowMapOn.value=field?1:0;if(field){mesh.material.uniforms.uFlowMap.value=field.texture;mesh.material.uniforms.uFlowBounds.value.copy(field.bounds);}}
@@ -59,5 +60,5 @@ export function createWaterRendering(model:EditorModel,render:RenderingSystem,ma
             uniforms.uReflectionLevel.value=level;uniforms.uReflectionOn.value=1;timer=0;captures++;
         }finally{hidden.forEach((o,i)=>o.visible=visibility[i]);}
     }
-    return {update,group,draw:optics.draw,get statistics(){return {surfaces:group.children.length+1,reflectionSize:size,captures,...optics.statistics,impacts:surface?.impacts.length??0};},dispose(){optics.dispose();flow.dispose();for(const child of group.children){const mesh=child as T.Mesh<T.BufferGeometry,T.Material>;mesh.geometry.dispose();(mesh.material as T.ShaderMaterial).uniforms.uDomainMap.value?.dispose();mesh.material.dispose();}group.removeFromParent();reflector?.dispose();reflector?.geometry.dispose();}};
+    return {update,group,draw:optics.draw,get statistics(){return {surfaces:group.children.length+1,reflectionSize:size,captures,...falls.statistics,...optics.statistics,impacts:surface?.impacts.length??0};},dispose(){falls.dispose();optics.dispose();flow.dispose();for(const child of group.children){const mesh=child as T.Mesh<T.BufferGeometry,T.Material>;mesh.geometry.dispose();(mesh.material as T.ShaderMaterial).uniforms.uDomainMap.value?.dispose();mesh.material.dispose();}group.removeFromParent();reflector?.dispose();reflector?.geometry.dispose();}};
 }
