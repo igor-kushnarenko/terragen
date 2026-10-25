@@ -16,9 +16,11 @@ export function carveWater(settings:EditorState,input:Float32Array,bodies:WaterB
             if(j%4===0)progress((b+(j-j0)/Math.max(1,j1-j0))/bodies.length);
             for(let i=i0;i<=i1;i++){
                 const p=waterSignedDistance(body,-HALF+i*cell,-HALF+j*cell);if(p.signed<-bank)continue;
-                const target=p.signed>=0?p.level-depth*smoothstep(0,Math.max(cell,body.kind==='river'?body.width*.3:depth*1.5),p.signed):p.level+(-p.signed/bank)*Math.max(1,depth*.5);
+                const outlet=body.outlet!==undefined&&p.segment>=body.outlet;
+                const bedLevel=outlet?(body.endLevel??settings.water):p.level;
+                const target=p.signed>=0?bedLevel-depth*smoothstep(0,Math.max(cell,body.kind==='river'?body.width*.3:depth*1.5),p.signed):bedLevel+(-p.signed/bank)*Math.max(1,depth*.5);
                 const weight=p.signed>=0?1:1-smoothstep(bank*.2,bank,-p.signed),k=j*n+i;
-                heights[k]+=(target-heights[k])*weight;
+                heights[k]+=(outlet?Math.min(0,target-heights[k]):target-heights[k])*weight;
             }
         }
     });progress(1);return heights;

@@ -13,16 +13,17 @@ export function waterPath(body:WaterBody,x:number,z:number) {
     const points=body.points,lengths:number[]=[];let total=0;
     const count=body.kind==='lake'?points.length:points.length-1;
     for(let i=0;i<count;i++){const a=points[i],b=points[(i+1)%points.length],d=Math.hypot(b[0]-a[0],b[1]-a[1]);lengths.push(d);total+=d;}
-    let distance=Infinity,along=0,passed=0,px=x,pz=z,dx=0,dz=0;
+    let distance=Infinity,along=0,passed=0,px=x,pz=z,dx=0,dz=0,segment=0,fraction=0;
     for(let i=0;i<count;i++){
         const a=points[i],b=points[(i+1)%points.length],length=lengths[i];
         const t=length?clamp(((x-a[0])*(b[0]-a[0])+(z-a[1])*(b[1]-a[1]))/(length*length),0,1):0;
         const xx=a[0]+(b[0]-a[0])*t,zz=a[1]+(b[1]-a[1])*t,d=Math.hypot(x-xx,z-zz);
-        if(d<distance){distance=d;along=passed+length*t;px=xx;pz=zz;dx=length?(b[0]-a[0])/length:0;dz=length?(b[1]-a[1])/length:0;}
+        if(d<distance){distance=d;along=passed+length*t;px=xx;pz=zz;dx=length?(b[0]-a[0])/length:0;dz=length?(b[1]-a[1])/length:0;segment=i;fraction=t;}
         passed+=length;
     }
     const direction=body.flowDirection??1,t=total?along/total:0,progress=direction===1?t:1-t;
-    return {distance,along,total,x:px,z:pz,dx:dx*direction,dz:dz*direction,level:body.kind==='river'?body.level+((body.endLevel??body.level)-body.level)*progress:body.level};
+    const level=body.pointLevels?body.pointLevels[segment]+(body.pointLevels[segment+1]-body.pointLevels[segment])*fraction:body.level+((body.endLevel??body.level)-body.level)*progress;
+    return {distance,along,total,segment,x:px,z:pz,dx:dx*direction,dz:dz*direction,level:body.kind==='river'?level:body.level};
 }
 export function waterSignedDistance(body:WaterBody,x:number,z:number) {
     const path=waterPath(body,x,z);

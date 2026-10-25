@@ -17,7 +17,7 @@ export function createWaterEdits(model:EditorModel,terrain:TerrainSystem,vegetat
         const exists=model.world.waterBodies.some(b=>b.id===body.id);
         const candidate=validateWorld({...model.world,waterBodies:exists?model.world.waterBodies.map(b=>b.id===body.id?body:b):[...model.world.waterBodies,body]},model.state);
         if(candidate.waterBodies.length>33)throw new Error('Не больше 32 отдельных водоёмов');
-        const previous=model.world.waterBodies.find(b=>b.id===body.id),earthwork=(b:WaterBody)=>[b.kind,b.points,b.level,b.endLevel,b.width,b.depth,b.bankWidth,b.bankSurface];
+        const previous=model.world.waterBodies.find(b=>b.id===body.id),earthwork=(b:WaterBody)=>[b.kind,b.points,b.level,b.endLevel,b.pointLevels,b.outlet,b.width,b.depth,b.bankWidth,b.bankSurface];
         if(previous&&JSON.stringify(earthwork(previous))===JSON.stringify(earthwork(body))){
             history.transaction('Параметры водоёма',()=>{model.world=candidate;materials.updateWater();history.refreshCurrent();});feedback.syncAllUI();feedback.setStatus('Параметры воды обновлены');return true;
         }

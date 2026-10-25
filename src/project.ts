@@ -245,6 +245,16 @@ export function validateWorld(value: unknown, state: EditorState, legacy = false
         for(const [key,min,max]of [['endLevel',-1000,5000],['flowSpeed',0,3],['depth',.3,50],['bankWidth',1,40],['clarity',.2,40]] as const)if(w[key]!==undefined)body[key]=number(w[key],p+'.'+key,min,max);
         if(body.endLevel!==undefined&&body.endLevel>body.level)fail(p+'.endLevel: устье выше истока');
         if(w.flowDirection!==undefined){if(w.flowDirection!==1&&w.flowDirection!==-1)fail(p+'.flowDirection');body.flowDirection=w.flowDirection;}
+        if(w.pointLevels!==undefined){
+            body.pointLevels=list(w.pointLevels,p+'.pointLevels',1000).map((v,j)=>number(v,p+`.pointLevels[${j}]`,-1000,5000));
+            if(kind!=='river'||body.pointLevels.length!==points.length)fail(p+'.pointLevels');
+            const levels=body.flowDirection===-1?[...body.pointLevels].reverse():body.pointLevels;
+            if(levels[0]!==body.level||levels.at(-1)!==(body.endLevel??body.level)||levels.some((h,j)=>j>0&&h>levels[j-1]))fail(p+'.pointLevels: неверный профиль реки');
+        }
+        if(w.outlet!==undefined){
+            if(kind!=='river'||!body.pointLevels)fail(p+'.outlet');
+            body.outlet=number(w.outlet,p+'.outlet',1,points.length-2,true);
+        }
         if(w.bankSurface!==undefined)body.bankSurface=choice(w.bankSurface,['sand','gravel'] as const,p+'.bankSurface');
         if(w.controlPoints!==undefined){body.controlPoints=list(w.controlPoints,p+'.controlPoints',64).map((v,j)=>vec2(v,p+`.controlPoints[${j}]`));if(body.controlPoints.length<(kind==='lake'?3:2))fail(p+'.controlPoints');}
         return body;
@@ -277,7 +287,7 @@ export function validateWorld(value: unknown, state: EditorState, legacy = false
 function validateOperations(value: unknown): OperationRecord[] {
     return list(value, 'operations', 10000).map((item, i) => {
         const p = `operations[${i}]`, op = object(item, p), parameters = object(op.parameters, `${p}.parameters`);
-        if (![1,2,3,4,5,6,7].includes(op.algorithmVersion as number) || Object.keys(parameters).length > 64)
+        if (![1,2,3,4,5,6,7,8].includes(op.algorithmVersion as number) || Object.keys(parameters).length > 64)
             fail(p);
         const normalized: Record<string, number | boolean> = {};
         for (const [key, value] of Object.entries(parameters)) {

@@ -1,6 +1,7 @@
 import * as T from 'three';
 import type {WaterBody} from './world';
 import {waterAt,waterBounds,waterSignedDistance,waterPath} from './water-math';
+import {waterGeometry} from './water-geometry';
 export const SHORE_PADDING=24;
 const cache=new WeakMap<WaterBody[],{length:number;bins:Map<string,WaterBody[]>}>();
 /** Extend a local body over its dry bank for swash, without flooding lower land outside its outline. */
@@ -15,6 +16,8 @@ export function createWaterDomain(body:WaterBody,spacing:number,resolution=96){
     const b=waterBounds(body,SHORE_PADDING),bounds=new T.Vector4(b.minX,b.minZ,b.maxX-b.minX,b.maxZ-b.minZ),size=body.points.length>128?64:resolution,data=new Uint16Array(size*size);
     for(let j=0;j<size;j++)for(let i=0;i<size;i++)data[j*size+i]=T.DataUtils.toHalfFloat(waterSignedDistance(body,b.minX+(i+.5)/size*bounds.z,b.minZ+(j+.5)/size*bounds.w).signed);
     const texture=new T.DataTexture(data,size,size,T.RedFormat,T.HalfFloatType);texture.minFilter=texture.magFilter=T.LinearFilter;texture.needsUpdate=true;
+    // A rectangular domain grid cannot resolve an almost vertical fall between two nearby points.
+    if(body.pointLevels)return {texture,bounds,geometry:waterGeometry(body,spacing)};
     const nx=Math.max(1,Math.min(160,Math.ceil(bounds.z/spacing))),nz=Math.max(1,Math.min(160,Math.ceil(bounds.w/spacing))),positions:number[]=[],indices:number[]=[],flow:number[]=[],travel:number[]=[];
     for(let j=0;j<=nz;j++)for(let i=0;i<=nx;i++){const x=b.minX+i/nx*bounds.z,z=b.minZ+j/nz*bounds.w,p=body.kind==='river'?waterPath(body,x,z):null;positions.push(x,p?.level??body.level,z);flow.push(p?.dx??0,p?.dz??0);travel.push((p?.along??0)*(body.flowDirection??1));}
     for(let j=0;j<nz;j++)for(let i=0;i<nx;i++){const a=j*(nx+1)+i,c=a+nx+1;indices.push(a,c,a+1,a+1,c,c+1);}

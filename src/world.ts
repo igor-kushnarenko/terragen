@@ -79,6 +79,10 @@ export interface WaterBody {
     width: number;
     name?: string;
     endLevel?: number;
+    /** Per-path-vertex levels for river mouths and cascades; old rivers remain linear. */
+    pointLevels?: number[];
+    /** Path vertex at the coastal brink; downstream earthworks may only remove ground. */
+    outlet?: number;
     flowSpeed?: number;
     flowDirection?: 1 | -1;
     depth?: number;
@@ -130,7 +134,7 @@ export interface OperationSeeds {
 export interface OperationRecord {
     kind: 'terrain' | 'erosion' | 'scatter' | 'noise' | 'preset' | 'composition' | 'trail' | 'water' | 'meteor';
     seed: number;
-    algorithmVersion: 1 | 2 | 3 | 4 | 5 | 6 | 7;
+    algorithmVersion: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
     parameters: Record<string, number | boolean>;
 }
 export function deriveSeeds(seed: number): OperationSeeds {

@@ -71,13 +71,16 @@ test('preview and detailed mainland generation use the same shoreline in map coo
     }
 });
 
-test('rivers and lakes stay inland and erosion does not fill new bays or join offshore islands',()=>{
+test('lakes stay inland, rivers reach the sea and erosion does not fill new bays',()=>{
     for(const preset of ['jungle','taiga'] as const)for(const seed of [1337,17,456]){
         const settings=worldSettings(createModel().state,{...defaultWorldRequest(),preset,areaSize:.5,N:128,seed});
         const shore=createCoastlineField(seed),size=SIZE*settings.areaSize;
         const bodies=preset==='jungle'?jungleWaterBodies(settings,jungleDefaults()):taigaWaterBodies(settings,taigaDefaults());
         assert.ok(bodies.some(body=>body.kind==='river'),`${preset}/${seed}: inland river lost`);
-        for(const body of bodies)for(const [x,z]of body.points)assert.ok(shore(x/size,z/size)*size>(body.bankWidth??8));
+        for(const body of bodies){
+            if(body.kind==='lake')for(const [x,z]of body.points)assert.ok(shore(x/size,z/size)*size>(body.bankWidth??8));
+            else {assert.ok(body.outlet!==undefined);assert.equal(body.endLevel,settings.water);const [x,z]=body.points.at(-1)!;assert.ok(shore(x/size,z/size)<0);}
+        }
         const h=computeTerrainJob({kind:'terrain',settings,preset,seed,worldErosion:1});
         for(let j=0;j<=settings.N;j++)for(let i=0;i<=settings.N;i++){
             const u=(i/settings.N-.5)/settings.areaSize,v=(j/settings.N-.5)/settings.areaSize;

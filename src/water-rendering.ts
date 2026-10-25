@@ -23,6 +23,12 @@ export function createWaterRendering(model:EditorModel,render:RenderingSystem,ma
             const domain=createWaterDomain(body,WATER_PROFILES[model.state.quality].spacing,model.state.quality==='low'?64:model.state.quality==='high'?128:96);
             const material=new T.ShaderMaterial({vertexShader:materials.waterMat.vertexShader,fragmentShader:materials.waterMat.fragmentShader,uniforms:{...uniforms,uBodyIndex:{value:index+1},uOpacity:{value:body.opacity},uWave:{value:body.wave},uFlowSpeed:{value:body.kind==='river'?(body.flowSpeed??.6):0},uWaterKind:{value:body.kind==='river'?2:1},uClarity:{value:body.clarity??(body.kind==='river'?3.5:8)},uFlowMap:{value:null},uFlowMapOn:{value:0},uFlowBounds:{value:new T.Vector4()}},transparent:true,depthWrite:true,side:T.DoubleSide});
             material.uniforms.uDomainMap={value:domain.texture};material.uniforms.uDomainBounds={value:domain.bounds};material.uniforms.uDomainOn={value:1};
+            material.uniforms.uCascade={value:new T.Vector4()};
+            if(body.outlet!==undefined&&body.pointLevels){
+                const base=body.pointLevels.findIndex((h,i)=>i>body.outlet!&&h===(body.endLevel??body.level));
+                if(base>=0)material.uniforms.uCascade.value.set(...body.points[base],body.width*1.3,body.pointLevels[body.outlet]-(body.endLevel??body.level));
+            }
+            material.polygonOffset=true;material.polygonOffsetFactor=-1;material.polygonOffsetUnits=-1;
             const mesh=new T.Mesh(domain.geometry,material);mesh.renderOrder=2;mesh.name=body.name??body.id;mesh.userData.waterBody=body;group.add(mesh);
         }
         materials.water.geometry.dispose();materials.water.geometry=oceanGeometry(WATER_PROFILES[model.state.quality].oceanSegments);
