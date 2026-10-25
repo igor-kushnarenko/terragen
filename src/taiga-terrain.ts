@@ -2,6 +2,8 @@ import {makeSimplex,fbm,mulberry32,smoothstep} from './noise';
 import type {EditorState} from './state';
 import type {TaigaSettings} from './taiga-settings';
 import type {Vec2,WaterBody} from './world';
+import {createCoastalHeight} from './coastline';
+import {fitCoastalWater} from './coastal-water';
 
 /** Shared basin plan for the terrain worker, water meshes and the moisture field. */
 export function taigaDrainage(seed:number,area:number){
@@ -23,9 +25,10 @@ export function taigaWaterBodies(s:EditorState,t:TaigaSettings):WaterBody[]{
         bodies.push({id:'taiga-stream',name:'Северный лесной ручей',kind:'river',points,level,endLevel:level-3*s.areaSize,
             width:Math.max(3,10*s.areaSize,1024/s.N*2.5),depth:1.2,bankWidth:Math.max(4,14*s.areaSize,1024/s.N),bankSurface:'gravel',opacity:.8,wave:.06,clarity:3,flowSpeed:.22,flowDirection:1});
     }
-    return bodies;
+    return fitCoastalWater(s,bodies);
 }
 export function generateTaigaTerrain(s:EditorState,t:TaigaSettings,progress:(p:number)=>void=()=>{}){
+    const coast=s.areaSize<1||s.island?createCoastalHeight(s):undefined;
     const noise=makeSimplex(s.seed^0x41ba73),fine=makeSimplex(s.seed^0x18df26),d=taigaDrainage(s.seed,s.areaSize);
     const n=s.N+1,result=new Float32Array(n*n),gain=(s.sharp/5)**.7,f=1/Math.max(.3,s.scale);
     for(let z=0;z<n;z++){
@@ -46,7 +49,7 @@ export function generateTaigaTerrain(s:EditorState,t:TaigaSettings,progress:(p:n
             const micro=fbm(fine,wx/(17*s.areaSize),wz/(17*s.areaSize),Math.min(3,Math.max(1,Math.floor(Math.log2(s.N/24)))));
             const hollow=1-smoothstep(.02,.13,Math.abs(noise(u*18+7,v*18-2)));
             h+=(micro*.8-hollow*.6)*s.areaSize*t.terrainVariation*gain;
-            if(s.areaSize<1||s.island){const edge=1-smoothstep(.44,.495,Math.hypot(u,v));h=s.water-15*s.areaSize+(h-s.water+15*s.areaSize)*edge;}
+            if(coast)h=coast(h,wx/(1024*s.areaSize),wz/(1024*s.areaSize));
             result[z*n+x]=h;
         }
     }

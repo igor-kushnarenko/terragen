@@ -130,7 +130,7 @@ export interface OperationSeeds {
 export interface OperationRecord {
     kind: 'terrain' | 'erosion' | 'scatter' | 'noise' | 'preset' | 'composition' | 'trail' | 'water' | 'meteor';
     seed: number;
-    algorithmVersion: 1 | 2 | 3 | 4 | 5 | 6;
+    algorithmVersion: 1 | 2 | 3 | 4 | 5 | 6 | 7;
     parameters: Record<string, number | boolean>;
 }
 export function deriveSeeds(seed: number): OperationSeeds {

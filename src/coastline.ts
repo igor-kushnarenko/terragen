@@ -1,4 +1,5 @@
 import {fbm,makeSimplex,mulberry32,smoothstep} from './noise';
+import {SIZE,type EditorState} from './state';
 
 // Smooth Boolean operations round the joins of bays and peninsulas rather than
 // leaving corners where two analytic outlines intersect.
@@ -40,3 +41,17 @@ export function createCoastlineField(seed:number){
     };
 }
 export function createCoastline(seed:number){const distance=createCoastlineField(seed);return(u:number,v:number)=>smoothstep(-.018,.018,distance(u,v));}
+
+/** Shared coast for recipes: lower the land into a beach without filling existing seas or fjords. */
+export function createCoastalHeight(s:EditorState){
+    const shore=createCoastlineField(s.seed),cell=SIZE/s.N;
+    const beach=Math.max(12*s.areaSize,cell),inland=Math.max(64*s.areaSize,3*cell),depth=Math.max(8,22*s.areaSize);
+    return (height:number,u:number,v:number)=>{
+        const distance=shore(u,v)*SIZE*s.areaSize;
+        const coast=distance>0
+            ?s.water+3*smoothstep(0,beach,distance)+Math.max(0,height-s.water-3)*smoothstep(beach,inland,distance)
+            :s.water-depth*(1-Math.exp(distance*.22/depth));
+        // Retain underwater channels, island gaps and the biome's original inland relief.
+        return Math.min(height,coast);
+    };
+}

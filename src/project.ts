@@ -277,7 +277,7 @@ export function validateWorld(value: unknown, state: EditorState, legacy = false
 function validateOperations(value: unknown): OperationRecord[] {
     return list(value, 'operations', 10000).map((item, i) => {
         const p = `operations[${i}]`, op = object(item, p), parameters = object(op.parameters, `${p}.parameters`);
-        if (![1,2,3,4,5,6].includes(op.algorithmVersion as number) || Object.keys(parameters).length > 64)
+        if (![1,2,3,4,5,6,7].includes(op.algorithmVersion as number) || Object.keys(parameters).length > 64)
             fail(p);
         const normalized: Record<string, number | boolean> = {};
         for (const [key, value] of Object.entries(parameters)) {

@@ -7,8 +7,9 @@ import {generateJungleTerrain} from './jungle-terrain';
 import {jungleDefaults,type JungleSettings} from './jungle-settings';
 import {taigaDefaults,type TaigaSettings} from './taiga-settings';
 import {generateTaigaTerrain} from './taiga-terrain';
+import {createCoastalHeight} from './coastline';
 
-/** Recipe v1: macro landforms in metres, independent of mesh resolution. */
+/** Macro landforms in metres, independent of mesh resolution, with a shared natural coast. */
 export function generateWorldTerrain(s:EditorState,preset:WorldPresetId,progress:Progress=()=>{},jungle?:JungleSettings,taiga?:TaigaSettings){
     if(preset==='jungle')return generateJungleTerrain(s,jungle??jungleDefaults(),progress);
     if(preset==='taiga')return generateTaigaTerrain(s,taiga??taigaDefaults(),progress);
@@ -18,6 +19,8 @@ export function generateWorldTerrain(s:EditorState,preset:WorldPresetId,progress
         return {x:Math.cos(a)*r,z:Math.sin(a)*r,r:i===0?.13:.045+random()*.075,h:.45+random()*.55};
     });
     const channels=Array.from({length:3},(_,i)=>({x:(i-1)*.22,phase:random()*8,width:.022+random()*.014}));
+    const coastal=preset==='archipelago'||preset==='iron-islands'||preset==='fjords';
+    const coast=s.areaSize<1||s.island||coastal?createCoastalHeight(s):undefined;
     const n=s.N+1,result=new Float32Array(n*n),sharp=clamp(s.sharp/5,0,1),gain=sharp**.7;
     const scale=1.4/s.scale,octaves=Math.min(s.octaves,Math.max(1,Math.floor(Math.log2(s.N*s.areaSize/10))));
     for(let j=0;j<n;j++){
@@ -63,18 +66,19 @@ export function generateWorldTerrain(s:EditorState,preset:WorldPresetId,progress
                 const ridge=1-Math.abs(noise(warpX*4-3,warpZ*4+7));
                 elevation=.1+broad*.3+ridge**(1.6+sharp)*s.mountains*.5+fine*.1;
             }
-            const footprint=1-smoothstep(.44,.495,Math.hypot(u,v));
-            const coastal=preset==='archipelago'||preset==='iron-islands'||preset==='fjords';
             let h=s.water+3+elevation*s.height*gain*s.areaSize;
             if(coastal){
                 const dry=smoothstep(0,preset==='iron-islands'?.10:.2,shore);
                 h=shore>0?s.water+3*smoothstep(0,.12,shore)+elevation*s.height*gain*s.areaSize*dry:s.water-Math.min(35*s.areaSize,3+Math.abs(shore)*30*s.areaSize);
             }
-            if(s.areaSize<1||s.island||coastal)h=s.water-22*s.areaSize+(h-s.water+22*s.areaSize)*footprint;
             result[j*n+i]=h;
         }
     }
     progress(.93);
     const filtered=smoothRelief(result,s.N,preset==='desert'?.35:.45+(1-sharp)*.5);
+    // Shape after filtering so narrow peninsulas and offshore islands are not blurred away.
+    if(coast)for(let j=0;j<n;j++)for(let i=0;i<n;i++){
+        const k=j*n+i;filtered[k]=coast(filtered[k],(i/s.N-.5)/s.areaSize,(j/s.N-.5)/s.areaSize);
+    }
     progress(1);return filtered;
 }

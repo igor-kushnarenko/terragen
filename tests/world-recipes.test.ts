@@ -12,6 +12,7 @@ import {OperationCancelled,type JobRunner} from '../src/worker-jobs';
 import {WORLD_PLANTS,makeWorldPlant} from '../src/world-models';
 import {getModel} from '../src/model-library';
 import {createEcology} from '../src/ecology';
+import {WORLD_TERRAIN_ALGORITHM} from '../src/generation-settings';
 
 function components(h:Float32Array,N:number,level:number){
     const seen=new Uint8Array(h.length),sizes:number[]=[],n=N+1;
@@ -58,6 +59,7 @@ test('world creation is one reversible edit and saves species, recipe, atmospher
     assert.ok(f.model.world.objects.every(o=>['palm','coastal-bush','rock','boulder'].includes(o.asset)));
     for(const route of f.model.world.routes)for(const [x,z]of route.points)assert.ok(f.terrain.getH(x,z)>f.model.state.water+1);
     const after=captureDocument(f.model),loaded=decodeProject(f.storage.projectJSON());assert.equal(loaded.version,11);assert.deepEqual(loaded.world,f.model.world);
+    assert.equal(loaded.operations.find(op=>op.kind==='preset')?.algorithmVersion,WORLD_TERRAIN_ALGORITHM);
     f.history.undo();assert.deepEqual(captureDocument(f.model),before);f.history.redo();assert.deepEqual(captureDocument(f.model),after);
 });
 

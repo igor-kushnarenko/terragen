@@ -2,6 +2,8 @@ import {makeSimplex,fbm,mulberry32,smoothstep} from './noise';
 import type {EditorState} from './state';
 import type {JungleSettings} from './jungle-settings';
 import type {Vec2,WaterBody} from './world';
+import {createCoastalHeight} from './coastline';
+import {fitCoastalWater} from './coastal-water';
 
 export function jungleDrainage(seed:number,area:number) {
     const random=mulberry32(seed^0x29c731),angle=random()*Math.PI*2,cs=Math.cos(angle),sn=Math.sin(angle),phase=random()*6;
@@ -16,12 +18,13 @@ export function jungleWaterBodies(s:EditorState,j:JungleSettings):WaterBody[] {
     for(let i=0;i<=28;i++){const v=-.36+i/28*.72;points.push(d.world(d.bend(v),v));}
     const level=s.water+6+6*s.areaSize,endLevel=level-4*s.areaSize;
     const width=Math.max(river?8:3,(river?24:8)*s.areaSize),lakeCenter=points.at(-1)!,radius=Math.max(9,(river?29:17)*s.areaSize);
-    return [{id:'jungle-river',kind:'river',name:river?'Тропическая река':'Лесной ручей',points,level,endLevel,width,
+    return fitCoastalWater(s,[{id:'jungle-river',kind:'river',name:river?'Тропическая река':'Лесной ручей',points,level,endLevel,width,
         depth:river?2.8:1.5,bankWidth:Math.max(4,11*s.areaSize),bankSurface:'gravel',opacity:.78,wave:.12,clarity:river?3:4,flowSpeed:river?.5:.3,flowDirection:1},
         {id:'jungle-pool',kind:'lake',name:'Лесной водоём',points:Array.from({length:14},(_,i)=>{const a=i/14*Math.PI*2,r=radius*(1+.13*Math.sin(a*3+.7));return [lakeCenter[0]+Math.cos(a)*r,lakeCenter[1]+Math.sin(a)*r*.75] as Vec2;}),
-            level:endLevel,width:1,depth:2,bankWidth:Math.max(4,9*s.areaSize),bankSurface:'gravel',opacity:.8,wave:.06,clarity:2.5}];
+            level:endLevel,width:1,depth:2,bankWidth:Math.max(4,9*s.areaSize),bankSurface:'gravel',opacity:.8,wave:.06,clarity:2.5}]);
 }
 export function generateJungleTerrain(s:EditorState,j:JungleSettings,progress:(p:number)=>void=()=>{}) {
+    const coast=s.areaSize<1||s.island?createCoastalHeight(s):undefined;
     const noise=makeSimplex(s.seed^0x648ead),fine=makeSimplex(s.seed^0x79b912),d=jungleDrainage(s.seed,s.areaSize);
     const result=new Float32Array((s.N+1)**2),n=s.N+1,f=1/Math.max(.3,s.scale),gain=Math.pow(s.sharp/5,.7);
     for(let z=0;z<n;z++){
@@ -42,7 +45,7 @@ export function generateJungleTerrain(s:EditorState,j:JungleSettings,progress:(p
             h+=micro*.8*s.areaSize;
             const gully=1-smoothstep(.025,.12,Math.abs(noise(u*11+9,v*11-6)));
             h-=gully*1.5*j.microrelief*s.areaSize;
-            if(s.areaSize<1||s.island){const edge=1-smoothstep(.44,.495,Math.hypot(u,v));h=s.water-15*s.areaSize+(h-s.water+15*s.areaSize)*edge;}
+            if(coast)h=coast(h,wx/(1024*s.areaSize),wz/(1024*s.areaSize));
             result[z*n+x]=h;
         }
     }

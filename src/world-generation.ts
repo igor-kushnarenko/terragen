@@ -16,6 +16,7 @@ import {jungleDefaults,validateJungle,type JungleSettings} from './jungle-settin
 import {jungleWaterBodies} from './jungle-terrain';
 import {taigaDefaults,validateTaiga,taigaClimate,type TaigaSettings} from './taiga-settings';
 import {taigaWaterBodies} from './taiga-terrain';
+import {WORLD_TERRAIN_ALGORITHM} from './generation-settings';
 
 export interface WorldRequest {preset:WorldPresetId;seed:number;N:number;areaSize:number;erosion:0|1|2;plants:boolean;routes:boolean;jungle?:JungleSettings;taiga?:TaigaSettings;terrain?:Partial<Pick<EditorState,'height'|'scale'|'sharp'|'mountains'|'warp'>>;}
 export const defaultWorldRequest=():WorldRequest=>({preset:'archipelago',seed:1337,N:256,areaSize:1,erosion:1,plants:true,routes:true});
@@ -35,7 +36,7 @@ export function createWorldGeneration(model:EditorModel,terrain:TerrainSystem,ma
         const settings=worldSettings(model.state,{...request,N:preview?64:request.N}),erosion=preview?0:request.erosion;
         const jungle=request.preset==='jungle'?request.jungle??jungleDefaults():undefined;
         const taiga=request.preset==='taiga'?request.taiga??taigaDefaults():undefined;
-        const key=JSON.stringify([1,request.preset,settings.N,settings.seed,settings.areaSize,settings.scale,settings.height,settings.octaves,settings.sharp,settings.warp,settings.mountains,settings.island,settings.water,erosion,jungle?[jungle.microrelief,jungle.streams,jungle.variant==='river']:null,taiga?[taiga.terrainVariation,taiga.bogFrequency,taiga.water,taiga.moisture>.4]:null]);
+        const key=JSON.stringify([WORLD_TERRAIN_ALGORITHM,request.preset,settings.N,settings.seed,settings.areaSize,settings.scale,settings.height,settings.octaves,settings.sharp,settings.warp,settings.mountains,settings.island,settings.water,erosion,jungle?[jungle.microrelief,jungle.streams,jungle.variant==='river']:null,taiga?[taiga.terrainVariation,taiga.bogFrequency,taiga.water,taiga.moisture>.4]:null]);
         const cached=cache.get(key);if(cached){cache.delete(key);cache.set(key,cached);onProgress(1);return cached.slice();}
         const heights=await (preview?previewJobs:jobs).run({kind:'terrain',settings,seed:request.seed,preset:request.preset,worldErosion:erosion,jungle,taiga},onProgress);
         cache.set(key,heights.slice());while(cache.size>4)cache.delete(cache.keys().next().value!);return heights;
@@ -70,7 +71,7 @@ export function createWorldGeneration(model:EditorModel,terrain:TerrainSystem,ma
                 }
                 model.world=validateWorld(model.world,model.state);
                 vegetation.rebuild();
-                recordOperation(model,'preset',request.seed,{preset:['archipelago','desert','taiga','iron-islands','fjords','jungle'].indexOf(request.preset),recipeVersion:1,N:request.N,areaSize:request.areaSize,erosion:request.erosion,plants:request.plants,routes:request.routes},6);
+                recordOperation(model,'preset',request.seed,{preset:['archipelago','desert','taiga','iron-islands','fjords','jungle'].indexOf(request.preset),recipeVersion:1,N:request.N,areaSize:request.areaSize,erosion:request.erosion,plants:request.plants,routes:request.routes},WORLD_TERRAIN_ALGORITHM);
                 history.refreshCurrent();if(skipUndo)edit.discard();else edit.commit();feedback.setProgress(1);
                 feedback.setStatus(WORLD_PRESETS[request.preset].name+' готов · '+((performance.now()-started)/1000).toFixed(1)+' с');return true;
             }catch(error){edit.rollback();feedback.setProgress(0);if(error instanceof OperationCancelled){feedback.setStatus('Создание мира отменено');return false;}throw error;}
