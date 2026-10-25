@@ -6,8 +6,16 @@ import { BIOME_TREES } from './presets';
 import {naturalScale} from './object-appearance';
 import {worldPreset} from './world-recipes';
 import {scatterJungle} from './jungle-scatter';
+import {scatterTaiga} from './taiga-scatter';
+import {taigaRegion} from './taiga-habitat';
 export function scatterObjects(model: EditorModel, terrain: EcologyTerrain) {
-    if(model.world.preset==='jungle'&&model.world.recipe?.jungle)return scatterJungle(model,terrain);
+    function regional(result:{objects:WorldObject[];counts:{trees:number;rocks:number;bushes:number}}){
+        if(model.world.preset!=='taiga'&&model.world.biomes.some(b=>b.kind==='taiga')){const next=scatterTaiga(model,terrain,result.objects);result={objects:next.objects,counts:{trees:result.counts.trees+next.counts.trees,rocks:result.counts.rocks+next.counts.rocks,bushes:result.counts.bushes+next.counts.bushes}};}
+        if(model.world.preset!=='jungle'&&model.world.biomes.some(b=>b.kind==='jungle')){const next=scatterJungle(model,terrain,result.objects);result={objects:next.objects,counts:{trees:result.counts.trees+next.counts.trees,rocks:result.counts.rocks+next.counts.rocks,bushes:result.counts.bushes+next.counts.bushes}};}
+        return result;
+    }
+    if(model.world.preset==='taiga')return regional(scatterTaiga(model,terrain));
+    if(model.world.preset==='jungle'&&model.world.recipe?.jungle)return regional(scatterJungle(model,terrain));
     const manual = model.world.objects.filter(item=>item.source!=='scatter'), capacity = MAX_WORLD_OBJECTS-manual.length;
     const objects: WorldObject[] = [], ecology = createEcology(model,terrain), occupied = new FootprintIndex();
     const counts = { trees:0,rocks:0,bushes:0 };
@@ -32,7 +40,7 @@ export function scatterObjects(model: EditorModel, terrain: EcologyTerrain) {
     const targetTrees=Math.round(settings.treeDensity*9000*areaFactor),targetRocks=Math.round(settings.rockDensity*2500*areaFactor);
     for(let attempt=0;counts.trees<targetTrees&&objects.length<capacity&&attempt<targetTrees*18;attempt++) {
         const [x,z]=candidate(),e=ecology.sample(x,z);
-        if(e.kind==='jungle'||!e.dry || e.ny<0.86 || e.forest<0.035 || random()>e.forest || e.h>settings.snowLine-18)continue;
+        if(e.kind==='jungle'||taigaRegion(model.world,x,z).weight>.05||!e.dry || e.ny<0.86 || e.forest<0.035 || random()>e.forest || e.h>settings.snowLine-18)continue;
         const weights=[0.2+(1-e.moisture)*0.8,0.25+Math.max(0,e.h/settings.snowLine)*0.65,0.1+e.moisture*0.8,0.15+e.moisture*0.35];
         if(model.world.preset || model.world.biomes.length)weights.forEach((weight,i)=>weights[i]=weight*BIOME_TREES[e.kind][i]);
         let selected=random()*weights.reduce((a,b)=>a+b,0),species=0;
@@ -43,16 +51,15 @@ export function scatterObjects(model: EditorModel, terrain: EcologyTerrain) {
     for(let attempt=0;counts.rocks<targetRocks&&objects.length<capacity&&attempt<targetRocks*14;attempt++) {
         const [x,z]=candidate(),e=ecology.sample(x,z);
         const probability=(1-e.ny)*2.6+(e.kind==='mountains'?0.45:e.kind==='coast'?0.25:0.06);
-        if(!e.dry||e.ny<0.45||random()>probability)continue;
+        if(taigaRegion(model.world,x,z).weight>.05||!e.dry||e.ny<0.45||random()>probability)continue;
         if(place(random()<0.22?'boulder':'rock',x,z,0.45+Math.pow(random(),2)*2.2,false))counts.rocks++;
     }
     const targetBushes=Math.round(settings.treeDensity*600*areaFactor);
     for(let attempt=0;counts.bushes<targetBushes&&objects.length<capacity&&attempt<targetBushes*10;attempt++) {
         const [x,z]=candidate(),e=ecology.sample(x,z);
-        if(e.kind==='jungle'||!e.dry||e.ny<0.88||e.h>settings.snowLine-20||random()>e.edge*e.moisture)continue;
+        if(e.kind==='jungle'||taigaRegion(model.world,x,z).weight>.05||!e.dry||e.ny<0.88||e.h>settings.snowLine-20||random()>e.edge*e.moisture)continue;
         const asset=recipe?recipe.shrubs[Math.floor(random()*recipe.shrubs.length)]:'bush';
         if(place(asset,x,z,0.6+random()*0.65,false))counts.bushes++;
     }
-    if(model.world.biomes.some(b=>b.kind==='jungle')){const jungle=scatterJungle(model,terrain,[...manual,...objects]);return {objects:jungle.objects,counts:{trees:counts.trees+jungle.counts.trees,rocks:counts.rocks+jungle.counts.rocks,bushes:counts.bushes+jungle.counts.bushes}};}
-    return { objects:[...manual,...objects],counts };
+    return regional({objects:[...manual,...objects],counts});
 }

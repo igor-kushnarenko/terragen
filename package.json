@@ -13,6 +13,7 @@
     "verify:fog": "tsc --noEmit -p tsconfig.verification.json && node scripts/build-fog-check.mjs",
     "verify:worlds": "tsc --noEmit -p tsconfig.verification.json && node scripts/build-world-studio-check.mjs",
     "verify:jungle": "tsc --noEmit -p tsconfig.verification.json && tsx verification/build-jungle-worlds.ts && node scripts/build-jungle-check.mjs",
+    "verify:taiga": "tsc --noEmit -p tsconfig.verification.json && tsx verification/build-taiga-worlds.ts && node scripts/build-taiga-check.mjs",
     "verify:assets": "tsc --noEmit -p tsconfig.verification.json && node scripts/build-asset-storage-check.mjs",
     "verify:animation": "tsc --noEmit -p tsconfig.verification.json && node scripts/build-animation-check.mjs",
     "verify:balloon": "tsc --noEmit -p tsconfig.verification.json && node scripts/build-balloon-check.mjs",

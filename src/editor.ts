@@ -51,6 +51,7 @@ import {createWorldStudio,type WorldStudio} from './world-studio';
 import {WORLD_PRESETS,isWorldPreset} from './world-recipes';
 import {createWorkspace} from './workspace';
 import {createJungleInterface} from './jungle-ui';
+import {createTaigaInterface} from './taiga-ui';
 import type {LandscapePresetId} from './world';
 export interface EditorOptions {
     repository?: () => Promise<WorldRepository>;
@@ -162,6 +163,7 @@ export function createEditor(options:EditorOptions = {}) {
         else await worldGeneration.generate(request);
     });
     createJungleInterface(model,terrain,history,vegetation,materials,feedback,settings=>worldStudio!.selectJungle(settings));
+    createTaigaInterface(model,terrain,history,vegetation,materials,feedback,settings=>worldStudio!.selectTaiga(settings));
     createWorkspace(model,feedback,ui,input,render,autosave);
     const cancelGeneration=()=>{generation.cancelOperation();worldGeneration.cancel();};
     document.getElementById('btnCancelOperation')!.addEventListener('click', cancelGeneration);

@@ -12,4 +12,4 @@ export const LANDSCAPE_PRESETS: Record<LegacyPresetId, { name: string; descripti
         settings: { height: 100, scale: 1.8, mountains: 0.3, sharp: 1.3, warp: 0.3, island: false, water: 4, snowLine: 240, rockSlope: 0.38, treeDensity: 0.2, rockDensity: 0.1, soilMoisture: 0.65, clearingAmount: 0.7, foliageDensity: 0.9, sunEl: 20, sunAz: 115, fog: 0.3, weather: 'clear', windSpeed: 0.25, wave: 0.3, exposure: 0.62 }, trees: [0.3, 0.25, 1.5, 1.0] },
 };
 export const BIOME_TREES = { forest: LANDSCAPE_PRESETS.forest.trees, coast: LANDSCAPE_PRESETS.coast.trees,
-    mountains: LANDSCAPE_PRESETS.mountains.trees, valley: LANDSCAPE_PRESETS.valley.trees, meadow: [0.4, 0.2, 1, 1], jungle:[.1,.1,.2,2] };
+    mountains: LANDSCAPE_PRESETS.mountains.trees, valley: LANDSCAPE_PRESETS.valley.trees, meadow: [0.4, 0.2, 1, 1], jungle:[.1,.1,.2,2],taiga:[1,1,.3,.05] };

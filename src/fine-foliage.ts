@@ -7,15 +7,19 @@ import { createEcology, FootprintIndex, objectFootprint, type EcologySystem } fr
 import { qualityProfile } from './quality';
 import type {EnvironmentMaterials} from './environment-materials';
 import {createJungleHabitat,CanopyIndex} from './jungle-habitat';
+import {createTaigaHabitat,hasTaiga} from './taiga-habitat';
+import {taigaSurface} from './taiga-surface';
 export const FOLIAGE_CHUNK = 12;
 export const MAX_FOLIAGE_INSTANCES = 20000;
 export function foliageSeed(seed: number, x: number, z: number) { return (seed ^ Math.imul(x, 73856093) ^ Math.imul(z, 19349663) ^ 0x5ac39e71) >>> 0; }
 export function jungleGroundContext(model:EditorModel,terrain:Pick<TerrainSystem,'getH'|'getNormalY'>){const canopy=new CanopyIndex();for(const o of model.world.objects)if(o.source!=='scatter'||model.state.showScatter)canopy.add(o);return {canopy,habitat:createJungleHabitat(model,terrain)};}
-export function foliagePoints(model: EditorModel, terrain: Pick<TerrainSystem, 'getH' | 'getNormalY'>, cx: number, cz: number, ecology: EcologySystem = createEcology(model,terrain), occupied?: FootprintIndex,jungle?:ReturnType<typeof jungleGroundContext>) {
+export function taigaGroundContext(model:EditorModel,terrain:Pick<TerrainSystem,'getH'|'getNormalY'>){const canopy=new CanopyIndex();for(const o of model.world.objects)if(o.source!=='scatter'||model.state.showScatter)canopy.add(o);return {canopy,habitat:createTaigaHabitat(model,terrain)};}
+export function foliagePoints(model: EditorModel, terrain: Pick<TerrainSystem, 'getH' | 'getNormalY'>, cx: number, cz: number, ecology: EcologySystem = createEcology(model,terrain), occupied?: FootprintIndex,jungle?:ReturnType<typeof jungleGroundContext>,taiga?:ReturnType<typeof taigaGroundContext>) {
     const random = mulberry32(foliageSeed(model.seeds.scatter, cx, cz));
     const result: { x: number; y: number; z: number; yaw: number; scale: number; kind: number }[] = [];
     const tropical=model.world.preset==='jungle'&&!!model.world.recipe?.jungle||model.world.biomes.some(b=>b.kind==='jungle');
     if(tropical)jungle??=jungleGroundContext(model,terrain);
+    if(hasTaiga(model.world))taiga??=taigaGroundContext(model,terrain);
     for (let i = 0; i < Math.round(128 * model.state.foliageDensity * qualityProfile(model).foliageDensity); i++) {
         const x = (cx + random()) * FOLIAGE_CHUNK, z = (cz + random()) * FOLIAGE_CHUNK, h = terrain.getH(x, z);
         const yaw = random() * Math.PI * 2, scale = 0.65 + random() * 0.8, choice = random();
@@ -24,6 +28,12 @@ export function foliagePoints(model: EditorModel, terrain: Pick<TerrainSystem, '
         if(model.splatDetail[painted+1]+model.splatDetail[painted+2]>160)continue;
         const e = ecology.sample(x,z);
         if (!e.dry || ecology.pathClearance(x,z)<0.45 || occupied?.query(x,z).some(p=>Math.hypot(x-p.x,z-p.z)<p.radius+0.15 && h+0.5>p.minY && h<p.maxY)) continue;
+        if(taiga){const b=taiga.habitat.sample(x,z);if(b.weight>.05){
+            if(!b.dry||random()>b.weight*(1-b.t.snowCoverage*.94)*(.3+b.detail*.7))continue;
+            const shade=taiga.canopy.sample(x,z).shade,surface=taigaSurface(b,shade),sphagnum=b.bog*.7,moss=surface.moss*.65,lichen=surface.lichen*.75,fern=b.moisture*(1-b.bog)*shade*.20;
+            const kind=choice<sphagnum?9:choice<sphagnum+moss?3:choice<sphagnum+moss+lichen?8:choice<sphagnum+moss+lichen+fern?2:choice>.97&&b.moisture>.5?5:choice>.94?11:choice>.86&&random()<b.t.understoryDensity?12:choice>.7?0:10;
+            result.push({x,y:h,z,yaw,scale:scale*(kind===8||kind===9||kind===3?1.6:kind===12?.6:1),kind});continue;
+        }}
         if(tropical&&jungle){
             const j=jungle.habitat.sample(x,z);if(j.weight>.05){
                 const shade=jungle.canopy.sample(x,z).shade;
@@ -54,12 +64,13 @@ export function createFineFoliage(model: EditorModel, terrain: TerrainSystem, sc
     const chunks = new Map<string, T.InstancedMesh[]>(); let signature = '';
     const ecology=createEcology(model,terrain);let occupied=new FootprintIndex();
     let jungle:ReturnType<typeof jungleGroundContext>|undefined;
+    let taiga:ReturnType<typeof taigaGroundContext>|undefined;
     let objects=model.world.objects,biomes=model.world.biomes,routes=model.world.routes,bodies=model.world.waterBodies;
-    const settingsKey=()=>`${model.seeds.scatter}/${model.state.foliageDensity}/${model.state.water}/${model.state.snowLine}/${model.state.quality}/${model.state.soilMoisture}/${model.state.clearingAmount}/${model.state.showScatter}/${JSON.stringify(model.world.recipe?.jungle?['variant','canopy','emergents','understory','vines','moisture','clearings'].map(k=>model.world.recipe!.jungle![k as keyof import('./jungle-settings').JungleSettings]):null)}`;
+    const settingsKey=()=>`${model.seeds.scatter}/${model.state.foliageDensity}/${model.state.water}/${model.state.snowLine}/${model.state.quality}/${model.state.soilMoisture}/${model.state.clearingAmount}/${model.state.showScatter}/${JSON.stringify(model.world.recipe?.jungle?['variant','canopy','emergents','understory','vines','moisture','clearings'].map(k=>model.world.recipe!.jungle![k as keyof import('./jungle-settings').JungleSettings]):null)}/${JSON.stringify(model.world.recipe?.taiga)}`;
     let configuration='';
     function remove(key: string) { const meshes = chunks.get(key); meshes?.forEach(mesh => { scene.remove(mesh); mesh.dispose(); }); chunks.delete(key); }
     function clear() { for (const key of [...chunks.keys()]) remove(key); }
-    function indexObjects(){occupied=new FootprintIndex();for(const item of model.world.objects)if(item.source!=='scatter'||model.state.showScatter)occupied.insert(objectFootprint(item,terrain,false));objects=model.world.objects;jungle=model.world.recipe?.jungle||model.world.biomes.some(b=>b.kind==='jungle')?jungleGroundContext(model,terrain):undefined;}
+    function indexObjects(){occupied=new FootprintIndex();for(const item of model.world.objects)if(item.source!=='scatter'||model.state.showScatter)occupied.insert(objectFootprint(item,terrain,false));objects=model.world.objects;jungle=model.world.recipe?.jungle||model.world.biomes.some(b=>b.kind==='jungle')?jungleGroundContext(model,terrain):undefined;taiga=hasTaiga(model.world)?taigaGroundContext(model,terrain):undefined;}
     function invalidateRegions(rects:readonly (readonly [number,number,number,number])[]){
         if(configuration!==settingsKey()||biomes!==model.world.biomes||routes!==model.world.routes||bodies!==model.world.waterBodies)return;
         const ranges=rects.map(([i0,j0,i1,j1])=>[-HALF+(i0-1)*model.cell,-HALF+(j0-1)*model.cell,-HALF+(i1+1)*model.cell,-HALF+(j1+1)*model.cell]);
@@ -93,7 +104,7 @@ export function createFineFoliage(model: EditorModel, terrain: TerrainSystem, sc
             // Spread regeneration over frames instead of recreating the entire
             // camera neighbourhood in the frame that receives an impact.
             if(built>=6||built>0&&performance.now()-started>3)continue;built++;
-            const points = foliagePoints(model, terrain, candidate.x, candidate.z,ecology,occupied,jungle).slice(0, budget), meshes: T.InstancedMesh[] = [];
+            const points = foliagePoints(model, terrain, candidate.x, candidate.z,ecology,occupied,jungle,taiga).slice(0, budget), meshes: T.InstancedMesh[] = [];
             for (let kind = 0; kind < geometries.length; kind++) {
                 const data = points.filter(point => point.kind === kind); if (!data.length) continue;
                 const mesh = new T.InstancedMesh(geometries[kind], material, data.length), matrix = new T.Matrix4(); mesh.receiveShadow = true;

@@ -1,0 +1,64 @@
+
+> terrain-editor@0.22.0 build
+> npm run build:models && node scripts/sync-entry.mjs && npm run typecheck && vite build && node scripts/build-offline.mjs && node scripts/build-webgpu.mjs
+
+
+> terrain-editor@0.22.0 build:models
+> node scripts/build-models.mjs
+
+THREE.GLTFExporter: Creating normalized normal attribute from the non-normalized one.
+THREE.GLTFExporter: Creating normalized normal attribute from the non-normalized one.
+THREE.GLTFExporter: Creating normalized normal attribute from the non-normalized one.
+THREE.GLTFExporter: Creating normalized normal attribute from the non-normalized one.
+THREE.GLTFExporter: Creating normalized normal attribute from the non-normalized one.
+THREE.GLTFExporter: Creating normalized normal attribute from the non-normalized one.
+THREE.GLTFExporter: Creating normalized normal attribute from the non-normalized one.
+THREE.GLTFExporter: Creating normalized normal attribute from the non-normalized one.
+THREE.GLTFExporter: Creating normalized normal attribute from the non-normalized one.
+THREE.GLTFExporter: Creating normalized normal attribute from the non-normalized one.
+THREE.GLTFExporter: Creating normalized normal attribute from the non-normalized one.
+THREE.GLTFExporter: Creating normalized normal attribute from the non-normalized one.
+THREE.GLTFExporter: Creating normalized normal attribute from the non-normalized one.
+THREE.GLTFExporter: Creating normalized normal attribute from the non-normalized one.
+THREE.GLTFExporter: Creating normalized normal attribute from the non-normalized one.
+THREE.GLTFExporter: Creating normalized normal attribute from the non-normalized one.
+THREE.GLTFExporter: Creating normalized normal attribute from the non-normalized one.
+THREE.GLTFExporter: Creating normalized normal attribute from the non-normalized one.
+THREE.GLTFExporter: Creating normalized normal attribute from the non-normalized one.
+Built local GLB library: 73 models
+
+> terrain-editor@0.22.0 typecheck
+> tsc --noEmit
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 160 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/webgpu_lab.html                        4.38 kB │ gzip:     2.08 kB
+dist/index.html                             9.76 kB │ gzip:     3.67 kB
+dist/terrain_editor.html                    9.76 kB │ gzip:     3.67 kB
+dist/assets/webgpu_lab-B3QymXPN.css         2.60 kB │ gzip:     1.13 kB
+dist/assets/main-WjQa7gEJ.css              40.88 kB │ gzip:     9.34 kB
+dist/assets/OrbitControls-uqwVMBHH.js     644.22 kB │ gzip:   160.91 kB │ map:  3,067.27 kB
+dist/assets/webgpu_lab-CxA9_Opg.js        704.66 kB │ gzip:   199.51 kB │ map:  3,494.42 kB
+dist/assets/main-C4YjbGxF.js           17,780.60 kB │ gzip: 5,361.56 kB │ map: 19,399.51 kB
+
+✓ built in 1.13s
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 148 modules transformed.
+rendering chunks...
+✓ built in 595ms
+Offline HTML: dist/terrain_editor_standalone.html (also copied to project root)
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 14 modules transformed.
+rendering chunks...
+✓ built in 285ms
+Offline WebGPU lab: webgpu_lab_standalone.html (root + dist)

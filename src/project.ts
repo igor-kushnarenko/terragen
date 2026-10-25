@@ -4,6 +4,7 @@ import {validateBalloon,type BalloonState} from './balloon-state';
 import { BUILTIN_INFO } from './model-shapes';
 import {validWaterOutline} from './water-math';
 import {validateJungle} from './jungle-settings';
+import {validateTaiga} from './taiga-settings';
 import type { WalkPose } from './physics';
 import { createModel, RESOLUTIONS, SIZE, SPLAT_RES, type EditorModel, type EditorState } from './state';
 import { DEFAULT_WALK_SETTINGS, MAX_WORLD_OBJECTS, MAX_ANIMATED_OBJECTS, WORLD_PRESET_IDS, deriveSeeds, type ObjectAnimation, type OperationRecord, type OperationSeeds, type Vec2, type Vec3, type WalkSettings, type WorldData } from './world';
@@ -210,10 +211,11 @@ export function validateWorld(value: unknown, state: EditorState, legacy = false
     });
     const biomes = list(input.biomes, 'world.biomes', 1000).map((item, i) => {
         const p = `world.biomes[${i}]`, b = object(item, p);
-        const region = { id: id(b.id, `${p}.id`), name: text(b.name, `${p}.name`), kind: choice(b.kind, ['forest', 'coast', 'mountains', 'meadow', 'valley', 'jungle'], `${p}.kind`),
+        const region = { id: id(b.id, `${p}.id`), name: text(b.name, `${p}.name`), kind: choice(b.kind, ['forest', 'coast', 'mountains', 'meadow', 'valley', 'jungle', 'taiga'], `${p}.kind`),
             center: vec2(b.center, `${p}.center`), radius: number(b.radius, `${p}.radius`, 0.1, SIZE) } as WorldData['biomes'][number];
         if(b.source!==undefined)region.source=choice(b.source,['composition'] as const,p+'.source');
         if(b.jungle!==undefined){try{region.jungle=validateJungle(b.jungle);}catch{fail(p+'.jungle');}}
+        if(b.taiga!==undefined){try{region.taiga=validateTaiga(b.taiga);}catch{fail(p+'.taiga');}}
         return region;
     });
     const routes = list(input.routes, 'world.routes', 1000).map((item, i) => {
@@ -256,6 +258,7 @@ export function validateWorld(value: unknown, state: EditorState, legacy = false
         const r=object(input.recipe,'world.recipe');
         recipe={version:number(r.version,'world.recipe.version',1,1,true) as 1,seed:number(r.seed,'world.recipe.seed',0,0xffffffff,true),erosion:number(r.erosion,'world.recipe.erosion',0,2,true) as 0|1|2,plants:bool(r.plants,'world.recipe.plants'),routes:bool(r.routes,'world.recipe.routes')};
         if(r.jungle!==undefined){try{recipe.jungle=validateJungle(r.jungle);}catch{fail('world.recipe.jungle');}}
+        if(r.taiga!==undefined){try{recipe.taiga=validateTaiga(r.taiga);}catch{fail('world.recipe.taiga');}}
     }
     if(preset&&WORLD_PRESET_IDS.includes(preset as typeof WORLD_PRESET_IDS[number])&&!recipe)fail('world.recipe');
     const landmarks = list(legacy && input.landmarks === undefined ? [] : input.landmarks, 'world.landmarks', 1000).map((item,i) => {

@@ -55,7 +55,7 @@ export function createEcology(model: EditorModel, terrain: EcologyTerrain) {
         let strongest = 0;
         for (const biome of model.world.biomes) {
             const weight = 1 - smoothstep(biome.radius * 0.65, biome.radius, Math.hypot(x - biome.center[0], z - biome.center[1]));
-            const target = biome.kind === 'jungle' ? .95 : biome.kind === 'forest' ? 0.85 : biome.kind === 'mountains' ? 0.2 : biome.kind === 'coast' ? 0.08 : biome.kind === 'valley' ? 0.18 : 0;
+            const target = biome.kind === 'jungle' ? .95 : biome.kind === 'forest'||biome.kind==='taiga' ? 0.85 : biome.kind === 'mountains' ? 0.2 : biome.kind === 'coast' ? 0.08 : biome.kind === 'valley' ? 0.18 : 0;
             forest = forest * (1 - weight) + target * weight;
             if (weight > 0 && weight >= strongest) { strongest = weight; kind = biome.kind; }
         }

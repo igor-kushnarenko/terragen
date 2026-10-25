@@ -7,6 +7,7 @@ import { BUILTIN_INFO, makeBuiltinModel, type BuiltinAsset } from './model-shape
 import { base64Binary, MAX_ASSET_BYTES, readGLB, validateGLTF } from './asset-format';
 import {describeAsset,type AssetVault} from './asset-vault';
 import {MAX_ANIMATED_OBJECTS,type ModelAsset,type WorldData} from './world';
+import {isTaigaPlant,decorateTaigaMaterial} from './taiga-models';
 export interface ModelTemplate { id: string; name: string; category: ModelAsset['category']; collider: ModelAsset['collider']; bounds: T.Box3; parts: { geometry: T.BufferGeometry; material: T.Material | T.Material[] }[]; rig?:{root:T.Group;clips:T.AnimationClip[];bones:number;skinnedMeshes:number}; }
 const templates = new Map<string, ModelTemplate>(), prepared = new Map<string, ModelTemplate>();
 const assetKey = (asset: ModelAsset) => asset.blob + '/' + asset.category + '/' + asset.collider+'/'+!!asset.normalize;
@@ -21,6 +22,7 @@ function template(id: string, name: string, category: ModelAsset['category'], co
     const parts: ModelTemplate['parts'] = []; let vertices = 0;
     scene.traverse(object => {
         if (!(object instanceof T.Mesh)) return;
+        if(isTaigaPlant(id))decorateTaigaMaterial(object.material);
         vertices += object.geometry.attributes.position.count;
         const geometry = object.geometry.clone();
         // A static rest-pose proxy remains available to existing bounds/collision consumers.

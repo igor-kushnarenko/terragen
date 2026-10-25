@@ -18,6 +18,8 @@ import {objectColor} from './object-appearance';
 import {isWorldPreset} from './world-recipes';
 import {isJunglePlant} from './jungle-models';
 import {createAnimatedModels} from './animated-models';
+import {isTaigaPlant,taigaLeafDepth} from './taiga-models';
+import {taigaRegion} from './taiga-habitat';
 export function createVegetation(model:EditorModel,render:Pick<RenderingSystem,'scene'>,terrain:TerrainSystem,feedback:Feedback,environment?:EnvironmentMaterials) {
     type Batch={mesh:T.InstancedMesh;data:WorldObject[];source:WorldObject['source'];asset:string;level:number;cell:string};
     type Chunk={batches:Batch[];bounds:T.Box3;level:number};
@@ -41,9 +43,15 @@ export function createVegetation(model:EditorModel,render:Pick<RenderingSystem,'
             for(let level=0;level<(fine?1:3);level++)for(const part of modelLOD(data[0].asset,level)) {
                 const category=getModel(data[0].asset).category,wind=category==='tree'?1:category==='shrub'?2:0;
                 environment?.decorate(part.material,wind);
-                const mesh=new T.InstancedMesh(part.geometry,part.material,data.length);mesh.castShadow=!fine&&(!isJunglePlant(data[0].asset)||category==='tree'||category==='rock');mesh.receiveShadow=true;mesh.name='Objects '+key+' LOD '+level;
+                const mesh=new T.InstancedMesh(part.geometry,part.material,data.length);mesh.castShadow=!fine&&(!(isJunglePlant(data[0].asset)||isTaigaPlant(data[0].asset))||category==='tree'||category==='rock'||category==='wood'&&isTaigaPlant(data[0].asset));mesh.receiveShadow=true;mesh.name='Objects '+key+' LOD '+level;
                 if(wind&&environment)mesh.customDepthMaterial=environment.depth(wind);
+                if(isTaigaPlant(data[0].asset)&&!Array.isArray(part.material)&&['taiga-deciduous','taiga-mixed-deciduous'].includes(part.material.name)&&environment)mesh.customDepthMaterial=taigaLeafDepth(environment.depth(wind),part.material.name==='taiga-mixed-deciduous');
                 const color=new T.Color();data.forEach((item,i)=>mesh.setColorAt(i,objectColor(item,color)));
+                if(isTaigaPlant(data[0].asset)){
+                    // Taiga's material decodes tint, snow and season from the instance colour.
+                    // This keeps geometry shared across chunks, seasons and all three LODs.
+                    data.forEach((item,i)=>{const t=taigaRegion(model.world,item.position[0],item.position[2]).settings;mesh.setColorAt(i,color.setRGB(item.tint,t?.snowCoverage??0,t?.season==='winter'?2:t?.season==='autumn'?1:0));});
+                }
                 const batch={mesh,data,source:data[0].source,asset:data[0].asset,level,cell}; groups.push(batch);chunk.batches.push(batch);render.scene.add(mesh);
             }
         }
@@ -80,7 +88,7 @@ export function createVegetation(model:EditorModel,render:Pick<RenderingSystem,'
             for(const batch of chunk.batches){
                 const fine=isFinePlantAsset(batch.asset);
                 batch.mesh.visible=(fine?model.state.showFoliage&&batch.mesh.boundingBox!.distanceToPoint(camera.position)<Math.max(80,Math.min(model.state.foliageDistance,qualityProfile(model).foliageDistance)*2):batch.level===chunk.level)&&(batch.source!=='scatter'||model.state.showScatter);
-                if(isJunglePlant(batch.asset)&&getModel(batch.asset).category==='shrub'&&chunk.bounds.distanceToPoint(camera.position)>qualityProfile(model).foliageDistance*3)batch.mesh.visible=false;
+                if((isJunglePlant(batch.asset)||isTaigaPlant(batch.asset))&&getModel(batch.asset).category==='shrub'&&chunk.bounds.distanceToPoint(camera.position)>qualityProfile(model).foliageDistance*3)batch.mesh.visible=false;
             }
             if(frustum.intersectsBox(chunk.bounds)&&chunk.batches.some(batch=>batch.mesh.visible))visible++;
         }
@@ -91,6 +99,7 @@ export function createVegetation(model:EditorModel,render:Pick<RenderingSystem,'
         feedback.setStatus(`Расставлено: деревьев ${counts.trees}, камней ${counts.rocks}, кустов ${counts.bushes} · сид ${model.seeds.scatter}`);
     }
     function clearScatter(){model.world.objects=model.world.objects.filter(item=>item.source!=='scatter');rebuild();}
+    function updateTaigaClimate(){const color=new T.Color();for(const batch of groups)if(isTaigaPlant(batch.asset)){batch.data.forEach((item,i)=>{const t=taigaRegion(model.world,item.position[0],item.position[2]).settings;batch.mesh.setColorAt(i,color.setRGB(item.tint,t?.snowCoverage??0,t?.season==='winter'?2:t?.season==='autumn'?1:0));});batch.mesh.instanceColor!.needsUpdate=true;}}
     let runtimePoses=false;
     function renderFloating(items:ReadonlyMap<string,FloatingBody>|null,alpha:number){
         animated.renderFloating(items,alpha);
@@ -99,7 +108,7 @@ export function createVegetation(model:EditorModel,render:Pick<RenderingSystem,'
         for(const group of groups){let changed=false;group.data.forEach((o,i)=>{const item=items.get(o.id);if(!item)return;position.lerpVectors(item.pose.previousPosition,item.pose.position,alpha);quaternion.slerpQuaternions(item.pose.previousRotation,item.pose.rotation,alpha);scale.fromArray(o.scale);group.mesh.setMatrixAt(i,matrix.compose(position,quaternion,scale));changed=true;});if(changed){group.mesh.instanceMatrix.needsUpdate=true;group.mesh.computeBoundingBox();group.mesh.computeBoundingSphere();}}
         for(const chunk of chunks.values())if(chunk.batches.some(b=>b.data.some(o=>o.floating))){chunk.bounds.makeEmpty();for(const batch of chunk.batches)if(batch.level===0)chunk.bounds.union(batch.mesh.boundingBox!);}
     }
-    return {bindChange(callback:()=>void){onChange=callback;},scatter,snapScatter,clearScatter,setVisibilityScatter,rebuild,refreshRegions,updateView,renderFloating,updateAnimations:animated.update,animationState:animated.state,
+    return {bindChange(callback:()=>void){onChange=callback;},scatter,snapScatter,clearScatter,setVisibilityScatter,rebuild,refreshRegions,updateTaigaClimate,updateView,renderFloating,updateAnimations:animated.update,animationState:animated.state,
         pick(ray:T.Ray){const caster=new T.Raycaster();caster.ray.copy(ray);const meshes=groups.filter(g=>g.mesh.visible);const hit=caster.intersectObjects(meshes.map(g=>g.mesh))[0],actor=animated.pick(ray);if(hit?.instanceId===undefined)return actor;const batch=meshes.find(g=>g.mesh===hit.object);return actor&&actor.distance<hit.distance?actor:batch?{id:batch.data[hit.instanceId].id,distance:hit.distance}:actor;},
         get statistics(){return {total:chunks.size,visible,levels:[...chunks.values()].reduce((sum,chunk)=>{sum[chunk.level]++;return sum;},[0,0,0]),animated:animated.statistics};},
         get trees(){return groups.find(group=>group.asset==='pine'&&group.source==='scatter'&&group.level===0)?.mesh??null;},

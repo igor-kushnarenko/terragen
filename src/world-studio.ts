@@ -7,6 +7,8 @@ import {OperationCancelled} from './worker-jobs';
 import {presetArt} from './preset-art';
 import {createJungleControls} from './jungle-controls';
 import {jungleDefaults,type JungleSettings} from './jungle-settings';
+import {createTaigaControls} from './taiga-controls';
+import {taigaDefaults,type TaigaSettings} from './taiga-settings';
 
 export function createWorldStudio(model:EditorModel,generation:WorldGeneration,feedback:Feedback,create:()=>Promise<unknown>){
     const panel=document.getElementById('panel')!;
@@ -37,6 +39,8 @@ export function createWorldStudio(model:EditorModel,generation:WorldGeneration,f
     for(const [value,name]of [[128,'Быстрая · 128'],[256,'Обычная · 256'],[512,'Подробная · 512']] as const){const o=el('option',resolution,name);o.value=String(value);}resolution.value='256';
     const jungleGroup=el('div',fieldset);jungleGroup.className='jungle-creation-controls';jungleGroup.hidden=true;
     const jungleForm=createJungleControls(jungleGroup,jungleDefaults(),invalidate,true);
+    const taigaGroup=el('div',fieldset);taigaGroup.className='jungle-creation-controls';taigaGroup.hidden=true;
+    const taigaForm=createTaigaControls(taigaGroup,taigaDefaults(),invalidate,true);
     const extra=el('details',fieldset);extra.className='world-advanced';el('summary',extra,'Настроить рецепт');
     const erosionLabel=el('label',extra,'Естественная обработка'),erosion=el('select',erosionLabel);erosion.setAttribute('aria-label','Эрозия нового мира');
     for(const [value,name]of [[0,'Без эрозии'],[1,'Мягкая · рекомендуется'],[2,'Выраженная']] as const){const o=el('option',erosion,name);o.value=String(value);}erosion.value='1';
@@ -57,6 +61,7 @@ export function createWorldStudio(model:EditorModel,generation:WorldGeneration,f
     function setPreset(id:WorldPresetId){
         selected=id;invalidate();const recipe=WORLD_PRESETS[id];
         jungleGroup.hidden=id!=='jungle';if(id==='jungle')jungleForm.sync(jungleDefaults());
+        taigaGroup.hidden=id!=='taiga';if(id==='taiga')taigaForm.sync(taigaDefaults());
         description.replaceChildren();el('strong',description,recipe.name);el('p',description,recipe.description);el('p',description,recipe.plantsLabel).className='hint';el('p',description,recipe.climate).className='world-climate';
         for(const [key,input]of terrainFields){input.value=String(recipe.settings[key as keyof typeof recipe.settings]);(input.nextElementSibling as HTMLOutputElement).value=input.value;}
         for(const [key,b]of cardButtons)b.setAttribute('aria-pressed',String(key===id));
@@ -64,7 +69,7 @@ export function createWorldStudio(model:EditorModel,generation:WorldGeneration,f
     for(const id of WORLD_PRESET_IDS){const recipe=WORLD_PRESETS[id],b=el('button',cards);b.type='button';b.className='world-preset-card';b.style.setProperty('--world-color',recipe.color);b.setAttribute('aria-label','Пресет '+recipe.name);b.setAttribute('aria-pressed','false');
         const icon=el('span',b);icon.innerHTML=presetArt(id);icon.className='world-preset-icon';icon.setAttribute('aria-hidden','true');el('strong',b,recipe.name);b.onclick=()=>setPreset(id);cardButtons.set(id,b);
     }
-    function request():WorldRequest{if(!seed.value.trim())throw new Error('Укажите сид мира или нажмите кнопку случайного сида');return {preset:selected,seed:Number(seed.value),N:Number(resolution.value),areaSize:Number(size.value),erosion:Number(erosion.value) as 0|1|2,plants:plants.checked,routes:routes.checked,...(selected==='jungle'?{jungle:jungleForm.read()}:{}),terrain:Object.fromEntries([...terrainFields].map(([key,input])=>[key,Number(input.value)]))};}
+    function request():WorldRequest{if(!seed.value.trim())throw new Error('Укажите сид мира или нажмите кнопку случайного сида');return {preset:selected,seed:Number(seed.value),N:Number(resolution.value),areaSize:Number(size.value),erosion:Number(erosion.value) as 0|1|2,plants:plants.checked,routes:routes.checked,...(selected==='jungle'?{jungle:jungleForm.read()}:{}),...(selected==='taiga'?{taiga:taigaForm.read()}:{}),terrain:Object.fromEntries([...terrainFields].map(([key,input])=>[key,Number(input.value)]))};}
     for(const input of [seed,size,resolution,erosion,plants,routes])input.addEventListener('change',invalidate);
     const rgb=(hex:number)=>[(hex>>16)&255,(hex>>8)&255,hex&255];
     preview.onclick=async()=>{
@@ -89,11 +94,11 @@ export function createWorldStudio(model:EditorModel,generation:WorldGeneration,f
             if(![...resolution.options].some(o=>o.value===String(model.state.N))){const o=el('option',resolution,'Текущая · '+model.state.N);o.value=String(model.state.N);}
             if(![...size.options].some(o=>o.value===String(model.state.areaSize))){const o=el('option',size,Math.round(model.state.areaSize*1024)+' м');o.value=String(model.state.areaSize);}
             resolution.value=String(model.state.N);size.value=String(model.state.areaSize);
-            const saved=model.world.recipe;if(saved){erosion.value=String(saved.erosion);plants.checked=saved.plants;routes.checked=saved.routes;if(saved.jungle)jungleForm.sync(saved.jungle);}
+            const saved=model.world.recipe;if(saved){erosion.value=String(saved.erosion);plants.checked=saved.plants;routes.checked=saved.routes;if(saved.jungle)jungleForm.sync(saved.jungle);if(saved.taiga)taigaForm.sync(saved.taiga);}
         }
     }
     setPreset('archipelago');selectTab('new');feedback.uiSync.worldCreation=synchronize;synchronize();
     function reveal(id:string){selectTab(id);root.dispatchEvent(new Event('workspace-reveal',{bubbles:true}));}
-    return {request,selectNew(){reveal('new');},selectSaved(){reveal('saved');},selectJungle(settings:JungleSettings=jungleDefaults()){setPreset('jungle');jungleForm.sync(settings);reveal('new');}};
+    return {request,selectNew(){reveal('new');},selectSaved(){reveal('saved');},selectJungle(settings:JungleSettings=jungleDefaults()){setPreset('jungle');jungleForm.sync(settings);reveal('new');},selectTaiga(settings:TaigaSettings=taigaDefaults()){setPreset('taiga');taigaForm.sync(settings);reveal('new');}};
 }
 export type WorldStudio=ReturnType<typeof createWorldStudio>;

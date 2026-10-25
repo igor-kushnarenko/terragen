@@ -5,10 +5,13 @@ import type {WorldPresetId} from './world';
 import type {Progress} from './terrain-compute';
 import {generateJungleTerrain} from './jungle-terrain';
 import {jungleDefaults,type JungleSettings} from './jungle-settings';
+import {taigaDefaults,type TaigaSettings} from './taiga-settings';
+import {generateTaigaTerrain} from './taiga-terrain';
 
 /** Recipe v1: macro landforms in metres, independent of mesh resolution. */
-export function generateWorldTerrain(s:EditorState,preset:WorldPresetId,progress:Progress=()=>{},jungle?:JungleSettings){
+export function generateWorldTerrain(s:EditorState,preset:WorldPresetId,progress:Progress=()=>{},jungle?:JungleSettings,taiga?:TaigaSettings){
     if(preset==='jungle')return generateJungleTerrain(s,jungle??jungleDefaults(),progress);
+    if(preset==='taiga')return generateTaigaTerrain(s,taiga??taigaDefaults(),progress);
     const random=mulberry32(s.seed^0x5a3712),noise=makeSimplex(s.seed),detail=makeSimplex(s.seed^0x2f913),angle=random()*Math.PI*2,cs=Math.cos(angle),sn=Math.sin(angle);
     const islands=Array.from({length:preset==='archipelago'?12:7},(_,i)=>{
         const a=i*2.399963+random()*.5,r=i===0?.04:.16+random()*.24;
@@ -56,9 +59,6 @@ export function generateWorldTerrain(s:EditorState,preset:WorldPresetId,progress
                 shore=(distance-.78)*.15;shore=Math.min(shore,(z+.43)*8);
                 elevation=(.35+.65*broad)*smoothstep(.7,3.3,distance)*(.5+.5*inland);
                 elevation*=1-channel*.75;
-            }else if(preset==='taiga'){
-                const ridge=1-Math.abs(noise(warpX*3+5,warpZ*3));
-                elevation=.10+broad*.36+ridge*ridge*s.mountains*.4+fine*.06;
             }else{
                 const ridge=1-Math.abs(noise(warpX*4-3,warpZ*4+7));
                 elevation=.1+broad*.3+ridge**(1.6+sharp)*s.mountains*.5+fine*.1;

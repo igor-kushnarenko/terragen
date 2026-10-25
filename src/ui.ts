@@ -19,6 +19,7 @@ import { QUALITY_PROFILES } from './quality';
 import type { NatureAudio } from './nature-audio';
 import {generationOctaveLimit} from './generation-settings';
 import {jungleDefaults,JUNGLE_VARIANTS,type JungleVariant} from './jungle-settings';
+import {taigaDefaults,TAIGA_VARIANTS,type TaigaVariant} from './taiga-settings';
 type NumericKey = {
     [K in keyof EditorState]: EditorState[K] extends number ? K : never;
 }[keyof EditorState];
@@ -327,14 +328,16 @@ export function createInterface(model: EditorModel, feedback: Feedback, actions:
     el('p',{class:'hint',text:'Замена обновляет все экземпляры выбранной модели, сохраняя их положение и масштаб. Действие можно отменить.'},imports);
     el('div', { class: 'hint', text: 'Скелеты и клипы определяются автоматически. После размещения выберите объект: клип, пауза, скорость и повтор доступны в его параметрах. До 128 анимированных экземпляров, по умолчанию без коллизий. Для glTF выберите также BIN и текстуры. До 64 МБ на модель, 512 МБ на мир и 20 импортированных моделей. Полный проект .terrain включает модели и анимации для работы офлайн.' }, library);
     const biomeSection=section('Локальные биомы',false),biomeKind=el('select',{'aria-label':'Вид биома'},biomeSection);biomeSection.id='biomeSettings';
-    for(const [id,name]of [['forest','Лес'],['meadow','Луг / поляна'],['coast','Побережье'],['mountains','Горы'],['valley','Долина'],['jungle','Джунгли / Tropical Jungle']])el('option',{value:id,text:name},biomeKind);
+    for(const [id,name]of [['forest','Лес'],['meadow','Луг / поляна'],['coast','Побережье'],['mountains','Горы'],['valley','Долина'],['taiga','Тайга / Boreal Forest'],['jungle','Джунгли / Tropical Jungle']])el('option',{value:id,text:name},biomeKind);
     const biomeRadius=el('input',{type:'number',min:10,max:512,value:100,'aria-label':'Радиус биома, м'},biomeSection);
     const jungleVariant=el('select',{'aria-label':'Вариант локальных джунглей'},biomeSection);jungleVariant.hidden=true;
     for(const [id,variant]of Object.entries(JUNGLE_VARIANTS))el('option',{value:id,text:variant.name},jungleVariant);
-    biomeKind.addEventListener('change',()=>jungleVariant.hidden=biomeKind.value!=='jungle');
+    const taigaVariant=el('select',{'aria-label':'Вариант локальной тайги'},biomeSection);taigaVariant.hidden=true;
+    for(const [id,variant]of Object.entries(TAIGA_VARIANTS))el('option',{value:id,text:variant.name},taigaVariant);
+    biomeKind.addEventListener('change',()=>{jungleVariant.hidden=biomeKind.value!=='jungle';taigaVariant.hidden=biomeKind.value!=='taiga';});
     button(biomeSection,'Добавить биом в центре вида',()=>{
         const kind=biomeKind.value as typeof model.world.biomes[number]['kind'];let id=1;const entities=[...model.world.biomes,...model.world.objects,...model.world.routes,...model.world.waterBodies,...model.world.groups,...model.world.viewpoints];while(entities.some(b=>b.id===`biome-${id}`))id++;
-        edits.replaceWorld({biomes:[...model.world.biomes,{id:`biome-${id}`,name:kind==='jungle'?JUNGLE_VARIANTS[jungleVariant.value as JungleVariant].name:biomeKind.selectedOptions[0].text,kind,center:[Math.max(-512,Math.min(512,render.controls.target.x)),Math.max(-512,Math.min(512,render.controls.target.z))],radius:Number(biomeRadius.value),...(kind==='jungle'?{jungle:jungleDefaults(jungleVariant.value as JungleVariant)}:{})}]},'Добавить биом');
+        edits.replaceWorld({biomes:[...model.world.biomes,{id:`biome-${id}`,name:kind==='jungle'?JUNGLE_VARIANTS[jungleVariant.value as JungleVariant].name:kind==='taiga'?TAIGA_VARIANTS[taigaVariant.value as TaigaVariant].name:biomeKind.selectedOptions[0].text,kind,center:[Math.max(-512,Math.min(512,render.controls.target.x)),Math.max(-512,Math.min(512,render.controls.target.z))],radius:Number(biomeRadius.value),...(kind==='jungle'?{jungle:jungleDefaults(jungleVariant.value as JungleVariant)}:{}),...(kind==='taiga'?{taiga:taigaDefaults(taigaVariant.value as TaigaVariant)}:{})}]},'Добавить биом');
     });
     const biomeList=el('div',{class:'hint'},biomeSection);feedback.uiSync.biomes=()=>biomeList.textContent=model.world.biomes.map(b=>`${b.name} · ${b.radius} м`).join('; ')||'Заданных биомов нет — используется естественное распределение.';feedback.uiSync.biomes();
     button(biomeSection,'Убрать последний биом',()=>edits.replaceWorld({biomes:model.world.biomes.slice(0,-1)},'Убрать биом'));

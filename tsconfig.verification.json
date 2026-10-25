@@ -13,6 +13,8 @@
     "verification/world-studio-check.ts",
     "verification/jungle-check.ts",
     "verification/jungle-world.ts",
+    "verification/taiga-check.ts",
+    "verification/taiga-world.ts",
     "verification/asset-storage-check.ts",
     "verification/animation-check.ts",
     "verification/texture-check.ts",

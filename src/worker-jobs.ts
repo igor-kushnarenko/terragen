@@ -2,7 +2,8 @@ import type { EditorState } from './state';
 import type { HeightFeature } from './landscape-compute';
 import type { WaterBody, WorldRoute,WorldPresetId } from './world';
 import type {JungleSettings} from './jungle-settings';
-export interface TerrainJob { kind: 'terrain' | 'erosion' | 'shape' | 'water'; settings: EditorState; seed: number; heights?: Float32Array; features?: HeightFeature[]; routes?: WorldRoute[]; waterBodies?: WaterBody[]; preset?:WorldPresetId;worldErosion?:0|1|2;jungle?:JungleSettings; }
+import type {TaigaSettings} from './taiga-settings';
+export interface TerrainJob { kind: 'terrain' | 'erosion' | 'shape' | 'water'; settings: EditorState; seed: number; heights?: Float32Array; features?: HeightFeature[]; routes?: WorldRoute[]; waterBodies?: WaterBody[]; preset?:WorldPresetId;worldErosion?:0|1|2;jungle?:JungleSettings;taiga?:TaigaSettings; }
 export type WorkerReply = { type: 'progress'; fraction: number } | { type: 'result'; heights: Float32Array } | { type: 'error'; message: string };
 export interface JobRunner {
     run(job: TerrainJob, progress: (fraction: number) => void): Promise<Float32Array>;

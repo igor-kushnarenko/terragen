@@ -8,6 +8,8 @@ export const BUILTIN_INFO = {
     fern:{name:'Папоротник',category:'shrub',collider:'none'},moss:{name:'Мох',category:'shrub',collider:'none'},
     'jungle-herb':{name:'Тропическое почвопокровное растение',category:'shrub',collider:'none'},'jungle-fungi':{name:'Лесные грибы',category:'shrub',collider:'none'},
     'jungle-seedling':{name:'Тропические ростки',category:'shrub',collider:'none'},'jungle-fern':{name:'Широкий тропический папоротник',category:'shrub',collider:'none'},
+    'taiga-lichen':{name:'Ягель и лишайник',category:'shrub',collider:'none'},'taiga-sphagnum':{name:'Сфагнум',category:'shrub',collider:'none'},
+    'taiga-litter':{name:'Хвойный опад и веточки',category:'shrub',collider:'none'},'taiga-cones':{name:'Сосновые шишки',category:'shrub',collider:'none'},'taiga-seedling':{name:'Хвойная поросль',category:'shrub',collider:'none'},
     pine: { name: 'Сосна', category: 'tree', collider: 'trunk' }, spruce: { name: 'Ель', category: 'tree', collider: 'trunk' },
     birch: { name: 'Берёза', category: 'tree', collider: 'trunk' }, oak: { name: 'Дуб', category: 'tree', collider: 'trunk' },
     bush: { name: 'Лесной куст', category: 'shrub', collider: 'none' }, rock: { name: 'Камень', category: 'rock', collider: 'convex' },

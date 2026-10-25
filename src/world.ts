@@ -1,4 +1,5 @@
 import type {JungleSettings} from './jungle-settings';
+import type {TaigaSettings} from './taiga-settings';
 export const MAX_WORLD_OBJECTS = 20000;
 export const MAX_ANIMATED_OBJECTS = 128;
 export interface ObjectAnimation {
@@ -38,11 +39,12 @@ export interface WorldObject {
 export interface BiomeRegion {
     id: string;
     name: string;
-    kind: 'forest' | 'coast' | 'mountains' | 'meadow' | 'valley' | 'jungle';
+    kind: 'forest' | 'coast' | 'mountains' | 'meadow' | 'valley' | 'jungle' | 'taiga';
     center: Vec2;
     radius: number;
     source?: 'composition';
     jungle?:JungleSettings;
+    taiga?:TaigaSettings;
 }
 export interface WorldRoute {
     id: string;
@@ -60,7 +62,7 @@ export type LegacyPresetId = 'forest' | 'coast' | 'mountains' | 'valley';
 export const WORLD_PRESET_IDS = ['archipelago','desert','taiga','iron-islands','fjords','jungle'] as const;
 export type WorldPresetId = typeof WORLD_PRESET_IDS[number];
 export type LandscapePresetId = LegacyPresetId | WorldPresetId;
-export interface WorldRecipe {version:1;seed:number;erosion:0|1|2;plants:boolean;routes:boolean;jungle?:JungleSettings;}
+export interface WorldRecipe {version:1;seed:number;erosion:0|1|2;plants:boolean;routes:boolean;jungle?:JungleSettings;taiga?:TaigaSettings;}
 export interface LandscapePoint {
     id: string; name: string; kind: 'glade' | 'valley' | 'viewpoint' | 'landmark';
     position: Vec2; radius: number;

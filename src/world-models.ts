@@ -1,9 +1,11 @@
 import * as T from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 import {JUNGLE_PLANTS,isJunglePlant,makeJunglePlant} from './jungle-models';
+import {TAIGA_PLANTS,isTaigaPlant,makeTaigaPlant} from './taiga-models';
 
 export const WORLD_PLANTS={
     ...JUNGLE_PLANTS,
+    ...TAIGA_PLANTS,
     palm:{name:'Кокосовая пальма',category:'tree',collider:'trunk'},
     'jungle-palm':{name:'Тропическая пальма',category:'tree',collider:'trunk'},
     kapok:{name:'Капок',category:'tree',collider:'trunk'},larch:{name:'Лиственница',category:'tree',collider:'trunk'},
@@ -19,6 +21,7 @@ export const isWorldPlant=(id:string):id is WorldPlantId=>Object.hasOwn(WORLD_PL
 /** Local opaque species, two merged parts at most; all three LODs keep their silhouette. */
 export function makeWorldPlant(id:WorldPlantId,level=0){
     if(isJunglePlant(id))return makeJunglePlant(id,level);
+    if(isTaigaPlant(id))return makeTaigaPlant(id,level);
     const root=new T.Group(),wood:T.BufferGeometry[]=[],leaves:T.BufferGeometry[]=[],sides=level===0?7:4;
     const color=id==='heather'?0x827087:id==='cactus'?0x82955c:id==='saxaul'||id==='dry-bush'?0x9b9665:id==='larch'?0x698f55:id==='mountain-birch'?0x8d9c65:id==='wind-pine'||id==='juniper'?0x4e6b61:0x467f4a;
     function branch(a:number[],b:number[],radius:number,leaf=false){

@@ -13,6 +13,7 @@ import {oceanGeometry} from './water-geometry';
 import {waveSettings} from './water-surface';
 import {jungleSurfaceMap,JUNGLE_MAP_SIZE} from './jungle-surface';
 import {isJunglePlant} from './jungle-models';
+import {taigaSurfaceMaps,TAIGA_MAP_SIZE} from './taiga-surface';
 export function createMaterials(model: EditorModel, render: Pick<RenderingSystem, 'scene'>) {
     const environment=createEnvironmentMaterials();
     const splatTex = new THREE.DataTexture(model.splat, SPLAT_RES, SPLAT_RES, THREE.RGBAFormat, THREE.UnsignedByteType);
@@ -24,6 +25,8 @@ export function createMaterials(model: EditorModel, render: Pick<RenderingSystem
     biomeTex.magFilter=biomeTex.minFilter=THREE.LinearFilter;biomeTex.needsUpdate=true;
     const jungleTex=new THREE.DataTexture(jungleSurfaceMap(model),JUNGLE_MAP_SIZE,JUNGLE_MAP_SIZE,THREE.RGBAFormat);
     jungleTex.magFilter=jungleTex.minFilter=THREE.LinearFilter;jungleTex.needsUpdate=true;
+    const taigaMaps=taigaSurfaceMaps(model),taigaTex=new THREE.DataTexture(taigaMaps.habitat,TAIGA_MAP_SIZE,TAIGA_MAP_SIZE,THREE.RGBAFormat),taigaCoverTex=new THREE.DataTexture(taigaMaps.cover,TAIGA_MAP_SIZE,TAIGA_MAP_SIZE,THREE.RGBAFormat);
+    for(const texture of [taigaTex,taigaCoverTex]){texture.magFilter=texture.minFilter=THREE.LinearFilter;texture.needsUpdate=true;}
     const detailTex = new THREE.DataTexture(model.splatDetail, SPLAT_RES, SPLAT_RES, THREE.RGBAFormat, THREE.UnsignedByteType);
     detailTex.magFilter = detailTex.minFilter = THREE.LinearFilter; detailTex.needsUpdate = true;
     const coverBytes = new Uint8Array(128 * 128), coverTex = new THREE.DataTexture(coverBytes, 128, 128, THREE.RedFormat);
@@ -35,6 +38,7 @@ export function createMaterials(model: EditorModel, render: Pick<RenderingSystem
     coverTex.magFilter = coverTex.minFilter = THREE.LinearFilter; coverTex.needsUpdate = true;
     const terrainUniforms = {
         uJungleMap:{value:jungleTex},
+        uTaigaMap:{value:taigaTex},uTaigaCover:{value:taigaCoverTex},
         uBiomes:{value:biomeTex},uWorldGround:{value:new THREE.Vector4()},uWorldRock:{value:new THREE.Color(0xffffff)},uWorldSand:{value:new THREE.Color(0xffffff)},uShoreTime:environment.uniforms.uEnvTime,uShoreReach:{value:0},
         uWaterLevels:{value:waterLevelTex},
         uContactMap: { value: coverTex as THREE.Texture },uContactStrength: {value:model.state.contactAO},
@@ -54,7 +58,7 @@ export function createMaterials(model: EditorModel, render: Pick<RenderingSystem
             .replace('#include <common>', `#include <common>
 uniform highp sampler2DArray uAlbedoAtlas, uDetailAtlas;
 uniform sampler2D uSplatDetail, uForestCover;
-uniform sampler2D uBiomes,uJungleMap;
+uniform sampler2D uBiomes,uJungleMap,uTaigaMap,uTaigaCover;
 uniform vec4 uWorldGround;uniform vec3 uWorldRock,uWorldSand;
 uniform sampler2D uContactMap;uniform float uContactStrength;
 uniform float uGroundDetail, uSurfaceOctaves,uShoreTime,uShoreReach;
@@ -87,6 +91,7 @@ float tBump; float tRough;`)
   float nMid = fbm3(p * 0.035);
   float nFine = vnoise(p * 0.3);
   vec4 jungle = texture2D(uJungleMap, p / uSize + 0.5);
+  vec4 taiga = texture2D(uTaigaMap, p / uSize + 0.5), taigaCover = texture2D(uTaigaCover, p / uSize + 0.5);
   // трава
   vec3 grass = mix(vec3(0.30, 0.35, 0.20), vec3(0.43, 0.45, 0.28), smoothstep(0.3, 0.7, nMid));
   grass = mix(grass, vec3(0.47, 0.44, 0.29), smoothstep(0.55, 0.8, nLarge) * 0.35 + smoothstep(uSnow * 0.55, uSnow, h) * 0.25);
@@ -150,6 +155,21 @@ float tBump; float tRough;`)
   vec3 wetRock = mix(rock*.7,jungleMoss,mossPatch*.48);
   jungleFloor = mix(jungleFloor,wetRock,wRock);
   col = mix(col,jungleFloor,jungle.r);
+  // Boreal litter, moss, pale dry lichen, wet organic soil and sphagnum blend in habitat space.
+  float tm = smoothstep(.22,.78,nMid) * taigaCover.r;
+  float tl = smoothstep(.28,.72,nLarge) * taigaCover.g;
+  float ts = taigaCover.b * (1.0-smoothstep(.3,.65,slope));
+  vec3 boreal = mix(dirt*vec3(.72,.65,.54),litter*vec3(.76,.79,.65),.4+forest*.4);
+  boreal = mix(boreal,moss*vec3(.81,.88,.68),tm);
+  vec3 lichen = mix(vec3(.51,.53,.43),vec3(.70,.72,.61),nFine);
+  boreal = mix(boreal,lichen,tl);
+  boreal = mix(boreal,dirt*vec3(.48,.44,.36),taiga.g*.3);
+  vec3 peat = mix(dirt*vec3(.39,.33,.25),moss*vec3(.91,.84,.55),smoothstep(.35,.7,nMid));
+  boreal = mix(boreal,peat,taiga.b);
+  boreal = mix(boreal,mix(rock*vec3(.81,.86,.84),moss,tm*.6),max(wRock,smoothstep(.75,.9,nLarge)*.3));
+  boreal = mix(boreal,litter*vec3(1.05,.78,.46),taigaCover.a*.18);
+  boreal = mix(boreal,snow,ts);
+  col = mix(col,boreal,taiga.r);
   vec4 sp = texture2D(uSplat, p / uSize + 0.5), sd = texture2D(uSplatDetail, p / uSize + 0.5);
   float sSum = dot(sp, vec4(1.0)) + dot(sd, vec4(1.0));
   vec2 md = surfaceDetail(texUV, 0.0);
@@ -163,6 +183,10 @@ float tBump; float tRough;`)
   jungleDetail = mix(jungleDetail,surfaceDetail(texUV,7.0),mossPatch*.65);
   jungleDetail.g = mix(jungleDetail.g,.48,jungle.b*.8);
   md = mix(md,mix(jungleDetail,rd,wRock),jungle.r);
+  vec2 taigaDetail=mix(surfaceDetail(texUV,4.0),surfaceDetail(texUV,7.0),tm);
+  taigaDetail.g=mix(taigaDetail.g,.52,taiga.b*.65);
+  taigaDetail=mix(taigaDetail,rd,wRock);taigaDetail=mix(taigaDetail,surfaceDetail(texUV,3.0),ts);
+  md=mix(md,taigaDetail,taiga.r);
   if (sSum > 0.003) {
     float k = clamp(sSum, 0.0, 1.0);
     vec3 mc = (sp.r * grass + sp.g * rock + sp.b * sand + sp.a * snow + sd.r * litter + sd.g * dirt + sd.b * gravel + sd.a * moss) / sSum;
@@ -260,6 +284,7 @@ float tBump; float tRough;`)
     function updateBiomes(){
         biomeTex.image.data!.set(biomeMaterialMap(model.world));biomeTex.needsUpdate=true;
         jungleTex.image.data!.set(jungleSurfaceMap(model));jungleTex.needsUpdate=true;
+        const taiga=taigaSurfaceMaps(model);taigaTex.image.data!.set(taiga.habitat);taigaCoverTex.image.data!.set(taiga.cover);taigaTex.needsUpdate=taigaCoverTex.needsUpdate=true;
         const recipe=worldPreset(model.world.preset);terrainUniforms.uWorldGround.value.fromArray(recipe?.ground??[0,0,0,0]);
         terrainUniforms.uWorldRock.value.setHex(recipe?.rockTint??0xffffff);
         terrainUniforms.uWorldSand.value.setHex(recipe?.sandTint??0xffffff);

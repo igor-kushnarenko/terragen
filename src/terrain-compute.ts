@@ -7,9 +7,10 @@ import {createMountainField} from './mountain-field';
 import {generateWorldTerrain} from './world-terrain';
 import type {WorldPresetId} from './world';
 import type {JungleSettings} from './jungle-settings';
+import type {TaigaSettings} from './taiga-settings';
 export type Progress = (fraction: number) => void;
-export function generateHeightmap(s: EditorState, progress: Progress = () => {}, preset?:WorldPresetId,jungle?:JungleSettings) {
-    if(preset)return generateWorldTerrain(s,preset,progress,jungle);
+export function generateHeightmap(s: EditorState, progress: Progress = () => {}, preset?:WorldPresetId,jungle?:JungleSettings,taiga?:TaigaSettings) {
+    if(preset)return generateWorldTerrain(s,preset,progress,jungle,taiga);
     const N = s.N, n = N + 1;
     const area = s.areaSize, cropped = area < 1;
     const coastline=s.island||cropped?createCoastlineField(s.seed):undefined;

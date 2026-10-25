@@ -1,5 +1,5 @@
 import * as T from 'three';
-export const FINE_PLANT_IDS=['grass','flowers','fern','moss','jungle-herb','jungle-fungi','jungle-seedling','jungle-fern'] as const;
+export const FINE_PLANT_IDS=['grass','flowers','fern','moss','jungle-herb','jungle-fungi','jungle-seedling','jungle-fern','taiga-lichen','taiga-sphagnum','taiga-litter','taiga-cones','taiga-seedling'] as const;
 export const isFinePlantAsset=(id:string)=>FINE_PLANT_IDS.includes(id as typeof FINE_PLANT_IDS[number]);
 export function plantGeometry(kind: number) {
     const vertices: number[] = [], colors: number[] = [];
@@ -7,7 +7,18 @@ export function plantGeometry(kind: number) {
         vertices.push(...a, ...b, ...c); const rgb = new T.Color(color);
         for (let i = 0; i < 3; i++) colors.push(rgb.r, rgb.g, rgb.b);
     }
-    if(kind===5){
+    if(kind===8||kind===9){
+        for(let i=0;i<14;i++){const a=i*2.39996,r=.07+(i%4)*.055,x=Math.cos(a)*r,z=Math.sin(a)*r,h=kind===9?.10:.14;
+            for(let k=0;k<3;k++){const b=a+k*2.1;triangle([x,.02,z],[x+Math.cos(b)*.07,h*(.6+(i%3)*.2),z+Math.sin(b)*.07],[x+Math.cos(b+.8)*.10,.02,z+Math.sin(b+.8)*.10],kind===9?(i%2?0x7b8651:0x8f9258):(i%2?0xa7ac95:0x8b9983));}}
+    }else if(kind===10){
+        for(let i=0;i<18;i++){const a=i*2.39996,x=Math.cos(i*7)*.3,z=Math.sin(i*9)*.3;triangle([x,.015,z],[x+.015,.02,z+.01],[x+Math.cos(a)*.18,.02,z+Math.sin(a)*.18],i%3?0x82734e:0x635b40);}
+        triangle([-.35,.02,-.1],[.3,.03,.14],[.32,.055,.10],0x70614a);
+    }else if(kind===11){
+        for(let i=0;i<7;i++){const a=i/7*Math.PI*2,b=(i+1)/7*Math.PI*2;triangle([0,.18,0],[Math.cos(a)*.065,.02,Math.sin(a)*.065],[Math.cos(b)*.065,.02,Math.sin(b)*.065],i%2?0x857153:0x6e5b41);}
+    }else if(kind===12){
+        triangle([-.018,0,0],[.018,0,0],[0,1.3,0],0x7c6d51);
+        for(let j=0;j<5;j++)for(let i=0;i<5;i++){const a=i*1.257+j*2.4,r=.4*(1-j/5),y=.28+j*.2;for(const s of [-1,1])triangle([0,y+.04,0],[Math.cos(a)*r,y-.1,Math.sin(a)*r],[Math.cos(a+s*.65)*r*.6,y-.02,Math.sin(a+s*.65)*r*.6],i%2?0x526d4b:0x3d6045);}
+    }else if(kind===5){
         for(let m=0;m<3;m++){
             const x=(m-1)*.11,z=(m%2)*.12,y=.14+m*.035;
             triangle([x-.015,0,z],[x+.015,0,z],[x,y,z],0xb4a687);
