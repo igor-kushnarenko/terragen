@@ -2,6 +2,7 @@
   "extends": "./tsconfig.json",
   "include": [
     "src",
+    "verification/ocean-render-check.ts",
     "verification/walk-check.ts",
     "verification/walk-world.ts",
     "verification/walk-metrics.ts",

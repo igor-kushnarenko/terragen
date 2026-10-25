@@ -12,6 +12,8 @@ import type {WaterBody} from '../src/world';
 import {createWaterEdits} from '../src/water-edits';
 import {carveWater} from '../src/water-compute';
 import {createWaterOptics} from '../src/water-optics';
+import {createWaterRendering} from '../src/water-rendering';
+import {waterExtraUniforms} from '../src/water-shader';
 import type {RenderingSystem} from '../src/rendering';
 import {createWaterInteractions} from '../src/water-interactions';
 import type {CollisionSystem} from '../src/collisions';
@@ -98,4 +100,23 @@ test('rain reaches visible water from a dry bank and paused footsteps do not emi
     const effects=createWaterInteractions(f.model,water,{floating:new Map()} as unknown as CollisionSystem,f.render as unknown as RenderingSystem),pose={on:false,paused:false,swim:false,feet:new Vector3(0,15,0)};
     for(let i=0;i<360;i++)effects.step(1/120,pose,1);assert.ok(water.impacts.length>=5);effects.reset();pose.on=true;effects.step(1/120,pose,0);assert.equal(water.impacts.length,1);assert.ok(effects.statistics.splashes>0);
     pose.paused=true;for(let i=0;i<720;i++)effects.step(1/120,pose,0);assert.equal(water.impacts.length,0);assert.equal(effects.statistics.splashes,0);effects.dispose();
+});
+
+
+test('waterfall clipping is disabled by default for the sea, lakes and ordinary rivers',()=>{
+    assert.deepEqual(waterExtraUniforms().uCascade.value.toArray(),[0,0,0,0]);
+    const f=editorFixture();f.model.state.quality='low';f.model.state.waterReflections=false;
+    const lake:WaterBody={...river,id:'lake',kind:'lake',level:f.model.state.water,points:[[-20,-20],[20,-20],[20,20],[-20,20]]};
+    f.model.world.waterBodies.push(lake,{...river,id:'ordinary-river',level:f.model.state.water,endLevel:f.model.state.water});
+    const renderer={xr:{enabled:false},shadowMap:{autoUpdate:false},getDrawingBufferSize:(v:any)=>v.set(64,64),getRenderTarget:()=>null,setRenderTarget(){},clear(){},render(){}};
+    const rendering=createWaterRendering(f.model,{...f.render,renderer} as unknown as RenderingSystem,f.materials);
+    rendering.update(0);
+    assert.deepEqual(f.materials.waterUniforms.uCascade.value.toArray(),[0,0,0,0]);
+    for(const mesh of rendering.group.children)assert.deepEqual((mesh as any).material.uniforms.uCascade.value.toArray(),[0,0,0,0]);
+    (rendering.group.children[0] as any).material.uniforms.uCascade.value.w=10;
+    assert.equal(f.materials.waterUniforms.uCascade.value.w,0,'local effects must not enable ocean clipping');
+    assert.equal((rendering.group.children[1] as any).material.uniforms.uCascade.value.w,0);
+    f.model.world.waterBodies=[...f.model.world.waterBodies];rendering.update(0);
+    for(const mesh of rendering.group.children)assert.equal((mesh as any).material.uniforms.uCascade.value.w,0);
+    rendering.dispose();
 });

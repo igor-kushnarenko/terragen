@@ -5,7 +5,7 @@ export function waterExtraUniforms(){
     return {uWindSpeed:{value:.5},uWindAngle:{value:0},uWaterKind:{value:0},uClarity:{value:12},
         uImpacts:{value:Array.from({length:MAX_WATER_IMPACTS},()=>new T.Vector4())},uImpactMeta:{value:Array.from({length:MAX_WATER_IMPACTS},()=>new T.Vector4())},uImpactCount:{value:0},
         uRefraction:{value:null as T.Texture|null},uSceneDepth:{value:null as T.Texture|null},uRefractionOn:{value:0},uViewport:{value:new T.Vector2(1,1)},uInverseProjection:{value:new T.Matrix4()},
-        uFlowMap:{value:null as T.Texture|null},uFlowBounds:{value:new T.Vector4()},uFlowMapOn:{value:0},uDomainMap:{value:null as T.Texture|null},uDomainBounds:{value:new T.Vector4()},uDomainOn:{value:0},uCascade:{value:new T.Vector4()}};
+        uFlowMap:{value:null as T.Texture|null},uFlowBounds:{value:new T.Vector4()},uFlowMapOn:{value:0},uDomainMap:{value:null as T.Texture|null},uDomainBounds:{value:new T.Vector4()},uDomainOn:{value:0},uCascade:{value:new T.Vector4(0,0,0,0)}};
 }
 const common=`uniform sampler2D uHeight,uFlowMap,uDomainMap;uniform vec4 uFlowBounds,uDomainBounds;uniform float uFlowMapOn,uSize,uN,uFlowSpeed,uDomainOn;
 float bodyDomain(vec2 p){if(uDomainOn<.5)return 10000.0;vec2 uv=(p-uDomainBounds.xy)/uDomainBounds.zw;return texture2D(uDomainMap,clamp(uv,0.0,1.0)).r;}
@@ -40,8 +40,8 @@ vec2 flow=riverFlow(p,vFlow/max(uFlowSpeed,.001));
 vec2 gradient=waterGradient(p,vMeanLevel-th,flow);vec3 N=normalize(vec3(-gradient.x,1.0,-gradient.y));
 vec3 faceNormal=normalize(cross(dFdx(vWPos),dFdy(vWPos)));float waterfall=1.0-smoothstep(.25,.7,abs(faceNormal.y));
 // Sea-level tails use the ocean surface; a separate layered effect renders the falling water.
-if(uCascade.w>0.0&&vMeanLevel<=uWater+.06)discard;
-if(uCascade.w>.75&&waterfall>.35)discard;
+if(uWaterKind>1.5&&uCascade.w>0.0&&vMeanLevel<=uWater+.06)discard;
+if(uWaterKind>1.5&&uCascade.w>.75&&waterfall>.35)discard;
 if(!gl_FrontFacing)faceNormal=-faceNormal;N=normalize(mix(N,faceNormal,waterfall));
 N=normalize(mix(N,vec3(0.0,1.0,0.0),smoothstep(150.0,2500.0,dist)*.85));
 float cycle=fract(uTime*.12),blend=abs(cycle-.5)*2.0;
