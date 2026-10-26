@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { Sky } from 'three/addons/objects/Sky.js';
 import { type EditorModel } from './state';
+import {VR_QUALITY_PROFILES} from './quality';
 export function configureEditorOrbit(controls: OrbitControls) {
     controls.enableDamping=true;controls.dampingFactor=.12;
     controls.maxPolarAngle=Math.PI*.495;
@@ -33,8 +34,8 @@ export function createRendering(model: EditorModel) {
     xrRig.add(xrCamera); scene.add(xrRig);
     renderer.xr.enabled = true;
     renderer.xr.setReferenceSpaceType('local-floor');
-    renderer.xr.setFramebufferScaleFactor(.65);
-    renderer.xr.setFoveation(1);
+    renderer.xr.setFramebufferScaleFactor(VR_QUALITY_PROFILES[model.xrQuality].framebufferScale);
+    renderer.xr.setFoveation(VR_QUALITY_PROFILES[model.xrQuality].foveation);
     const controls = new OrbitControls(camera, renderer.domElement);
     function resizeViewport() {
         const width = Math.max(1, container.clientWidth), height = Math.max(1, container.clientHeight);

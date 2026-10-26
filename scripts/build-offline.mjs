@@ -15,6 +15,8 @@ const script = outputs.filter(output => output.type === 'chunk').map(output => o
 const css = outputs.filter(output => output.type === 'asset' && output.fileName.endsWith('.css')).map(output => String(output.source)).join('\n');
 if (!script || !css) throw new Error('Offline bundle is incomplete');
 let html = await readFile('index.html', 'utf8');
+const controllerLicense = await readFile('docs/licenses/WEBXR_INPUT_PROFILES_LICENSE.md','utf8');
+html = html.replace('</head>', () => `<!-- PICO controller assets: @webxr-input-profiles/assets 1.0.20\n${controllerLicense}-->\n</head>`);
 html = html.replace('</head>', () => `<style>${css}</style>\n</head>`);
 html = html.replace(/<script type="module" src="\/src\/main.ts"><\/script>/, () => `<script>${script.replace(/<\/script/gi, '<\\/script')}</script>`);
 const scriptTags = [...html.matchAll(/<script\b([^>]*)>/gi)];
@@ -36,4 +38,5 @@ await writeFile('dist/terrain_editor_standalone.html', html);
 await writeFile('terrain_editor_standalone.html', html);
 await copyFile('node_modules/three/LICENSE', 'dist/THREE-LICENSE.txt');
 await copyFile('node_modules/@dimforge/rapier3d-compat/LICENSE', 'dist/RAPIER-LICENSE.txt');
+await copyFile('docs/licenses/WEBXR_INPUT_PROFILES_LICENSE.md','dist/WEBXR-PROFILES-LICENSE.txt');
 console.log('Offline HTML: dist/terrain_editor_standalone.html (also copied to project root)');

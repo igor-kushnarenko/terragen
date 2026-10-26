@@ -1,4 +1,5 @@
 import type {EditorModel} from './state';
+import {effectiveQuality} from './quality';
 import type {TerrainSystem} from './terrain';
 import type {RenderingSystem} from './rendering';
 import type {EnvironmentMaterials} from './environment-materials';
@@ -13,7 +14,7 @@ export function createEnvironment(model:EditorModel,terrain:TerrainSystem,render
         const u=materials.uniforms;u.uEnvTime.value+=dt;
         const p=render.camera.position,ground=terrain.getH(p.x,p.z),air=sampleAtmosphere(model.state,model.balloon?.seed??model.state.seed,p.x,ground+10,p.z,model.balloon?.time??u.uEnvTime.value,ground);
         u.uEnvWind.value.set(air.wind[0]/4,air.wind[2]/4);u.uEnvWetness.value=model.state.wetness;
-        u.uEnvLowFog.value=model.state.lowFog*model.state.fogIntensity*(model.state.quality==='low'?.65:1);u.uEnvFogColor.value.copy(render.fog.color);
+        u.uEnvLowFog.value=model.state.lowFog*model.state.fogIntensity*(effectiveQuality(model)==='low'?.65:1);u.uEnvFogColor.value.copy(render.fog.color);
         if(revision!==model.terrainRevision||bodies!==model.world.waterBodies||water!==model.state.water){
             for(let j=0;j<FOG_MAP_SIZE;j++)for(let i=0;i<FOG_MAP_SIZE;i++){
                 const x=(i+.5)/FOG_MAP_SIZE*1024-512,z=(j+.5)/FOG_MAP_SIZE*1024-512,h=terrain.getH(x,z);

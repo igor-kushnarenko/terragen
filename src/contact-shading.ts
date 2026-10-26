@@ -1,4 +1,5 @@
 import * as T from 'three';
+import {effectiveQuality} from './quality';
 import {objectFootprint,type Footprint} from './ecology';
 import {getModel} from './model-library';
 import {HALF,SIZE,type EditorModel} from './state';
@@ -49,7 +50,7 @@ export function createContactShading(model:EditorModel,terrain:TerrainSystem,uni
         pending={revision:model.terrainRevision,full:!!pending?.full||model.terrainRevision!==expected+rects.length,rects:[...pending?.rects??[],...rects]};
     }
     function update(dt=1){
-        elapsed+=dt;if(model.state.quality==='low'||model.state.contactAO===0)return;
+        elapsed+=dt;if(effectiveQuality(model)==='low'||model.state.contactAO===0)return;
         if(revision===model.terrainRevision&&objects===model.world.objects&&show===model.state.showScatter)return;
         if(revision>=0&&elapsed<.25)return;
         const started=performance.now(),next=shadowsFor(model,terrain,shadows);statistics.pixels=0;

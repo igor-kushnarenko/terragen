@@ -1,5 +1,5 @@
 import { createWorld, DEFAULT_WALK_SETTINGS, deriveSeeds, type OperationRecord } from './world';
-import type { QualityId } from './quality';
+import type { QualityId, VRQualityId } from './quality';
 import type {BalloonState} from './balloon-state';
 export const SIZE = 1024;
 export const RESOLUTIONS = [16, 32, 64, 128, 256, 512] as const;
@@ -93,6 +93,7 @@ export function createModel() {
         terrainRevision: 0,
         // Session-only: never changes the world's saved graphics preferences.
         xrActive: false,
+        xrQuality: 'economy' as VRQualityId,
         world: createWorld(), seeds: deriveSeeds(state.seed),
         operations: [] as OperationRecord[], walkSettings: { ...DEFAULT_WALK_SETTINGS },balloon:null as BalloonState|null,
         maxH: 1, minH: 0, busy: false,

@@ -5,13 +5,19 @@ export const QUALITY_PROFILES = {
     high: { name: 'Высокий', pixelRatio: 1.75, surfaceOctaves: 4, shadowSize: 4096, shadowRadius: 80, terrainDistances: [160, 400] as const, objectDistances: [190, 440] as const, foliageDistance: 80, foliageDensity: 1, contact: 1, groundDetail: 1 },
 } as const;
 export type QualityId = keyof typeof QUALITY_PROFILES;
+export const VR_QUALITY_PROFILES = {
+    economy: { name:'Экономный', quality:'low', framebufferScale:.65, foveation:1 },
+    quality: { name:'Качественный', quality:'high', framebufferScale:1, foveation:.15 },
+} as const;
+export type VRQualityId = keyof typeof VR_QUALITY_PROFILES;
+const VR_HIGH_PROFILE = {...QUALITY_PROFILES.high,shadowSize:2048};
 export const WATER_PROFILES = {
     low:{reflectionSize:0,reflectionInterval:1,detail:0,foam:.45,refractionScale:.35,oceanSegments:64,spacing:6,impacts:8,rainRate:3},
     balanced:{reflectionSize:256,reflectionInterval:.08,detail:1,foam:.8,refractionScale:.5,oceanSegments:96,spacing:3,impacts:16,rainRate:8},
     high:{reflectionSize:512,reflectionInterval:.04,detail:2,foam:1,refractionScale:.75,oceanSegments:128,spacing:2,impacts:24,rainRate:14},
 } as const;
-export function effectiveQuality(model: EditorModel): QualityId { return model.xrActive ? 'low' : model.state.quality; }
-export function qualityProfile(model: EditorModel) { return QUALITY_PROFILES[effectiveQuality(model)]; }
+export function effectiveQuality(model: EditorModel): QualityId { return model.xrActive ? VR_QUALITY_PROFILES[model.xrQuality].quality : model.state.quality; }
+export function qualityProfile(model: EditorModel) { return model.xrActive&&model.xrQuality==='quality'?VR_HIGH_PROFILE:QUALITY_PROFILES[effectiveQuality(model)]; }
 export function chooseLOD(distance: number, current: number, thresholds: readonly [number, number], hysteresis = 0.12) {
     if (current === 0 && distance < thresholds[0] * (1 + hysteresis)) return 0;
     if (current === 1 && distance >= thresholds[0] * (1 - hysteresis) && distance < thresholds[1] * (1 + hysteresis)) return 1;

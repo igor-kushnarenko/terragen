@@ -4,7 +4,7 @@ import { mulberry32 } from './noise';
 import { HALF, SIZE, SPLAT_RES, type EditorModel } from './state';
 import type { TerrainSystem } from './terrain';
 import { createEcology, FootprintIndex, objectFootprint, type EcologySystem } from './ecology';
-import { qualityProfile } from './quality';
+import { qualityProfile, effectiveQuality } from './quality';
 import type {EnvironmentMaterials} from './environment-materials';
 import {createJungleHabitat,CanopyIndex} from './jungle-habitat';
 import {createTaigaHabitat,hasTaiga} from './taiga-habitat';
@@ -66,7 +66,7 @@ export function createFineFoliage(model: EditorModel, terrain: TerrainSystem, sc
     let jungle:ReturnType<typeof jungleGroundContext>|undefined;
     let taiga:ReturnType<typeof taigaGroundContext>|undefined;
     let objects=model.world.objects,biomes=model.world.biomes,routes=model.world.routes,bodies=model.world.waterBodies;
-    const settingsKey=()=>`${model.seeds.scatter}/${model.state.foliageDensity}/${model.state.water}/${model.state.snowLine}/${model.state.quality}/${model.state.soilMoisture}/${model.state.clearingAmount}/${model.state.showScatter}/${JSON.stringify(model.world.recipe?.jungle?['variant','canopy','emergents','understory','vines','moisture','clearings'].map(k=>model.world.recipe!.jungle![k as keyof import('./jungle-settings').JungleSettings]):null)}/${JSON.stringify(model.world.recipe?.taiga)}`;
+    const settingsKey=()=>`${model.seeds.scatter}/${model.state.foliageDensity}/${model.state.water}/${model.state.snowLine}/${effectiveQuality(model)}/${model.state.soilMoisture}/${model.state.clearingAmount}/${model.state.showScatter}/${JSON.stringify(model.world.recipe?.jungle?['variant','canopy','emergents','understory','vines','moisture','clearings'].map(k=>model.world.recipe!.jungle![k as keyof import('./jungle-settings').JungleSettings]):null)}/${JSON.stringify(model.world.recipe?.taiga)}`;
     let configuration='';
     function remove(key: string) { const meshes = chunks.get(key); meshes?.forEach(mesh => { scene.remove(mesh); mesh.dispose(); }); chunks.delete(key); }
     function clear() { for (const key of [...chunks.keys()]) remove(key); }

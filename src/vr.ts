@@ -11,13 +11,20 @@ import type {ProjectView} from './project';
 import {getModel} from './model-library';
 import {createVREdges,vrStick,vrHorizontal,traceVRTeleport,vrFailure} from './vr-input';
 import {createVRPanel,type VRAction} from './vr-panel';
+import {VR_QUALITY_PROFILES,type VRQualityId} from './quality';
+import {readVRQuality,saveVRQuality,readVRRayPitch,saveVRRayPitch,DEFAULT_VR_RAY_PITCH} from './vr-preferences';
+import {createPICOController,createVRPointer,vrPointerRay} from './vr-controller';
 
 export function createVR(model:EditorModel,render:RenderingSystem,input:ControlsSystem,collisions:CollisionSystem,vegetation:VegetationSystem,edits:WorldEdits,history:HistorySystem,feedback:Feedback,save:()=>Promise<unknown>,beforeEnter:()=>void){
+    try{model.xrQuality=readVRQuality(localStorage);}catch{/* Browser storage can be disabled. */}
+    let rayPitch=DEFAULT_VR_RAY_PITCH;try{rayPitch=readVRRayPitch(localStorage);}catch{/* Keep the default calibration. */}
     const {renderer,xrRig,xrCamera,camera}=render,xr=renderer.xr;
     const panel=createVRPanel(render.scene),edges=createVREdges(),head=new T.Vector3(),previousHead=new T.Vector3();
     const direction=new T.Vector3(),rotation=new T.Quaternion();
     let session:XRSession|undefined,entering=false,savedView:ProjectView|undefined,hasPose=false,tracking=false,yaw=0,selected:string|undefined;
     let aiming=false,target:T.Vector3|null=null,status='Подключите PICO Connect и запустите SteamVR',supported=false,probe=0;
+    let resolutionScale:number=VR_QUALITY_PROFILES[model.xrQuality].framebufferScale;
+    const qualityPending=()=>model.xrActive&&resolutionScale!==VR_QUALITY_PROFILES[model.xrQuality].framebufferScale;
     let grab:{id:string;start:T.Matrix4;object:T.Matrix4;preview:T.Matrix4}|undefined;
     const outline=new T.Box3Helper(new T.Box3(),0xa8efb9);outline.visible=false;outline.userData.noWaterReflection=true;render.scene.add(outline);
     const arcPositions=new Float32Array(56*3),arcGeometry=new T.BufferGeometry();arcGeometry.setAttribute('position',new T.BufferAttribute(arcPositions,3));
@@ -26,9 +33,9 @@ export function createVR(model:EditorModel,render:RenderingSystem,input:Controls
     const sources:(XRInputSource|undefined)[]=[undefined,undefined];
     const hands=[0,1].map(i=>{
         const controller=xr.getController(i),grip=xr.getControllerGrip(i);xrRig.add(controller,grip);
-        const body=new T.Mesh(new T.CylinderGeometry(.022,.03,.11,8),new T.MeshBasicMaterial({color:0x94b6ba}));body.rotation.x=Math.PI/2;grip.add(body);
-        const ray=new T.Line(new T.BufferGeometry().setFromPoints([new T.Vector3(),new T.Vector3(0,0,-1)]),new T.LineBasicMaterial({color:0x8bdfc4,transparent:true,opacity:.8}));ray.scale.z=8;controller.add(ray);
-        controller.addEventListener('connected',event=>{sources[i]=event.data;});
+        const pico=createPICOController(i===0?'left':'right'),pointer=createVRPointer(rayPitch);grip.add(pico.root,pointer.root);
+        const modelError=(error:unknown)=>message('Не удалось загрузить модель контроллера: '+String(error));void pico.loaded.catch(modelError);
+        controller.addEventListener('connected',event=>{sources[i]=event.data;void pico.setHand(event.data.handedness==='left'?'left':'right').catch(modelError);});
         controller.addEventListener('disconnected',()=>{sources[i]=undefined;edges.reset();aiming=false;target=null;grab=undefined;});
         controller.addEventListener('selectstart',()=>{
             if(!usable())return;
@@ -42,12 +49,19 @@ export function createVR(model:EditorModel,render:RenderingSystem,input:Controls
         });
         controller.addEventListener('squeezestart',()=>{if(sources[i]?.handedness==='right')beginGrab(i);});
         controller.addEventListener('squeezeend',()=>{if(sources[i]?.handedness==='right')finishGrab();});
-        return {controller,grip,ray};
+        return {controller,grip,pico,pointer};
     });
-    function rayFor(index:number){const c=hands[index].controller;c.updateWorldMatrix(true,false);return new T.Ray(new T.Vector3().setFromMatrixPosition(c.matrixWorld),new T.Vector3(0,0,-1).transformDirection(c.matrixWorld));}
+    function rayFor(index:number){return vrPointerRay(hands[index].pointer.root);}
     function usable(){return model.xrActive&&!!session&&session.visibilityState==='visible'&&hasPose&&tracking&&!model.busy;}
     function pulse(index:number){const actuator=sources[index]?.gamepad?.hapticActuators?.[0];if(actuator)void actuator.pulse(.25,35).catch(()=>{});}
-    function message(text:string){status=text;feedback.setStatus(text);panel.update(text,input.walk.flying);syncUI();}
+    function message(text:string){status=text;feedback.setStatus(text);panel.update(text,input.walk.flying,model.xrQuality,qualityPending(),rayPitch);syncUI();}
+    function setRayPitch(value:number){if(!Number.isFinite(value))return;rayPitch=Math.max(-70,Math.min(10,value));hands.forEach(hand=>hand.pointer.root.rotation.x=T.MathUtils.degToRad(rayPitch));try{saveVRRayPitch(localStorage,rayPitch);}catch{/* Still usable without storage. */}message('Наклон луча: '+rayPitch+'°');}
+    function setQuality(value:VRQualityId){
+        if(!(value in VR_QUALITY_PROFILES))return;
+        model.xrQuality=value;try{saveVRQuality(localStorage,value);}catch{/* Applies for this visit even without storage. */}
+        xr.setFoveation(VR_QUALITY_PROFILES[value].foveation);
+        message('Качество VR: '+VR_QUALITY_PROFILES[value].name);
+    }
     function menu(open:boolean){
         if(!model.xrActive)return;
         grab=undefined;aiming=false;target=null;
@@ -57,6 +71,9 @@ export function createVR(model:EditorModel,render:RenderingSystem,input:Controls
         if(action==='resume')menu(false);
         if(action==='flight'){menu(false);input.toggleFlight();message(input.walk.flying?'Полёт включён: A — вверх, Y — вниз':'Гравитация включена');}
         if(action==='exit')void exit();
+        if(action==='quality')setQuality(model.xrQuality==='economy'?'quality':'economy');
+        if(action==='rayUp')setRayPitch(rayPitch+5);
+        if(action==='rayDown')setRayPitch(rayPitch-5);
         if(action==='save')void save().then(()=>message('Мир сохранён')).catch(error=>message(String(error)));
         if(action==='undo'){history.undo();message('Последнее изменение отменено');}
     }
@@ -86,12 +103,20 @@ export function createVR(model:EditorModel,render:RenderingSystem,input:Controls
     }
     const settings=document.createElement('div');settings.className='vr-settings';document.getElementById('cameraSettings')!.append(settings);
     const title=document.createElement('h3');title.textContent='PICO · VR через ПК';settings.append(title);
-    const hint=document.createElement('p');hint.className='hint';hint.textContent='PICO Connect → SteamVR (OpenXR) → браузер на ПК. Для RTX 2050 автоматически используется экономный профиль и масштаб VR 65%.';settings.append(hint);
+    const hint=document.createElement('p');hint.className='hint';hint.textContent='PICO Connect → SteamVR (OpenXR) → браузер на ПК.';settings.append(hint);
+    const qualityLabel=document.createElement('label');qualityLabel.textContent='Качество VR ';settings.append(qualityLabel);
+    const qualitySelect=document.createElement('select');qualitySelect.setAttribute('aria-label','Качество VR');qualityLabel.append(qualitySelect);
+    for(const [id,profile]of Object.entries(VR_QUALITY_PROFILES)){const option=document.createElement('option');option.value=id;option.textContent=profile.name;qualitySelect.append(option);}
+    qualitySelect.onchange=()=>setQuality(qualitySelect.value as VRQualityId);
+    const qualityHint=document.createElement('p');qualityHint.className='hint';settings.append(qualityHint);
+    const pitchLabel=document.createElement('label');pitchLabel.textContent='Наклон луча ';settings.append(pitchLabel);
+    const pitchInput=document.createElement('input');pitchInput.type='range';pitchInput.min='-70';pitchInput.max='10';pitchInput.step='5';pitchInput.setAttribute('aria-label','Наклон луча VR');pitchLabel.append(pitchInput);
+    const pitchOutput=document.createElement('output');pitchLabel.append(pitchOutput);pitchInput.oninput=()=>setRayPitch(Number(pitchInput.value));
     const note=document.createElement('p');note.className='hint';note.setAttribute('role','status');settings.append(note);
     const check=document.createElement('button');check.className='btn';check.textContent='Проверить подключение VR';check.onclick=()=>void detect();settings.append(check);
     const button=document.createElement('button');button.id='vrButton';button.className='workspace-button';button.type='button';button.textContent='Войти в VR';button.onclick=()=>void (model.xrActive?exit():enter());document.querySelector('.header-actions')!.prepend(button);
     const exitButton=document.createElement('button');exitButton.id='vrExit';exitButton.className='btn';exitButton.textContent='Выйти из VR';exitButton.hidden=true;exitButton.onclick=()=>void exit();document.body.append(exitButton);
-    function syncUI(){button.disabled=entering||!supported||model.busy;button.textContent=entering?'Подключение VR…':model.xrActive?'Выйти из VR':'Войти в VR';button.title=status;note.textContent=status;exitButton.hidden=!model.xrActive;}
+    function syncUI(){button.disabled=entering||!supported||model.busy;button.textContent=entering?'Подключение VR…':model.xrActive?'Выйти из VR':'Войти в VR';button.title=status;note.textContent=status;exitButton.hidden=!model.xrActive;qualitySelect.value=model.xrQuality;pitchInput.value=String(rayPitch);pitchOutput.value=rayPitch+'°';qualityHint.textContent=qualityPending()?'Детализация уже изменена. Для смены разрешения выйдите и войдите в VR снова.':model.xrQuality==='economy'?'Экономный: масштаб XR 65%, упрощённые детали, без прямых теней.':'Качественный: масштаб XR 100%, подробные поверхности, вода, растительность и тени.';}
     async function detect(){
         const current=++probe;
         if(!window.isSecureContext){supported=false;message('WebXR требует защищённый адрес: запустите приложение через локальный dev-сервер или HTTPS.');return;}
@@ -115,6 +140,7 @@ export function createVR(model:EditorModel,render:RenderingSystem,input:Controls
             if(!input.walk.on&&input.setWalk(true)===false)throw new Error('Не найдена безопасная точка старта. Выберите её в режиме прогулки.');
             input.setPaused(false);input.clearKeys();yaw=input.walk.yaw;hasPose=tracking=false;
             model.xrActive=true;xrRig.visible=true;document.body.classList.add('vr-mode');render.controls.enabled=false;
+            const profile=VR_QUALITY_PROFILES[model.xrQuality];xr.setFramebufferScaleFactor(profile.framebufferScale);xr.setFoveation(profile.foveation);resolutionScale=profile.framebufferScale;
             next.addEventListener('visibilitychange',()=>{if(session===next&&next!.visibilityState!=='visible'){menu(true);tracking=false;edges.reset();}});
             await xr.setSession(next);supported=true;message('VR: X — меню · левый стик — движение');
         }catch(error){if(next)await next.end().catch(()=>{});if(savedView||model.xrActive)cleanup();message(vrFailure(error));}
@@ -145,7 +171,7 @@ export function createVR(model:EditorModel,render:RenderingSystem,input:Controls
         const stick=vrStick(left),turn=vrStick(right);if(!panel.root.visible)yaw+=edges.snap(turn.x);
         input.walk.yaw=yaw+headYaw;
         input.setXRInput(panel.root.visible?{forward:0,right:0,up:0}:{forward:-stick.y*.45,right:stick.x*.45,up:input.walk.flying?(buttonDown(right,4)?1:0)-(buttonDown(left,5)?1:0):0});
-        panel.update(status,input.walk.flying);
+        panel.update(status,input.walk.flying,model.xrQuality,qualityPending(),rayPitch);
     }
     function renderFrame(alpha=1){
         if(!model.xrActive||!hasPose)return;
@@ -159,7 +185,9 @@ export function createVR(model:EditorModel,render:RenderingSystem,input:Controls
         arc.visible=aiming&&leftIndex>=0&&usable()&&!panel.root.visible;landing.visible=false;
         if(arc.visible){const ray=rayFor(leftIndex),trace=traceVRTeleport(ray.origin,ray.direction,collisions.teleportHit);target=trace.target;trace.points.forEach((p,i)=>p.toArray(arcPositions,i*3));arcGeometry.attributes.position.needsUpdate=true;arcGeometry.setDrawRange(0,trace.points.length);arc.material.color.set(target?0x81efb3:0xf5a684);if(target){landing.visible=true;landing.position.copy(target);landing.position.y+=.04;}}
         else target=null;
-        hands.forEach((hand,index)=>{if(!sources[index])return;const ray=rayFor(index),hit=panel.hit(ray);hand.ray.scale.z=hit?.distance??8;});
+        hands.forEach((hand,index)=>{if(!sources[index])return;hand.pico.update(sources[index]?.gamepad);const ray=rayFor(index),hit=panel.hit(ray);hand.pointer.line.scale.z=hit?.distance??8;});
     }
-    return {enter,exit,stop,beforeFrame,renderFrame,detect,get active(){return model.xrActive;},get status(){return status;},get selected(){return selected;}};
+    return {enter,exit,stop,beforeFrame,renderFrame,detect,setQuality,setRayPitch,get rayPitch(){return rayPitch;},get quality(){return model.xrQuality;},get resolutionScale(){return resolutionScale;},get qualityPending(){return qualityPending();},
+        get controllers(){return hands.map((hand,i)=>{const ray=rayFor(i);return {hand:sources[i]?.handedness,modelReady:hand.pico.ready,origin:ray.origin.toArray(),direction:ray.direction.toArray()};});},
+        get active(){return model.xrActive;},get status(){return status;},get selected(){return selected;}};
 }
