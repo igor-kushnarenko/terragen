@@ -1,6 +1,7 @@
 import * as T from 'three';
 import { getModel, modelEntries } from './model-library';
-import { modelLOD } from './model-lod';
+import {plantModelLOD,variedPlant,plantIdentity} from './plant-models';
+import {setPlantMorph,enablePlantRaycast} from './plant-variation';
 import { OBJECT_CHUNK_SIZE, cameraFrustum } from './chunk-grid';
 import { chooseLOD, qualityProfile } from './quality';
 import { scatterObjects } from './scatter';
@@ -40,10 +41,11 @@ export function createVegetation(model:EditorModel,render:Pick<RenderingSystem,'
         for(const [key,data]of buckets) {
             const cell=key.split('/')[0],chunk=chunks.get(cell)??{batches:[],bounds:new T.Box3(),level:0}; chunks.set(cell,chunk);
             const fine=isFinePlantAsset(data[0].asset);
-            for(let level=0;level<(fine?1:3);level++)for(const part of modelLOD(data[0].asset,level)) {
+            for(let level=0;level<(fine?1:3);level++)for(const part of plantModelLOD(data[0].asset,level)) {
                 const category=getModel(data[0].asset).category,wind=category==='tree'?1:category==='shrub'?2:0;
                 environment?.decorate(part.material,wind);
                 const mesh=new T.InstancedMesh(part.geometry,part.material,data.length);mesh.castShadow=!fine&&(!(isJunglePlant(data[0].asset)||isTaigaPlant(data[0].asset))||category==='tree'||category==='rock'||category==='wood'&&isTaigaPlant(data[0].asset));mesh.receiveShadow=true;mesh.name='Objects '+key+' LOD '+level;
+                if(variedPlant(data[0].asset)){data.forEach((item,i)=>setPlantMorph(mesh,i,plantIdentity(item)));mesh.morphTexture!.needsUpdate=true;enablePlantRaycast(mesh);}
                 if(wind&&environment)mesh.customDepthMaterial=environment.depth(wind);
                 if(isTaigaPlant(data[0].asset)&&!Array.isArray(part.material)&&['taiga-deciduous','taiga-mixed-deciduous'].includes(part.material.name)&&environment)mesh.customDepthMaterial=taigaLeafDepth(environment.depth(wind),part.material.name==='taiga-mixed-deciduous');
                 const color=new T.Color();data.forEach((item,i)=>mesh.setColorAt(i,objectColor(item,color)));

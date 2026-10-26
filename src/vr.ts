@@ -9,6 +9,7 @@ import type {HistorySystem} from './history';
 import type {Feedback} from './feedback';
 import type {ProjectView} from './project';
 import {getModel} from './model-library';
+import {plantObjectBounds} from './plant-models';
 import {createVREdges,createVRSprint,vrStick,vrHorizontal,traceVRTeleport,vrFailure} from './vr-input';
 import {createVRPanel,type VRAction} from './vr-panel';
 import {VR_QUALITY_PROFILES,type VRQualityId} from './quality';
@@ -182,7 +183,7 @@ export function createVR(model:EditorModel,render:RenderingSystem,input:Controls
         const rightIndex=sources.findIndex(s=>s?.handedness==='right'),leftIndex=sources.findIndex(s=>s?.handedness==='left');
         if(grab&&rightIndex>=0){hands[rightIndex].grip.updateWorldMatrix(true,false);grab.preview.copy(hands[rightIndex].grip.matrixWorld).multiply(grab.start).multiply(grab.object);}
         const item=model.world.objects.find(o=>o.id===selected);outline.visible=!!item&&!panel.root.visible;
-        if(item){const matrix=grab?.id===item.id?grab.preview:new T.Matrix4().compose(new T.Vector3(...item.position),new T.Quaternion().setFromEuler(new T.Euler(...item.rotation)),new T.Vector3(...item.scale));outline.box.copy(getModel(item.asset).bounds).applyMatrix4(matrix);}
+        if(item){const matrix=grab?.id===item.id?grab.preview:new T.Matrix4().compose(new T.Vector3(...item.position),new T.Quaternion().setFromEuler(new T.Euler(...item.rotation)),new T.Vector3(...item.scale));outline.box.copy(plantObjectBounds(item)).applyMatrix4(matrix);}
         arc.visible=aiming&&leftIndex>=0&&usable()&&!panel.root.visible;landing.visible=false;
         if(arc.visible){const ray=rayFor(leftIndex),trace=traceVRTeleport(ray.origin,ray.direction,collisions.teleportHit);target=trace.target;trace.points.forEach((p,i)=>p.toArray(arcPositions,i*3));arcGeometry.attributes.position.needsUpdate=true;arcGeometry.setDrawRange(0,trace.points.length);arc.material.color.set(target?0x81efb3:0xf5a684);if(target){landing.visible=true;landing.position.copy(target);landing.position.y+=.04;}}
         else target=null;

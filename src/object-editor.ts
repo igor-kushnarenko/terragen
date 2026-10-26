@@ -2,6 +2,7 @@ import * as T from 'three';
 import {TransformControls} from 'three/addons/controls/TransformControls.js';
 import {expandSelection,transformedObjects} from './object-transforms';
 import {getModel} from './model-library';
+import {plantObjectBounds} from './plant-models';
 import type {EditorModel} from './state';
 import type {ControlsSystem,TerrainTool} from './controls';
 import type {RenderingSystem} from './rendering';
@@ -47,7 +48,7 @@ export function createObjectEditor(model:EditorModel,render:RenderingSystem,terr
     const gizmo=new TransformControls(render.camera,render.renderer.domElement),helper=gizmo.getHelper();helper.userData.noWaterReflection=true;render.scene.add(helper);gizmo.setSize(.8);gizmo.enabled=false;
     const box=new T.Box3(),outline=new T.Box3Helper(box,0xffc56a);outline.visible=false;outline.userData.noWaterReflection=true;render.scene.add(outline);
     let active=false,selected:string[]=[],transaction:HistoryTransaction|undefined,bases:WorldObject[]=[],initial=new T.Matrix4(),invalid=false,lastObjects=model.world.objects;
-    function bounds(){box.makeEmpty();for(const id of selected){const o=model.world.objects.find(o=>o.id===id);if(!o)continue;const m=new T.Matrix4().compose(new T.Vector3(...o.position),new T.Quaternion().setFromEuler(new T.Euler(...o.rotation)),new T.Vector3(...o.scale));box.union(getModel(o.asset).bounds.clone().applyMatrix4(m));}}
+    function bounds(){box.makeEmpty();for(const id of selected){const o=model.world.objects.find(o=>o.id===id);if(!o)continue;const m=new T.Matrix4().compose(new T.Vector3(...o.position),new T.Quaternion().setFromEuler(new T.Euler(...o.rotation)),new T.Vector3(...o.scale));box.union(plantObjectBounds(o).clone().applyMatrix4(m));}}
     function placeProxy(){
         selected=expandSelection(model.world,selected);bounds();if(!selected.length){gizmo.detach();outline.visible=false;return;}
         const one=selected.length===1?model.world.objects.find(o=>o.id===selected[0])!:null;

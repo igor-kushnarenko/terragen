@@ -14,7 +14,7 @@ float wave=sin(uEnvTime*1.5+phase)*.7+sin(uEnvTime*3.1+phase*1.7)*.2;
 float anchor=max(p.y,0.0);float amount=mix(pow(min(anchor/8.0,1.5),1.7)*.38,anchor*.16,grass)*wave;
 return inverse(mat3(placement))*vec3(uEnvWind.x,0.0,uEnvWind.y)*amount;}`;
     const bound=new WeakSet<T.Material>(),depths=new Map<number,T.MeshDepthMaterial>();
-    function windVertex(vertex:string,grass:number){return vertex.replace('#include <common>','#include <common>\n'+windGLSL).replace('#include <begin_vertex>',`#include <begin_vertex>
+    function windVertex(vertex:string,grass:number){const anchor=vertex.includes('#include <morphtarget_vertex>')?'#include <morphtarget_vertex>':'#include <begin_vertex>';return vertex.replace('#include <common>','#include <common>\n'+windGLSL).replace(anchor,`${anchor}
 mat4 envPlacement=modelMatrix;
 #ifdef USE_INSTANCING
 envPlacement=modelMatrix*instanceMatrix;

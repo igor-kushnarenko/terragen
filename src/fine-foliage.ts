@@ -1,4 +1,5 @@
 import {plantGeometry,FINE_PLANT_IDS} from './plant-geometry';
+import {plantMorphGeometry,setPlantMorph} from './plant-variation';
 import * as T from 'three';
 import { mulberry32 } from './noise';
 import { HALF, SIZE, SPLAT_RES, type EditorModel } from './state';
@@ -49,8 +50,8 @@ export function foliagePoints(model: EditorModel, terrain: Pick<TerrainSystem, '
     return result;
 }
 export function createFineFoliage(model: EditorModel, terrain: TerrainSystem, scene: T.Scene,environment?:EnvironmentMaterials) {
-    const geometries = FINE_PLANT_IDS.map((_,i)=>plantGeometry(i)), range = { value: model.state.foliageDistance };
     const material = new T.MeshStandardMaterial({ vertexColors: true, roughness: 0.93, side: T.DoubleSide });
+    const geometries = FINE_PLANT_IDS.map((id,i)=>{const source=plantGeometry(i);source.computeBoundingBox();const result=plantMorphGeometry([[{geometry:source,material}]],source.boundingBox!,id).levels[0][0].geometry;source.dispose();return result;}),range={value:model.state.foliageDistance};
     material.onBeforeCompile = shader => {
         shader.uniforms.uFoliageRange = range;
         shader.vertexShader = shader.vertexShader.replace('#include <common>', '#include <common>\nvarying vec3 vPlantWorld;')
@@ -110,7 +111,9 @@ export function createFineFoliage(model: EditorModel, terrain: TerrainSystem, sc
                 const mesh = new T.InstancedMesh(geometries[kind], material, data.length), matrix = new T.Matrix4(); mesh.receiveShadow = true;
                 data.forEach((point, i) => {
                     matrix.compose(new T.Vector3(point.x, point.y + 0.015, point.z), new T.Quaternion().setFromEuler(new T.Euler(0, point.yaw, 0)), new T.Vector3(point.scale, point.scale, point.scale)); mesh.setMatrixAt(i, matrix);
+                    setPlantMorph(mesh,i,`${model.seeds.scatter}/${FINE_PLANT_IDS[kind]}/${point.x.toFixed(6)}/${point.z.toFixed(6)}`);
                 });
+                mesh.morphTexture!.needsUpdate=true;
                 mesh.instanceMatrix.needsUpdate = true; mesh.computeBoundingSphere(); scene.add(mesh); meshes.push(mesh);
             }
             chunks.set(key, meshes); budget -= points.length;

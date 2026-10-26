@@ -2,6 +2,7 @@
   "extends": "./tsconfig.json",
   "include": [
     "src",
+    "verification/plant-variation-check.ts",
     "verification/collision-ship.ts",
     "verification/ocean-render-check.ts",
     "verification/walk-check.ts",

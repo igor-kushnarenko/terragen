@@ -1,8 +1,10 @@
 import RAPIER from '@dimforge/rapier3d-compat';
-import { Euler, Quaternion, Vector3, type Ray } from 'three';
+import { Euler, Quaternion, Vector3, Mesh, type Ray } from 'three';
 import type { EditorModel } from './state';
 import type { TerrainSystem } from './terrain';
 import { getModel } from './model-library';
+import {plantModelLOD,variedPlant,plantIdentity,plantTrunkHull} from './plant-models';
+import {plantWeights} from './plant-variation';
 import type { WalkMotion } from './physics';
 import { WALK_STEP_HEIGHT, WALK_GROUND_SNAP } from './physics';
 import type { StepSurface } from './soundscape';
@@ -14,11 +16,12 @@ import {SIZE} from './state';
 let ready: Promise<void> | undefined;
 export const initializeRapier = () => ready ??= RAPIER.init();
 export interface CollisionParticipant {attach(world:RAPIER.World):void;detach():void;beforeStep(dt:number):void;afterStep():void;}
-export function modelTriangles(asset: string, scale: number[]) {
+export function modelTriangles(asset: string, scale: number[], item?:WorldObject) {
     const vertices: number[] = [], indices: number[] = [];
-    for (const part of getModel(asset).parts) {
+    for (const part of item?plantModelLOD(asset):getModel(asset).parts) {
         const position = part.geometry.attributes.position, base = vertices.length / 3;
-        for (let i = 0; i < position.count; i++) vertices.push(position.getX(i) * scale[0], position.getY(i) * scale[1], position.getZ(i) * scale[2]);
+        const mesh=item&&variedPlant(asset)?new Mesh(part.geometry,part.material):undefined,point=new Vector3();if(mesh)mesh.morphTargetInfluences=plantWeights(plantIdentity(item!));
+        for (let i = 0; i < position.count; i++){if(mesh)mesh.getVertexPosition(i,point);else point.fromBufferAttribute(position,i);vertices.push(point.x*scale[0],point.y*scale[1],point.z*scale[2]);}
         const index = part.geometry.index;
         for (let i = 0; i < (index?.count ?? position.count); i++) indices.push(base + (index ? index.getX(i) : i));
     }
@@ -42,7 +45,7 @@ export function createCollisions(model: EditorModel, terrain: TerrainSystem) {
         if(item.source==='scatter'&&!model.state.showScatter)return;
         const asset=getModel(item.asset);
         if(item.floating){
-            const mesh=modelTriangles(item.asset,item.scale),descriptor=RAPIER.ColliderDesc.convexHull(mesh.vertices);if(!descriptor)return;
+            const mesh=modelTriangles(item.asset,item.scale,item),descriptor=RAPIER.ColliderDesc.convexHull(mesh.vertices);if(!descriptor)return;
             const bounds=asset.bounds.clone();bounds.min.multiply(new Vector3(...item.scale));bounds.max.multiply(new Vector3(...item.scale));const size=bounds.getSize(new Vector3()),volume=Math.max(.00001,size.x*size.y*size.z),rotation=new Quaternion().setFromEuler(new Euler(...item.rotation));
             const body=world!.createRigidBody(RAPIER.RigidBodyDesc.dynamic().setTranslation(...item.position).setRotation(rotation).setLinearDamping(.12).setAngularDamping(.3).setCcdEnabled(true));
             const collider=world!.createCollider(descriptor.setMass(volume*1000*(item.density??.45)).setFriction(.65),body);surfaces.set(collider.handle,'wood');
@@ -53,13 +56,16 @@ export function createCollisions(model: EditorModel, terrain: TerrainSystem) {
         const y=item.followTerrain?terrain.getH(item.position[0],item.position[2])+item.groundOffset:item.position[1];
         if(item.source==='scatter'&&terrain.getH(item.position[0],item.position[2])<waterLevelAt(model.state.water,model.world.waterBodies,item.position[0],item.position[2])+.5)return;
         let descriptor:RAPIER.ColliderDesc|null;
-        if(asset.collider==='trunk'){
+        if(asset.collider==='trunk'&&variedPlant(item.asset)){
+            descriptor=RAPIER.ColliderDesc.convexHull(plantTrunkHull(item));if(!descriptor)return;
+            descriptor.setTranslation(item.position[0],y,item.position[2]).setRotation(new Quaternion().setFromEuler(new Euler(...item.rotation)));
+        }else if(asset.collider==='trunk'){
             const size=asset.bounds.getSize(new Vector3()),radius=Math.max(.12,Math.min(size.x,size.z)*.055),trunkHeight=size.y*.65;
             descriptor=RAPIER.ColliderDesc.cylinder(trunkHeight*item.scale[1]/2,radius*Math.max(item.scale[0],item.scale[2]));
             const rotation=new Quaternion().setFromEuler(new Euler(...item.rotation)),offset=new Vector3(0,trunkHeight*item.scale[1]/2,0).applyQuaternion(rotation);
             descriptor.setTranslation(item.position[0]+offset.x,y+offset.y,item.position[2]+offset.z).setRotation(rotation);
         }else{
-            const mesh=modelTriangles(item.asset,item.scale);descriptor=asset.collider==='mesh'?RAPIER.ColliderDesc.trimesh(mesh.vertices,mesh.indices,RAPIER.TriMeshFlags.FIX_INTERNAL_EDGES):RAPIER.ColliderDesc.convexHull(mesh.vertices);
+            const mesh=modelTriangles(item.asset,item.scale,item);descriptor=asset.collider==='mesh'?RAPIER.ColliderDesc.trimesh(mesh.vertices,mesh.indices,RAPIER.TriMeshFlags.FIX_INTERNAL_EDGES):RAPIER.ColliderDesc.convexHull(mesh.vertices);
             if(!descriptor)throw new Error('Не удалось построить коллизию модели: '+item.asset);
             descriptor.setTranslation(item.position[0],y,item.position[2]).setRotation(new Quaternion().setFromEuler(new Euler(...item.rotation)));
         }
