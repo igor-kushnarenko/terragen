@@ -9,7 +9,7 @@ import type {HistorySystem} from './history';
 import type {Feedback} from './feedback';
 import type {ProjectView} from './project';
 import {getModel} from './model-library';
-import {createVREdges,vrStick,vrHorizontal,traceVRTeleport,vrFailure} from './vr-input';
+import {createVREdges,createVRSprint,vrStick,vrHorizontal,traceVRTeleport,vrFailure} from './vr-input';
 import {createVRPanel,type VRAction} from './vr-panel';
 import {VR_QUALITY_PROFILES,type VRQualityId} from './quality';
 import {readVRQuality,saveVRQuality,readVRRayPitch,saveVRRayPitch,DEFAULT_VR_RAY_PITCH} from './vr-preferences';
@@ -19,7 +19,7 @@ export function createVR(model:EditorModel,render:RenderingSystem,input:Controls
     try{model.xrQuality=readVRQuality(localStorage);}catch{/* Browser storage can be disabled. */}
     let rayPitch=DEFAULT_VR_RAY_PITCH;try{rayPitch=readVRRayPitch(localStorage);}catch{/* Keep the default calibration. */}
     const {renderer,xrRig,xrCamera,camera}=render,xr=renderer.xr;
-    const panel=createVRPanel(render.scene),edges=createVREdges(),head=new T.Vector3(),previousHead=new T.Vector3();
+    const panel=createVRPanel(render.scene),edges=createVREdges(),sprint=createVRSprint(),head=new T.Vector3(),previousHead=new T.Vector3();
     const direction=new T.Vector3(),rotation=new T.Quaternion();
     let session:XRSession|undefined,entering=false,savedView:ProjectView|undefined,hasPose=false,tracking=false,yaw=0,selected:string|undefined;
     let aiming=false,target:T.Vector3|null=null,status='Подключите PICO Connect и запустите SteamVR',supported=false,probe=0;
@@ -36,7 +36,7 @@ export function createVR(model:EditorModel,render:RenderingSystem,input:Controls
         const pico=createPICOController(i===0?'left':'right'),pointer=createVRPointer(rayPitch);grip.add(pico.root,pointer.root);
         const modelError=(error:unknown)=>message('Не удалось загрузить модель контроллера: '+String(error));void pico.loaded.catch(modelError);
         controller.addEventListener('connected',event=>{sources[i]=event.data;void pico.setHand(event.data.handedness==='left'?'left':'right').catch(modelError);});
-        controller.addEventListener('disconnected',()=>{sources[i]=undefined;edges.reset();aiming=false;target=null;grab=undefined;});
+        controller.addEventListener('disconnected',()=>{sources[i]=undefined;edges.reset();sprint.reset();aiming=false;target=null;grab=undefined;});
         controller.addEventListener('selectstart',()=>{
             if(!usable())return;
             if(sources[i]?.handedness==='left'){if(!panel.root.visible)aiming=true;}
@@ -44,7 +44,7 @@ export function createVR(model:EditorModel,render:RenderingSystem,input:Controls
         });
         controller.addEventListener('selectend',()=>{
             if(sources[i]?.handedness!=='left')return;
-            if(aiming&&target&&usable()&&!panel.root.visible){input.teleportXR(target);pulse(i);}
+            if(aiming&&target&&usable()&&!panel.root.visible){sprint.reset();input.teleportXR(target);pulse(i);}
             aiming=false;target=null;
         });
         controller.addEventListener('squeezestart',()=>{if(sources[i]?.handedness==='right')beginGrab(i);});
@@ -64,7 +64,7 @@ export function createVR(model:EditorModel,render:RenderingSystem,input:Controls
     }
     function menu(open:boolean){
         if(!model.xrActive)return;
-        grab=undefined;aiming=false;target=null;
+        grab=undefined;aiming=false;target=null;sprint.reset();
         if(open){panel.place(camera);input.setPaused(true);}else{panel.root.visible=false;input.setPaused(false);}
     }
     function run(action:VRAction){
@@ -125,7 +125,7 @@ export function createVR(model:EditorModel,render:RenderingSystem,input:Controls
         catch(error){if(current===probe){supported=false;message(vrFailure(error));}}
     }
     function cleanup(){
-        const view=savedView;savedView=undefined;session=undefined;model.xrActive=false;entering=false;hasPose=tracking=aiming=false;target=null;grab=undefined;selected=undefined;edges.reset();
+        const view=savedView;savedView=undefined;session=undefined;model.xrActive=false;entering=false;hasPose=tracking=aiming=false;target=null;grab=undefined;selected=undefined;edges.reset();sprint.reset();
         xrRig.visible=panel.root.visible=outline.visible=arc.visible=landing.visible=false;input.setXRMode(false);document.body.classList.remove('vr-mode');
         if(view)input.restoreView(view);render.resizeViewport();message('VR завершён. Можно продолжить работу в редакторе.');
     }
@@ -138,7 +138,7 @@ export function createVR(model:EditorModel,render:RenderingSystem,input:Controls
             if(model.busy)throw new Error('Дождитесь завершения операции с миром.');
             beforeEnter();savedView=input.captureView();session=next;input.setXRMode(true);
             if(!input.walk.on&&input.setWalk(true)===false)throw new Error('Не найдена безопасная точка старта. Выберите её в режиме прогулки.');
-            input.setPaused(false);input.clearKeys();yaw=input.walk.yaw;hasPose=tracking=false;
+            input.setPaused(false);input.clearKeys();sprint.reset();yaw=input.walk.yaw;hasPose=tracking=false;
             model.xrActive=true;xrRig.visible=true;document.body.classList.add('vr-mode');render.controls.enabled=false;
             const profile=VR_QUALITY_PROFILES[model.xrQuality];xr.setFramebufferScaleFactor(profile.framebufferScale);xr.setFoveation(profile.foveation);resolutionScale=profile.framebufferScale;
             next.addEventListener('visibilitychange',()=>{if(session===next&&next!.visibilityState!=='visible'){menu(true);tracking=false;edges.reset();}});
@@ -156,7 +156,7 @@ export function createVR(model:EditorModel,render:RenderingSystem,input:Controls
     function beforeFrame(frame:XRFrame|undefined){
         if(!model.xrActive||!frame||!session)return;
         const reference=xr.getReferenceSpace(),pose=reference?frame.getViewerPose(reference):null;
-        if(!pose){tracking=false;input.setXRInput({forward:0,right:0,up:0});return;}
+        if(!pose){tracking=false;sprint.update(!!sources.find(s=>s?.handedness==='left')?.gamepad?.buttons[3]?.pressed,false,false);input.setXRInput({forward:0,right:0,up:0});return;}
         const p=pose.transform.position;head.set(p.x,p.y,p.z);rotation.set(pose.transform.orientation.x,pose.transform.orientation.y,pose.transform.orientation.z,pose.transform.orientation.w);
         direction.set(0,0,-1).applyQuaternion(rotation);const headYaw=Math.atan2(-direction.x,-direction.z);
         if(!hasPose){yaw-=headYaw;hasPose=true;}
@@ -164,13 +164,14 @@ export function createVR(model:EditorModel,render:RenderingSystem,input:Controls
         previousHead.copy(head);tracking=session.visibilityState==='visible';
         const left=sources.find(s=>s?.handedness==='left')?.gamepad,right=sources.find(s=>s?.handedness==='right')?.gamepad;
         const buttonDown=(gamepad:Gamepad|undefined,index:number)=>!!gamepad?.buttons[index]?.pressed;
-        if(!usable()){input.setXRInput({forward:0,right:0,up:0});return;}
+        if(!usable()){sprint.update(buttonDown(left,3),false,false);input.setXRInput({forward:0,right:0,up:0});return;}
         if(edges.pressed('menu',buttonDown(left,4)))menu(!panel.root.visible);
         if(edges.pressed('flight',buttonDown(right,5))&&!panel.root.visible)input.toggleFlight();
         if(edges.pressed('jump',buttonDown(right,4))&&!panel.root.visible&&!input.walk.flying)input.walk.jumpReq=true;
         const stick=vrStick(left),turn=vrStick(right);if(!panel.root.visible)yaw+=edges.snap(turn.x);
+        const running=sprint.update(buttonDown(left,3),stick.x!==0||stick.y!==0,!!left&&!input.walk.paused&&!panel.root.visible&&!input.walk.flying&&!input.walk.swim);
         input.walk.yaw=yaw+headYaw;
-        input.setXRInput(panel.root.visible?{forward:0,right:0,up:0}:{forward:-stick.y*.45,right:stick.x*.45,up:input.walk.flying?(buttonDown(right,4)?1:0)-(buttonDown(left,5)?1:0):0});
+        input.setXRInput(panel.root.visible?{forward:0,right:0,up:0}:{forward:-stick.y*.45,right:stick.x*.45,sprint:running,up:input.walk.flying?(buttonDown(right,4)?1:0)-(buttonDown(left,5)?1:0):0});
         panel.update(status,input.walk.flying,model.xrQuality,qualityPending(),rayPitch);
     }
     function renderFrame(alpha=1){
@@ -187,7 +188,7 @@ export function createVR(model:EditorModel,render:RenderingSystem,input:Controls
         else target=null;
         hands.forEach((hand,index)=>{if(!sources[index])return;hand.pico.update(sources[index]?.gamepad);const ray=rayFor(index),hit=panel.hit(ray);hand.pointer.line.scale.z=hit?.distance??8;});
     }
-    return {enter,exit,stop,beforeFrame,renderFrame,detect,setQuality,setRayPitch,get rayPitch(){return rayPitch;},get quality(){return model.xrQuality;},get resolutionScale(){return resolutionScale;},get qualityPending(){return qualityPending();},
+    return {enter,exit,stop,beforeFrame,renderFrame,detect,setQuality,setRayPitch,get sprinting(){return sprint.running;},get rayPitch(){return rayPitch;},get quality(){return model.xrQuality;},get resolutionScale(){return resolutionScale;},get qualityPending(){return qualityPending();},
         get controllers(){return hands.map((hand,i)=>{const ray=rayFor(i);return {hand:sources[i]?.handedness,modelReady:hand.pico.ready,origin:ray.origin.toArray(),direction:ray.direction.toArray()};});},
         get active(){return model.xrActive;},get status(){return status;},get selected(){return selected;}};
 }

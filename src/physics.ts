@@ -12,7 +12,7 @@ export interface WalkMotion {
     resolve(feet: Vector3, movement: Vector3, dt: number, flying?:boolean): { position: Vector3; grounded: boolean };
     ground(x: number, z: number, y: number): number;
 }
-export interface WalkAnalogInput { forward:number; right:number; up:number; }
+export interface WalkAnalogInput { forward:number; right:number; up:number; sprint?:boolean; }
 /** Catch up ordinary low-FPS frames; discard only pauses longer than one second. */
 export class FixedStepClock {
     private accumulator = 0;
@@ -99,7 +99,7 @@ export function createWalkSimulation(model: EditorModel, getH: (x: number, z: nu
         const water=surface(walk.feet.x,walk.feet.z);
         const swimFloor = water.level - settings.eyeHeight + 0.25;
         walk.swim = ground < swimFloor && walk.feet.y <= swimFloor + 0.3;
-        const speed = walk.swim ? settings.swimSpeed : settings.speed * (keys.ShiftLeft || keys.ShiftRight ? settings.sprint : 1);
+        const speed = walk.swim ? settings.swimSpeed : settings.speed * (keys.ShiftLeft || keys.ShiftRight || analog?.sprint ? settings.sprint : 1);
         let moved = false;
         if (move.lengthSq() > 0) {
             if(move.lengthSq()>1)move.normalize();

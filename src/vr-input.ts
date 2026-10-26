@@ -16,6 +16,22 @@ export function createVREdges(){
         reset(){previous.clear();turning=false;},
     };
 }
+/** Click to toggle; centering the stick after moving returns to walking. */
+export function createVRSprint(){
+    let requested=false,wasPressed=false,wasMoving=false,running=false,wasAllowed=true;
+    return {
+        update(pressed:boolean,moving:boolean,allowed:boolean){
+            const clicked=pressed&&!wasPressed&&wasAllowed;wasPressed=pressed;wasAllowed=allowed;
+            if(!allowed){requested=wasMoving=running=false;return false;}
+            if(clicked)requested=!requested;
+            else if(!moving&&wasMoving)requested=false;
+            wasMoving=moving;running=requested&&moving;return running;
+        },
+        // Retain button state so a held click cannot reactivate after a pause.
+        reset(){requested=wasMoving=running=false;wasAllowed=false;},
+        get running(){return running;},
+    };
+}
 /** The same rotation is used for room-scale movement and the tracking origin. */
 export function vrHorizontal(local:{x:number;z:number},yaw:number){return new Vector3(local.x,0,local.z).applyAxisAngle(new Vector3(0,1,0),yaw);}
 

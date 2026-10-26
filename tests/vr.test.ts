@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {Vector3,Ray} from 'three';
-import {vrStick,createVREdges,vrHorizontal,traceVRTeleport,vrFailure} from '../src/vr-input';
+import {vrStick,createVREdges,createVRSprint,vrHorizontal,traceVRTeleport,vrFailure} from '../src/vr-input';
 import {createWalkSimulation,FixedStepClock} from '../src/physics';
 import {effectiveQuality,qualityProfile} from '../src/quality';
 import {createCollisions,initializeRapier} from '../src/collisions';
@@ -29,6 +29,34 @@ test('VR turns require centering and buttons fire once per press',()=>{
     const edges=createVREdges();assert.equal(edges.snap(1),-Math.PI/6);assert.equal(edges.snap(1),0);assert.equal(edges.snap(-1),0);assert.equal(edges.snap(0),0);assert.equal(edges.snap(-1),Math.PI/6);
     assert.equal(edges.pressed('flight',true),true);assert.equal(edges.pressed('flight',true),false);assert.equal(edges.pressed('flight',false),false);assert.equal(edges.pressed('flight',true),true);
     edges.reset();assert.equal(edges.snap(-1),Math.PI/6);
+});
+test('VR sprint toggles on click, releases on centering, and never reactivates from a held click after interruption',()=>{
+    const sprint=createVRSprint();assert.equal(sprint.update(false,true,true),false);
+    assert.equal(sprint.update(true,true,true),true);assert.equal(sprint.update(true,true,true),true);assert.equal(sprint.update(false,true,true),true);
+    assert.equal(sprint.update(true,true,true),false);sprint.update(false,false,true);
+    assert.equal(sprint.update(true,false,true),false,'can arm before starting to move');assert.equal(sprint.update(false,true,true),true);assert.equal(sprint.update(false,false,true),false);
+    for(const reset of [()=>sprint.reset(),()=>sprint.update(true,true,false)]){
+        sprint.update(false,true,true);assert.equal(sprint.update(true,true,true),true);reset();assert.equal(sprint.update(true,true,true),false);sprint.update(false,true,true);
+    }
+    sprint.update(false,false,false);assert.equal(sprint.update(true,true,true),false,'newly reconnected held button is not a click');sprint.update(false,true,true);assert.equal(sprint.update(true,true,true),true);
+});
+test('analog sprint uses the configured multiplier and preserves diagonal/partial-stick speed at different frame rates',()=>{
+    const positions:Vector3[]=[];
+    for(const fps of [10,30,60,90,144])for(const amount of [.2,.45])for(const diagonal of [false,true]){
+        const f=editorFixture();f.model.state.water=-1000;
+        const distance=(sprint:boolean)=>{const sim=createWalkSimulation(f.model,()=>0),clock=new FixedStepClock();for(let i=0;i<fps;i++)clock.advance(1/fps,dt=>sim.step(dt,{forward:amount*(diagonal?Math.SQRT1_2:1),right:diagonal?amount*Math.SQRT1_2:0,up:0,sprint}));return sim.walk.feet.clone();};
+        const walking=distance(false),running=distance(true);assert.ok(Math.abs(running.length()/walking.length()-f.model.walkSettings.sprint)<1e-8);
+        assert.ok(Math.abs(running.length()-f.model.walkSettings.speed*amount*f.model.walkSettings.sprint)<1e-8);
+        if(amount===.45&&!diagonal)positions.push(running);
+    }
+    for(const position of positions)assert.ok(position.distanceTo(positions[0])<1e-8);
+});
+test('analog sprint never changes swimming or creative flight speed',()=>{
+    const f=editorFixture();
+    for(const flying of [false,true]){
+        const distance=(sprint:boolean)=>{const sim=createWalkSimulation(f.model,()=>0);sim.walk.feet.set(0,flying?40:f.model.state.water-f.model.walkSettings.eyeHeight+.25,0);if(flying)sim.setFlying(true);for(let i=0;i<120;i++)sim.step(1/120,{forward:.45,right:0,up:flying?.2:0,sprint});return sim.walk.feet.clone();};
+        assert.ok(distance(true).distanceTo(distance(false))<1e-8);
+    }
 });
 test('tracked walking and origin compensation use the same heading',()=>{
     const d=vrHorizontal({x:1,z:0},Math.PI/2);assert.ok(Math.abs(d.x)<1e-9);assert.ok(Math.abs(d.z+1)<1e-9);assert.equal(d.y,0);
@@ -125,6 +153,15 @@ test('teleportation lands on imported decks and rejects walls, sea and insuffici
     const wall=collisions.teleportHit(new Ray(new Vector3(0,11,0),new Vector3(1,0,0)),10);assert.equal(wall?.safe,false);
     f.model.walkSettings.eyeHeight=8;const cramped=collisions.teleportHit(new Ray(new Vector3(0,10.5,0),new Vector3(0,-1,0)),1);assert.equal(cramped?.safe,false);
     f.model.state.water=100;assert.equal(collisions.teleportHit(new Ray(new Vector3(0,30,0),new Vector3(0,-1,0)),30)?.safe,false);
+});
+test('VR running collides with imported walls and crosses an open doorway on the deck',async t=>{
+    await initializeRapier();
+    (globalThis as any).FileReader=class{result:any;onloadend?:()=>void;async readAsArrayBuffer(blob:Blob){this.result=await blob.arrayBuffer();this.onloadend?.();}};
+    const f=editorFixture();f.model.state.water=-1000;f.model.heights.fill(0);f.terrain.updateMeshAll();f.materials.updateWater();
+    const asset=await f.storage.importModel([new File([await collisionShipGLB(false)],'ship.glb')],'structure','mesh');f.edits.replaceWorld({assets:[asset]});const id=f.edits.addObject(asset.id,0,0)!;f.edits.updateObject(id,{followTerrain:false,position:[0,10,0]});
+    const collisions=createCollisions(f.model,f.terrain);t.after(collisions.dispose);const sim=createWalkSimulation(f.model,f.terrain.getH,()=>true,collisions.motion);
+    sim.walk.feet.set(0,10.1,0);for(let i=0;i<240;i++)sim.step(1/120,{forward:0,right:.45,up:0,sprint:true});assert.ok(sim.walk.feet.x<3.2,'cannot run through wall');assert.ok(Math.abs(sim.walk.feet.y-10)<.1,'supported by lower deck');
+    sim.walk.feet.set(0,10.1,0);sim.walk.vy=0;for(let i=0;i<160;i++)sim.step(1/120,{forward:.45,right:0,up:0,sprint:true});assert.ok(sim.walk.feet.z<-4.5,'passes through doorway');
 });
 test('VR connection errors include actionable instructions',()=>{
     assert.match(vrFailure(new DOMException('denied','NotAllowedError')),/Разрешите/);assert.match(vrFailure(new DOMException('no runtime','NotSupportedError')),/OpenXR/);
