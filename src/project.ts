@@ -129,14 +129,14 @@ const ranges: Partial<Record<keyof EditorState, [
     layer: [0, 8, true], radius: [0.1, 512], strength: [0, 1], falloff: [0, 1], snowLine: [-1000, 5000], rockSlope: [0, 1],
     water: [-1000, 5000], waterOpacity: [0, 1], wave: [0, 10], sunAz: [0, 360], sunEl: [-90, 90], fog: [0, 1],
     groundDetail: [0, 2], foliageDensity: [0, 1], foliageDistance: [10, 80],
-    soilMoisture:[0,1],clearingAmount:[0,1],exposure:[0.2,2],contactAO:[0,0.6],soundVolume:[0,1],ambienceVolume:[0,1],footstepVolume:[0,1],
+    filterIntensity:[0,1],soilMoisture:[0,1],clearingAmount:[0,1],exposure:[0.2,2],contactAO:[0,0.6],soundVolume:[0,1],ambienceVolume:[0,1],footstepVolume:[0,1],
     treeDensity: [0, 1], rockDensity: [0, 1], windDir: [0, 360], windSpeed: [0, 10],
 };
 export function validateState(value: unknown, legacy = false, preV6 = true, preV8 = true): EditorState {
     const defaults = createModel().state, input = object(value, 'state');
     const result = {} as Record<keyof EditorState, unknown>;
     for (const key of Object.keys(defaults) as (keyof EditorState)[]) {
-        const item = (legacy || preV8&&['dayTime','dayCycle','dayDuration','lowFog','wetness'].includes(key) || preV6 && ['areaSize','precipitation','fogIntensity'].includes(key) || ['graphicFilter','waterReflections','groundDetail','foliageDensity','foliageDistance','showFoliage','soilMoisture','clearingAmount','quality','exposure','contactAO','soundEnabled','soundVolume','ambienceVolume','footstepVolume'].includes(key)) && input[key] === undefined ? defaults[key] : input[key];
+        const item = (legacy || preV8&&['dayTime','dayCycle','dayDuration','lowFog','wetness'].includes(key) || preV6 && ['areaSize','precipitation','fogIntensity'].includes(key) || ['filterIntensity','filmGrain','graphicFilter','waterReflections','groundDetail','foliageDensity','foliageDistance','showFoliage','soilMoisture','clearingAmount','quality','exposure','contactAO','soundEnabled','soundVolume','ambienceVolume','footstepVolume'].includes(key)) && input[key] === undefined ? defaults[key] : input[key];
         const range = ranges[key];
         if (range)
             result[key] = number(item, `state.${key}`, ...range);

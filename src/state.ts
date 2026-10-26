@@ -65,6 +65,8 @@ export interface EditorState {
     quality: QualityId;
     exposure: number;
     graphicFilter: GraphicFilter;
+    filterIntensity:number;
+    filmGrain:boolean;
     contactAO: number;
     soundEnabled: boolean;
     soundVolume: number;
@@ -84,7 +86,7 @@ export function createModel() {
         sunAz: 140, sunEl: 28, dayTime: 10, dayCycle: false, dayDuration: 20, lowFog: .5, wetness: 0, fog: 0.35, shadows: true,
         treeDensity: 0.45, rockDensity: 0.4, showScatter: true, fly: true,
         weather: 'clear', precipitation: 1, fogIntensity: 1, windDir: 45, windSpeed: 0.5, groundDetail: 1, foliageDensity: 0.65, foliageDistance: 45, showFoliage: true,
-        soilMoisture: 0.55, clearingAmount: 0.4, quality: 'balanced', graphicFilter:'none', exposure: 0.55, contactAO: 0.3,
+        soilMoisture: 0.55, clearingAmount: 0.4, quality: 'balanced', graphicFilter:'none', filterIntensity:1, filmGrain:true, exposure: 0.55, contactAO: 0.3,
         soundEnabled: true, soundVolume: 0.65, ambienceVolume: 0.75, footstepVolume: 0.8,
     };
     return {

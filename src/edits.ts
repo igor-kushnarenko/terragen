@@ -67,7 +67,7 @@ export function createWorldEdits(model: EditorModel, history: HistorySystem, ter
         const settings = validateWalkSettings({ ...model.walkSettings, ...patch });
         history.transaction('Настройки прогулки', () => { Object.assign(model.walkSettings, settings); feedback.syncAllUI(); });
     }
-    function setPreferences(patch:Partial<Pick<EditorState,'graphicFilter'|'waterReflections'|'quality'|'exposure'|'contactAO'|'soundEnabled'|'soundVolume'|'ambienceVolume'|'footstepVolume'|'soilMoisture'|'clearingAmount'>>) {
+    function setPreferences(patch:Partial<Pick<EditorState,'filterIntensity'|'filmGrain'|'graphicFilter'|'waterReflections'|'quality'|'exposure'|'contactAO'|'soundEnabled'|'soundVolume'|'ambienceVolume'|'footstepVolume'|'soilMoisture'|'clearingAmount'>>) {
         const validated=validateState({...model.state,...patch});history.transaction('Настройки окружения',()=>{Object.assign(model.state,validated);feedback.syncAllUI();});
     }
     return { addObject, updateObject, removeObject, removeObjects, duplicateObjects, groupObjects, ungroupObjects, replaceWorld, setSeeds, setWalkSettings,setPreferences };

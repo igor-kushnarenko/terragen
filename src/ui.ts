@@ -237,6 +237,9 @@ export function createInterface(model: EditorModel, feedback: Feedback, actions:
     const filterLabel=el('label',{text:'Графический фильтр'},graphics),filter=el('select',{'aria-label':'Графический фильтр'},filterLabel);
     for(const [id,name]of Object.entries(GRAPHIC_FILTERS))el('option',{value:id,text:name},filter);
     filter.onchange=()=>edits.setPreferences({graphicFilter:filter.value as EditorState['graphicFilter']});feedback.uiSync.graphicFilter=()=>filter.value=model.state.graphicFilter;feedback.uiSync.graphicFilter();
+    slider(graphics,'filterIntensity','Интенсивность фильтра',0,1,.01,null,v=>Math.round(v*100)+'%');
+    checkbox(graphics,'filmGrain','Плёночное зерно (без VR)');
+    el('p',{class:'hint',text:'Зерно доступно для плёнки 35 мм и старой экспедиции. В VR оно отключается для чёткости изображения.'},graphics);
     checkbox(graphics,'waterReflections','Отражения в воде');
     slider(graphics,'exposure','Экспозиция',0.2,2,0.05,null,v=>v.toFixed(2));
     slider(graphics,'contactAO','Контактное затемнение',0,0.6,0.02,materials.updateMaterial,v=>v.toFixed(2));

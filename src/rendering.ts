@@ -19,7 +19,7 @@ export function createRendering(model: EditorModel) {
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 0.55;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
-    createGraphicFilters(renderer,()=>model.state.graphicFilter);
+    createGraphicFilters(renderer,()=>model.state.graphicFilter,()=>({intensity:model.state.filterIntensity,grain:model.state.filmGrain}));
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFShadowMap;
     container.appendChild(renderer.domElement);
