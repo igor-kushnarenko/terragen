@@ -26,6 +26,15 @@ export function createRendering(model: EditorModel) {
     scene.fog = fog;
     const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.5, 40000);
     camera.position.set(-330, 260, 600);
+    // Keep the world-space observer camera for LOD, sound and weather. Only this
+    // separate camera is parented to the player rig and driven by the headset.
+    const xrRig = new THREE.Group(); xrRig.name = 'VR player'; xrRig.visible = false;
+    const xrCamera = new THREE.PerspectiveCamera(90, 1, .08, 40000);
+    xrRig.add(xrCamera); scene.add(xrRig);
+    renderer.xr.enabled = true;
+    renderer.xr.setReferenceSpaceType('local-floor');
+    renderer.xr.setFramebufferScaleFactor(.65);
+    renderer.xr.setFoveation(1);
     const controls = new OrbitControls(camera, renderer.domElement);
     function resizeViewport() {
         const width = Math.max(1, container.clientWidth), height = Math.max(1, container.clientHeight);
@@ -75,6 +84,6 @@ export function createRendering(model: EditorModel) {
     scene.add(hemi);
     const sunDir = new THREE.Vector3();
     const atmosBase = { sunInt: 4.2, hemiInt: 0.42, fogDensity: 0.0004, fogColor: new THREE.Color(0xaabbcc), skyZenith: new THREE.Color(), skyHorizon: new THREE.Color(), sunColor: new THREE.Color() };
-    return { renderer, scene, fog, camera, controls, sky, envSky, envScene, pmrem, sun, hemi, sunDir, atmosBase, setLeftButton, resizeViewport };
+    return { renderer, scene, fog, camera, xrRig, xrCamera, controls, sky, envSky, envScene, pmrem, sun, hemi, sunDir, atmosBase, setLeftButton, resizeViewport };
 }
 export type RenderingSystem = ReturnType<typeof createRendering>;

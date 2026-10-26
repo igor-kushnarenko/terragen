@@ -10,7 +10,8 @@ export const WATER_PROFILES = {
     balanced:{reflectionSize:256,reflectionInterval:.08,detail:1,foam:.8,refractionScale:.5,oceanSegments:96,spacing:3,impacts:16,rainRate:8},
     high:{reflectionSize:512,reflectionInterval:.04,detail:2,foam:1,refractionScale:.75,oceanSegments:128,spacing:2,impacts:24,rainRate:14},
 } as const;
-export function qualityProfile(model: EditorModel) { return QUALITY_PROFILES[model.state.quality]; }
+export function effectiveQuality(model: EditorModel): QualityId { return model.xrActive ? 'low' : model.state.quality; }
+export function qualityProfile(model: EditorModel) { return QUALITY_PROFILES[effectiveQuality(model)]; }
 export function chooseLOD(distance: number, current: number, thresholds: readonly [number, number], hysteresis = 0.12) {
     if (current === 0 && distance < thresholds[0] * (1 + hysteresis)) return 0;
     if (current === 1 && distance >= thresholds[0] * (1 - hysteresis) && distance < thresholds[1] * (1 + hysteresis)) return 1;

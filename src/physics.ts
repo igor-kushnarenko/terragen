@@ -12,6 +12,7 @@ export interface WalkMotion {
     resolve(feet: Vector3, movement: Vector3, dt: number, flying?:boolean): { position: Vector3; grounded: boolean };
     ground(x: number, z: number, y: number): number;
 }
+export interface WalkAnalogInput { forward:number; right:number; up:number; }
 /** Catch up ordinary low-FPS frames; discard only pauses longer than one second. */
 export class FixedStepClock {
     private accumulator = 0;
@@ -65,7 +66,7 @@ export function createWalkSimulation(model: EditorModel, getH: (x: number, z: nu
     function clearKeys() { for (const key in keys)
         keys[key] = false; walk.jumpReq = false; walk.dragging = false; walk.autoWalking = false; automaticStall = 0; }
     function setFlying(on:boolean){walk.flying=on;walk.vy=0;walk.grounded=false;walk.swim=false;clearKeys();synchronize();}
-    function step(dt: number) {
+    function step(dt: number, analog?:WalkAnalogInput) {
         const settings = model.walkSettings;
         synchronize();
         if (walk.paused) { automaticStall=0; return; }
@@ -81,10 +82,12 @@ export function createWalkSimulation(model: EditorModel, getH: (x: number, z: nu
             move.add(right);
         if (keys.KeyA || keys.ArrowLeft)
             move.sub(right);
+        if(analog){move.addScaledVector(forward,analog.forward).addScaledVector(right,analog.right);}
         if(walk.flying){
             walk.vy=0;walk.grounded=false;walk.swim=false;walk.jumpReq=false;
-            move.y=(keys.Space?1:0)-(keys.ShiftLeft||keys.ShiftRight?1:0);
-            if(move.lengthSq()>0)move.normalize().multiplyScalar(settings.speed*2.5*(keys.ControlLeft||keys.ControlRight?settings.sprint:1)*dt);
+            move.y=(keys.Space?1:0)-(keys.ShiftLeft||keys.ShiftRight?1:0)+(analog?.up??0);
+            if(move.lengthSq()>1)move.normalize();
+            move.multiplyScalar(settings.speed*2.5*(keys.ControlLeft||keys.ControlRight?settings.sprint:1)*dt);
             move.x=clamp(walk.feet.x+move.x,-HALF+1,HALF-1)-walk.feet.x;
             move.z=clamp(walk.feet.z+move.z,-HALF+1,HALF-1)-walk.feet.z;
             move.y=clamp(walk.feet.y+move.y,-59999,59999)-walk.feet.y;
@@ -99,7 +102,8 @@ export function createWalkSimulation(model: EditorModel, getH: (x: number, z: nu
         const speed = walk.swim ? settings.swimSpeed : settings.speed * (keys.ShiftLeft || keys.ShiftRight ? settings.sprint : 1);
         let moved = false;
         if (move.lengthSq() > 0) {
-            move.normalize().multiplyScalar(speed * dt);
+            if(move.lengthSq()>1)move.normalize();
+            move.multiplyScalar(speed * dt);
             const x = clamp(walk.feet.x + move.x, -HALF + 1, HALF - 1), z = clamp(walk.feet.z + move.z, -HALF + 1, HALF - 1);
             const distance = Math.hypot(x - walk.feet.x, z - walk.feet.z) + 1e-6;
             const automatic = walk.autoWalking && !manual;

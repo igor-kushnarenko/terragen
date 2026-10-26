@@ -1,5 +1,5 @@
 import RAPIER from '@dimforge/rapier3d-compat';
-import { Euler, Quaternion, Vector3 } from 'three';
+import { Euler, Quaternion, Vector3, type Ray } from 'three';
 import type { EditorModel } from './state';
 import type { TerrainSystem } from './terrain';
 import { getModel } from './model-library';
@@ -131,6 +131,13 @@ export function createCollisions(model: EditorModel, terrain: TerrainSystem) {
         },
     };
     return { motion, ensure, rebuild,
+        teleportHit(ray:Ray,distance:number){
+            ensure();const hit=world!.castRayAndGetNormal(new RAPIER.Ray(ray.origin,ray.direction),distance,true,undefined,undefined,capsule);
+            if(!hit)return null;
+            const point=ray.at(hit.timeOfImpact,new Vector3()),inside=Math.abs(point.x)<SIZE/2-1&&Math.abs(point.z)<SIZE/2-1;
+            const clear=!world!.intersectionWithShape({x:point.x,y:point.y+center+.08,z:point.z},{x:0,y:0,z:0,w:1},capsule.shape,undefined,undefined,capsule);
+            return {point,safe:inside&&hit.normal.y>=Math.SQRT1_2&&point.y>waterLevelAt(model.state.water,model.world.waterBodies,point.x,point.z)+.15&&clear};
+        },
         bindDynamic(next:CollisionParticipant|undefined){ensure();participant?.detach();participant=next;participant?.attach(world!);},
         setPassenger(on:boolean){passenger=on;if(world)capsule.setEnabled(!on);},
         stepWater(dt:number,sample:WaterQuery){ensure();world!.timestep=dt;participant?.beforeStep(dt);for(const item of floating.values()){item.pose.previousPosition.copy(item.pose.position);item.pose.previousRotation.copy(item.pose.rotation);applyBuoyancy(item,sample);}world!.step();participant?.afterStep();for(const item of floating.values()){captureFloatingPose(item);const p=item.body.translation();if(Math.abs(p.x)>511||Math.abs(p.z)>511){item.body.setTranslation({x:Math.max(-511,Math.min(511,p.x)),y:p.y,z:Math.max(-511,Math.min(511,p.z))},true);captureFloatingPose(item);}}stepped=true;},

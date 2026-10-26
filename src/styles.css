@@ -84,6 +84,9 @@
   .inventory-state { color:#ffcf8e; }
   .transform-row { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:4px; margin:7px 0; }
   #photoBtn { position:fixed; right:12px; bottom:16px; z-index:10; }
+  .vr-mode > :not(#view):not(#vrExit) { display:none !important; }
+  #vrExit { position:fixed;right:16px;top:16px;z-index:100; }
+  .vr-settings { border-top:1px solid var(--line);margin-top:12px;padding-top:8px; }
   body.photo-mode > :not(#view):not(#photoControls):not(#photoReturn):not(#photoThirds):not(#busy) { display:none !important; }
   #photoControls { position:fixed; top:12px; right:12px; width:280px; max-height:calc(100vh - 24px); overflow:auto; z-index:24; padding:14px; background:#171d26ed; border:1px solid var(--line); border-radius:10px; }
   #photoControls h2 { margin:0 0 8px; font-size:18px; }

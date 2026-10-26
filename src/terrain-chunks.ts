@@ -1,6 +1,6 @@
 import * as T from 'three';
 import { TERRAIN_CHUNK_SEGMENTS, boxDistance, cameraFrustum, terrainChunkIndices } from './chunk-grid';
-import { chooseLOD, qualityProfile } from './quality';
+import { chooseLOD, qualityProfile, effectiveQuality } from './quality';
 import type { EditorModel } from './state';
 export function createTerrainChunks(model: EditorModel, scene: T.Scene, material: T.Material, full: T.BufferGeometry) {
     const span = Math.min(TERRAIN_CHUNK_SEGMENTS, model.N), n = span + 1;
@@ -55,7 +55,7 @@ export function createTerrainChunks(model: EditorModel, scene: T.Scene, material
             // ridges into polygons. Keep detail while its loss is visible on screen.
             if(camera instanceof T.PerspectiveCamera){
                 const projection=viewportHeight*camera.projectionMatrix.elements[5]/(2*Math.max(1,distance));
-                const tolerance={low:5,balanced:2.5,high:1.25}[model.state.quality];
+                const tolerance={low:5,balanced:2.5,high:1.25}[effectiveQuality(model)];
                 while(chunk.level>0&&chunk.errors[chunk.level]*projection>tolerance)chunk.level--;
             }
             geometry.setDrawRange(starts[chunk.level],levels[chunk.level].length);

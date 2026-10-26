@@ -91,6 +91,8 @@ export function createModel() {
         splat: new Uint8Array(SPLAT_RES * SPLAT_RES * 4),
         splatDetail: new Uint8Array(SPLAT_RES * SPLAT_RES * 4),
         terrainRevision: 0,
+        // Session-only: never changes the world's saved graphics preferences.
+        xrActive: false,
         world: createWorld(), seeds: deriveSeeds(state.seed),
         operations: [] as OperationRecord[], walkSettings: { ...DEFAULT_WALK_SETTINGS },balloon:null as BalloonState|null,
         maxH: 1, minH: 0, busy: false,

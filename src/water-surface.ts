@@ -2,7 +2,7 @@ import {Vector2, Vector3, Vector4} from 'three';
 import type {EditorModel} from './state';
 import type {WaterBody} from './world';
 import {waterAtShore} from './water-domain';
-import {WATER_PROFILES} from './quality';
+import {WATER_PROFILES,effectiveQuality} from './quality';
 
 // This table also generates the GLSL. Physics and rendering use the same wave spectrum.
 export const WATER_WAVES = [
@@ -58,7 +58,7 @@ export function createWaterSurface(model:EditorModel,getH:(x:number,z:number)=>n
         // Invert the horizontal Gerstner displacement to query height at an Eulerian world point.
         let bx=x,bz=z,w=gerstnerOffset(x,z,time,angle,settings.amplitude,settings.length,dx,dz,settings.chop);
         for(let i=0;i<8;i++){bx=x-w.x;bz=z-w.z;const local=waveSettings(kind,wave,model.state.windSpeed,mean-getH(bx,bz));w=gerstnerOffset(bx,bz,time,angle,local.amplitude,local.length,dx,dz,local.chop);}
-        let ripple=0,rx=0,rz=0;for(const impact of impacts.slice(-WATER_PROFILES[model.state.quality].impacts))if(impact.body===id){ripple+=impactHeight(impact,x,z,time);rx+=(impactHeight(impact,x+.04,z,time)-impactHeight(impact,x-.04,z,time))/.08;rz+=(impactHeight(impact,x,z+.04,time)-impactHeight(impact,x,z-.04,time))/.08;}
+        let ripple=0,rx=0,rz=0;for(const impact of impacts.slice(-WATER_PROFILES[effectiveQuality(model)].impacts))if(impact.body===id){ripple+=impactHeight(impact,x,z,time);rx+=(impactHeight(impact,x+.04,z,time)-impactHeight(impact,x-.04,z,time))/.08;rz+=(impactHeight(impact,x,z+.04,time)-impactHeight(impact,x,z-.04,time))/.08;}
         return {level:mean+w.y+ripple,meanLevel:mean,dx,dz,body:s.body??null,normal:new Vector3(-w.gx-rx,1,-w.gz-rz).normalize()};
     }
     function upload(limit=MAX_WATER_IMPACTS){const active=impacts.slice(-limit);for(let i=0;i<MAX_WATER_IMPACTS;i++){const p=active[i];packed[i].set(p?.x??0,p?.z??0,p?.time??-100,p?.strength??0);meta[i].set(p?.body??-1,p?.radius??0,0,0);}return {packed,meta,count:active.length};}

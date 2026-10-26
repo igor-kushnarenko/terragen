@@ -22,6 +22,7 @@ import {createObjectEditor} from './object-editor';
 import {createVegetationBrush} from './vegetation-brush';
 import {createEnvironment} from './environment';
 import {createPhotoMode} from './photo-mode';
+import {createVR} from './vr';
 import { createLibraryInterface } from './library-ui';
 import { createWorldPreviewCache } from './preview';
 import { openWorldRepository, type WorldRepository } from './world-library';
@@ -124,6 +125,7 @@ export function createEditor(options:EditorOptions = {}) {
         brushes.endStroke();input.clearKeys();if(kind!=='trail')input.cancelTerrainTool();if(input.walk.on)input.setWalkPanel(true);
     });
     const worldGeneration=createWorldGeneration(model,terrain,materials,vegetation,history,feedback,jobs,()=>{
+        vr.stop();
         brushes.endStroke();input.cancelTerrainTool();input.clearKeys();scenarios.stop();balloon.stop();photo.exit();input.setWalk(false);
     },createTerrainJobs());
     let worldStudio:WorldStudio|undefined;
@@ -143,7 +145,7 @@ export function createEditor(options:EditorOptions = {}) {
     scenarios.bindBeforeStart(()=>balloon.stop());
     audio.bindStatus(()=>feedback.syncUI('audioState'));
     brushes.bindEndStroke(() => history.flush());
-    storage.bindView(photo.persistentView, view => { scenarios.stop();photo.exit();input.restoreView(view);audio.reset();balloon.synchronize();waterInteractions.reset(); physicsClock.reset(); lastFrame = undefined; });
+    storage.bindView(photo.persistentView, view => { vr.stop();scenarios.stop();photo.exit();input.restoreView(view);audio.reset();balloon.synchronize();waterInteractions.reset(); physicsClock.reset(); lastFrame = undefined; });
     history.bindRefresh(() => { scenarios.stop();actions.applyAll(); feedback.syncAllUI(); input.synchronize();audio.reset();balloon.synchronize();waterInteractions.reset(); physicsClock.reset(); lastFrame = undefined; });
     feedback.bindHistory(() => history.undoDepth, () => history.redoDepth, () => history.undoLabel, () => history.redoLabel);
     terrain.buildTerrain(); terrain.updateMeshAll(); actions.applyAll(); lighting.updateEnv();
@@ -165,6 +167,7 @@ export function createEditor(options:EditorOptions = {}) {
     createJungleInterface(model,terrain,history,vegetation,materials,feedback,settings=>worldStudio!.selectJungle(settings));
     createTaigaInterface(model,terrain,history,vegetation,materials,feedback,settings=>worldStudio!.selectTaiga(settings));
     createWorkspace(model,feedback,ui,input,render,autosave);
+    const vr=createVR(model,render,input,collisions,vegetation,edits,history,feedback,()=>autosave.saveNow(true),()=>{photo.exit();balloon.stop();scenarios.stop();history.flush();});
     const cancelGeneration=()=>{generation.cancelOperation();worldGeneration.cancel();};
     document.getElementById('btnCancelOperation')!.addEventListener('click', cancelGeneration);
     window.addEventListener('keydown', event => { if ((model.busy||worldGeneration.previewing) && event.key === 'Escape') cancelGeneration(); });
@@ -191,11 +194,12 @@ export function createEditor(options:EditorOptions = {}) {
     const resetClock = () => { meter.reset(); physicsClock.reset(); lastFrame = undefined; input.clearKeys(); };
     document.addEventListener('visibilitychange', resetClock);
     window.addEventListener('blur', resetClock);
-    function animate(timestamp: number) {
+    function animate(timestamp: number,frame?:XRFrame) {
         const cpuStart=performance.now();
         const elapsed = lastFrame === undefined ? 0 : (timestamp - lastFrame) / 1000;
         lastFrame = timestamp;
         const dt = Math.max(0, Math.min(elapsed, 1));
+        vr.beforeFrame(frame);
         balloon.update(dt,photo.active);
         render.renderer.info.reset();
         const alpha = physicsClock.advance(dt, step => { options.beforePhysics?.(step);
@@ -211,6 +215,7 @@ export function createEditor(options:EditorOptions = {}) {
             input.renderWalk(alpha);
         else
             render.controls.update(dt);
+        vr.renderFrame(alpha);
         const interaction = brushes.interaction;
         if (input.walk.on||photo.active) {
             if (!interaction.painting)
@@ -279,7 +284,7 @@ export function createEditor(options:EditorOptions = {}) {
     }
     render.renderer.setAnimationLoop(animate);
     return {
-        ready, autosave, state: model.state, ...actions, ...generation,
+        ready, autosave, vr, state: model.state, ...actions, ...generation,
         scatter: () => history.transaction('Расстановка объектов', () => vegetation.scatter()),
         clearScatter: () => history.transaction('Убрать расстановку', vegetation.clearScatter),
         undo: history.undo, redo: history.redo, setTool: ui.setTool, getH: terrain.getH,

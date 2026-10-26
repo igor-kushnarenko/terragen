@@ -1,3 +1,4 @@
+import {effectiveQuality} from './quality';
 import * as T from 'three';
 import {mulberry32} from './noise';
 import type {EditorModel} from './state';
@@ -32,10 +33,10 @@ const fragmentCommon=`uniform float uTime,uFogDensity;uniform vec3 uFogColor;var
 /** Bounded procedural visual effects: no particles or animation data are saved in the project. */
 export function createWaterfallEffects(model:EditorModel,scene:T.Scene,shared:{uTime:{value:number};uFogDensity:{value:number};uFogColor:{value:T.Color}}){
     const root=new T.Group();root.name='Waterfall streams, spray and plunge foam';root.userData.noWaterReflection=true;scene.add(root);
-    let bodies:WaterBody[]|undefined,quality=model.state.quality,particles=0;
+    let bodies:WaterBody[]|undefined,quality=effectiveQuality(model),particles=0;
     function clear(){root.traverse(o=>{if(o instanceof T.Mesh||o instanceof T.Points){o.geometry.dispose();(o.material as T.Material).dispose();}});root.clear();particles=0;}
     function rebuild(){
-        clear();bodies=model.world.waterBodies;quality=model.state.quality;
+        clear();bodies=model.world.waterBodies;quality=effectiveQuality(model);
         const layers=quality==='low'?2:quality==='high'?4:3,count=quality==='low'?64:quality==='high'?256:144;
         for(const body of bodies){const p=waterfallPlan(body);if(!p)continue;
             const group=new T.Group();group.userData.center=new T.Vector3(p.x,p.sea+p.drop*.5,p.z);group.userData.range=Math.max(200,p.width*25);root.add(group);
@@ -61,5 +62,5 @@ void main(){float life=fract(uTime*(.6+aSeed.w*.4)+aSeed.x),age=life*1.3;vec3 p=
             const foam=new T.Mesh(foamGeometry,foamMaterial);foam.renderOrder=3;group.add(foam);
         }
     }
-    return {update(camera:T.Camera){if(bodies!==model.world.waterBodies||quality!==model.state.quality)rebuild();for(const g of root.children)g.visible=camera.position.distanceTo(g.userData.center)<g.userData.range;},get statistics(){return {waterfalls:root.children.length,sprayParticles:particles};},dispose(){clear();root.removeFromParent();}};
+    return {update(camera:T.Camera){if(bodies!==model.world.waterBodies||quality!==effectiveQuality(model))rebuild();for(const g of root.children)g.visible=camera.position.distanceTo(g.userData.center)<g.userData.range;},get statistics(){return {waterfalls:root.children.length,sprayParticles:particles};},dispose(){clear();root.removeFromParent();}};
 }

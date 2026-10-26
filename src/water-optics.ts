@@ -22,6 +22,14 @@ void main(){vec2 uv=clamp(vUv+vec2(sin(vUv.y*22.0+uTime*1.6),cos(vUv.x*18.0+uTim
     }
     function draw(){
         const point=render.camera.position,s=surface?.sample(point.x,point.z),depth=s?s.level-point.y:0;
+        // A screen-sized, monocular postprocess cannot be drawn into the two XR
+        // eye viewports. Render both eyes normally and use world-space fog below water.
+        if(r.xr.isPresenting){
+            const color=render.fog.color.clone(),density=render.fog.density;
+            try{if(depth>.04){render.fog.color.setRGB(.015,.12,.15);render.fog.density=Math.max(density,.045);}r.render(render.scene,render.xrCamera);}
+            finally{render.fog.color.copy(color);render.fog.density=density;}
+            return;
+        }
         if(depth<=.04){r.render(render.scene,render.camera);return;}
         r.getDrawingBufferSize(viewport);if(!underwater||underwater.width!==viewport.x||underwater.height!==viewport.y){underwater?.dispose();underwater=make(viewport.x,viewport.y);}
         const previous=r.getRenderTarget();try{r.setRenderTarget(underwater);r.clear();r.render(render.scene,render.camera);r.setRenderTarget(previous);post.uniforms.uColor.value=underwater.texture;post.uniforms.uDepth.value=underwater.depthTexture;post.uniforms.uInverseProjection.value.copy(render.camera.projectionMatrixInverse);post.uniforms.uTime.value=surface!.time;post.uniforms.uSubmersion.value=Math.min(1,depth*3);r.render(scene,camera);}finally{r.setRenderTarget(previous);}

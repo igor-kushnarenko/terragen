@@ -43,7 +43,7 @@ export function createPhotoMode(model:EditorModel,render:RenderingSystem,input:C
     function sync(){const selected=views.value;views.replaceChildren();for(const v of model.world.viewpoints){const o=el('option',views,v.name);o.value=v.id;}if(model.world.viewpoints.some(v=>v.id===selected))views.value=selected;}
     feedback.uiSync.photoViews=sync;sync();
     function enter(){
-        if(active||model.busy)return;history.flush();original=input.captureView();paused=input.walk.paused;walkPanel=input.walkPanel.open;inventory=input.inventory.open;
+        if(active||model.busy||input.xrMode.on)return;history.flush();original=input.captureView();paused=input.walk.paused;walkPanel=input.walkPanel.open;inventory=input.inventory.open;
         originalMinDistance=render.controls.minDistance;originalMaxPolar=render.controls.maxPolarAngle;originalButtons={...render.controls.mouseButtons};
         active=true;input.setPhotoMode(true);stopOrbit();panel.hidden=false;document.body.classList.add('photo-mode');
         if(original.walk?.on){const forward=render.camera.getWorldDirection(new T.Vector3());render.controls.target.copy(render.camera.position).addScaledVector(forward,30);}

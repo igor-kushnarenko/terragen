@@ -59,7 +59,7 @@ export function createLighting(model: EditorModel, render: RenderingSystem, mate
     const focus=new THREE.Vector3(),right=new THREE.Vector3(),up=new THREE.Vector3();let lastRatio=0;
     function updateView(terrain:TerrainSystem,walking:boolean) {
         const profile=qualityProfile(model),ratio=Math.min(window.devicePixelRatio||1,profile.pixelRatio);
-        if(ratio!==lastRatio){render.renderer.setPixelRatio(ratio);lastRatio=ratio;}
+        if(!render.renderer.xr.isPresenting&&ratio!==lastRatio){render.renderer.setPixelRatio(ratio);lastRatio=ratio;}
         render.renderer.toneMappingExposure=model.state.exposure;materials.updateMaterial();updateShadows();
         const size=Math.min(profile.shadowSize,render.renderer.capabilities.maxTextureSize);
         if(size && render.sun.shadow.mapSize.x!==size) {

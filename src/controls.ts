@@ -5,7 +5,7 @@ import type { Feedback } from './feedback';
 import type { HistorySystem } from './history';
 import type { MaterialsSystem } from './materials';
 import { clamp } from './noise';
-import { createWalkSimulation, WALK_STEP_HEIGHT, WALK_GROUND_SNAP, type WalkMotion } from './physics';
+import { createWalkSimulation, WALK_STEP_HEIGHT, WALK_GROUND_SNAP, type WalkMotion, type WalkAnalogInput } from './physics';
 import type { ProjectView } from './project';
 import type { RenderingSystem } from './rendering';
 import { TOOLS, type EditorActions, type EditorModel, type ToolId } from './state';
@@ -34,6 +34,8 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
     const walkPanel = { open: false };
     const inventory = { open: false };
     const photoMode={on:false};
+    const xrMode={on:false};
+    let xrAnalog:WalkAnalogInput|undefined;
     let walkToolKey: ((event: KeyboardEvent) => boolean) | undefined;
     let vehicle:WalkVehicle|undefined;
     let terrainTool:TerrainTool|undefined;
@@ -158,11 +160,12 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
         return true;
     }
     function syncCamera() {
-        if(photoMode.on)return;
+        if(photoMode.on||xrMode.on)return;
         const fov = walk.on ? model.walkSettings.fov : 55;
         if (render.camera.fov !== fov) { render.camera.fov = fov; render.camera.updateProjectionMatrix(); }
     }
     function requestLock() {
+        if(xrMode.on)return;
         try {
             const r = render.renderer.domElement.requestPointerLock();
             if (r && r.catch)
@@ -175,7 +178,7 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
         walk.pitch = clamp(walk.pitch - dy * model.walkSettings.sensitivity, -1.55, 1.55);
     }
     document.addEventListener('mousemove', e => {
-        if (photoMode.on || !walk.on || walk.paused || model.busy)
+        if (xrMode.on || photoMode.on || !walk.on || walk.paused || model.busy)
             return;
         if (document.pointerLockElement === render.renderer.domElement)
             walkLook(e.movementX, e.movementY);
@@ -189,10 +192,11 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
     function walkUpdate(dt: number) {
         if(vehicle?.seated)return;
         const automatic = walk.autoWalking;
-        simulation.step(dt);
+        simulation.step(dt,xrMode.on?xrAnalog:undefined);
         if (automatic && !walk.autoWalking) { feedback.setStatus('Автопрогулка остановлена: впереди небезопасный участок'); notify(); }
     }
     function renderWalk(alpha: number) {
+        if(xrMode.on)return;
         syncCamera();
         if(vehicle?.seated){vehicle.render(walk.paused?1:alpha);return;}
         render.camera.position.copy(simulation.eyePosition(alpha));
@@ -260,7 +264,7 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
     const canvas = render.renderer.domElement;
     canvas.tabIndex = 0;
     document.addEventListener('pointerlockchange', () => {
-        if (!photoMode.on && walk.on && !walk.paused && !vehicle?.pointerUI && document.pointerLockElement !== canvas) setPaused(true);
+        if (!xrMode.on && !photoMode.on && walk.on && !walk.paused && !vehicle?.pointerUI && document.pointerLockElement !== canvas) setPaused(true);
     });
     canvas.addEventListener('contextmenu', e => e.preventDefault());
     function setMouse(e: PointerEvent) { const r = canvas.getBoundingClientRect(); brushes.mouse.x = ((e.clientX - r.left) / r.width) * 2 - 1; brushes.mouse.y = -((e.clientY - r.top) / r.height) * 2 + 1; }
@@ -271,7 +275,7 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
     canvas.addEventListener('pointerleave', () => { brushes.interaction.mouseInside = false; });
     // capture-фаза: срабатывает раньше OrbitControls, поэтому Alt+ЛКМ может включить вращение
     canvas.addEventListener('pointerdown', e => {
-        if(photoMode.on)return;
+        if(photoMode.on||xrMode.on)return;
         if (e.button !== 0)
             return;
         if (walk.on) {
@@ -329,6 +333,7 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
         }
     });
     window.addEventListener('keydown', e => {
+        if(xrMode.on)return;
         if (document.querySelector('dialog[open]')) return;
         if (help.classList.contains('show')) {
             if (e.key === 'Escape' || e.code === 'KeyH' || e.key === 'F1') { e.preventDefault(); toggleHelp(false); }
@@ -454,7 +459,12 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
     }
     function resetCamera() { render.camera.position.set(-330, 260, 600); render.controls.target.set(0, 30, 0); render.controls.update(); }
     function setPhotoMode(on:boolean){photoMode.on=on;simulation.clearKeys();if(on){terrainTool?.cancel();brushes.endStroke();cancelPick();walk.paused=true;if(document.pointerLockElement)document.exitPointerLock();render.controls.enabled=true;materials.terrainUniforms.uBrushOn.value=0;brushes.interaction.hoverHit=null;}else render.controls.enabled=!walk.on;}
-    return { photoMode,setPhotoMode, walk, walkPanel, inventory, picking, starts, findLand, setWalk, chooseStart, cancelPick, previewStart, setPaused, setWalkPanel, setInventory, toggleWalkPanel, toggleAutoWalk,setFlight,toggleFlight,
+    return { photoMode,setPhotoMode, xrMode,
+        setXRMode(on:boolean){xrMode.on=on;xrAnalog=undefined;simulation.clearKeys();if(on&&document.pointerLockElement)document.exitPointerLock();},
+        setXRInput(value:WalkAnalogInput){xrAnalog=value;},
+        moveXRRoomscale(delta:THREE.Vector3){if(!xrMode.on||walk.paused||model.busy)return;const p=motion?motion.resolve(walk.feet,delta,1/120,walk.flying).position:walk.feet.clone().add(delta);walk.feet.copy(p);simulation.synchronize();},
+        teleportXR(point:THREE.Vector3){if(!xrMode.on||walk.paused||model.busy)return;walk.feet.copy(point);walk.vy=0;walk.grounded=true;simulation.synchronize();},
+        walk, walkPanel, inventory, picking, starts, findLand, setWalk, chooseStart, cancelPick, previewStart, setPaused, setWalkPanel, setInventory, toggleWalkPanel, toggleAutoWalk,setFlight,toggleFlight,
         get terrainToolActive(){return !!terrainTool?.active;},
         bindWalkToolKeys(callback: (event: KeyboardEvent) => boolean) { walkToolKey = callback; },
         bindVehicle(next:WalkVehicle){vehicle=next;},

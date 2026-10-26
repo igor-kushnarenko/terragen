@@ -46,7 +46,7 @@ export function createBalloonScenario(model:EditorModel,terrain:TerrainSystem,re
         changed();say('Полёт завершён.');
     }
     function launch(point?:Vec3){
-        if(model.busy)return false;
+        if(model.busy||input.xrMode.on)return false;
         const origin=point??input.walk.feet.toArray() as Vec3,site=findBalloonSite(model,terrain.getH,origin,!!point);
         if(!site){say('Не найдена площадка: нужны сухая ровная земля и 10 м свободного пространства. Выберите место на карте.');return false;}
         beforeLaunch();stop();

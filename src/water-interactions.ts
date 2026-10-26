@@ -3,7 +3,7 @@ import type {EditorModel} from './state';
 import type {WaterSurface} from './water-surface';
 import type {CollisionSystem} from './collisions';
 import type {RenderingSystem} from './rendering';
-import {WATER_PROFILES} from './quality';
+import {WATER_PROFILES,effectiveQuality} from './quality';
 interface ContactPose{on:boolean;paused:boolean;swim:boolean;feet:T.Vector3;}
 export function createWaterInteractions(model:EditorModel,water:WaterSurface,collisions:CollisionSystem,render:RenderingSystem){
     const max=128,positions=new Float32Array(max*3),life=new Float32Array(max),geometry=new T.BufferGeometry();geometry.setAttribute('position',new T.BufferAttribute(positions,3));geometry.setAttribute('aLife',new T.BufferAttribute(life,1));
@@ -19,7 +19,7 @@ export function createWaterInteractions(model:EditorModel,water:WaterSurface,col
                 if(wet&&!wake.wet&&p.y+item.bounds.max.y>s.level-.2){water.addImpact(p.x,p.z,Math.min(.14,.035+Math.abs(item.body.linvel().y)*.025),.25);splash(p.x,s.level,p.z,6);}wake.wet=wet;
                 if(wake.timer>.35&&Math.hypot(p.x-wake.x,p.z-wake.z)>.08&&Math.abs(p.y-s.level)<4){water.addImpact(p.x,p.z,.045,.25);wake.x=p.x;wake.z=p.z;wake.timer=0;}}
         }else {wasWet=false;walkDistance=0;wakes.clear();}last.copy(pose.feet);
-        rainTime+=dt*Math.max(0,rain)*WATER_PROFILES[model.state.quality].rainRate;
+        rainTime+=dt*Math.max(0,rain)*WATER_PROFILES[effectiveQuality(model)].rainRate;
         while(rainTime>=1){rainTime--;render.camera.getWorldDirection(look);const camera=render.camera.position,probe=water.sample(camera.x+look.x*25,camera.z+look.z*25),ahead=look.y<-.001?Math.max(0,Math.min(35,(probe.meanLevel-camera.y)/look.y)):12;
             const a=random()*Math.PI*2,d=Math.sqrt(random())*22,x=camera.x+look.x*ahead+Math.cos(a)*d,z=camera.z+look.z*ahead+Math.sin(a)*d;water.addImpact(x,z,.012,.025);}
         for(let i=particles.length-1;i>=0;i--){const p=particles[i];p.age+=dt;p.v.y-=9.81*dt;p.p.addScaledVector(p.v,dt);if(p.age>p.ttl)particles.splice(i,1);}
