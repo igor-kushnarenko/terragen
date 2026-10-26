@@ -12,7 +12,7 @@ export function createTrailTool(model:EditorModel,render:RenderingSystem,terrain
     const lineMaterial=new T.LineBasicMaterial({color:0xffc76b,depthTest:false,transparent:true,opacity:0.95});
     const markerMaterial=new T.MeshBasicMaterial({color:0xffc76b,depthTest:false});
     const sphere=new T.SphereGeometry(1,10,6);let line:T.Line|undefined;
-    const state={active:false,points:[] as Vec2[],dragging:-1,hover:null as Vec2|null};
+    const state={active:false,points:[] as Vec2[],dragging:-1,hover:null as Vec2|null,error:''};
     let dragOffset:Vec2=[0,0];
     let getDraft:()=>Omit<TrailDraft,'controls'>=()=>({name:'Новая тропа',width:8,maxGrade:0.32,surface:'soil'});
     function refresh(){
@@ -25,16 +25,19 @@ export function createTrailTool(model:EditorModel,render:RenderingSystem,terrain
         }
         document.body.classList.toggle('drawing-trail',state.active);feedback.syncUI('trailDraft');
     }
-    function cancel(){if(!state.active)return;state.active=false;state.points=[];state.hover=null;state.dragging=-1;refresh();}
+    function cancel(){if(!state.active)return;state.active=false;state.error='';state.points=[];state.hover=null;state.dragging=-1;refresh();}
     async function commit(){
-        if(model.busy||state.points.length<2)return;
+        if(model.busy)return;
+        if(state.points.length<2){state.error='Добавьте хотя бы две разные точки тропы';feedback.setStatus(state.error);refresh();return;}
+        state.error='';
         try{if(await landscape.buildTrail({...getDraft(),controls:structuredClone(state.points)}))cancel();}
-        catch(error){feedback.setStatus(error instanceof Error?error.message:String(error));}
+        catch(error){state.error=error instanceof Error?error.message:String(error);feedback.setStatus(state.error);refresh();}
     }
-    function removeLast(){if(model.busy)return;state.points.pop();state.hover=null;state.dragging=-1;refresh();}
+    function removeLast(){if(model.busy)return;state.error='';state.points.pop();state.hover=null;state.dragging=-1;refresh();}
     const tool:TerrainTool={
         get active(){return state.active;},cancel,
         pointerDown(point,ray){
+            state.error='';
             const p:Vec2=[point.x,point.z],radius=Math.max(2,Math.min(8,(render.camera.position.y-terrain.getH(render.camera.position.x,render.camera.position.z))*0.025));
             const existing=controlPointHit(ray,state.points,terrain.getH,radius);
             dragOffset=[0,0];
@@ -42,7 +45,7 @@ export function createTrailTool(model:EditorModel,render:RenderingSystem,terrain
             else if(state.points.length<64){state.points.push(p);state.dragging=state.points.length-1;}
             else feedback.setStatus('Не больше 64 контрольных точек');state.hover=null;refresh();
         },
-        pointerMove(point){if(!point){state.hover=null;refresh();return;}const p:Vec2=[point.x,point.z];if(state.dragging>=0)state.points[state.dragging]=[p[0]+dragOffset[0],p[1]+dragOffset[1]];else state.hover=p;refresh();},
+        pointerMove(point){if(state.dragging>=0)state.error='';if(!point){state.hover=null;refresh();return;}const p:Vec2=[point.x,point.z];if(state.dragging>=0)state.points[state.dragging]=[p[0]+dragOffset[0],p[1]+dragOffset[1]];else state.hover=p;refresh();},
         pointerUp(){state.dragging=-1;},
         keyDown(event){
             if(model.busy)return false;
@@ -53,7 +56,7 @@ export function createTrailTool(model:EditorModel,render:RenderingSystem,terrain
     };
     input.bindTerrainTool(tool);
     return {state,cancel,commit,removeLast,bindDraft(callback:typeof getDraft){getDraft=callback;},
-        begin(){if(model.busy)return;if(input.walk.on)input.setWalk(false);input.cancelPick();input.clearKeys();setCameraTool();input.bindTerrainTool(tool);state.active=true;state.points=[];state.hover=null;state.dragging=-1;refresh();render.renderer.domElement.focus({preventScroll:true});feedback.setStatus('Клик — точка тропы · перетаскивание точки — изменить кривую · Enter — построить · Esc — отменить');},
+        begin(){if(model.busy)return;if(input.walk.on)input.setWalk(false);input.cancelPick();input.clearKeys();setCameraTool();input.bindTerrainTool(tool);state.active=true;state.error='';state.points=[];state.hover=null;state.dragging=-1;refresh();render.renderer.domElement.focus({preventScroll:true});feedback.setStatus('Клик — точка тропы · перетаскивание точки — изменить кривую · Enter — построить · Esc — отменить');},
     };
 }
 export type TrailTool=ReturnType<typeof createTrailTool>;

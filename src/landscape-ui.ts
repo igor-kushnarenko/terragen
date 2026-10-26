@@ -47,7 +47,7 @@ export function createLandscapeInterface(model:EditorModel,landscape:LandscapeSy
     const routeList=element('div',trails);routeList.className='landscape-places';
     const draftBar=element('div',document.body);draftBar.id='trailDrawHint';draftBar.hidden=true;
     const draftText=element('span',draftBar);draftText.setAttribute('aria-live','polite');button(draftBar,'Убрать точку',tool.removeLast);const draftFinish=button(draftBar,'Построить · Enter',tool.commit);button(draftBar,'Отменить · Esc',tool.cancel);
-    feedback.uiSync.trailDraft=()=>{const active=tool.state.active;draftBar.hidden=!active;draftText.textContent=`Тропа · точек: ${tool.state.points.length} · клик — добавить · перетащить точку — изменить`;finish.disabled=draftFinish.disabled=!active||tool.state.points.length<2||model.busy;};
+    feedback.uiSync.trailDraft=()=>{const active=tool.state.active;draftBar.hidden=!active;draftText.textContent=tool.state.error||`Тропа · точек: ${tool.state.points.length} · клик — добавить · перетащить точку — изменить`;finish.disabled=draftFinish.disabled=!active||tool.state.points.length<2||model.busy;};
     let lastPreset=model.world.preset;
     feedback.uiSync.landscape=()=>{
         if(lastPreset!==model.world.preset){lastPreset=model.world.preset;if(lastPreset&&lastPreset in LANDSCAPE_PRESETS){select.value=lastPreset;description.textContent=LANDSCAPE_PRESETS[lastPreset as LegacyPresetId].description;}}

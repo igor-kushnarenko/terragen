@@ -302,6 +302,8 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
         }
         if(terrainTool?.active&&!e.altKey){
             if(model.busy)return;
+            // preventDefault below suppresses the browser's normal canvas focus.
+            canvas.focus({preventScroll:true});
             setMouse(e);brushes.raycaster.setFromCamera(brushes.mouse,render.camera);const hit=terrain.raycastTerrain(brushes.raycaster.ray);
             if(terrainTool.pointerRayDown?.(e,brushes.raycaster.ray,hit))return;
             e.preventDefault();e.stopImmediatePropagation();
@@ -342,6 +344,7 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
         }
         const t = e.target as HTMLInputElement | null;
         const tag = (t && t.tagName) || '';
+        if(!photoMode.on&&!walk.on&&terrainTool?.active&&e.key==='Enter'&&!e.repeat&&!e.isComposing&&!e.defaultPrevented&&tag!=='BUTTON'&&tag!=='TEXTAREA'&&!t?.isContentEditable&&terrainTool.keyDown(e))return;
         const panelHistoryShortcut = tag === 'SELECT' && walkPanel.open && (e.ctrlKey || e.metaKey) && (e.code === 'KeyZ' || e.code === 'KeyY');
         if (((tag === 'INPUT' && t?.type !== 'range' && t?.type !== 'checkbox') || tag === 'SELECT' || tag === 'TEXTAREA') && e.key !== 'Escape' && e.key !== 'F1' && !panelHistoryShortcut)
             return;
