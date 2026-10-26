@@ -14,6 +14,7 @@ import {waveSettings} from './water-surface';
 import {jungleSurfaceMap,JUNGLE_MAP_SIZE} from './jungle-surface';
 import {isJunglePlant} from './jungle-models';
 import {taigaSurfaceMaps,TAIGA_MAP_SIZE} from './taiga-surface';
+import {ironSurfaceMap,IRON_MAP_SIZE} from './iron-habitat';
 export function createMaterials(model: EditorModel, render: Pick<RenderingSystem, 'scene'>) {
     const environment=createEnvironmentMaterials();
     const splatTex = new THREE.DataTexture(model.splat, SPLAT_RES, SPLAT_RES, THREE.RGBAFormat, THREE.UnsignedByteType);
@@ -21,6 +22,8 @@ export function createMaterials(model: EditorModel, render: Pick<RenderingSystem
     splatTex.minFilter = THREE.LinearFilter;
     splatTex.needsUpdate = true;
     const maps = createSurfaceMaps();
+    const ironTex=new THREE.DataTexture(ironSurfaceMap(model),IRON_MAP_SIZE,IRON_MAP_SIZE,THREE.RGBAFormat);
+    ironTex.magFilter=ironTex.minFilter=THREE.LinearFilter;ironTex.needsUpdate=true;
     const biomeTex=new THREE.DataTexture(biomeMaterialMap(model.world),BIOME_MAP_SIZE,BIOME_MAP_SIZE,THREE.RGBAFormat);
     biomeTex.magFilter=biomeTex.minFilter=THREE.LinearFilter;biomeTex.needsUpdate=true;
     const jungleTex=new THREE.DataTexture(jungleSurfaceMap(model),JUNGLE_MAP_SIZE,JUNGLE_MAP_SIZE,THREE.RGBAFormat);
@@ -37,6 +40,7 @@ export function createMaterials(model: EditorModel, render: Pick<RenderingSystem
     let lastBodies:typeof model.world.waterBodies|undefined,lastOcean=NaN;
     coverTex.magFilter = coverTex.minFilter = THREE.LinearFilter; coverTex.needsUpdate = true;
     const terrainUniforms = {
+        uIronMap:{value:ironTex},
         uJungleMap:{value:jungleTex},
         uTaigaMap:{value:taigaTex},uTaigaCover:{value:taigaCoverTex},
         uBiomes:{value:biomeTex},uWorldGround:{value:new THREE.Vector4()},uWorldRock:{value:new THREE.Color(0xffffff)},uWorldSand:{value:new THREE.Color(0xffffff)},uShoreTime:environment.uniforms.uEnvTime,uShoreReach:{value:0},
@@ -58,7 +62,7 @@ export function createMaterials(model: EditorModel, render: Pick<RenderingSystem
             .replace('#include <common>', `#include <common>
 uniform highp sampler2DArray uAlbedoAtlas, uDetailAtlas;
 uniform sampler2D uSplatDetail, uForestCover;
-uniform sampler2D uBiomes,uJungleMap,uTaigaMap,uTaigaCover;
+uniform sampler2D uBiomes,uJungleMap,uTaigaMap,uTaigaCover,uIronMap;
 uniform vec4 uWorldGround;uniform vec3 uWorldRock,uWorldSand;
 uniform sampler2D uContactMap;uniform float uContactStrength;
 uniform float uGroundDetail, uSurfaceOctaves,uShoreTime,uShoreReach;
@@ -170,6 +174,19 @@ float tBump; float tRough;`)
   boreal = mix(boreal,litter*vec3(1.05,.78,.46),taigaCover.a*.18);
   boreal = mix(boreal,snow,ts);
   col = mix(col,boreal,taiga.r);
+  // Cold layered coastal stone: triplanar texture, broken strata, salt marks,
+  // patchy lichen and thin soil on sheltered plateau treads.
+  vec4 iron=texture2D(uIronMap,p/uSize+.5);
+  float ironLayer=.5+.5*sin(h*.7+nMid*3.0+vnoise(p*.07)*1.5);
+  float fissure=1.0-smoothstep(.015,.07,abs(vnoise(p*.24+vec2(h*.04,0.0))-.5));
+  vec3 ironStone=mix(vec3(.25,.28,.31),vec3(.41,.44,.45),rn*.7+ironLayer*.3);
+  ironStone*=.85+.15*nFine;ironStone*=1.0-fissure*.22;
+  ironStone=mix(ironStone,vec3(.47,.48,.42),smoothstep(.67,.79,nMid)*(.15+.3*wn.y));
+  vec3 ironGround=mix(ironStone,dirt*vec3(.65,.62,.55),iron.b*.45);
+  ironGround=mix(ironGround,grass*vec3(.75,.78,.66),iron.b*smoothstep(.3,.7,nMid)*.6);
+  ironGround=mix(ironGround,moss*vec3(.75,.79,.66),iron.g*smoothstep(.3,.7,nFine));
+  ironGround*=1.0-iron.a*.14;
+  col=mix(col,ironGround,iron.r);
   vec4 sp = texture2D(uSplat, p / uSize + 0.5), sd = texture2D(uSplatDetail, p / uSize + 0.5);
   float sSum = dot(sp, vec4(1.0)) + dot(sd, vec4(1.0));
   vec2 md = surfaceDetail(texUV, 0.0);
@@ -187,6 +204,7 @@ float tBump; float tRough;`)
   taigaDetail.g=mix(taigaDetail.g,.52,taiga.b*.65);
   taigaDetail=mix(taigaDetail,rd,wRock);taigaDetail=mix(taigaDetail,surfaceDetail(texUV,3.0),ts);
   md=mix(md,taigaDetail,taiga.r);
+  md=mix(md,vec2(rd.r+fissure*.03,mix(.87,.62,iron.a)),iron.r);
   if (sSum > 0.003) {
     float k = clamp(sSum, 0.0, 1.0);
     vec3 mc = (sp.r * grass + sp.g * rock + sp.b * sand + sp.a * snow + sd.r * litter + sd.g * dirt + sd.b * gravel + sd.a * moss) / sSum;
@@ -230,7 +248,7 @@ float tBump; float tRough;`)
         uSkyZenith: { value: new THREE.Color() }, uSkyHorizon: { value: new THREE.Color() },
         uDeep: { value: new THREE.Color().setRGB(0.01, 0.06, 0.09) }, uShallow: { value: new THREE.Color().setRGB(0.05, 0.22, 0.22) },
         uFogColor: { value: new THREE.Color() }, uFogDensity: { value: 0.0004 }, uHeight: { value: null as THREE.Texture | null },
-        uWaterLevels:{value:waterLevelTex},uBodyIndex:{value:0},uFlowSpeed:{value:0},uWaterDetail:{value:1},uFoamStrength:{value:1},
+        uWaterLevels:{value:waterLevelTex},uBodyIndex:{value:0},uFlowSpeed:{value:0},uWaterDetail:{value:1},uFoamStrength:{value:1},uRoughness:{value:.5},
         uReflection:{value:new THREE.DataTexture(new Uint8Array([0,0,0,255]),1,1) as THREE.Texture},uReflectionMatrix:{value:new THREE.Matrix4()},uReflectionOn:{value:0},uReflectionLevel:{value:0},uReflectionsEnabled:{value:1},
     };
     const waterMat = new THREE.ShaderMaterial({
@@ -282,6 +300,7 @@ float tBump; float tRough;`)
         coverTex.needsUpdate = true;
     }
     function updateBiomes(){
+        ironTex.image.data!.set(ironSurfaceMap(model));ironTex.needsUpdate=true;
         biomeTex.image.data!.set(biomeMaterialMap(model.world));biomeTex.needsUpdate=true;
         jungleTex.image.data!.set(jungleSurfaceMap(model));jungleTex.needsUpdate=true;
         const taiga=taigaSurfaceMaps(model);taigaTex.image.data!.set(taiga.habitat);taigaCoverTex.image.data!.set(taiga.cover);taigaTex.needsUpdate=taigaCoverTex.needsUpdate=true;

@@ -74,7 +74,7 @@ export function createVegetation(model:EditorModel,render:Pick<RenderingSystem,'
                 if(only&&!only.has(item.id))return;
                 if(item.followTerrain)item.position[1]=terrain.getH(item.position[0],item.position[2])+item.groundOffset;
                 position.fromArray(item.position);euler.set(...item.rotation);quaternion.setFromEuler(euler);scale.fromArray(item.scale);
-                if(item.source==='scatter'&&terrain.getH(item.position[0],item.position[2])<waterLevelAt(model.state.water,model.world.waterBodies,item.position[0],item.position[2])+0.5)scale.setScalar(0.0001);
+                if(item.source==='scatter'&&item.asset!=='iron-stack'&&terrain.getH(item.position[0],item.position[2])<waterLevelAt(model.state.water,model.world.waterBodies,item.position[0],item.position[2])+0.5)scale.setScalar(0.0001);
                 group.mesh.setMatrixAt(i,matrix.compose(position,quaternion,scale));
             });
             group.mesh.instanceMatrix.needsUpdate=true;group.mesh.computeBoundingBox();group.mesh.computeBoundingSphere();if(environment){group.mesh.boundingSphere!.radius+=3;group.mesh.boundingBox!.expandByScalar(3);}

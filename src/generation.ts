@@ -21,7 +21,7 @@ export function createGeneration(model: EditorModel, feedback: Feedback, history
             prepare?.();
             const settings = { ...model.state }, seed = kind === 'terrain' ? settings.seed : model.seeds.erosion;
             feedback.setBusy(true); feedback.setProgress(0); feedback.setStatus(label + '…');
-            const heights = await jobs.run({ kind, settings, seed, heights: kind === 'erosion' ? model.heights : undefined,preset:kind==='terrain'&&isWorldPreset(model.world.preset)?model.world.preset:undefined }, feedback.setProgress);
+            const heights = await jobs.run({ kind, settings, seed, heights: kind === 'erosion' ? model.heights : undefined,preset:kind==='terrain'&&isWorldPreset(model.world.preset)?model.world.preset:undefined,iron:kind==='terrain'&&model.world.preset==='iron-islands'?model.world.recipe?.iron:undefined }, feedback.setProgress);
             model.heights = new Float32Array(heights);
             if (kind === 'terrain') {
                 model.N = settings.N; model.seeds.terrain = seed;

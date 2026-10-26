@@ -19,7 +19,7 @@ void main(){vec3 p=(modelMatrix*vec4(position,1.0)).xyz;vMeanLevel=p.y;vFlow=riv
 p+=waterOffset(p.xz,p.y-terrainHeight(p.xz,p.y),vFlow);vWPos=p;vec4 view=viewMatrix*vec4(p,1.0);vViewDepth=-view.z;gl_Position=projectionMatrix*view;}`;
 
 export const waterFragmentShader=`${WATER_WAVE_GLSL}\n${common}
-uniform float uWater,uOpacity,uFogDensity,uWaterDetail,uFoamStrength,uReflectionOn,uReflectionLevel,uReflectionsEnabled,uRefractionOn,uClarity;
+uniform float uWater,uOpacity,uFogDensity,uWaterDetail,uFoamStrength,uRoughness,uReflectionOn,uReflectionLevel,uReflectionsEnabled,uRefractionOn,uClarity;
 uniform vec3 uSunDir,uSunColor,uSkyZenith,uSkyHorizon,uDeep,uShallow,uFogColor;
 uniform sampler2D uWaterLevels,uReflection,uRefraction,uSceneDepth;uniform mat4 uReflectionMatrix,uInverseProjection;uniform vec2 uViewport;
 uniform vec4 uCascade;
@@ -49,7 +49,7 @@ vec2 q=p*.85-flow*cycle/ .12,q2=p*.85-flow*fract(cycle+.5)/.12;
 float e=.08;
 vec2 micro=mix(vec2(vnoise(q+vec2(e,0))-vnoise(q-vec2(e,0)),vnoise(q+vec2(0,e))-vnoise(q-vec2(0,e))),vec2(vnoise(q2+vec2(e,0))-vnoise(q2-vec2(e,0)),vnoise(q2+vec2(0,e))-vnoise(q2-vec2(0,e))),blend);
 micro+=vec2(sin(p.x*5.1+p.y*3.7-uTime*2.4),cos(p.y*5.8-p.x*2.2+uTime*1.8))*.015;
-N=normalize(N+vec3(-micro.x,0.0,-micro.y)*min(1.0,uWaterDetail)*min(3.0,uWave)*(.1+min(3.0,uWindSpeed)*.3)*smoothstep(0.0,1.0,depth)*(1.0-smoothstep(50.0,300.0,dist)));
+N=normalize(N+vec3(-micro.x,0.0,-micro.y)*min(1.0,uWaterDetail)*min(3.0,uWave)*(.3+uRoughness*1.4)*(.1+min(3.0,uWindSpeed)*.3)*smoothstep(0.0,1.0,depth)*(1.0-smoothstep(50.0,300.0,dist)));
 bool below=!gl_FrontFacing;if(below)N=-N;
 float fres=.02+.98*pow(1.0-clamp(dot(N,V),0.0,1.0),5.0);
 vec3 R=reflect(-V,N);R.y=abs(R.y);vec3 sky=mix(uSkyHorizon,uSkyZenith,pow(clamp(R.y,0.0,1.0),.45));

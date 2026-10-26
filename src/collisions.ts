@@ -54,7 +54,7 @@ export function createCollisions(model: EditorModel, terrain: TerrainSystem) {
         }
         if(asset.collider==='none')return;
         const y=item.followTerrain?terrain.getH(item.position[0],item.position[2])+item.groundOffset:item.position[1];
-        if(item.source==='scatter'&&terrain.getH(item.position[0],item.position[2])<waterLevelAt(model.state.water,model.world.waterBodies,item.position[0],item.position[2])+.5)return;
+        if(item.source==='scatter'&&item.asset!=='iron-stack'&&terrain.getH(item.position[0],item.position[2])<waterLevelAt(model.state.water,model.world.waterBodies,item.position[0],item.position[2])+.5)return;
         let descriptor:RAPIER.ColliderDesc|null;
         if(asset.collider==='trunk'&&variedPlant(item.asset)){
             descriptor=RAPIER.ColliderDesc.convexHull(plantTrunkHull(item));if(!descriptor)return;
@@ -103,7 +103,7 @@ export function createCollisions(model: EditorModel, terrain: TerrainSystem) {
             record.item=item;
             if(terrainChanged&&!record.body){
                 const groundY=terrain.getH(item.position[0],item.position[2]);
-                if(item.source==='scatter'&&groundY<waterLevelAt(model.state.water,model.world.waterBodies,item.position[0],item.position[2])+.5){removeObject(item.id);continue;}
+                if(item.source==='scatter'&&item.asset!=='iron-stack'&&groundY<waterLevelAt(model.state.water,model.world.waterBodies,item.position[0],item.position[2])+.5){removeObject(item.id);continue;}
                 const y=item.followTerrain?groundY+item.groundOffset:item.position[1];
                 if(y!==record.y){const p=record.collider.translation();record.collider.setTranslation({x:p.x,y:p.y+y-record.y,z:p.z});record.y=y;record.key=key(item);}
             }

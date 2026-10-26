@@ -73,7 +73,9 @@ test('all six populated worlds validate at the full-map boundary and contain the
         const f=fixture();assert.equal(await f.generator.generate({...defaultWorldRequest(),preset,N:64}),true,preset);
         const world=decodeProject(f.storage.projectJSON()).world;
         assert.ok(world.objects.every(o=>Math.abs(o.position[0])<=512&&Math.abs(o.position[2])<=512),preset);
-        assert.ok(world.objects.some(o=>WORLD_PRESETS[preset].trees.includes(o.asset)),preset+' species');
+        const species=preset==='iron-islands'?WORLD_PRESETS[preset].shrubs:WORLD_PRESETS[preset].trees;
+        assert.ok(world.objects.some(o=>species.includes(o.asset)),preset+' species');
+        if(preset==='iron-islands')assert.ok(world.objects.every(o=>getModel(o.asset).category!=='tree'),'Iron Isles has no forests');
     }
 });
 

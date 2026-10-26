@@ -1,3 +1,5 @@
+import {ironPuddles} from './iron-terrain';
+import {ironDefaults,validateIron,ironClimate,ironTerrainKey,type IronSettings} from './iron-settings';
 import {WORLD_PRESETS,isWorldPreset} from './world-recipes';
 import {createWorld,deriveSeeds,type WorldPresetId,type WorldRecipe} from './world';
 import {SIZE,RESOLUTIONS,type EditorState,type EditorModel} from './state';
@@ -18,9 +20,10 @@ import {taigaDefaults,validateTaiga,taigaClimate,type TaigaSettings} from './tai
 import {taigaWaterBodies} from './taiga-terrain';
 import {WORLD_TERRAIN_ALGORITHM} from './generation-settings';
 
-export interface WorldRequest {preset:WorldPresetId;seed:number;N:number;areaSize:number;erosion:0|1|2;plants:boolean;routes:boolean;jungle?:JungleSettings;taiga?:TaigaSettings;terrain?:Partial<Pick<EditorState,'height'|'scale'|'sharp'|'mountains'|'warp'>>;}
+export interface WorldRequest {preset:WorldPresetId;seed:number;N:number;areaSize:number;erosion:0|1|2;plants:boolean;routes:boolean;iron?:IronSettings;jungle?:JungleSettings;taiga?:TaigaSettings;terrain?:Partial<Pick<EditorState,'height'|'scale'|'sharp'|'mountains'|'warp'>>;}
 export const defaultWorldRequest=():WorldRequest=>({preset:'archipelago',seed:1337,N:256,areaSize:1,erosion:1,plants:true,routes:true});
 export function worldSettings(base:EditorState,request:WorldRequest):EditorState{
+    const iron=request.preset==='iron-islands'?validateIron(request.iron??ironDefaults()):undefined;
     const jungle=request.preset==='jungle'?validateJungle(request.jungle??jungleDefaults()):undefined;
     const taiga=request.preset==='taiga'?validateTaiga(request.taiga??taigaDefaults()):undefined;
     if(!isWorldPreset(request.preset)||!Number.isInteger(request.seed)||request.seed<0||request.seed>0xffffffff||!RESOLUTIONS.includes(request.N as typeof RESOLUTIONS[number])||!Number.isFinite(request.areaSize)||request.areaSize<.125||request.areaSize>1||![0,1,2].includes(request.erosion)||typeof request.plants!=='boolean'||typeof request.routes!=='boolean')throw new Error('Проверьте тип мира, сид, размер и качество рельефа');
@@ -28,7 +31,7 @@ export function worldSettings(base:EditorState,request:WorldRequest):EditorState
     for(const [key,value]of Object.entries(request.terrain??{})){
         const range=limits[key as keyof typeof limits];if(!Object.hasOwn(limits,key)||!Number.isFinite(value)||value<range[0]||value>range[1])throw new Error('Некорректная настройка рельефа: '+key);
     }
-    return {...base,...WORLD_PRESETS[request.preset].settings,...request.terrain,...(jungle?{soilMoisture:jungle.moisture,clearingAmount:jungle.clearings,fog:jungle.atmosphere?.04+jungle.haze*.2:0,lowFog:jungle.atmosphere?jungle.haze*.8:0}:{}),...(taiga?taigaClimate(taiga):{}),seed:request.seed,N:request.N,areaSize:request.areaSize,showScatter:request.plants,showFoliage:request.plants};
+    return {...base,...WORLD_PRESETS[request.preset].settings,...request.terrain,...(jungle?{soilMoisture:jungle.moisture,clearingAmount:jungle.clearings,fog:jungle.atmosphere?.04+jungle.haze*.2:0,lowFog:jungle.atmosphere?jungle.haze*.8:0}:{}),...(taiga?taigaClimate(taiga):{}),...(iron?ironClimate(iron):{}),seed:request.seed,N:request.N,areaSize:request.areaSize,showScatter:request.plants,showFoliage:request.plants};
 }
 export function createWorldGeneration(model:EditorModel,terrain:TerrainSystem,materials:MaterialsSystem,vegetation:VegetationSystem,history:HistorySystem,feedback:Feedback,jobs:JobRunner,beforeStart=()=>{},previewJobs:JobRunner=jobs){
     const cache=new Map<string,Float32Array>();let cancelled=false,previewing=false;
@@ -36,9 +39,10 @@ export function createWorldGeneration(model:EditorModel,terrain:TerrainSystem,ma
         const settings=worldSettings(model.state,{...request,N:preview?64:request.N}),erosion=preview?0:request.erosion;
         const jungle=request.preset==='jungle'?request.jungle??jungleDefaults():undefined;
         const taiga=request.preset==='taiga'?request.taiga??taigaDefaults():undefined;
-        const key=JSON.stringify([WORLD_TERRAIN_ALGORITHM,request.preset,settings.N,settings.seed,settings.areaSize,settings.scale,settings.height,settings.octaves,settings.sharp,settings.warp,settings.mountains,settings.island,settings.water,erosion,jungle?[jungle.microrelief,jungle.streams,jungle.variant==='river']:null,taiga?[taiga.terrainVariation,taiga.bogFrequency,taiga.water,taiga.moisture>.4]:null]);
+        const iron=request.preset==='iron-islands'?validateIron(request.iron??ironDefaults()):undefined;
+        const key=JSON.stringify([WORLD_TERRAIN_ALGORITHM,request.preset,settings.N,settings.seed,settings.areaSize,settings.scale,settings.height,settings.octaves,settings.sharp,settings.warp,settings.mountains,settings.island,settings.water,erosion,iron?ironTerrainKey(iron):null,jungle?[jungle.microrelief,jungle.streams,jungle.variant==='river']:null,taiga?[taiga.terrainVariation,taiga.bogFrequency,taiga.water,taiga.moisture>.4]:null]);
         const cached=cache.get(key);if(cached){cache.delete(key);cache.set(key,cached);onProgress(1);return cached.slice();}
-        const heights=await (preview?previewJobs:jobs).run({kind:'terrain',settings,seed:request.seed,preset:request.preset,worldErosion:erosion,jungle,taiga},onProgress);
+        const heights=await (preview?previewJobs:jobs).run({kind:'terrain',settings,seed:request.seed,preset:request.preset,worldErosion:erosion,jungle,taiga,iron},onProgress);
         cache.set(key,heights.slice());while(cache.size>4)cache.delete(cache.keys().next().value!);return heights;
     }
     const yieldUI=()=>new Promise<void>(resolve=>setTimeout(resolve,0));
@@ -56,8 +60,9 @@ export function createWorldGeneration(model:EditorModel,terrain:TerrainSystem,ma
                 await yieldUI();if(cancelled)throw new OperationCancelled();
                 Object.assign(model.state,settings);model.N=settings.N;model.n=settings.N+1;model.cell=SIZE/settings.N;model.heights=new Float32Array(heights);
                 model.seeds=deriveSeeds(request.seed);model.operations=[];model.world=createWorld();model.world.preset=request.preset;
-                model.world.recipe={version:1,seed:request.seed,erosion:request.erosion,plants:request.plants,routes:request.routes,...(request.preset==='jungle'?{jungle:validateJungle(request.jungle??jungleDefaults())}:{}),...(request.preset==='taiga'?{taiga:validateTaiga(request.taiga??taigaDefaults())}:{})} satisfies WorldRecipe;
-                model.world.waterBodies[0]={...model.world.waterBodies[0],level:settings.water,wave:settings.wave,opacity:settings.waterOpacity};
+                model.world.recipe={version:1,seed:request.seed,erosion:request.erosion,plants:request.plants,routes:request.routes,...(request.preset==='iron-islands'?{iron:validateIron(request.iron??ironDefaults())}:{}),...(request.preset==='jungle'?{jungle:validateJungle(request.jungle??jungleDefaults())}:{}),...(request.preset==='taiga'?{taiga:validateTaiga(request.taiga??taigaDefaults())}:{})} satisfies WorldRecipe;
+                model.world.waterBodies[0]={...model.world.waterBodies[0],level:settings.water,wave:settings.wave,opacity:settings.waterOpacity,...(request.preset==='iron-islands'?{clarity:3}: {})};
+                if(request.preset==='iron-islands')model.world.waterBodies.push(...ironPuddles(settings,model.world.recipe.iron!));
                 if(request.preset==='jungle')model.world.waterBodies.push(...jungleWaterBodies(settings,model.world.recipe.jungle!));
                 if(request.preset==='taiga')model.world.waterBodies.push(...taigaWaterBodies(settings,model.world.recipe.taiga!));
                 model.world.biomes=[{id:'world-biome',name:WORLD_PRESETS[request.preset].name,kind:WORLD_PRESETS[request.preset].biome,center:[0,0],radius:SIZE}];

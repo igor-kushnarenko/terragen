@@ -11,6 +11,7 @@ export function groundSurface(model:EditorModel,terrain:EcologyTerrain,x:number,
     const weights=[...model.splat.subarray(k,k+4),...model.splatDetail.subarray(k,k+4)],largest=Math.max(...weights);
     if(largest>12)return SURFACES[weights.indexOf(largest)];
     const h=terrain.getH(x,z),ny=terrain.getNormalY(x,z);
+    if(model.world.preset==='iron-islands'){if(h<model.state.water+.3)return 'water';return ny>.94?'gravel':'rock';}
     if(h<waterLevelAt(model.state.water,model.world.waterBodies,x,z)+3.5)return 'sand';
     if(h>model.state.snowLine&&ny>0.75)return 'snow';
     if(1-ny>model.state.rockSlope)return 'rock';
@@ -44,7 +45,7 @@ export function createSoundEnvironment(model:EditorModel,terrain:EcologyTerrain)
         const nearby=trees.query(x,z,18).filter(p=>Math.hypot(x-p.x,z-p.z)<18+p.radius);
         return {cover:1-Math.exp(-nearby.length*0.22),underTree:nearby.some(p=>Math.hypot(x-p.x,z-p.z)<p.radius)};
     }
-    return {sample(x:number,z:number){ const e=ecology.sample(x,z),forest=forestAt(x,z).cover;return {forest,moisture:e.moisture,birds:(0.2+forest*0.8)*smoothstep(-3,12,model.state.sunEl),wind:0.07+model.state.windSpeed*0.05,water:nearestWater(model,terrain,x,z)};},
+    return {sample(x:number,z:number){ const e=ecology.sample(x,z),forest=forestAt(x,z).cover;return {forest,moisture:e.moisture,birds:(model.world.preset==='iron-islands'?.015:0.2+forest*0.8)*smoothstep(-3,12,model.state.sunEl),wind:0.07+model.state.windSpeed*0.05,water:nearestWater(model,terrain,x,z)};},
         surface(x:number,z:number){const surface=groundSurface(model,terrain,x,z);if(surface!=='grass')return surface;const e=ecology.sample(x,z);return forestAt(x,z).underTree?(e.moisture>0.75?'moss':'litter'):surface;}};
 }
 export interface SoundPose {on:boolean;paused:boolean;feet:Vector3;grounded:boolean;swim:boolean;}

@@ -7,7 +7,7 @@ float atmosphereFog(float distance){float opticalDepth=uFogDensity*distance;retu
 float skyFogPath(float elevation){return ${SKY_FOG_HEIGHT.toFixed(1)}/max(${SKY_FOG_MIN_ELEVATION.toFixed(3)},elevation);}
 `;
 const cloudGLSL=`
-uniform float uTime,uCover,uDark,uFlash,uFogDensity,uForeground,uIsEnvironment,uClearSky;
+uniform float uTime,uCover,uDark,uFlash,uFogDensity,uForeground,uIsEnvironment,uClearSky,uCloudAltitude;
 uniform vec2 uOffset;
 uniform vec3 uLit,uShade,uSunDir,uFogColor,uObserverOffset;
 ${skyFogGLSL}
@@ -25,7 +25,7 @@ float cloudFbm(vec2 p){
 }
 float cloudDistance(vec3 observer,vec3 direction){
     float b=(${ATMOSPHERE_RADIUS.toFixed(1)}+observer.y)*direction.y;
-    float c=(observer.y-${CLOUD_ALTITUDE.toFixed(1)})*(2.0*${ATMOSPHERE_RADIUS.toFixed(1)}+observer.y+${CLOUD_ALTITUDE.toFixed(1)});
+    float c=(observer.y-uCloudAltitude)*(2.0*${ATMOSPHERE_RADIUS.toFixed(1)}+observer.y+uCloudAltitude);
     float discriminant=b*b-c;
     if(discriminant<0.0)return -1.0;
     float root=sqrt(discriminant),farHit=-b+root;
@@ -51,7 +51,7 @@ vec4 cloudLayer(vec3 direction,out float distance){
 
 /** One background pass; independent of map extents and the camera's far plane. */
 export function createSkyAtmosphere(render:Pick<RenderingSystem,'sky'|'envSky'|'sunDir'|'camera'|'scene'>){
-    const uniforms={uTime:{value:0},uCover:{value:0},uDark:{value:0},uFlash:{value:0},uOffset:{value:new T.Vector2()},
+    const uniforms={uCloudAltitude:{value:CLOUD_ALTITUDE},uTime:{value:0},uCover:{value:0},uDark:{value:0},uFlash:{value:0},uOffset:{value:new T.Vector2()},
         uLit:{value:new T.Color()},uShade:{value:new T.Color()},uSunDir:{value:render.sunDir},uFogColor:{value:new T.Color()},uFogDensity:{value:0},uForeground:{value:0},uClearSky:{value:0}};
     for(const sky of [render.sky,render.envSky]){
         const material=sky.material;

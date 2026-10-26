@@ -1,3 +1,4 @@
+import {scatterIron} from './iron-scatter';
 import { createEcology, FootprintIndex, objectFootprint, type EcologyTerrain } from './ecology';
 import { mulberry32 } from './noise';
 import { SIZE, type EditorModel } from './state';
@@ -14,6 +15,7 @@ export function scatterObjects(model: EditorModel, terrain: EcologyTerrain) {
         if(model.world.preset!=='jungle'&&model.world.biomes.some(b=>b.kind==='jungle')){const next=scatterJungle(model,terrain,result.objects);result={objects:next.objects,counts:{trees:result.counts.trees+next.counts.trees,rocks:result.counts.rocks+next.counts.rocks,bushes:result.counts.bushes+next.counts.bushes}};}
         return result;
     }
+    if(model.world.preset==='iron-islands')return scatterIron(model,terrain);
     if(model.world.preset==='taiga')return regional(scatterTaiga(model,terrain));
     if(model.world.preset==='jungle'&&model.world.recipe?.jungle)return regional(scatterJungle(model,terrain));
     const manual = model.world.objects.filter(item=>item.source!=='scatter'), capacity = MAX_WORLD_OBJECTS-manual.length;

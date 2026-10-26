@@ -3,6 +3,7 @@ import {validAssetKey} from './asset-vault';
 import {validateBalloon,type BalloonState} from './balloon-state';
 import { BUILTIN_INFO } from './model-shapes';
 import {validWaterOutline} from './water-math';
+import {validateIron} from './iron-settings';
 import {validateJungle} from './jungle-settings';
 import {validateTaiga} from './taiga-settings';
 import type { WalkPose } from './physics';
@@ -264,6 +265,7 @@ export function validateWorld(value: unknown, state: EditorState, legacy = false
     if(input.recipe!==undefined){
         const r=object(input.recipe,'world.recipe');
         recipe={version:number(r.version,'world.recipe.version',1,1,true) as 1,seed:number(r.seed,'world.recipe.seed',0,0xffffffff,true),erosion:number(r.erosion,'world.recipe.erosion',0,2,true) as 0|1|2,plants:bool(r.plants,'world.recipe.plants'),routes:bool(r.routes,'world.recipe.routes')};
+        if(r.iron!==undefined){try{recipe.iron=validateIron(r.iron);}catch{fail('world.recipe.iron');}}
         if(r.jungle!==undefined){try{recipe.jungle=validateJungle(r.jungle);}catch{fail('world.recipe.jungle');}}
         if(r.taiga!==undefined){try{recipe.taiga=validateTaiga(r.taiga);}catch{fail('world.recipe.taiga');}}
     }
@@ -284,7 +286,7 @@ export function validateWorld(value: unknown, state: EditorState, legacy = false
 function validateOperations(value: unknown): OperationRecord[] {
     return list(value, 'operations', 10000).map((item, i) => {
         const p = `operations[${i}]`, op = object(item, p), parameters = object(op.parameters, `${p}.parameters`);
-        if (![1,2,3,4,5,6,7,8].includes(op.algorithmVersion as number) || Object.keys(parameters).length > 64)
+        if (![1,2,3,4,5,6,7,8,9].includes(op.algorithmVersion as number) || Object.keys(parameters).length > 64)
             fail(p);
         const normalized: Record<string, number | boolean> = {};
         for (const [key, value] of Object.entries(parameters)) {

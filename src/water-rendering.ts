@@ -1,3 +1,4 @@
+import {createIronSurf} from './iron-surf';
 import * as T from 'three';
 import {Reflector} from 'three/addons/objects/Reflector.js';
 import type {EditorModel} from './state';
@@ -15,6 +16,7 @@ import {createWaterfallEffects} from './waterfall-effects';
 export function createWaterRendering(model:EditorModel,render:RenderingSystem,materials:MaterialsSystem,surface?:WaterSurface,getH:(x:number,z:number)=>number=()=>0) {
     const group=new T.Group();group.name='Local water surfaces';render.scene.add(group);
     const optics=createWaterOptics(render,materials,group,surface),flow=createWaterFlow(model,getH);surface?.bindFlow(flow.sample);
+    const surf=createIronSurf(model,render,materials,getH);
     let quality=effectiveQuality(model);
     let bodies:typeof model.world.waterBodies|undefined,reflector:Reflector|undefined,size=-1,timer=Infinity,captures=0;
     const uniforms=materials.waterUniforms,falls=createWaterfallEffects(model,render.scene,uniforms),inverse=new T.Matrix4(),fallbackReflection=uniforms.uReflection.value;
@@ -37,11 +39,12 @@ export function createWaterRendering(model:EditorModel,render:RenderingSystem,ma
         bodies=model.world.waterBodies;quality=effectiveQuality(model);timer=Infinity;
     }
     function update(dt:number){
-        if(bodies!==model.world.waterBodies||quality!==effectiveQuality(model))rebuild();materials.updateWater();flow.ensure();falls.update(render.camera);
+        if(bodies!==model.world.waterBodies||quality!==effectiveQuality(model))rebuild();materials.updateWater();flow.ensure();falls.update(render.camera);surf.update();
         materials.water.position.x=render.camera.position.x;materials.water.position.z=render.camera.position.z;
         if(surface){const data=surface.upload(WATER_PROFILES[effectiveQuality(model)].impacts);uniforms.uTime.value=surface.time;uniforms.uImpacts.value=data.packed;uniforms.uImpactMeta.value=data.meta;uniforms.uImpactCount.value=data.count;}
         for(const child of group.children){const mesh=child as T.Mesh<T.BufferGeometry,T.ShaderMaterial>,body=mesh.userData.waterBody,field=flow.map(body);mesh.material.uniforms.uFlowMapOn.value=field?1:0;if(field){mesh.material.uniforms.uFlowMap.value=field.texture;mesh.material.uniforms.uFlowBounds.value.copy(field.bounds);}}
-        const profile=WATER_PROFILES[effectiveQuality(model)];uniforms.uWaterDetail.value=profile.detail;uniforms.uFoamStrength.value=profile.foam;
+        const profile=WATER_PROFILES[effectiveQuality(model)];uniforms.uWaterDetail.value=profile.detail;uniforms.uFoamStrength.value=profile.foam*(model.world.preset==='iron-islands'?model.world.recipe?.iron?.seaFoam??1:1);
+        uniforms.uRoughness.value=model.world.preset==='iron-islands'?model.world.recipe?.iron?.waveRoughness??.5:.5;
         uniforms.uReflectionsEnabled.value=!model.xrActive&&model.state.waterReflections?1:0;
         const desiredSize=!model.xrActive&&model.state.waterReflections?profile.reflectionSize:0;
         if(size!==desiredSize){reflector?.dispose();reflector?.geometry.dispose();reflector=undefined;uniforms.uReflection.value=fallbackReflection;size=desiredSize;timer=Infinity;uniforms.uReflectionOn.value=0;
@@ -61,5 +64,5 @@ export function createWaterRendering(model:EditorModel,render:RenderingSystem,ma
             uniforms.uReflectionLevel.value=level;uniforms.uReflectionOn.value=1;timer=0;captures++;
         }finally{hidden.forEach((o,i)=>o.visible=visibility[i]);}
     }
-    return {update,group,draw:optics.draw,get statistics(){return {surfaces:group.children.length+1,reflectionSize:size,captures,...falls.statistics,...optics.statistics,impacts:surface?.impacts.length??0};},dispose(){falls.dispose();optics.dispose();flow.dispose();for(const child of group.children){const mesh=child as T.Mesh<T.BufferGeometry,T.Material>;mesh.geometry.dispose();(mesh.material as T.ShaderMaterial).uniforms.uDomainMap.value?.dispose();mesh.material.dispose();}group.removeFromParent();reflector?.dispose();reflector?.geometry.dispose();}};
+    return {update,group,draw:optics.draw,get statistics(){return {surfaces:group.children.length+1,reflectionSize:size,captures,...falls.statistics,...surf.statistics,...optics.statistics,impacts:surface?.impacts.length??0};},dispose(){surf.dispose();falls.dispose();optics.dispose();flow.dispose();for(const child of group.children){const mesh=child as T.Mesh<T.BufferGeometry,T.Material>;mesh.geometry.dispose();(mesh.material as T.ShaderMaterial).uniforms.uDomainMap.value?.dispose();mesh.material.dispose();}group.removeFromParent();reflector?.dispose();reflector?.geometry.dispose();}};
 }

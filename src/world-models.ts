@@ -1,9 +1,11 @@
+import {IRON_PLANTS,isIronPlant,makeIronModel} from './iron-models';
 import * as T from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 import {JUNGLE_PLANTS,isJunglePlant,makeJunglePlant} from './jungle-models';
 import {TAIGA_PLANTS,isTaigaPlant,makeTaigaPlant} from './taiga-models';
 
 export const WORLD_PLANTS={
+    ...IRON_PLANTS,
     ...JUNGLE_PLANTS,
     ...TAIGA_PLANTS,
     palm:{name:'Кокосовая пальма',category:'tree',collider:'trunk'},
@@ -20,6 +22,7 @@ export const isWorldPlant=(id:string):id is WorldPlantId=>Object.hasOwn(WORLD_PL
 
 /** Local opaque species, two merged parts at most; all three LODs keep their silhouette. */
 export function makeWorldPlant(id:WorldPlantId,level=0){
+    if(isIronPlant(id))return makeIronModel(id,level);
     if(isJunglePlant(id))return makeJunglePlant(id,level);
     if(isTaigaPlant(id))return makeTaigaPlant(id,level);
     const root=new T.Group(),wood:T.BufferGeometry[]=[],leaves:T.BufferGeometry[]=[],sides=level===0?7:4;

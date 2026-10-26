@@ -1,3 +1,5 @@
+import {generateIronTerrain} from './iron-terrain';
+import {ironDefaults,type IronSettings} from './iron-settings';
 import {makeSimplex,fbm,mulberry32,smoothstep,clamp} from './noise';
 import {smoothRelief} from './terrain-smoothing';
 import type {EditorState} from './state';
@@ -10,7 +12,8 @@ import {generateTaigaTerrain} from './taiga-terrain';
 import {createCoastalHeight} from './coastline';
 
 /** Macro landforms in metres, independent of mesh resolution, with a shared natural coast. */
-export function generateWorldTerrain(s:EditorState,preset:WorldPresetId,progress:Progress=()=>{},jungle?:JungleSettings,taiga?:TaigaSettings){
+export function generateWorldTerrain(s:EditorState,preset:WorldPresetId,progress:Progress=()=>{},jungle?:JungleSettings,taiga?:TaigaSettings,iron?:IronSettings){
+    if(preset==='iron-islands')return generateIronTerrain(s,iron??ironDefaults(),progress);
     if(preset==='jungle')return generateJungleTerrain(s,jungle??jungleDefaults(),progress);
     if(preset==='taiga')return generateTaigaTerrain(s,taiga??taigaDefaults(),progress);
     const random=mulberry32(s.seed^0x5a3712),noise=makeSimplex(s.seed),detail=makeSimplex(s.seed^0x2f913),angle=random()*Math.PI*2,cs=Math.cos(angle),sn=Math.sin(angle);
@@ -19,7 +22,7 @@ export function generateWorldTerrain(s:EditorState,preset:WorldPresetId,progress
         return {x:Math.cos(a)*r,z:Math.sin(a)*r,r:i===0?.13:.045+random()*.075,h:.45+random()*.55};
     });
     const channels=Array.from({length:3},(_,i)=>({x:(i-1)*.22,phase:random()*8,width:.022+random()*.014}));
-    const coastal=preset==='archipelago'||preset==='iron-islands'||preset==='fjords';
+    const coastal=preset==='archipelago'||preset==='fjords';
     const coast=s.areaSize<1||s.island||coastal?createCoastalHeight(s):undefined;
     const n=s.N+1,result=new Float32Array(n*n),sharp=clamp(s.sharp/5,0,1),gain=sharp**.7;
     const scale=1.4/s.scale,octaves=Math.min(s.octaves,Math.max(1,Math.floor(Math.log2(s.N*s.areaSize/10))));
@@ -32,7 +35,7 @@ export function generateWorldTerrain(s:EditorState,preset:WorldPresetId,progress
             const broad=fbm(noise,warpX*3+4,warpZ*3-3,3)*.5+.5;
             const fine=fbm(detail,warpX*7,warpZ*7,octaves)*.5+.5;
             let elevation=0,shore=1;
-            if(preset==='archipelago'||preset==='iron-islands'){
+            if(preset==='archipelago'){
                 shore=-1;let islandHeight=0;
                 for(const island of islands){
                     const dx=u-island.x+noise(u*9,v*9)*.018*s.warp,dz=v-island.z+noise(u*9+7,v*9)*.018*s.warp;
@@ -40,11 +43,7 @@ export function generateWorldTerrain(s:EditorState,preset:WorldPresetId,progress
                     const field=1-Math.hypot(dx,dz)/radius;
                     if(field>shore){shore=field;islandHeight=island.h;}
                 }
-                if(preset==='archipelago')elevation=Math.max(0,shore)**.7*(.3+.7*broad)*islandHeight;
-                else{
-                    const plateau=Math.max(0,shore)**.35*(.45+.55*broad);
-                    elevation=(plateau*.72+Math.floor(plateau*5)/5*.28)*islandHeight;
-                }
+                elevation=Math.max(0,shore)**.7*(.3+.7*broad)*islandHeight;
             }else if(preset==='desert'){
                 const phase=warpX*24+noise(warpX*2,warpZ*2)*2+Math.sin(warpZ*3)*.7;
                 const wave=phase-Math.floor(phase),dune=wave<.76?wave/.76:(1-wave)/.24;
@@ -68,7 +67,7 @@ export function generateWorldTerrain(s:EditorState,preset:WorldPresetId,progress
             }
             let h=s.water+3+elevation*s.height*gain*s.areaSize;
             if(coastal){
-                const dry=smoothstep(0,preset==='iron-islands'?.10:.2,shore);
+                const dry=smoothstep(0,.2,shore);
                 h=shore>0?s.water+3*smoothstep(0,.12,shore)+elevation*s.height*gain*s.areaSize*dry:s.water-Math.min(35*s.areaSize,3+Math.abs(shore)*30*s.areaSize);
             }
             result[j*n+i]=h;

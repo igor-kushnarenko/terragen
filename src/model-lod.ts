@@ -1,3 +1,4 @@
+import {isIronRock,makeIronModel} from './iron-models';
 import * as T from 'three';
 import { getModel, type ModelTemplate } from './model-library';
 import {isFinePlantAsset} from './plant-geometry';
@@ -12,8 +13,8 @@ export function modelLOD(asset: string, level: number): ModelTemplate['parts'] {
     return levels[level];
 }
 function proxy(template: ModelTemplate, level: number): ModelTemplate['parts'] {
-    if(isNaturalAsset(template.id)||isWorldPlant(template.id)){
-        const root=isWorldPlant(template.id)?makeWorldPlant(template.id,level):makeNaturalModel(template.id as import('./natural-models').NaturalAsset,level);root.updateMatrixWorld(true);
+    if(isNaturalAsset(template.id)||isWorldPlant(template.id)||isIronRock(template.id)){
+        const root=isIronRock(template.id)?makeIronModel(template.id,level):isWorldPlant(template.id)?makeWorldPlant(template.id,level):makeNaturalModel(template.id as import('./natural-models').NaturalAsset,level);root.updateMatrixWorld(true);
         const bounds=new T.Box3().setFromObject(root),size=bounds.getSize(new T.Vector3()),target=template.bounds.getSize(new T.Vector3());
         // Match the full model's envelope so species do not shrink, lift or change center at a threshold.
         const scale=target.divide(size),offset=template.bounds.min.clone().sub(bounds.min.clone().multiply(scale));

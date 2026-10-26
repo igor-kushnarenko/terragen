@@ -10,6 +10,7 @@ interface WeatherSettings {
     snow: number;
     storm: number;
 }
+import {ironClimate} from './iron-settings';
 import * as THREE from 'three';
 import { weatherStrengths, directSunlight,CLOUD_ALTITUDE } from './atmosphere-settings';
 import { createSkyAtmosphere, skyFogGLSL } from './sky-atmosphere';
@@ -83,9 +84,9 @@ void main(){
     })();
     // --- Осадки: дождь (отрезки) и снег (точки), вершины анимируются на GPU вокруг камеры
     const PRECIP_BOX = 70, PRECIP_H = 40;
-    const precipUniforms = { uTime: { value: 0 }, uCam: { value: new THREE.Vector3() }, uWind: { value: new THREE.Vector2() }, uOpacity: { value: 0 }, uColor: { value: new THREE.Color(0.7, 0.75, 0.85) }, uPixel: { value: render.renderer.getPixelRatio() } };
+    const precipUniforms = {uDrizzle:{value:0}, uTime: { value: 0 }, uCam: { value: new THREE.Vector3() }, uWind: { value: new THREE.Vector2() }, uOpacity: { value: 0 }, uColor: { value: new THREE.Color(0.7, 0.75, 0.85) }, uPixel: { value: render.renderer.getPixelRatio() } };
     const precipCommonV = `
-uniform float uTime; uniform vec3 uCam; uniform vec2 uWind;
+uniform float uTime,uDrizzle; uniform vec3 uCam; uniform vec2 uWind;
 const float B = ${PRECIP_BOX.toFixed(1)}; const float H = ${PRECIP_H.toFixed(1)};
 vec3 wrapPos(vec3 base, float fall, vec2 wind){
   vec3 p = base;
@@ -113,10 +114,10 @@ vec3 wrapPos(vec3 base, float fall, vec2 wind){
             vertexShader: precipCommonV + `
 attribute float aEnd; attribute float aSpd; varying float vA;
 void main(){
-  float fall = 22.0 * aSpd; vec2 wind = uWind * 6.0;
+  float fall = mix(22.0,9.0,uDrizzle) * aSpd; vec2 wind = uWind * 6.0;
   vec3 p = wrapPos(position, fall, wind);
   vec3 vel = vec3(wind.x, -fall, wind.y);
-  p += vel * 0.035 * aEnd; // длина штриха ~ скорость
+  p += vel * mix(.035,.012,uDrizzle) * aEnd; // длина штриха ~ скорость
   float dc = length(p - uCam);
   vA = (0.35 + 0.65 * aEnd) * (1.0 - smoothstep(B * 0.3, B * 0.5, dc)) * smoothstep(0.5, 2.0, dc);
   gl_Position = projectionMatrix * viewMatrix * vec4(p, 1.0);
@@ -192,6 +193,7 @@ void main(){
     }
     const _c1 = new THREE.Color(), _c2 = new THREE.Color();
     const GREY = new THREE.Color();
+    let ironSignature='';
     let precipitation = model.state.precipitation, fogIntensity = model.state.fogIntensity, envFogDensity = -1;
     const soundWeather = { rain: 0, snow: 0, dark: 0 };
     function atmosUpdate(dt: number) {
@@ -204,7 +206,12 @@ void main(){
                 wCur[k] = wFrom[k] + (wTo[k] - wFrom[k]) * s;
             envDirty = true;
         }
-        const W = wCur, dayL = smoothstep(-6, 10, lighting.sunElevation);
+        const iron=model.world.preset==='iron-islands'?model.world.recipe?.iron:undefined;
+        const custom=iron&&model.state.weather===ironClimate(iron).weather?iron:undefined;
+        const signature=custom?JSON.stringify([custom.cloudCoverage,custom.atmosphereDarkness]):'';if(signature!==ironSignature){ironSignature=signature;envDirty=true;}
+        const W = custom?{...wCur,cover:custom.cloudCoverage,overcast:smoothstep(.4,1,custom.cloudCoverage),dark:custom.atmosphereDarkness,sun:1-custom.cloudCoverage*.85,sat:custom.cloudCoverage*.9,storm:0}:wCur;
+        precipUniforms.uDrizzle.value=custom?1-smoothstep(.25,.8,model.state.precipitation):0;
+        const dayL = smoothstep(-6, 10, lighting.sunElevation);
         const blend = 1 - Math.exp(-Math.max(0, dt) * 5);
         precipitation += (model.state.precipitation - precipitation) * blend;
         fogIntensity += (model.state.fogIntensity - fogIntensity) * blend;
@@ -266,7 +273,8 @@ void main(){
         cloudUniforms.uOffset.value.y -= wz * dt * 25; // дрейф облаков по ветру
         cloudUniforms.uTime.value = atmosTime;
         cloudUniforms.uCover.value = W.cover;
-        cloudUniforms.uForeground.value=render.camera.position.y>CLOUD_ALTITUDE-1||model.maxH>CLOUD_ALTITUDE-1?1:0;
+        const cloudAltitude=custom?240-custom.atmosphereDarkness*100:CLOUD_ALTITUDE;cloudUniforms.uCloudAltitude.value=cloudAltitude;
+        cloudUniforms.uForeground.value=render.camera.position.y>cloudAltitude-1||model.maxH>cloudAltitude-1?1:0;
         clouds.visible=cloudUniforms.uForeground.value>.5&&W.cover>.01;
         cloudUniforms.uClearSky.value=(1-W.sat)*smoothstep(0,15,lighting.sunElevation);
         cloudUniforms.uDark.value = W.dark;

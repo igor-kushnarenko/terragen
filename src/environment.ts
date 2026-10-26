@@ -10,7 +10,7 @@ import {sampleAtmosphere} from './atmosphere';
 export function createEnvironment(model:EditorModel,terrain:TerrainSystem,render:RenderingSystem,materials:EnvironmentMaterials){
     let revision=-1,bodies=model.world.waterBodies,water=NaN;
     function update(dt:number,rain:number){
-        model.state.wetness=wetnessAfter(model.state.wetness,rain,dt);
+        model.state.wetness=Math.max(model.world.preset==='iron-islands'?model.world.recipe?.iron?.surfaceWetness??0:0,wetnessAfter(model.state.wetness,rain,dt));
         const u=materials.uniforms;u.uEnvTime.value+=dt;
         const p=render.camera.position,ground=terrain.getH(p.x,p.z),air=sampleAtmosphere(model.state,model.balloon?.seed??model.state.seed,p.x,ground+10,p.z,model.balloon?.time??u.uEnvTime.value,ground);
         u.uEnvWind.value.set(air.wind[0]/4,air.wind[2]/4);u.uEnvWetness.value=model.state.wetness;

@@ -51,6 +51,7 @@ import {createWorldGeneration,defaultWorldRequest} from './world-generation';
 import {createWorldStudio,type WorldStudio} from './world-studio';
 import {WORLD_PRESETS,isWorldPreset} from './world-recipes';
 import {createWorkspace} from './workspace';
+import {createIronInterface} from './iron-ui';
 import {createJungleInterface} from './jungle-ui';
 import {createTaigaInterface} from './taiga-ui';
 import type {LandscapePresetId} from './world';
@@ -164,6 +165,7 @@ export function createEditor(options:EditorOptions = {}) {
         if(autosave.status.available){await autosave.newWorld();if(previousId!==autosave.status.id)autosave.rename(WORLD_PRESETS[request.preset].name+' · '+request.seed);}
         else await worldGeneration.generate(request);
     });
+    createIronInterface(model,terrain,history,vegetation,materials,feedback,settings=>worldStudio!.selectIron(settings));
     createJungleInterface(model,terrain,history,vegetation,materials,feedback,settings=>worldStudio!.selectJungle(settings));
     createTaigaInterface(model,terrain,history,vegetation,materials,feedback,settings=>worldStudio!.selectTaiga(settings));
     createWorkspace(model,feedback,ui,input,render,autosave);

@@ -1,9 +1,11 @@
+import {IRON_ROCKS,isIronRock,makeIronModel} from './iron-models';
 import * as T from 'three';
 import {FINE_PLANT_IDS,plantGeometry,isFinePlantAsset} from './plant-geometry';
 import {isNaturalAsset,makeNaturalModel} from './natural-models';
 import {WORLD_PLANTS,isWorldPlant,makeWorldPlant} from './world-models';
 export const BUILTIN_INFO = {
     ...WORLD_PLANTS,
+    ...IRON_ROCKS,
     grass:{name:'Трава',category:'shrub',collider:'none'},flowers:{name:'Цветы',category:'shrub',collider:'none'},
     fern:{name:'Папоротник',category:'shrub',collider:'none'},moss:{name:'Мох',category:'shrub',collider:'none'},
     'jungle-herb':{name:'Тропическое почвопокровное растение',category:'shrub',collider:'none'},'jungle-fungi':{name:'Лесные грибы',category:'shrub',collider:'none'},
@@ -23,6 +25,7 @@ export const BUILTIN_INFO = {
 } as const;
 export type BuiltinAsset = keyof typeof BUILTIN_INFO;
 export function makeBuiltinModel(id: BuiltinAsset) {
+    if(isIronRock(id))return makeIronModel(id);
     if(isWorldPlant(id)){const model=makeWorldPlant(id);model.name=BUILTIN_INFO[id].name;return model;}
     if(isNaturalAsset(id)){const model=makeNaturalModel(id);model.name=BUILTIN_INFO[id].name;return model;}
     const root = new T.Group(); root.name = BUILTIN_INFO[id].name;

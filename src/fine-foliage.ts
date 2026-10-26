@@ -1,3 +1,4 @@
+import {createIronHabitat} from './iron-habitat';
 import {plantGeometry,FINE_PLANT_IDS} from './plant-geometry';
 import {plantMorphGeometry,setPlantMorph} from './plant-variation';
 import * as T from 'three';
@@ -19,6 +20,7 @@ export function foliagePoints(model: EditorModel, terrain: Pick<TerrainSystem, '
     const random = mulberry32(foliageSeed(model.seeds.scatter, cx, cz));
     const result: { x: number; y: number; z: number; yaw: number; scale: number; kind: number }[] = [];
     const tropical=model.world.preset==='jungle'&&!!model.world.recipe?.jungle||model.world.biomes.some(b=>b.kind==='jungle');
+    const iron=model.world.preset==='iron-islands'?createIronHabitat(model,terrain):undefined;
     if(tropical)jungle??=jungleGroundContext(model,terrain);
     if(hasTaiga(model.world))taiga??=taigaGroundContext(model,terrain);
     for (let i = 0; i < Math.round(128 * model.state.foliageDensity * qualityProfile(model).foliageDensity); i++) {
@@ -29,6 +31,7 @@ export function foliagePoints(model: EditorModel, terrain: Pick<TerrainSystem, '
         if(model.splatDetail[painted+1]+model.splatDetail[painted+2]>160)continue;
         const e = ecology.sample(x,z);
         if (!e.dry || ecology.pathClearance(x,z)<0.45 || occupied?.query(x,z).some(p=>Math.hypot(x-p.x,z-p.z)<p.radius+0.15 && h+0.5>p.minY && h<p.maxY)) continue;
+        if(iron){const b=iron.sample(x,z);if(random()>b.vegetation*b.t.grassCoverage*3)continue;const kind=choice<b.moss?3:choice>.98?1:0;result.push({x,y:h,z,yaw:b.t.windDirection*Math.PI/180-Math.PI/2,scale:scale*.45,kind});continue;}
         if(taiga){const b=taiga.habitat.sample(x,z);if(b.weight>.05){
             if(!b.dry||random()>b.weight*(1-b.t.snowCoverage*.94)*(.3+b.detail*.7))continue;
             const shade=taiga.canopy.sample(x,z).shade,surface=taigaSurface(b,shade),sphagnum=b.bog*.7,moss=surface.moss*.65,lichen=surface.lichen*.75,fern=b.moisture*(1-b.bog)*shade*.20;
