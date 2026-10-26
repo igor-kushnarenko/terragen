@@ -1,3 +1,4 @@
+import {createGraphicFilters} from './graphic-filters';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { Sky } from 'three/addons/objects/Sky.js';
@@ -18,6 +19,7 @@ export function createRendering(model: EditorModel) {
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 0.55;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
+    createGraphicFilters(renderer,()=>model.state.graphicFilter);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFShadowMap;
     container.appendChild(renderer.domElement);

@@ -1,4 +1,6 @@
 import { readGLB, base64Binary, MAX_ASSET_BYTES } from './asset-format';
+import {MIN_AREA_SIZE} from './territory-size';
+import {GRAPHIC_FILTERS} from './graphic-filters';
 import {validAssetKey} from './asset-vault';
 import {validateBalloon,type BalloonState} from './balloon-state';
 import { BUILTIN_INFO } from './model-shapes';
@@ -122,7 +124,7 @@ const ranges: Partial<Record<keyof EditorState, [
 ]>> = {
     N: [16, 512, true], seed: [0, 0xffffffff, true], scale: [0.05, 100], height: [0, 2000], octaves: [1, 12, true], sharp: [0, 20],
     warp: [0, 10], mountains: [0, 1], droplets: [0, 600, true], thermal: [0, 100, true], erosionStrength: [0, 1],
-    areaSize: [0.125, 1], precipitation: [0, 2], fogIntensity: [0, 2],
+    areaSize: [MIN_AREA_SIZE, 1], precipitation: [0, 2], fogIntensity: [0, 2],
     dayTime:[0,24],dayDuration:[2,120],lowFog:[0,2],wetness:[0,1],
     layer: [0, 8, true], radius: [0.1, 512], strength: [0, 1], falloff: [0, 1], snowLine: [-1000, 5000], rockSlope: [0, 1],
     water: [-1000, 5000], waterOpacity: [0, 1], wave: [0, 10], sunAz: [0, 360], sunEl: [-90, 90], fog: [0, 1],
@@ -134,7 +136,7 @@ export function validateState(value: unknown, legacy = false, preV6 = true, preV
     const defaults = createModel().state, input = object(value, 'state');
     const result = {} as Record<keyof EditorState, unknown>;
     for (const key of Object.keys(defaults) as (keyof EditorState)[]) {
-        const item = (legacy || preV8&&['dayTime','dayCycle','dayDuration','lowFog','wetness'].includes(key) || preV6 && ['areaSize','precipitation','fogIntensity'].includes(key) || ['waterReflections','groundDetail','foliageDensity','foliageDistance','showFoliage','soilMoisture','clearingAmount','quality','exposure','contactAO','soundEnabled','soundVolume','ambienceVolume','footstepVolume'].includes(key)) && input[key] === undefined ? defaults[key] : input[key];
+        const item = (legacy || preV8&&['dayTime','dayCycle','dayDuration','lowFog','wetness'].includes(key) || preV6 && ['areaSize','precipitation','fogIntensity'].includes(key) || ['graphicFilter','waterReflections','groundDetail','foliageDensity','foliageDistance','showFoliage','soilMoisture','clearingAmount','quality','exposure','contactAO','soundEnabled','soundVolume','ambienceVolume','footstepVolume'].includes(key)) && input[key] === undefined ? defaults[key] : input[key];
         const range = ranges[key];
         if (range)
             result[key] = number(item, `state.${key}`, ...range);
@@ -142,6 +144,7 @@ export function validateState(value: unknown, legacy = false, preV6 = true, preV
             result[key] = bool(item, `state.${key}`);
         else if (key === 'tool')
             result[key] = choice(item, ['camera', 'raise', 'lower', 'smooth', 'flatten', 'noise', 'paint'], 'state.tool');
+        else if(key==='graphicFilter')result[key]=choice(item,Object.keys(GRAPHIC_FILTERS) as (keyof typeof GRAPHIC_FILTERS)[],'state.graphicFilter');
         else if(key==='quality')result[key]=choice(item,['low','balanced','high'],'state.quality');
         else
             result[key] = choice(item, ['clear', 'partly', 'overcast', 'fog', 'rain', 'storm', 'snow'], 'state.weather');

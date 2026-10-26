@@ -1,3 +1,5 @@
+import {GRAPHIC_FILTERS} from './graphic-filters';
+import {MIN_AREA_SIZE,AREA_SIZE_STEP,territoryLabel} from './territory-size';
 import { modelEntries,getModel } from './model-library';
 import type { ModelAsset } from './world';
 import type { BrushSystem } from './brushes';
@@ -127,7 +129,7 @@ export function createInterface(model: EditorModel, feedback: Feedback, actions:
         feedback.uiSync.N();
         el('span', {}, row2);
     }
-    slider(sGen, 'areaSize', 'Размер территории', 0.125, 1, 0.025, syncOctaveRange, v => `${Math.round(v * 1024)} м · ${Math.round(v * 100)}%`);
+    slider(sGen, 'areaSize', 'Размер территории', MIN_AREA_SIZE, 1, AREA_SIZE_STEP, syncOctaveRange, territoryLabel);
     el('p', { class: 'hint', text: 'Размер по ширине карты: от островка 128 м до всей карты 1024 м. Применяется при генерации и создании пресета. Уменьшенная территория окружена водой; для маленьких островов удобнее сетка 256/512.' }, sGen);
     slider(sGen, 'scale', 'Масштаб', 0.3, 3, 0.05, syncOctaveRange, v => `${v.toFixed(2)}×`).title='Больше значение — крупнее горные массивы и долины. Вертикальная высота задаётся отдельно.';
     slider(sGen, 'height', 'Высота, м', 0, 400, 5, null, v => v.toFixed(0)).title='Предельный подъём над равниной. 0 — плоская суша; острота и доля гор определяют, где и насколько используется эта высота.';
@@ -232,6 +234,9 @@ export function createInterface(model: EditorModel, feedback: Feedback, actions:
     const quality=el('select',{'aria-label':'Профиль качества'},graphics);
     for(const [id,profile]of Object.entries(QUALITY_PROFILES))el('option',{value:id,text:profile.name},quality);
     quality.onchange=()=>edits.setPreferences({quality:quality.value as EditorState['quality']});feedback.uiSync.quality=()=>quality.value=model.state.quality;feedback.uiSync.quality();
+    const filterLabel=el('label',{text:'Графический фильтр'},graphics),filter=el('select',{'aria-label':'Графический фильтр'},filterLabel);
+    for(const [id,name]of Object.entries(GRAPHIC_FILTERS))el('option',{value:id,text:name},filter);
+    filter.onchange=()=>edits.setPreferences({graphicFilter:filter.value as EditorState['graphicFilter']});feedback.uiSync.graphicFilter=()=>filter.value=model.state.graphicFilter;feedback.uiSync.graphicFilter();
     checkbox(graphics,'waterReflections','Отражения в воде');
     slider(graphics,'exposure','Экспозиция',0.2,2,0.05,null,v=>v.toFixed(2));
     slider(graphics,'contactAO','Контактное затемнение',0,0.6,0.02,materials.updateMaterial,v=>v.toFixed(2));

@@ -1,3 +1,4 @@
+import {MIN_AREA_SIZE} from './territory-size';
 import {ironPuddles} from './iron-terrain';
 import {ironDefaults,validateIron,ironClimate,ironTerrainKey,type IronSettings} from './iron-settings';
 import {WORLD_PRESETS,isWorldPreset} from './world-recipes';
@@ -26,7 +27,7 @@ export function worldSettings(base:EditorState,request:WorldRequest):EditorState
     const iron=request.preset==='iron-islands'?validateIron(request.iron??ironDefaults()):undefined;
     const jungle=request.preset==='jungle'?validateJungle(request.jungle??jungleDefaults()):undefined;
     const taiga=request.preset==='taiga'?validateTaiga(request.taiga??taigaDefaults()):undefined;
-    if(!isWorldPreset(request.preset)||!Number.isInteger(request.seed)||request.seed<0||request.seed>0xffffffff||!RESOLUTIONS.includes(request.N as typeof RESOLUTIONS[number])||!Number.isFinite(request.areaSize)||request.areaSize<.125||request.areaSize>1||![0,1,2].includes(request.erosion)||typeof request.plants!=='boolean'||typeof request.routes!=='boolean')throw new Error('Проверьте тип мира, сид, размер и качество рельефа');
+    if(!isWorldPreset(request.preset)||!Number.isInteger(request.seed)||request.seed<0||request.seed>0xffffffff||!RESOLUTIONS.includes(request.N as typeof RESOLUTIONS[number])||!Number.isFinite(request.areaSize)||request.areaSize<MIN_AREA_SIZE||request.areaSize>1||![0,1,2].includes(request.erosion)||typeof request.plants!=='boolean'||typeof request.routes!=='boolean')throw new Error('Проверьте тип мира, сид, размер и качество рельефа');
     const limits={height:[0,400],scale:[.3,3],sharp:[0,5],mountains:[0,1],warp:[0,2]} as const;
     for(const [key,value]of Object.entries(request.terrain??{})){
         const range=limits[key as keyof typeof limits];if(!Object.hasOwn(limits,key)||!Number.isFinite(value)||value<range[0]||value>range[1])throw new Error('Некорректная настройка рельефа: '+key);

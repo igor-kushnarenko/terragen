@@ -1,3 +1,4 @@
+import {MIN_AREA_SIZE,AREA_SIZE_STEP,territoryLabel} from './territory-size';
 import {createIronControls} from './iron-controls';
 import {ironDefaults,type IronSettings} from './iron-settings';
 import {WORLD_PRESETS,isWorldPreset} from './world-recipes';
@@ -35,8 +36,9 @@ export function createWorldStudio(model:EditorModel,generation:WorldGeneration,f
     function row(name:string){const label=el('label',fieldset);label.className='world-form-row';el('span',label,name);return label;}
     const seedRow=row('Сид'),seed=el('input',seedRow);seed.type='number';seed.min='0';seed.max=String(0xffffffff);seed.step='1';seed.value='1337';seed.setAttribute('aria-label','Сид нового мира');
     const dice=el('button',seedRow,'↻');dice.type='button';dice.title='Выбрать новый сид без запуска генерации';dice.setAttribute('aria-label','Случайный сид нового мира');dice.onclick=()=>{seed.value=String(crypto.getRandomValues(new Uint32Array(1))[0]);invalidate();};
-    const size=el('select',row('Размер территории'));size.setAttribute('aria-label','Размер нового мира');
-    for(const [value,name]of [[.125,'128 м · островок'],[.25,'256 м'],[.5,'512 м'],[.75,'768 м'],[1,'1024 м · вся карта']] as const){const o=el('option',size,name);o.value=String(value);}size.value='1';
+    const sizeRow=row('Размер территории'),size=el('input',sizeRow);size.type='range';size.min=String(MIN_AREA_SIZE);size.max='1';size.step=String(AREA_SIZE_STEP);size.value='1';size.setAttribute('aria-label','Размер нового мира');
+    const sizeValue=el('output',sizeRow);sizeValue.value=territoryLabel(1);
+    size.oninput=()=>{sizeValue.value=territoryLabel(Number(size.value));if(Number(size.value)<.125)resolution.value='512';invalidate();};
     const resolution=el('select',row('Детальность рельефа'));resolution.setAttribute('aria-label','Детальность нового мира');
     for(const [value,name]of [[128,'Быстрая · 128'],[256,'Обычная · 256'],[512,'Подробная · 512']] as const){const o=el('option',resolution,name);o.value=String(value);}resolution.value='256';
     const jungleGroup=el('div',fieldset);jungleGroup.className='jungle-creation-controls';jungleGroup.hidden=true;
@@ -100,8 +102,7 @@ export function createWorldStudio(model:EditorModel,generation:WorldGeneration,f
             }
             seed.value=String(model.state.seed);
             if(![...resolution.options].some(o=>o.value===String(model.state.N))){const o=el('option',resolution,'Текущая · '+model.state.N);o.value=String(model.state.N);}
-            if(![...size.options].some(o=>o.value===String(model.state.areaSize))){const o=el('option',size,Math.round(model.state.areaSize*1024)+' м');o.value=String(model.state.areaSize);}
-            resolution.value=String(model.state.N);size.value=String(model.state.areaSize);
+            resolution.value=String(model.state.N);size.value=String(model.state.areaSize);sizeValue.value=territoryLabel(model.state.areaSize);
             const saved=model.world.recipe;if(saved){erosion.value=String(saved.erosion);plants.checked=saved.plants;routes.checked=saved.routes;if(saved.iron)ironForm.sync(saved.iron);if(saved.jungle)jungleForm.sync(saved.jungle);if(saved.taiga)taigaForm.sync(saved.taiga);}
         }
     }
