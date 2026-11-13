@@ -17,7 +17,12 @@ void main(){vec2 uv=clamp(vUv+vec2(sin(vUv.y*22.0+uTime*1.6),cos(vUv.x*18.0+uTim
         const w=Math.max(1,Math.floor(viewport.x*scale)),h=Math.max(1,Math.floor(viewport.y*scale));if(!target||target.width!==w||target.height!==h){target?.dispose();target=make(w,h);}
         const hidden:T.Object3D[]=[materials.water,group];render.scene.traverse(o=>{if(o.visible&&o.userData.noWaterReflection)hidden.push(o);});const visible=hidden.map(o=>o.visible),previous=r.getRenderTarget(),shadow=r.shadowMap.autoUpdate,xr=r.xr.enabled;
         hidden.forEach(o=>o.visible=false);
-        try{r.xr.enabled=false;r.shadowMap.autoUpdate=false;r.setRenderTarget(target);r.clear();r.render(render.scene,render.camera);u.uRefraction.value=target.texture;u.uSceneDepth.value=target.depthTexture!;u.uRefractionOn.value=1;captures++;}
+        // A newly enabled light has no depth texture yet. PCF shaders cannot
+        // sample the regular fallback texture as sampler2DShadow. Initialize
+        // missing maps in this first pass before freezing updates for captures.
+        let initializeShadows=false;
+        render.scene.traverseVisible(o=>{const light=o as T.Light & {shadow?:T.LightShadow};if(light.isLight&&light.castShadow&&light.shadow&&!light.shadow.map)initializeShadows=true;});
+        try{r.xr.enabled=false;r.shadowMap.autoUpdate=initializeShadows;r.setRenderTarget(target);r.clear();r.render(render.scene,render.camera);u.uRefraction.value=target.texture;u.uSceneDepth.value=target.depthTexture!;u.uRefractionOn.value=1;captures++;}
         finally{r.setRenderTarget(previous);r.shadowMap.autoUpdate=shadow;r.xr.enabled=xr;hidden.forEach((o,i)=>o.visible=visible[i]);}
     }
     function draw(){

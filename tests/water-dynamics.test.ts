@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {Vector3} from 'three';
+import {Vector3,SpotLight,WebGLRenderTarget} from 'three';
 import {editorFixture} from './fixture';
 import {createWaterSurface,gerstnerOffset,waveSettings,impactHeight,MAX_WATER_IMPACTS} from '../src/water-surface';
 import {createWaterFlow,obstacleFlow} from '../src/water-flow';
@@ -94,6 +94,20 @@ test('optical captures restore visibility, target, XR and shadows after success,
     const group=f.render.scene.clone(false) as any;group.visible=true;const optics=createWaterOptics({...f.render,renderer} as unknown as RenderingSystem,f.materials,group);
     optics.capture(.5);assert.equal(calls,1);assert.equal(f.materials.water.visible,true);assert.equal(group.visible,true);assert.equal(target,null);assert.ok(renderer.xr.enabled&&renderer.shadowMap.autoUpdate);assert.deepEqual(optics.statistics.refractionSize,[400,300]);
     w=1200;h=800;optics.capture(.5);assert.deepEqual(optics.statistics.refractionSize,[600,400]);fail=true;assert.throws(()=>optics.capture(.5),/render failed/);assert.equal(target,null);assert.equal(f.materials.water.visible,true);assert.equal(group.visible,true);assert.ok(renderer.xr.enabled&&renderer.shadowMap.autoUpdate);optics.dispose();
+});
+test('water captures initialize a new flashlight shadow before using PCF samplers and restore flags on failure',()=>{
+    const f=editorFixture(),light=new SpotLight();light.castShadow=true;f.render.scene.add(light);
+    const shadowTarget=new WebGLRenderTarget(16,16);let fail=false,target:any=null;
+    const renderer={xr:{enabled:true},shadowMap:{autoUpdate:true},getDrawingBufferSize:(v:any)=>v.set(64,64),getRenderTarget:()=>target,setRenderTarget(t:any){target=t;},clear(){},render(){
+        assert.equal(renderer.shadowMap.autoUpdate,!light.shadow.map);
+        if(fail)throw new Error('capture failed');
+        light.shadow.map=shadowTarget;
+    }};
+    const optics=createWaterOptics({...f.render,renderer} as unknown as RenderingSystem,f.materials,f.render.scene.clone(false));
+    optics.capture(.5);assert.ok(light.shadow.map);assert.equal(renderer.shadowMap.autoUpdate,true);
+    optics.capture(.5);light.shadow.map=null;fail=true;
+    assert.throws(()=>optics.capture(.5),/capture failed/);assert.equal(renderer.shadowMap.autoUpdate,true);assert.equal(target,null);assert.equal(renderer.xr.enabled,true);
+    optics.dispose();shadowTarget.dispose();
 });
 test('rain reaches visible water from a dry bank and paused footsteps do not emit stale splashes',()=>{
     const f=editorFixture(),water=createWaterSurface(f.model,(_x,z)=>z>5?22:0);f.render.camera.position.set(0,24,24);f.render.camera.lookAt(0,16,-20);f.render.camera.updateMatrixWorld();
