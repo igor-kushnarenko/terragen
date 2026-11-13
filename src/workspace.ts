@@ -42,7 +42,7 @@ const workspaces: {id: WorkspaceId; name: string; description: string; sections:
     {id:'landscape', name:'Ландшафт', description:'Придайте своему миру характер.', sections:[['brushSettings','Скульптинг и текстуры'],['waterBodySettings','Озёра и реки'],['trailSettings','Тропы и маршруты'],['terrainSettings','Генерация рельефа'],['erosionSettings','Эрозия'],['biomeSettings','Локальные биомы'],['compositionSettings','Композиция и пресеты']]},
     {id:'environment', name:'Окружение', description:'Свет, погода и настроение вашего мира.', sections:[['weatherSettings','Погода и ветер'],['skySettings','Небо и освещение'],['oceanSettings','Океан и волны'],['materialSettings','Поверхность земли'],['soundSettings','Звуки природы']]},
     {id:'objects', name:'Объекты', description:'Наполните ландшафт жизнью и деталями.', sections:[['modelSettings','Библиотека моделей'],['objectSettings','Выбор и трансформация'],['vegetationSettings','Растительность'],['ironSettings','Железные острова'],['taigaSettings','Тайга · северный лес'],['jungleSettings','Тропические джунгли'],['quickObjects','Быстрое добавление']]},
-    {id:'settings', name:'Настройки', description:'Настройте редактор под себя.', sections:[['graphicsSettings','Качество графики'],['cameraSettings','Камера и прогулка'],['walkSettings','Управление персонажем'],['seedSettings','Сиды операций'],['experimentalSettings','Эксперименты']]},
+    {id:'settings', name:'Настройки', description:'Настройте редактор под себя.', sections:[['graphicsSettings','Качество графики'],['cameraSettings','Камера и прогулка'],['walkSettings','Управление персонажем'],['seedSettings','Сиды операций']]},
 ];
 
 /** Compose the existing controls into a single workspace; their listeners and history stay intact. */

@@ -33,7 +33,7 @@ export function createPhotoMode(model:EditorModel,render:RenderingSystem,input:C
     button('Скрыть интерфейс · Tab',toggleUI);button('Выйти из фоторежима · Esc',exit);
     const message=el('p',panel);message.setAttribute('aria-live','polite');
     const returnButton=el('button',document.body,'Панель фото · Tab');returnButton.id='photoReturn';returnButton.className='btn';returnButton.hidden=true;returnButton.onclick=toggleUI;
-    let active=false,original:ProjectView|undefined,paused=false,walkPanel=false,inventory=false,originalMinDistance=5,originalMaxPolar=0,originalButtons=render.controls.mouseButtons,exposureValue=model.state.exposure;
+    let active=false,original:ProjectView|undefined,paused=false,walkPanel=false,originalMinDistance=5,originalMaxPolar=0,originalButtons=render.controls.mouseButtons,exposureValue=model.state.exposure;
     let transition:{position:T.Vector3;target:T.Vector3;to:SavedViewpoint;t:number}|undefined;
     function stopOrbit(){
         const position=render.camera.position.clone(),target=render.controls.target.clone(),rotation=render.camera.quaternion.clone(),damping=render.controls.enableDamping;
@@ -43,7 +43,7 @@ export function createPhotoMode(model:EditorModel,render:RenderingSystem,input:C
     function sync(){const selected=views.value;views.replaceChildren();for(const v of model.world.viewpoints){const o=el('option',views,v.name);o.value=v.id;}if(model.world.viewpoints.some(v=>v.id===selected))views.value=selected;}
     feedback.uiSync.photoViews=sync;sync();
     function enter(){
-        if(active||model.busy||input.xrMode.on)return;history.flush();original=input.captureView();paused=input.walk.paused;walkPanel=input.walkPanel.open;inventory=input.inventory.open;
+        if(active||model.busy||input.xrMode.on)return;history.flush();original=input.captureView();paused=input.walk.paused;walkPanel=input.walkPanel.open;
         originalMinDistance=render.controls.minDistance;originalMaxPolar=render.controls.maxPolarAngle;originalButtons={...render.controls.mouseButtons};
         active=true;input.setPhotoMode(true);stopOrbit();panel.hidden=false;document.body.classList.add('photo-mode');
         if(original.walk?.on){const forward=render.camera.getWorldDirection(new T.Vector3());render.controls.target.copy(render.camera.position).addScaledVector(forward,30);}
@@ -53,7 +53,7 @@ export function createPhotoMode(model:EditorModel,render:RenderingSystem,input:C
     function exit(){
         if(!active)return;active=false;transition=undefined;document.body.classList.remove('photo-mode','photo-ui-hidden');panel.hidden=returnButton.hidden=thirds.hidden=true;
         render.controls.minDistance=originalMinDistance;render.controls.maxPolarAngle=originalMaxPolar;render.controls.mouseButtons=originalButtons;render.camera.up.set(0,1,0);
-        stopOrbit();input.setPhotoMode(false);if(original)input.restoreView(original);if(input.walk.on){if(walkPanel)input.setWalkPanel(true);else if(inventory)input.setInventory(true);else input.setPaused(paused);}render.setLeftButton();feedback.setStatus('Фоторежим завершён');
+        stopOrbit();input.setPhotoMode(false);if(original)input.restoreView(original);if(input.walk.on){if(walkPanel)input.setWalkPanel(true);else input.setPaused(paused);}render.setLeftButton();feedback.setStatus('Фоторежим завершён');
     }
     function toggleUI(){const hidden=document.body.classList.toggle('photo-ui-hidden');returnButton.hidden=!hidden;}
     function currentView():SavedViewpoint{return {id:worldId(model.world)('view'),name:name.value.trim()||'Любимый ракурс',position:render.camera.position.toArray() as SavedViewpoint['position'],target:render.controls.target.toArray() as SavedViewpoint['target'],fov:Number(fov.input.value),roll:Number(roll.input.value),exposure:exposureValue};}

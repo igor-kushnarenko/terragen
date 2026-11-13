@@ -21,7 +21,6 @@
     "verification/asset-storage-check.ts",
     "verification/animation-check.ts",
     "verification/texture-check.ts",
-    "verification/animated-fixture.ts",
-    "verification/balloon-check.ts"
+    "verification/animated-fixture.ts"
   ]
 }

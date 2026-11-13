@@ -2,7 +2,6 @@ import { readGLB, base64Binary, MAX_ASSET_BYTES } from './asset-format';
 import {MIN_AREA_SIZE} from './territory-size';
 import {GRAPHIC_FILTERS} from './graphic-filters';
 import {validAssetKey} from './asset-vault';
-import {validateBalloon,type BalloonState} from './balloon-state';
 import { BUILTIN_INFO } from './model-shapes';
 import {validWaterOutline} from './water-math';
 import {validateIron} from './iron-settings';
@@ -33,7 +32,8 @@ export interface DocumentSnapshot {
     seeds: OperationSeeds;
     operations: OperationRecord[];
     walkSettings: WalkSettings;
-    balloon:BalloonState|null;
+    /** Legacy field: flights are no longer restored. */
+    balloon:null;
 }
 export interface DecodedProject extends DocumentSnapshot {
     version: 11;
@@ -44,7 +44,7 @@ export interface DecodedProject extends DocumentSnapshot {
 }
 export function captureDocument(model: EditorModel): DocumentSnapshot {
     return { state: { ...model.state }, heights: model.heights.slice(), splat: model.splat.slice(), splatDetail: model.splatDetail.slice(),
-        world: structuredClone(model.world), seeds: { ...model.seeds }, operations: structuredClone(model.operations), walkSettings: { ...model.walkSettings },balloon:structuredClone(model.balloon) };
+        world: structuredClone(model.world), seeds: { ...model.seeds }, operations: structuredClone(model.operations), walkSettings: { ...model.walkSettings },balloon:null };
 }
 export function applyDocument(model: EditorModel, snapshot: DocumentSnapshot) {
     Object.assign(model.state, snapshot.state);
@@ -58,7 +58,7 @@ export function applyDocument(model: EditorModel, snapshot: DocumentSnapshot) {
     model.seeds = { ...snapshot.seeds };
     model.operations = structuredClone(snapshot.operations);
     Object.assign(model.walkSettings, snapshot.walkSettings);
-    model.balloon=structuredClone(snapshot.balloon);
+    model.balloon=null;
 }
 export function bytesToBase64(bytes: Uint8Array) {
     let text = '';
@@ -75,7 +75,7 @@ export function encodeProject(model: EditorModel, view: ProjectView) {
     return JSON.stringify({ app: 'terrain-editor', version: PROJECT_VERSION, date: new Date().toISOString(), size: SIZE,
         state: model.state, heights: bytesToBase64(heightBytes(model.heights)), heightEncoding: 'float32-le',
         splatRes: SPLAT_RES, splat: bytesToBase64(model.splat), splatDetail: bytesToBase64(model.splatDetail), world: model.world,
-        seeds: model.seeds, operations: model.operations, walkSettings: model.walkSettings,balloon:model.balloon, view });
+        seeds: model.seeds, operations: model.operations, walkSettings: model.walkSettings,balloon:null, view });
 }
 function fail(path: string): never { throw new Error(`Неверный проект: ${path}`); }
 function object(value: unknown, path: string): Record<string, unknown> {
@@ -159,7 +159,9 @@ export function validateSeeds(value: unknown, legacy = false): OperationSeeds {
 }
 export function validateWalkSettings(value: unknown, preV6 = true): WalkSettings {
     const input = object(value, 'walkSettings');
-    return { equippedLight: choice(preV6 && input.equippedLight === undefined ? DEFAULT_WALK_SETTINGS.equippedLight : input.equippedLight, ['none','flashlight','lantern'], 'walkSettings.equippedLight'),
+    // Validate old equipment values, then migrate to the single flashlight beam.
+    choice(preV6 && input.equippedLight===undefined?DEFAULT_WALK_SETTINGS.equippedLight:input.equippedLight,['none','flashlight','lantern'],'walkSettings.equippedLight');
+    return { equippedLight:'flashlight',
         lightEnabled: bool(preV6 && input.lightEnabled === undefined ? DEFAULT_WALK_SETTINGS.lightEnabled : input.lightEnabled, 'walkSettings.lightEnabled'),
         speed: number(input.speed, 'walkSettings.speed', 0.1, 30), sprint: number(input.sprint, 'walkSettings.sprint', 1, 5),
         swimSpeed: number(input.swimSpeed, 'walkSettings.swimSpeed', 0.1, 15), eyeHeight: number(input.eyeHeight, 'walkSettings.eyeHeight', 0.5, 3),
@@ -381,8 +383,9 @@ export function decodeProject(source: string): DecodedProject {
             return {...metadata,blob:'sha256:'+i.toString(16).padStart(64,'0'),byteLength:bytes.byteLength};
         });
     }
-    const balloon=(data.version as number)>=11?validateBalloon(data.balloon):null,projectView=validateView(data.view);
-    if(balloon?.seated&&!projectView.walk?.on)fail('balloon.seated без режима прогулки');
+    const balloon=null,projectView=validateView(data.view);
+    // Return legacy balloon passengers to the editor instead of suspending them in mid-air.
+    if(data.balloon && projectView.walk)projectView.walk=null;
     return { version: 11,sourceVersion:data.version as number,embeddedAssets,balloon, state, heights, splat, splatDetail, seeds, world: validateWorld(data.world, state, (data.version as number) < 5, (data.version as number)<7,(data.version as number)<8), operations: validateOperations(data.operations),
         walkSettings: validateWalkSettings(data.walkSettings, (data.version as number)<6), view:projectView, legacyScatter: false };
 }

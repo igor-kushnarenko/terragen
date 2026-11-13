@@ -206,7 +206,7 @@
 .editor-workspace.walk-panel-open #walkControls { top:calc(var(--header-height) + 12px); right:calc(var(--inspector-width) + 36px); max-width:calc(100vw - var(--inspector-width) - 60px); }
 .editor-workspace .walk-panel-header { margin:0; padding:12px 16px; flex:none; top:0; background:#25302b; }
 .editor-workspace #photoControls { background:#202729f5; border-color:#536054; border-radius:12px; padding:22px; width:310px; }
-.editor-workspace #walkMenu,.editor-workspace #walkInventory { z-index:30; }
+.editor-workspace #walkMenu { z-index:30; }
 .editor-workspace #photoReturn { z-index:24; }
 @media(min-width:1700px) { .editor-workspace { --inspector-width:360px; }.inspector-content { padding-left:24px; padding-right:24px; } }
 @media(max-width:1280px) {

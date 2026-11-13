@@ -15,7 +15,6 @@ import type {WorldObject} from './world';
 import {SIZE} from './state';
 let ready: Promise<void> | undefined;
 export const initializeRapier = () => ready ??= RAPIER.init();
-export interface CollisionParticipant {attach(world:RAPIER.World):void;detach():void;beforeStep(dt:number):void;afterStep():void;}
 export function modelTriangles(asset: string, scale: number[], item?:WorldObject) {
     const vertices: number[] = [], indices: number[] = [];
     for (const part of item?plantModelLOD(asset):getModel(asset).parts) {
@@ -37,7 +36,6 @@ export function createCollisions(model: EditorModel, terrain: TerrainSystem) {
     let ground:RAPIER.Collider,geometry=terrain.geo,assets=model.world.assets;
     const records=new Map<string,{item:WorldObject;key:string;collider:RAPIER.Collider;y:number;body?:RAPIER.RigidBody}>();
     const statistics={rebuilds:0,terrainUpdates:0,objectCreates:0,lastUpdateMs:0};
-    let participant:CollisionParticipant|undefined,passenger=false;
     const key=(o:WorldObject)=>JSON.stringify([o.asset,o.position,o.rotation,o.scale,o.followTerrain,o.groundOffset,o.floating,o.density,o.source]);
     const field=()=>new RAPIER.Heightfield(model.N,model.N,terrain.physicsHeights,{x:SIZE,y:1,z:SIZE},RAPIER.HeightFieldFlags.FIX_INTERNAL_EDGES);
     function syncQueries(){const dt=world!.timestep;world!.timestep=0;try{world!.step();}finally{world!.timestep=dt;}}
@@ -75,20 +73,20 @@ export function createCollisions(model: EditorModel, terrain: TerrainSystem) {
     function removeObject(id:string){const record=records.get(id)!;surfaces.delete(record.collider.handle);if(record.body)world!.removeRigidBody(record.body);else world!.removeCollider(record.collider,true);floating.delete(id);records.delete(id);}
     function rebuild() {
         const started=performance.now();statistics.rebuilds++;
-        participant?.detach();world?.free(); world = new RAPIER.World({ x: 0, y: 0, z: 0 });surfaces.clear();floating.clear();records.clear();stepped=false;
+        world?.free(); world = new RAPIER.World({ x: 0, y: 0, z: 0 });surfaces.clear();floating.clear();records.clear();stepped=false;
         const descriptor=new RAPIER.ColliderDesc(field());ground=world.createCollider(descriptor.setFriction(.9));
         for(const item of model.world.objects)addObject(item);
         const bodyHeight = Math.max(0.9, model.walkSettings.eyeHeight + 0.12), radius = Math.min(0.3, bodyHeight / 3);
         supportRadius = radius * .65;
         center = bodyHeight / 2;
         capsule = world.createCollider(RAPIER.ColliderDesc.capsule(bodyHeight / 2 - radius, radius).setCollisionGroups(0x0001ffff));
-        capsule.setEnabled(!passenger);
+        capsule.setEnabled(true);
         controller = world.createCharacterController(0.025);
         controller.setMaxSlopeClimbAngle(45 * Math.PI / 180); controller.setMinSlopeSlideAngle(50 * Math.PI / 180);
         controller.setSlideEnabled(true);
         controller.enableAutostep(WALK_STEP_HEIGHT, 0.2, false); controller.enableSnapToGround(WALK_GROUND_SNAP);
         revision = model.terrainRevision; objects = model.world.objects; visibility = model.state.showScatter; height = model.walkSettings.eyeHeight; water = model.state.water;bodies=model.world.waterBodies;
-        geometry=terrain.geo;assets=model.world.assets;participant?.attach(world);syncQueries();statistics.lastUpdateMs=performance.now()-started;
+        geometry=terrain.geo;assets=model.world.assets;syncQueries();statistics.lastUpdateMs=performance.now()-started;
     }
     function ensure() {
         if(!world||geometry!==terrain.geo||assets!==model.world.assets||visibility!==model.state.showScatter||height!==model.walkSettings.eyeHeight||water!==model.state.water||bodies!==model.world.waterBodies){rebuild();return;}
@@ -144,11 +142,9 @@ export function createCollisions(model: EditorModel, terrain: TerrainSystem) {
             const clear=!world!.intersectionWithShape({x:point.x,y:point.y+center+.08,z:point.z},{x:0,y:0,z:0,w:1},capsule.shape,undefined,undefined,capsule);
             return {point,safe:inside&&hit.normal.y>=Math.SQRT1_2&&point.y>waterLevelAt(model.state.water,model.world.waterBodies,point.x,point.z)+.15&&clear};
         },
-        bindDynamic(next:CollisionParticipant|undefined){ensure();participant?.detach();participant=next;participant?.attach(world!);},
-        setPassenger(on:boolean){passenger=on;if(world)capsule.setEnabled(!on);},
-        stepWater(dt:number,sample:WaterQuery){ensure();world!.timestep=dt;participant?.beforeStep(dt);for(const item of floating.values()){item.pose.previousPosition.copy(item.pose.position);item.pose.previousRotation.copy(item.pose.rotation);applyBuoyancy(item,sample);}world!.step();participant?.afterStep();for(const item of floating.values()){captureFloatingPose(item);const p=item.body.translation();if(Math.abs(p.x)>511||Math.abs(p.z)>511){item.body.setTranslation({x:Math.max(-511,Math.min(511,p.x)),y:p.y,z:Math.max(-511,Math.min(511,p.z))},true);captureFloatingPose(item);}}stepped=true;},
+        stepWater(dt:number,sample:WaterQuery){ensure();world!.timestep=dt;for(const item of floating.values()){item.pose.previousPosition.copy(item.pose.position);item.pose.previousRotation.copy(item.pose.rotation);applyBuoyancy(item,sample);}world!.step();for(const item of floating.values()){captureFloatingPose(item);const p=item.body.translation();if(Math.abs(p.x)>511||Math.abs(p.z)>511){item.body.setTranslation({x:Math.max(-511,Math.min(511,p.x)),y:p.y,z:Math.max(-511,Math.min(511,p.z))},true);captureFloatingPose(item);}}stepped=true;},
         get floating(){return floating;},get statistics(){return {...statistics};},
         surfaceAt(x:number,z:number,y:number){const hit=support(x,z,y);return hit?surfaces.get(hit.collider.handle):undefined;},
-        dispose() {participant?.detach(); world?.free(); world = undefined; }, get colliderCount() { return world?.colliders.len() ?? 0; } };
+        dispose() { world?.free(); world = undefined; }, get colliderCount() { return world?.colliders.len() ?? 0; } };
 }
 export type CollisionSystem = ReturnType<typeof createCollisions>;

@@ -1,7 +1,6 @@
 import type {GraphicFilter} from './graphic-filters';
 import { createWorld, DEFAULT_WALK_SETTINGS, deriveSeeds, type OperationRecord } from './world';
 import type { QualityId, VRQualityId } from './quality';
-import type {BalloonState} from './balloon-state';
 export const SIZE = 1024;
 export const RESOLUTIONS = [16, 32, 64, 128, 256, 512] as const;
 export const HALF = SIZE / 2;
@@ -99,7 +98,7 @@ export function createModel() {
         xrActive: false,
         xrQuality: 'economy' as VRQualityId,
         world: createWorld(), seeds: deriveSeeds(state.seed),
-        operations: [] as OperationRecord[], walkSettings: { ...DEFAULT_WALK_SETTINGS },balloon:null as BalloonState|null,
+        operations: [] as OperationRecord[], walkSettings: { ...DEFAULT_WALK_SETTINGS },balloon:null,
         maxH: 1, minH: 0, busy: false,
     };
 }

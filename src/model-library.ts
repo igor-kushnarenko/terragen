@@ -2,9 +2,8 @@ import * as T from 'three';
 import {createModelLoader} from './model-loader';
 import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
-import { BUILTIN_GLB } from './builtin-models';
 import { BUILTIN_INFO, makeBuiltinModel, type BuiltinAsset } from './model-shapes';
-import { base64Binary, readGLB, validateGLTF } from './asset-format';
+import { readGLB, validateGLTF } from './asset-format';
 import {describeAsset,type AssetVault} from './asset-vault';
 import {type ModelAsset,type WorldData} from './world';
 import {isTaigaPlant,decorateTaigaMaterial} from './taiga-models';
@@ -50,10 +49,25 @@ function template(id: string, name: string, category: ModelAsset['category'], co
     if(skinnedMeshes||clips.length||morph){const root=new T.Group();root.name='GenTerrainModel';transform.decompose(root.position,root.quaternion,root.scale);root.add(scene);root.updateMatrixWorld(true);rig={root,clips,bones,skinnedMeshes};}
     return { id, name, category, collider, bounds, parts: merged,...(rig?{rig}:{}) };
 }
-for (const id of Object.keys(BUILTIN_INFO) as BuiltinAsset[]) {
-    const info = BUILTIN_INFO[id]; templates.set(id, template(id, info.name, info.category, info.collider, makeBuiltinModel(id)));
+/** Build the same authored geometry used by the GLB exporter, only on first use.
+ * No embedded GLB pack, parsing, or geometry allocation for unused assets. */
+export function getModel(id: string): ModelTemplate {
+    let model=templates.get(id);
+    if(!model&&Object.hasOwn(BUILTIN_INFO,id)){
+        const info=BUILTIN_INFO[id as BuiltinAsset];
+        model=template(id,info.name,info.category,info.collider,makeBuiltinModel(id as BuiltinAsset));
+        templates.set(id,model);
+    }
+    if(!model)throw new Error('Модель не загружена: '+id);
+    return model;
 }
-export function getModel(id: string) { const model = templates.get(id); if (!model) throw new Error('Модель не загружена: ' + id); return model; }
+const builtinEntries:ModelTemplate[]=(Object.keys(BUILTIN_INFO) as BuiltinAsset[]).map(id=>({
+    id,...BUILTIN_INFO[id],
+    get bounds(){return getModel(id).bounds;},
+    get parts(){return getModel(id).parts;},
+} satisfies ModelTemplate));
+/** Exposed for diagnostics without forcing model creation. */
+export function loadedBuiltinModels(){return [...templates.keys()].filter(id=>Object.hasOwn(BUILTIN_INFO,id));}
 export function modelEntries(world: WorldData) {
     const entries=new Map<string,ModelTemplate>();
     for (const asset of world.assets ?? []) {
@@ -61,19 +75,12 @@ export function modelEntries(world: WorldData) {
         if (!cached) throw new Error('Модель не подготовлена: ' + asset.name);
         entries.set(asset.id, { ...cached,id:asset.id, name: asset.name });
     }
-    for(const o of world.objects){const t=entries.get(o.asset)??templates.get(o.asset);if(o.animation&&(!t?.rig||o.animation.clip>=t.rig.clips.length))throw new Error('Анимационный клип объекта не найден: '+o.id);}
+    for(const o of world.objects){const t=entries.get(o.asset)??(o.animation?getModel(o.asset):undefined);if(o.animation&&(!t?.rig||o.animation.clip>=t.rig.clips.length))throw new Error('Анимационный клип объекта не найден: '+o.id);}
     for(const [id,t]of entries)templates.set(id,t);
-    return [...Object.keys(BUILTIN_INFO), ...(world.assets ?? []).map(asset => asset.id)].map(getModel);
+    return [...builtinEntries,...(world.assets??[]).map(asset=>getModel(asset.id))];
 }
-let builtinsReady: Promise<void> | undefined;
-export function initializeModelLibrary() {
-    return builtinsReady ??= (async () => {
-        for (const [id, data] of Object.entries(BUILTIN_GLB)) {
-            const scene = (await createModelLoader().parseAsync(base64Binary(data), '')).scene, info = BUILTIN_INFO[id as BuiltinAsset];
-            templates.set(id, template(id, info.name, info.category, info.collider, scene));
-        }
-    })();
-}
+/** Optional prewarming; listing the catalog and editor startup load nothing. */
+export async function initializeModelLibrary(ids:readonly string[]=[]){for(const id of ids)getModel(id);}
 export async function prepareModelAssets(assets: ModelAsset[],vault:AssetVault,provided?:Map<string,Blob>) {
     const pending = new Map<string, ModelTemplate>();
     const binaries=new Map<string,Blob>();

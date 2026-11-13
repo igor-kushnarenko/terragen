@@ -66,7 +66,7 @@ export function createLighting(model: EditorModel, render: RenderingSystem, mate
             render.sun.shadow.map?.dispose();render.sun.shadow.map=null;render.sun.shadow.mapSize.set(size,size);render.sun.shadow.needsUpdate=true;
         }
         focus.copy(walking?render.camera.position:render.controls.target);focus.y=terrain.getH(focus.x,focus.z)+5;
-        const radius=walking?profile.shadowRadius:Math.max(profile.shadowRadius,Math.min(650,render.camera.position.distanceTo(render.controls.target)*0.65));
+        const radius=walking?profile.shadowRadius:Math.min(150,Math.max(profile.shadowRadius,render.camera.position.distanceTo(render.controls.target)*0.35));
         const texel=2*radius/Math.max(512,size);
         right.crossVectors(render.sunDir,new THREE.Vector3(0,1,0));if(right.lengthSq()<0.01)right.set(1,0,0);right.normalize();up.crossVectors(right,render.sunDir).normalize();
         const u=focus.dot(right),v=focus.dot(up);focus.addScaledVector(right,Math.round(u/texel)*texel-u).addScaledVector(up,Math.round(v/texel)*texel-v);

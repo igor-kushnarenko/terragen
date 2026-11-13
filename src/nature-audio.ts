@@ -14,14 +14,6 @@ export function createNatureAudio(model:EditorModel,terrain:TerrainSystem,object
     type MeteorGroup={sources:Set<AudioScheduledSourceNode>;flight?:{source:AudioBufferSourceNode;gain:GainNode;spatial:PannerNode;volume:number}};
     const meteorGroups=new Map<string,MeteorGroup>();
     let meteorBuffer:AudioBuffer|undefined;
-    let balloonSound:{power:number;position:Vec3;relative?:number}|null=null;
-    let burner:{source:AudioBufferSourceNode;gain:GainNode;spatial:PannerNode;filter:BiquadFilterNode}|undefined;
-    function stopBurner(){if(!burner)return;burner.source.stop();burner.source.disconnect();burner.gain.disconnect();burner.spatial.disconnect();burner.filter.disconnect();burner=undefined;}
-    function updateBurner(){
-        if(!balloonSound||!context)return;
-        if(!burner){const source=context.createBufferSource(),gain=context.createGain(),spatial=panner(),filter=context.createBiquadFilter();source.buffer=buffer(noiseSamples(context.sampleRate,3,0xba1100,true));source.loop=true;gain.gain.value=0;filter.type='lowpass';filter.frequency.value=1100;source.connect(filter);filter.connect(gain);gain.connect(spatial);spatial.connect(master);source.start();burner={source,gain,spatial,filter};}
-        const p=balloonSound.position;burner.spatial.positionX.value=p[0];burner.spatial.positionY.value=p[1]+2;burner.spatial.positionZ.value=p[2];set(burner.gain.gain,balloonSound.power*.65,.08);
-    }
     const set=(param:AudioParam,value:number,time=0.6)=>{if(targets.get(param)!==value){param.setTargetAtTime(value,context!.currentTime,time);targets.set(param,value);}};
     function buffer(data:Float32Array){const result=context!.createBuffer(1,data.length,context!.sampleRate);result.copyToChannel(data as Float32Array<ArrayBuffer>,0);return result;}
     function panner(){const node=context!.createPanner();node.panningModel='HRTF';node.distanceModel='inverse';node.refDistance=8;node.rolloffFactor=1.2;node.maxDistance=400;return node;}
@@ -89,13 +81,11 @@ export function createNatureAudio(model:EditorModel,terrain:TerrainSystem,object
         if(!context||context.state!=='running'){tracker.take();return;}
         if(seed!==model.seeds.scatter){seed=model.seeds.scatter;random=mulberry32(seed^0x8592);birdTimer=3;}
         set(master.gain,model.state.soundVolume,0.18);set(ambient.gain,model.state.ambienceVolume,0.2);
-        updateBurner();
         const listener=context.listener,now=context.currentTime;camera.getWorldDirection(forward);up.set(0,1,0).applyQuaternion(camera.quaternion);
         for(const [param,value]of [[listener.positionX,camera.position.x],[listener.positionY,camera.position.y],[listener.positionZ,camera.position.z],[listener.forwardX,forward.x],[listener.forwardY,forward.y],[listener.forwardZ,forward.z],[listener.upX,up.x],[listener.upY,up.y],[listener.upZ,up.z]] as const)param.setValueAtTime(value,now);
         timer-=dt;if(timer<=0){env=environment.sample(pose.feet.x,pose.feet.z);timer=0.35;}
-        const flightWind=balloonSound?.relative;
-        set(wind.gain,flightWind===undefined?env.wind*(1-env.forest*0.35)*(1+weather.rain*0.5):Math.min(.8,flightWind*.035));set(windFilter.frequency,320+(flightWind??model.state.windSpeed)*180);
-        const aboveForest=flightWind===undefined?1:Math.exp(-Math.max(0,pose.feet.y-terrain.getH(pose.feet.x,pose.feet.z))/50);
+        set(wind.gain,env.wind*(1-env.forest*0.35)*(1+weather.rain*0.5));set(windFilter.frequency,320+model.state.windSpeed*180);
+        const aboveForest=1;
         set(leaves.gain,env.forest*(0.055+model.state.windSpeed*0.04)*(1-weather.snow*0.65)*aboveForest);set(water.gain,env.water&&env.water.distance<180?0.28:0,1);
         if(env.water){set(waterPanner.positionX,env.water.position.x,0.4);set(waterPanner.positionY,env.water.position.y,0.4);set(waterPanner.positionZ,env.water.position.z,0.4);}
         const events=tracker.take();for(const event of events) {
@@ -106,10 +96,10 @@ export function createNatureAudio(model:EditorModel,terrain:TerrainSystem,object
     }
     const gesture=()=>{void unlock();},blur=()=>{focused=false;tracker.reset();if(context?.state==='running'){set(master.gain,0,0.03);setTimeout(()=>{if(!focused)void context?.suspend();},150);}},focus=()=>{focused=true;},visibility=()=>{if(document.hidden)blur();else focus();};
     if(typeof window!=='undefined'){window.addEventListener('pointerdown',gesture,{capture:true});window.addEventListener('keydown',gesture,{capture:true});window.addEventListener('blur',blur);window.addEventListener('focus',focus);document.addEventListener('visibilitychange',visibility);}
-    return {unlock,update,meteor,moveMeteor,stopMeteor,balloon(power:number,position:Vec3|null,relative?:number){balloonSound=position?{power,position,relative}:null;if(!position)stopBurner();},pauseMeteor(){if(context)for(const group of meteorGroups.values())if(group.flight)set(group.flight.gain.gain,0,.03);},reset(){stopMeteor();stopBurner();balloonSound=null;tracker.reset();lastStepAt=0;timer=0;voices.forEach(source=>source.stop());},physicsStep(dt:number,pose:SoundPose){simulationTime+=dt;tracker.step(dt,pose);},bindStatus(callback:()=>void){notify=callback;notify();},
+    return {unlock,update,meteor,moveMeteor,stopMeteor,pauseMeteor(){if(context)for(const group of meteorGroups.values())if(group.flight)set(group.flight.gain.gain,0,.03);},reset(){stopMeteor();tracker.reset();lastStepAt=0;timer=0;voices.forEach(source=>source.stop());},physicsStep(dt:number,pose:SoundPose){simulationTime+=dt;tracker.step(dt,pose);},bindStatus(callback:()=>void){notify=callback;notify();},
         get status(){return !available?'Звук недоступен':!model.state.soundEnabled?'Звук выключен':context?.state==='running'?'Звук готов':'Для звука нажмите клавишу или кликните';},
-        get statistics(){return {voices:voices.size,meteorFlights:[...meteorGroups.values()].filter(g=>g.flight).length,loops:loops.length,burner:!!burner,steps:eventIndex,time:simulationTime};},
-        dispose(){stopBurner();if(typeof window!=='undefined'){window.removeEventListener('pointerdown',gesture,true);window.removeEventListener('keydown',gesture,true);window.removeEventListener('blur',blur);window.removeEventListener('focus',focus);document.removeEventListener('visibilitychange',visibility);}loops.forEach(source=>source.stop());voices.forEach(source=>source.stop());void context?.close();}
+        get statistics(){return {voices:voices.size,meteorFlights:[...meteorGroups.values()].filter(g=>g.flight).length,loops:loops.length,steps:eventIndex,time:simulationTime};},
+        dispose(){if(typeof window!=='undefined'){window.removeEventListener('pointerdown',gesture,true);window.removeEventListener('keydown',gesture,true);window.removeEventListener('blur',blur);window.removeEventListener('focus',focus);document.removeEventListener('visibilitychange',visibility);}loops.forEach(source=>source.stop());voices.forEach(source=>source.stop());void context?.close();}
     };
 }
 export type NatureAudio=ReturnType<typeof createNatureAudio>;

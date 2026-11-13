@@ -12,10 +12,12 @@ import {shapeLandscape} from '../src/landscape-compute';
 import {checkRoutes} from '../src/trail-earthworks';
 import type {JobRunner} from '../src/worker-jobs';
 
-test('empty hands hide the prop and both lights, persist, and can be undone before equipping again',()=>{
-    const f=editorFixture(),scene=new Scene(),camera=new PerspectiveCamera(),lights=createWalkLights(f.model,scene,camera);f.edits.setWalkSettings({equippedLight:'lantern',lightEnabled:true});lights.update(0,true);assert.ok(lights.held.visible&&lights.lantern.visible);
-    f.edits.setWalkSettings({equippedLight:'none',lightEnabled:false});lights.update(.1,true);assert.equal(lights.held.visible,false);assert.equal(lights.flashlight.visible,false);assert.equal(lights.lantern.visible,false);assert.equal(decodeProject(f.storage.projectJSON()).walkSettings.equippedLight,'none');
-    f.history.undo();lights.update(0,true);assert.equal(lights.lantern.visible,true);f.history.redo();lights.update(0,true);assert.equal(lights.held.visible,false);f.edits.setWalkSettings({equippedLight:'flashlight',lightEnabled:true});lights.update(0,true);assert.equal(lights.flashlight.visible,true);lights.dispose();
+test('flashlight switches without props or inventory, survives save and undo',()=>{
+    const f=editorFixture(),scene=new Scene(),camera=new PerspectiveCamera(),lights=createWalkLights(f.model,scene,camera);
+    f.edits.setWalkSettings({lightEnabled:true});lights.update(0,true);assert.equal(lights.flashlight.visible,true);assert.equal(scene.children.filter(o=>o.type==='PointLight').length,0);
+    assert.equal(decodeProject(f.storage.projectJSON()).walkSettings.lightEnabled,true);
+    f.history.undo();lights.update(0,true);assert.equal(lights.flashlight.visible,false);
+    f.history.redo();lights.update(0,true);assert.equal(lights.flashlight.visible,true);lights.dispose();
 });
 test('weather strength disables all fog and precipitation and scales rain and snow independently of the preset',()=>{
     assert.deepEqual(weatherStrengths(.0005,.0032,1,0,0,0),{fog:0,rain:0,snow:0});
@@ -67,23 +69,18 @@ test('presets fit their complete route network on a small island and undo restor
     }
 });
 
-test('held lights follow the camera, differ in coverage, respect quality and remain off outside walking',()=>{
-    const model=createModel(),scene=new Scene(),camera=new PerspectiveCamera();camera.position.set(10,25,30);camera.rotation.set(-.2,.7,0,'YXZ');
-    const lights=createWalkLights(model,scene,camera);model.walkSettings.lightEnabled=true;
-    lights.update(.1,true);assert.equal(lights.flashlight.visible,true);assert.equal(lights.lantern.visible,false);assert.equal(lights.flashlight.castShadow,true);
-    const view=camera.getWorldDirection(new Vector3()),beam=lights.flashlight.target.position.clone().sub(lights.flashlight.position).normalize();
-    assert.ok(view.dot(beam)>.999);assert.ok(lights.flashlight.position.distanceTo(camera.position)<1);
-    model.walkSettings.equippedLight='lantern';lights.update(.1,true);assert.equal(lights.flashlight.visible,false);assert.equal(lights.lantern.visible,true);assert.ok(lights.lantern.position.distanceTo(camera.position)<1);
-    assert.ok(lights.lantern.color.r>lights.lantern.color.b);assert.equal(lights.lantern.distance,18);
-    model.state.quality='low';lights.update(.1,true);assert.equal(lights.lantern.castShadow,false);
-    model.walkSettings.lightEnabled=false;lights.update(.1,true);assert.equal(lights.lantern.visible,false);
-    model.walkSettings.lightEnabled=true;lights.update(.1,false);assert.equal(lights.held.visible,false);assert.equal(lights.lantern.visible,false);assert.equal(lights.flashlight.visible,false);
-    assert.equal(model.walkSettings.lightEnabled,true);lights.dispose();assert.equal(scene.children.includes(lights.lantern),false);
+test('flashlight follows the view, switches off outside walking and respects quality',()=>{
+    const model=createModel(),scene=new Scene(),camera=new PerspectiveCamera(),lights=createWalkLights(model,scene,camera);
+    camera.position.set(10,20,30);camera.lookAt(10,20,0);model.walkSettings.lightEnabled=true;model.state.shadows=true;model.state.quality='high';
+    lights.update(.1,true);assert.equal(lights.flashlight.visible,true);assert.equal(lights.flashlight.castShadow,true);assert.ok(lights.flashlight.position.distanceTo(camera.position)<.2);
+    const direction=new Vector3();camera.getWorldDirection(direction);assert.ok(lights.flashlight.target.position.clone().sub(camera.position).normalize().distanceTo(direction)<1e-5);
+    model.state.quality='low';lights.update(.1,true);assert.equal(lights.flashlight.castShadow,false);
+    lights.update(.1,false);assert.equal(lights.flashlight.visible,false);lights.dispose();assert.equal(scene.children.includes(lights.flashlight),false);
 });
 
 test('format 6 saves weather, territory size and equipment; format 5 migrates and invalid new data is rejected atomically',async()=>{
     const f=editorFixture();f.model.state.areaSize=.25;f.model.state.precipitation=1.75;f.model.state.fogIntensity=.2;f.model.walkSettings.equippedLight='lantern';f.model.walkSettings.lightEnabled=true;
-    const text=f.storage.projectJSON(),saved=decodeProject(text);assert.equal(saved.version,11);assert.equal(saved.state.areaSize,.25);assert.equal(saved.state.precipitation,1.75);assert.equal(saved.state.fogIntensity,.2);assert.equal(saved.walkSettings.equippedLight,'lantern');assert.equal(saved.walkSettings.lightEnabled,true);
+    const text=f.storage.projectJSON(),saved=decodeProject(text);assert.equal(saved.version,11);assert.equal(saved.state.areaSize,.25);assert.equal(saved.state.precipitation,1.75);assert.equal(saved.state.fogIntensity,.2);assert.equal(saved.walkSettings.equippedLight,'flashlight');assert.equal(saved.walkSettings.lightEnabled,true);
     const old=JSON.parse(text);old.version=5;for(const key of ['areaSize','precipitation','fogIntensity'])delete old.state[key];delete old.walkSettings.equippedLight;delete old.walkSettings.lightEnabled;
     const migrated=decodeProject(JSON.stringify(old));assert.equal(migrated.state.areaSize,1);assert.equal(migrated.state.fogIntensity,1);assert.equal(migrated.state.precipitation,1);assert.equal(migrated.walkSettings.lightEnabled,false);
     const before=captureDocument(f.model);

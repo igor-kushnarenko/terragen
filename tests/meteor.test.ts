@@ -149,11 +149,11 @@ test('leaving walk or replacing/editing the world cancels flight without damagin
 });
 test('reflection preference persists, defaults for older saves and frees/recreates the reflection target',()=>{
     const f=flatWorld(),render=f.render as unknown as RenderingSystem,water=createWaterRendering(f.model,render,f.materials);
-    f.model.busy=true;water.update(0);assert.equal(water.statistics.reflectionSize,256);
+    f.model.state.quality='high';f.model.busy=true;water.update(0);assert.equal(water.statistics.reflectionSize,512);
     f.model.busy=false;f.edits.setPreferences({waterReflections:false});f.model.busy=true;water.update(0);assert.equal(water.statistics.reflectionSize,0);assert.equal(f.materials.waterUniforms.uReflectionsEnabled.value,0);assert.equal(f.materials.waterUniforms.uReflectionOn.value,0);
     f.model.busy=false;assert.equal(decodeProject(f.storage.projectJSON()).state.waterReflections,false);
-    f.model.busy=false;f.history.undo();f.model.busy=true;water.update(0);assert.equal(water.statistics.reflectionSize,256);
+    f.model.busy=false;f.history.undo();f.model.busy=true;water.update(0);assert.equal(water.statistics.reflectionSize,512);
     f.model.busy=false;const data=JSON.parse(f.storage.projectJSON());delete data.state.waterReflections;assert.equal(decodeProject(JSON.stringify(data)).state.waterReflections,true);
     data.state.waterReflections='off';assert.throws(()=>decodeProject(JSON.stringify(data)),/waterReflections/);
-    f.model.state.quality='low';water.update(0);assert.equal(water.statistics.reflectionSize,0);assert.equal(f.materials.waterUniforms.uReflectionsEnabled.value,1);water.dispose();
+    f.model.state.quality='low';water.update(0);assert.equal(water.statistics.reflectionSize,0);assert.equal(f.materials.waterUniforms.uReflectionsEnabled.value,0);water.dispose();
 });

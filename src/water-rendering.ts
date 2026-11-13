@@ -45,7 +45,7 @@ export function createWaterRendering(model:EditorModel,render:RenderingSystem,ma
         for(const child of group.children){const mesh=child as T.Mesh<T.BufferGeometry,T.ShaderMaterial>,body=mesh.userData.waterBody,field=flow.map(body);mesh.material.uniforms.uFlowMapOn.value=field?1:0;if(field){mesh.material.uniforms.uFlowMap.value=field.texture;mesh.material.uniforms.uFlowBounds.value.copy(field.bounds);}}
         const profile=WATER_PROFILES[effectiveQuality(model)];uniforms.uWaterDetail.value=profile.detail;uniforms.uFoamStrength.value=profile.foam*(model.world.preset==='iron-islands'?model.world.recipe?.iron?.seaFoam??1:1);
         uniforms.uRoughness.value=model.world.preset==='iron-islands'?model.world.recipe?.iron?.waveRoughness??.5:.5;
-        uniforms.uReflectionsEnabled.value=!model.xrActive&&model.state.waterReflections?1:0;
+        uniforms.uReflectionsEnabled.value=!model.xrActive&&effectiveQuality(model)==='high'&&model.state.waterReflections?1:0;
         const desiredSize=!model.xrActive&&model.state.waterReflections?profile.reflectionSize:0;
         if(size!==desiredSize){reflector?.dispose();reflector?.geometry.dispose();reflector=undefined;uniforms.uReflection.value=fallbackReflection;size=desiredSize;timer=Infinity;uniforms.uReflectionOn.value=0;
             if(size){reflector=new Reflector(new T.PlaneGeometry(1,1),{textureWidth:size,textureHeight:size,multisample:0,clipBias:.003});reflector.rotation.x=-Math.PI/2;uniforms.uReflection.value=reflector.getRenderTarget().texture;}}

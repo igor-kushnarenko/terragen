@@ -85,6 +85,7 @@ export function createInterface(model: EditorModel, feedback: Feedback, actions:
         inp.addEventListener('change', () => { history.transaction(label, () => { model.state[key] = inp.checked; onChange?.(); }); feedback.syncUI(key); });
         feedback.uiSync[key] = () => inp.checked = model.state[key];
         feedback.uiSync[key]();
+        return inp;
     }
     function button(parent: HTMLElement, text: string, onClick: () => unknown, cls = '') {
         return el('button', { class: 'btn ' + cls, text, onclick: () => {
@@ -240,10 +241,17 @@ export function createInterface(model: EditorModel, feedback: Feedback, actions:
     slider(graphics,'filterIntensity','Интенсивность фильтра',0,1,.01,null,v=>Math.round(v*100)+'%');
     checkbox(graphics,'filmGrain','Плёночное зерно (без VR)');
     el('p',{class:'hint',text:'Зерно доступно для плёнки 35 мм и старой экспедиции. В VR оно отключается для чёткости изображения.'},graphics);
-    checkbox(graphics,'waterReflections','Отражения в воде');
+    const reflectionToggle=checkbox(graphics,'waterReflections','Отражения в воде (высокое качество)');
+    feedback.uiSync.waterReflections=()=>{
+        reflectionToggle.disabled=model.state.quality!=='high';
+        reflectionToggle.checked=!reflectionToggle.disabled&&model.state.waterReflections;
+    };
+    const syncQuality=feedback.uiSync.quality;
+    feedback.uiSync.quality=()=>{syncQuality();feedback.syncUI('waterReflections');};
+    feedback.syncUI('waterReflections');
     slider(graphics,'exposure','Экспозиция',0.2,2,0.05,null,v=>v.toFixed(2));
     slider(graphics,'contactAO','Контактное затемнение',0,0.6,0.02,materials.updateMaterial,v=>v.toFixed(2));
-    el('div',{class:'hint',text:'Профиль задаёт разрешение, дальность деталей и качество теней. Экономный отключает тени и контактное затемнение; вода отражает небо. Сбалансированный и высокий добавляют отражение сцены 256/512 и детали мелководья. В прогулке тени сосредоточены возле камеры.'},graphics);
+    el('div',{class:'hint',text:'Отражения сцены доступны только в высоком качестве вне VR. Карта солнечных теней — до 2048; подробные тени ограничены областью возле камеры или центра обзора. Экономный отключает тени и контактное затемнение.'},graphics);
     // --- Растительность
     const sVeg = section('Растительность', false);
     sVeg.id = 'vegetationSettings';
@@ -453,13 +461,6 @@ export function createInterface(model: EditorModel, feedback: Feedback, actions:
     slider(sWeather, 'windDir', 'Направление ветра', 0, 360, 1, null, v => v.toFixed(0) + '°');
     slider(sWeather, 'windSpeed', 'Сила ветра', 0, 3, 0.05, null, v => v.toFixed(2));
     el('div', { class: 'hint', text: 'Смена погоды плавная (~3 с). Время суток — ползунок «Высота солнца» в разделе «Небо и освещение»: ниже ~10° появляются звёзды.' }, sWeather);
-    const sExperimental = section('Эксперименты', false);
-    sExperimental.id = 'experimentalSettings';
-    const labName = location.protocol === 'file:' ? 'webgpu_lab_standalone.html' : 'webgpu_lab.html';
-    const labUrl = new URL(labName, location.href).href;
-    el('a', { class: 'btn experiment-link', href: labUrl, target: '_blank', rel: 'noopener', text: 'Лаборатория WebGPU ↗' }, sExperimental);
-    el('a', { class: 'hint experiment-link', href: labUrl, text: 'Открыть в этой вкладке' }, sExperimental);
-    el('p', { class: 'hint', text: 'Сравнение земли, растений и воды на WebGL и WebGPU в отдельной сцене.' }, sExperimental);
     return { setTool, refreshTools, onToolChange(listener: (tool: ToolId) => void) { toolListeners.add(listener); return () => toolListeners.delete(listener); } };
 }
 export type InterfaceSystem = ReturnType<typeof createInterface>;

@@ -43,10 +43,6 @@ test('audio graph starts only after unlock, plays distance-based steps and fades
     for(let i=0;i<60;i++){pose.feet.x+=4.5/120;audio.physicsStep(1/120,pose);}audio.update(0.5,camera,pose,weather);assert.equal(audio.statistics.steps,1);assert.ok(ctx.nodes[0].gain.value>0);
     pose.paused=true;audio.update(0.1,camera,pose,weather);assert.equal(ctx.nodes[0].gain.value,0);f.model.state.soundEnabled=false;assert.equal(audio.status,'Звук выключен');audio.dispose();assert.equal(ctx.state,'closed');
 });
-test('burner uses one spatial loop and releases it across repeated scenario stops',async()=>{
-    const f=editorFixture(),ctx=new Context(),audio=createNatureAudio(f.model,f.terrain,()=>undefined,()=>ctx as unknown as AudioContext);await audio.unlock();const camera=new PerspectiveCamera(),pose={on:true,paused:false,feet:new Vector3(),grounded:false,swim:false},weather={rain:0,snow:0,dark:0};
-    for(let i=0;i<5;i++){audio.balloon(.8,[i,30,0],2);audio.update(.01,camera,pose,weather);assert.equal(audio.statistics.burner,true);const count=ctx.nodes.length;audio.balloon(.4,[i+1,31,0],1);audio.update(.01,camera,pose,weather);assert.equal(ctx.nodes.length,count);audio.balloon(0,null);assert.equal(audio.statistics.burner,false);assert.equal(audio.statistics.voices,0);}audio.dispose();assert.equal(ctx.state,'closed');
-});
 
 test('simultaneous meteor sounds move and stop independently; one impact does not silence other flights',async()=>{
     const f=editorFixture(),ctx=new Context(),audio=createNatureAudio(f.model,f.terrain,()=>undefined,()=>ctx as unknown as AudioContext);await audio.unlock();

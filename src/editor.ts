@@ -1,5 +1,4 @@
 import { createCollisions, initializeRapier } from './collisions';
-import { initializeModelLibrary } from './model-library';
 import { createFineFoliage } from './fine-foliage';
 import { createContactShading } from './contact-shading';
 import { createNatureAudio } from './nature-audio';
@@ -11,8 +10,6 @@ import { createAutosave } from './autosave';
 import { createWalkInterface } from './walk-ui';
 import { createWalkLights } from './walk-lights';
 import { createWalkScenarios } from './walk-scenarios';
-import {createBalloonScenario} from './balloon-scenario';
-import {createBalloonInterface} from './balloon-ui';
 import {createWaterSurface} from './water-surface';
 import {createWaterInteractions} from './water-interactions';
 import {createWaterRendering} from './water-rendering';
@@ -127,7 +124,7 @@ export function createEditor(options:EditorOptions = {}) {
     });
     const worldGeneration=createWorldGeneration(model,terrain,materials,vegetation,history,feedback,jobs,()=>{
         vr.stop();
-        brushes.endStroke();input.cancelTerrainTool();input.clearKeys();scenarios.stop();balloon.stop();photo.exit();input.setWalk(false);
+        brushes.endStroke();input.cancelTerrainTool();input.clearKeys();scenarios.stop();photo.exit();input.setWalk(false);
     },createTerrainJobs());
     let worldStudio:WorldStudio|undefined;
     const trailTool=createTrailTool(model,render,terrain,input,feedback,landscape,()=>ui.setTool('camera'));
@@ -141,13 +138,10 @@ export function createEditor(options:EditorOptions = {}) {
     createWalkInterface(model, input, edits, feedback,audio,scenarios);
     const walkLights=createWalkLights(model,render.scene,render.camera);
     const photo=createPhotoMode(model,render,input,edits,history,feedback,()=>{waterRendering.update(Infinity);waterRendering.draw();});
-    const balloon=createBalloonScenario(model,terrain,render,input,collisions,audio,feedback,()=>autosave.markDirty(),()=>{scenarios.stop();photo.exit();history.flush();});
-    createBalloonInterface(balloon,input);
-    scenarios.bindBeforeStart(()=>balloon.stop());
     audio.bindStatus(()=>feedback.syncUI('audioState'));
     brushes.bindEndStroke(() => history.flush());
-    storage.bindView(photo.persistentView, view => { vr.stop();scenarios.stop();photo.exit();input.restoreView(view);audio.reset();balloon.synchronize();waterInteractions.reset(); physicsClock.reset(); lastFrame = undefined; });
-    history.bindRefresh(() => { scenarios.stop();actions.applyAll(); feedback.syncAllUI(); input.synchronize();audio.reset();balloon.synchronize();waterInteractions.reset(); physicsClock.reset(); lastFrame = undefined; });
+    storage.bindView(photo.persistentView, view => { vr.stop();scenarios.stop();photo.exit();input.restoreView(view);audio.reset();waterInteractions.reset(); physicsClock.reset(); lastFrame = undefined; });
+    history.bindRefresh(() => { scenarios.stop();actions.applyAll(); feedback.syncAllUI(); input.synchronize();audio.reset();waterInteractions.reset(); physicsClock.reset(); lastFrame = undefined; });
     feedback.bindHistory(() => history.undoDepth, () => history.redoDepth, () => history.undoLabel, () => history.redoLabel);
     terrain.buildTerrain(); terrain.updateMeshAll(); actions.applyAll(); lighting.updateEnv();
     const preview=createWorldPreviewCache(model);
@@ -169,13 +163,13 @@ export function createEditor(options:EditorOptions = {}) {
     createJungleInterface(model,terrain,history,vegetation,materials,feedback,settings=>worldStudio!.selectJungle(settings));
     createTaigaInterface(model,terrain,history,vegetation,materials,feedback,settings=>worldStudio!.selectTaiga(settings));
     createWorkspace(model,feedback,ui,input,render,autosave);
-    const vr=createVR(model,render,input,collisions,vegetation,edits,history,feedback,()=>autosave.saveNow(true),()=>{photo.exit();balloon.stop();scenarios.stop();history.flush();});
+    const vr=createVR(model,render,input,collisions,vegetation,edits,history,feedback,()=>autosave.saveNow(true),()=>{photo.exit();scenarios.stop();history.flush();});
     const cancelGeneration=()=>{generation.cancelOperation();worldGeneration.cancel();};
     document.getElementById('btnCancelOperation')!.addEventListener('click', cancelGeneration);
     window.addEventListener('keydown', event => { if ((model.busy||worldGeneration.previewing) && event.key === 'Escape') cancelGeneration(); });
     feedback.setBusy(true);
     const ready = (async () => {
-        await Promise.all([initializeRapier(), initializeModelLibrary()]);
+        await initializeRapier();
         const restored = await autosave.initialize();
         feedback.setBusy(false);
         if (!restored) {
@@ -202,14 +196,13 @@ export function createEditor(options:EditorOptions = {}) {
         lastFrame = timestamp;
         const dt = Math.max(0, Math.min(elapsed, 1));
         vr.beforeFrame(frame);
-        balloon.update(dt,photo.active);
         render.renderer.info.reset();
         const alpha = physicsClock.advance(dt, step => { options.beforePhysics?.(step);
             if(!model.busy&&!photo.frozen){waterInteractions.step(step,input.walk,weather.soundWeather.rain);
                 if(input.walk.on&&!input.walk.paused&&!photo.active){if(!floatMode){collisions.rebuild();floatMode=true;}collisions.stepWater(step,waterSurface.sample);}
                 else if(!input.walk.on&&floatMode){collisions.rebuild();floatMode=false;}}
             if(photo.active){input.flyUpdate(step);return;}if (input.walk.on) {
-            input.walkUpdate(step);if(!balloon.seated)audio.physicsStep(step,input.walk);
+            input.walkUpdate(step);audio.physicsStep(step,input.walk);
         }
         else
             input.flyUpdate(step); });
@@ -259,7 +252,6 @@ export function createEditor(options:EditorOptions = {}) {
         lighting.updateView(terrain,input.walk.on);
         photo.update(dt);
         scenarios.update(dt,weather.soundWeather.rain,photo.active);
-        balloon.render(alpha,photo.active);
         vegetation.renderFloating(input.walk.on?collisions.floating:null,input.walk.paused||photo.active?1:alpha);
         vegetation.updateAnimations(model.busy||input.walk.on&&input.walk.paused||photo.frozen?0:dt);
         terrain.updateView(render.camera,input.walk.on?null:hit,render.renderer.domElement.clientHeight);vegetation.updateView(render.camera);
@@ -268,7 +260,7 @@ export function createEditor(options:EditorOptions = {}) {
         if (!model.busy) { foliage.update(render.camera, dt);contacts.update(dt); }
         audio.update(dt,render.camera,input.walk,weather.soundWeather);
         walkLights.update(dt,input.walk.on,input.walk.paused);
-        if(photo.active||balloon.state?.options.external&&balloon.seated)walkLights.held.visible=false;
+
         waterInteractions.update();waterRendering.update(dt);
         waterRendering.draw();
         const counters={ calls: render.renderer.info.render.calls, triangles: render.renderer.info.render.triangles, objects: countSceneObjects(render.scene) };
@@ -300,7 +292,7 @@ export function createEditor(options:EditorOptions = {}) {
         buildOBJ: storage.buildOBJ, encodePNG16: storage.encodePNG16, decodePNG: storage.decodePNG,
         projectJSON: storage.projectJSON, loadProjectText: storage.loadProjectText,loadProjectFile:storage.loadProjectFile,buildProjectBlob:storage.buildProjectBlob,importModel:storage.importModel,
         get busy() { return model.busy; }, get undoDepth() { return history.undoDepth; }, get maxH() { return model.maxH; },
-        photo,environment,scenarios,balloon,waterSurface,get statistics() { return { ...statistics, programs:render.renderer.info.programs?.length??0, scenarios:scenarios.statistics,balloon:balloon.statistics, preview:{...preview.statistics},foliage: foliage.statistics, terrain:terrain.statistics,vegetation:vegetation.statistics,water:{...waterRendering.statistics,...waterInteractions.statistics,floating:collisions.floating.size},audio:audio.statistics, colliders: collisions.colliderCount,collisionUpdates:collisions.statistics,contacts:contacts.statistics }; }, revision: THREE.REVISION,
+        photo,environment,scenarios,waterSurface,get statistics() { return { ...statistics, programs:render.renderer.info.programs?.length??0, scenarios:scenarios.statistics, preview:{...preview.statistics},foliage: foliage.statistics, terrain:terrain.statistics,vegetation:vegetation.statistics,water:{...waterRendering.statistics,...waterInteractions.statistics,floating:collisions.floating.size},audio:audio.statistics, colliders: collisions.colliderCount,collisionUpdates:collisions.statistics,contacts:contacts.statistics }; }, revision: THREE.REVISION,
         applyBrushAt(x: number, z: number, dt = 0.1) {
             const hit = new THREE.Vector3(x, terrain.getH(x, z), z);
             brushes.interaction.flattenH = hit.y;
@@ -321,7 +313,6 @@ export function createEditor(options:EditorOptions = {}) {
         updateSun: lighting.updateSun, syncUI: feedback.syncUI,
         atmos: { wCur: weather.wCur, starMat: weather.starMat, clouds: weather.clouds, rain: weather.rain, snow: weather.snow },
         setWalkView(x: number, z: number, yawDeg: number, pitchDeg = 0) {
-            if(balloon.seated)balloon.stop();
             const spot = input.findLand(x, z);
             if (!spot) return false;
             const [lx, lz] = spot;

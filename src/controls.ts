@@ -21,7 +21,6 @@ export interface TerrainTool {
     cancel():void;
     pointerRayDown?(event:PointerEvent,ray:THREE.Ray,point:THREE.Vector3|null):boolean;
 }
-export interface WalkVehicle {readonly seated:boolean;readonly pointerUI?:boolean;lockView?():void;keyDown(event:KeyboardEvent):boolean;keyUp(event:KeyboardEvent):void;render(alpha:number):void;leaveWalk():void;}
 export function createControls(model: EditorModel, terrain: TerrainSystem, render: RenderingSystem, materials: MaterialsSystem, brushes: BrushSystem, feedback: Feedback, history: HistorySystem, actions: EditorActions, setTool: (id: ToolId) => void, motion?: WalkMotion,waterQuery?:WaterQuery) {
     const starts = createWalkStart(model, terrain.getH);
     const simulation = createWalkSimulation(model, terrain.getSurfaceH, (x, z) => {
@@ -32,12 +31,10 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
     }, motion,waterQuery);
     const picking = { on: false, assessment: null as StartAssessment | null };
     const walkPanel = { open: false };
-    const inventory = { open: false };
     const photoMode={on:false};
     const xrMode={on:false};
     let xrAnalog:WalkAnalogInput|undefined;
     let walkToolKey: ((event: KeyboardEvent) => boolean) | undefined;
-    let vehicle:WalkVehicle|undefined;
     let terrainTool:TerrainTool|undefined;
     let objectSelector:(id:string)=>void=()=>{};
     let synchronizePresentation = () => {};
@@ -69,7 +66,7 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
     function setPaused(paused: boolean) {
         if (walkPanel.open) history.flush();
         walkPanel.open = false;
-        inventory.open = false;
+
         walk.paused = paused; simulation.clearKeys();
         if (paused && document.pointerLockElement) document.exitPointerLock();
         notify();
@@ -79,7 +76,7 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
         if (!walk.on || model.busy || open === walkPanel.open) return;
         brushes.endStroke(); history.flush();
         walkPanel.open = open;
-        inventory.open = false;
+
         walk.paused = open;
         simulation.clearKeys();
         if (open && document.pointerLockElement) document.exitPointerLock();
@@ -87,22 +84,15 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
         if (!open) render.renderer.domElement.focus({ preventScroll: true });
     }
     function toggleWalkPanel() { setWalkPanel(!walkPanel.open); }
-    function setInventory(open: boolean) {
-        if (!walk.on || model.busy || inventory.open === open) return;
-        brushes.endStroke(); history.flush(); walkPanel.open = false;
-        inventory.open = open; walk.paused = open; simulation.clearKeys();
-        if (open && document.pointerLockElement) document.exitPointerLock();
-        notify(); if (!open) render.renderer.domElement.focus({ preventScroll: true });
-    }
     function setFlight(on:boolean){
-        if(!walk.on||walk.paused||model.busy||vehicle?.seated)return;
+        if(!walk.on||walk.paused||model.busy)return;
         simulation.setFlying(on);notify();
         feedback.setStatus(on?'Полёт: WASD — движение · Пробел — вверх · Shift — вниз · Ctrl — ускорение · G — гравитация':'Полёт выключен: гравитация включена');
         render.renderer.domElement.focus({preventScroll:true});
     }
     function toggleFlight(){setFlight(!walk.flying);}
     function toggleAutoWalk() {
-        if (!walk.on || walk.paused || walk.flying || model.busy||vehicle?.seated) return;
+        if (!walk.on || walk.paused || walk.flying || model.busy) return;
         walk.autoWalking = !walk.autoWalking;
         if (walk.autoWalking && !starts.assess(walk.feet.x, walk.feet.z).safe) {
             walk.autoWalking = false; feedback.setStatus('Автопрогулка доступна на свободной сухой площадке');
@@ -113,12 +103,11 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
         if (on === walk.on)
             return;
         if (on && model.busy) return false;
-        if(!on)vehicle?.leaveWalk();
         const start = on ? point ? starts.assess(...point) : starts.nearest(walk.start?.x ?? render.controls.target.x, walk.start?.z ?? render.controls.target.z) : null;
         if (on && !start?.safe) { feedback.setStatus(start?.reason ?? 'Безопасная площадка не найдена. Выберите другое место или измените рельеф.'); return false; }
         terrainTool?.cancel();
         brushes.endStroke(); history.flush(); cancelPick();
-        simulation.clearKeys(); walk.paused = false; walkPanel.open = false; inventory.open = false;
+        simulation.clearKeys(); walk.paused = false; walkPanel.open = false;
         walk.on = on;walk.flying=false;
         if (on) {
             walk.saved = { pos: render.camera.position.clone(), target: render.controls.target.clone(), near: render.camera.near };
@@ -190,7 +179,6 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
     });
     window.addEventListener('mouseup', () => { walk.dragging = false; });
     function walkUpdate(dt: number) {
-        if(vehicle?.seated)return;
         const automatic = walk.autoWalking;
         simulation.step(dt,xrMode.on?xrAnalog:undefined);
         if (automatic && !walk.autoWalking) { feedback.setStatus('Автопрогулка остановлена: впереди небезопасный участок'); notify(); }
@@ -198,7 +186,6 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
     function renderWalk(alpha: number) {
         if(xrMode.on)return;
         syncCamera();
-        if(vehicle?.seated){vehicle.render(walk.paused?1:alpha);return;}
         render.camera.position.copy(simulation.eyePosition(alpha));
         render.camera.rotation.set(walk.pitch, walk.yaw, 0, 'YXZ');
         document.getElementById('coord')!.textContent = `x ${walk.feet.x.toFixed(0)}  z ${walk.feet.z.toFixed(0)}  h ${walk.feet.y.toFixed(1)} м${walk.swim ? ' · плывёте' : ''}`;
@@ -218,7 +205,7 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
     function restoreView(view: ProjectView) {
         terrainTool?.cancel();
         walkPanel.open = false;
-        inventory.open = false;
+
         cancelPick();
         if (document.pointerLockElement)
             document.exitPointerLock();
@@ -264,7 +251,7 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
     const canvas = render.renderer.domElement;
     canvas.tabIndex = 0;
     document.addEventListener('pointerlockchange', () => {
-        if (!xrMode.on && !photoMode.on && walk.on && !walk.paused && !vehicle?.pointerUI && document.pointerLockElement !== canvas) setPaused(true);
+        if (!xrMode.on && !photoMode.on && walk.on && !walk.paused && document.pointerLockElement !== canvas) setPaused(true);
     });
     canvas.addEventListener('contextmenu', e => e.preventDefault());
     function setMouse(e: PointerEvent) { const r = canvas.getBoundingClientRect(); brushes.mouse.x = ((e.clientX - r.left) / r.width) * 2 - 1; brushes.mouse.y = -((e.clientY - r.top) / r.height) * 2 + 1; }
@@ -283,7 +270,6 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
             e.stopPropagation();
             e.preventDefault();
             if (!document.pointerLockElement) {
-                vehicle?.lockView?.();
                 requestLock();
                 walk.dragging = true;
                 walk.lastX = e.clientX;
@@ -376,7 +362,6 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
         if (e.key === 'Escape') {
             toggleHelp(false);
             if (picking.on) cancelPick();
-            else if (inventory.open) { e.preventDefault(); setInventory(false); }
             else if (walkPanel.open) { e.preventDefault(); setWalkPanel(false); }
             else if (walk.on) setPaused(!walk.paused);
             return;
@@ -387,7 +372,6 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
         }
         if (walk.on && e.code === 'KeyE' && !e.repeat) { e.preventDefault(); toggleWalkPanel(); return; }
         if(walk.on&&e.code==='KeyG'&&!e.repeat){e.preventDefault();toggleFlight();return;}
-        if(walk.on&&!walk.paused&&!model.busy&&vehicle?.keyDown(e)){e.preventDefault();return;}
         if (walk.on && !e.repeat && walkToolKey?.(e)) { e.preventDefault(); return; }
         if (walk.on && e.code === 'KeyR' && !e.repeat) { e.preventDefault(); toggleAutoWalk(); return; }
         if (walk.on && walk.paused) return;
@@ -419,7 +403,7 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
         }
         keys[e.code] = true;
     });
-    window.addEventListener('keyup', e => { keys[e.code] = false;vehicle?.keyUp(e); });
+    window.addEventListener('keyup', e => { keys[e.code] = false; });
     window.addEventListener('blur', () => { simulation.clearKeys(); brushes.endStroke(); notify(); });
     document.addEventListener('visibilitychange', () => { if (document.hidden) { simulation.clearKeys(); notify(); } });
     window.addEventListener('resize', render.resizeViewport);
@@ -467,10 +451,9 @@ export function createControls(model: EditorModel, terrain: TerrainSystem, rende
         setXRInput(value:WalkAnalogInput){xrAnalog=value;},
         moveXRRoomscale(delta:THREE.Vector3){if(!xrMode.on||walk.paused||model.busy)return;const p=motion?motion.resolve(walk.feet,delta,1/120,walk.flying).position:walk.feet.clone().add(delta);walk.feet.copy(p);simulation.synchronize();},
         teleportXR(point:THREE.Vector3){if(!xrMode.on||walk.paused||model.busy)return;walk.feet.copy(point);walk.vy=0;walk.grounded=true;simulation.synchronize();},
-        walk, walkPanel, inventory, picking, starts, findLand, setWalk, chooseStart, cancelPick, previewStart, setPaused, setWalkPanel, setInventory, toggleWalkPanel, toggleAutoWalk,setFlight,toggleFlight,
+        walk, walkPanel, picking, starts, findLand, setWalk, chooseStart, cancelPick, previewStart, setPaused, setWalkPanel, toggleWalkPanel, toggleAutoWalk,setFlight,toggleFlight,
         get terrainToolActive(){return !!terrainTool?.active;},
         bindWalkToolKeys(callback: (event: KeyboardEvent) => boolean) { walkToolKey = callback; },
-        bindVehicle(next:WalkVehicle){vehicle=next;},
         bindTerrainTool(tool:TerrainTool){if(terrainTool!==tool)terrainTool?.cancel();terrainTool=tool;},cancelTerrainTool:()=>terrainTool?.cancel(),
         bindObjectSelector(callback:(id:string)=>void){objectSelector=callback;},selectObject(id:string){objectSelector(id);},
         bindPresentation(callback: () => void) { synchronizePresentation = callback; feedback.uiSync.walkPresentation = () => { syncCamera(); notify(); }; notify(); }, walkUpdate, renderWalk, captureView, restoreView, flyUpdate, resetCamera, synchronize: simulation.synchronize, clearKeys: simulation.clearKeys };
